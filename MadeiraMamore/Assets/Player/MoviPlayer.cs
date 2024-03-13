@@ -10,6 +10,10 @@ public class MoviPlayer : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        if (Input.GetJoystickNames().Length > 0)
+        {
+         Debug.Log("Controle Conectado");
+        }
         
     }
 
@@ -18,7 +22,10 @@ public class MoviPlayer : MonoBehaviour
     private void FixedUpdate()
     {
         Keyboard();
-        JoyStick();
+        if (Input.GetJoystickNames().Length > 0)
+        {
+            JoyStick();
+        }
     }
     private void Keyboard()
     {
