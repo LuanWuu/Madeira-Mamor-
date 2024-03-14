@@ -9,7 +9,7 @@ public class MangerMenu : MonoBehaviour
     [SerializeField] private GameObject options;
     [SerializeField] private GameObject credits;
     [SerializeField] private string nameGame;    
-    // Start is called before the first frame update
+    // Start is called before the first frame update dasda dasdas
     void Start()
     {
         
