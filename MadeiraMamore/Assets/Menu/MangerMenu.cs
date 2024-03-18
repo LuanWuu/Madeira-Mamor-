@@ -2,18 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MangerMenu : MonoBehaviour
 {
+    [Header("menus")]
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject options;
     [SerializeField] private GameObject credits;
+
+    [Header("Primeiros botoes selecionados pelo controle")]
+    [SerializeField] private GameObject playFirtButton;
+    [SerializeField] private GameObject optionsFirstButton;
+    [SerializeField] private GameObject closeCreditsFirstButton;
+
+    [Header("Nome da primeira fase")]
     [SerializeField] private string nameGame;    
-    // Start is called before the first frame update dasda dasdas
+
     void Start()
-    {
+    { 
+        FirtButton();
 
-
+    }
+    void FirtButton(){
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(playFirtButton);
     }
 
     // Update is called once per frame
@@ -29,21 +42,27 @@ public class MangerMenu : MonoBehaviour
     {
         menu.SetActive(false);
         options.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
     }
     public void closeOptions()
     {
         menu.SetActive(true);
         options.SetActive(false);
+        FirtButton();
     }
     public void openCredits()
     {
         menu.SetActive(false);
         credits.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(closeCreditsFirstButton);
     }
     public void closeCredits()
     {
         menu.SetActive(true);
         credits.SetActive(false);
+        FirtButton();
     }
     public void Quit()
     {
