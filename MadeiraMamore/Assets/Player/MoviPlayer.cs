@@ -10,11 +10,7 @@ public class MoviPlayer : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        if (Input.GetJoystickNames().Length > 0)
-        {
-         Debug.Log("Controle Conectado");
-        }
-        
+
     }
 
     // Update is called once per frame
@@ -22,7 +18,12 @@ public class MoviPlayer : MonoBehaviour
     private void FixedUpdate()
     {
         Keyboard();
-        if (Input.GetJoystickNames().Length > 0)
+    
+
+        string[] joysticksController = Input.GetJoystickNames();
+
+        // Verifique se há controle conectado
+        if (joysticksController.Length > 0 && !string.IsNullOrEmpty(joysticksController[0]))
         {
             JoyStick();
         }
@@ -33,20 +34,26 @@ public class MoviPlayer : MonoBehaviour
         float verticalInput = Input.GetAxis("KeyBoardY");
         if (horizontalInput != 0 || verticalInput != 0)
         {
+            Debug.Log("teste");
             Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * moveSpeed * Time.fixedDeltaTime;
-            rb.velocity = movement;
+            Vector3 localMovement = transform.TransformDirection(movement);
+            rb.velocity = localMovement;
         }
 
     }
     private void JoyStick()
     {
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxis("HorizontalMoviJoystick");
+        float verticalInput = Input.GetAxis("VerticalMoviJoystick");
+
         if (horizontalInput != 0 || verticalInput != 0)
         {
+            Debug.Log("horizintal " + horizontalInput);
+            Debug.Log("vertical" + verticalInput);
             Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * moveSpeed * Time.fixedDeltaTime;
-            rb.velocity = movement;
+            Vector3 localMovement = transform.TransformDirection(movement);
+            rb.velocity = localMovement;
         }
 
     }
