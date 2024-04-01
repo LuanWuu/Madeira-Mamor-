@@ -8,8 +8,13 @@ public class MangerMenu : MonoBehaviour
 {
     [Header("menus")]
     [SerializeField] private GameObject menu;
+    [SerializeField] private GameObject inGameMenu;
+    [SerializeField] private GameObject firstMenu;
+    [SerializeField] private GameObject playButton;
+    [SerializeField] private GameObject optionsButton;
     [SerializeField] private GameObject options;
     [SerializeField] private GameObject credits;
+    [SerializeField] private GameObject closeMenuInGame;
 
     [Header("Primeiros botoes selecionados pelo controle")]
     [SerializeField] private GameObject playFirtButton;
@@ -18,6 +23,8 @@ public class MangerMenu : MonoBehaviour
 
     [Header("Nome da primeira fase")]
     [SerializeField] private string nameGame;    
+
+    private bool inGame = false;
 
     void Start()
     { 
@@ -28,6 +35,10 @@ public class MangerMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(playFirtButton);
     }
+    void SecondButton(){
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsButton);
+    }
 
     // Update is called once per frame
     void Update()
@@ -35,34 +46,49 @@ public class MangerMenu : MonoBehaviour
 
     }
     public void StartGame()
-    {
+    { 
+        DontDestroyOnLoad(menu);
+        DontDestroyOnLoad(inGameMenu);
+        inGame = true;
         SceneManager.LoadScene(nameGame);
+        closeMenuInGame.SetActive(true);
+        menu.SetActive(false);
+        playButton.SetActive(false);
+        inGameMenu.SetActive(true);
     }
     public void openOptions()
     {
-        menu.SetActive(false);
+        firstMenu.SetActive(false);
         options.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsFirstButton);
     }
     public void closeOptions()
     {
-        menu.SetActive(true);
+        firstMenu.SetActive(true);
         options.SetActive(false);
-        FirtButton();
+        if(inGame == false){
+            FirtButton();
+        }else{
+            SecondButton();
+        }
     }
     public void openCredits()
     {
-        menu.SetActive(false);
+        firstMenu.SetActive(false);
         credits.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(closeCreditsFirstButton);
     }
     public void closeCredits()
     {
-        menu.SetActive(true);
+        firstMenu.SetActive(true);
         credits.SetActive(false);
-        FirtButton();
+        if(inGame == false){
+            FirtButton();
+        }else{
+            SecondButton();
+        }
     }
     public void Quit()
     {
