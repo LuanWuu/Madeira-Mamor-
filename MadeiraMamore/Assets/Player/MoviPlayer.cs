@@ -37,7 +37,7 @@ public class MoviPlayer : MonoBehaviour
             Debug.Log("teste");
             Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * moveSpeed * Time.fixedDeltaTime;
             Vector3 localMovement = transform.TransformDirection(movement);
-            rb.velocity = localMovement;
+            rb.velocity = new Vector3(localMovement.x, rb.velocity.y, localMovement.z);
         }
 
     }
@@ -53,7 +53,7 @@ public class MoviPlayer : MonoBehaviour
             Debug.Log("vertical" + verticalInput);
             Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * moveSpeed * Time.fixedDeltaTime;
             Vector3 localMovement = transform.TransformDirection(movement);
-            rb.velocity = localMovement;
+            rb.velocity =  rb.velocity = new Vector3(localMovement.x, rb.velocity.y, localMovement.z);
         }
 
     }
