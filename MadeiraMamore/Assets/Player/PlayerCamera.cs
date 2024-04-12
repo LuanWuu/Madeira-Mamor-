@@ -38,6 +38,11 @@ public class PlayerCamera : MonoBehaviour
 
     }
     void Update(){
+        if (Input.GetKeyDown("b"))
+        {
+            Debug.Log(" valor da sensivilidade " + sensitivityX);
+        }
+
         Mouse();
         string[] joysticksController = Input.GetJoystickNames();
 
