@@ -12,6 +12,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private float outilineSizeTrain;
     [SerializeField] private float lerpVelocity;
     [SerializeField] private float durationLerpMovi;
+    [SerializeField] private GameObject speechBubble;
    
 
     private bool canGet;
@@ -20,11 +21,13 @@ public class Hand : MonoBehaviour
     private bool canCarry;
     private bool canMoviLerp;
     private bool canGive;
+    private bool canActiveCharaceterLines;
     private float startCarryTime;
     private float distOfObjects;
     private float distTrain;
     private GameObject target;
     private GameObject targetTrain;
+    private GameObject targetCharacter;
     private Renderer targetRenderer;
     private Renderer targetRendererDelivery;
     private Ray ray;
@@ -41,8 +44,13 @@ public class Hand : MonoBehaviour
         CarrySystem();
         InputManager();
         CheckDelivery();
+        CommunicationSystem();
     }
     void InputManager(){
+        if (Input.GetKeyDown("e") && canActiveCharaceterLines == true){
+            speechBubble.SetActive(true);
+            targetCharacter.GetComponent<roadMap>().Randomized();
+        }
         if (Input.GetMouseButtonDown(0)){ // pegando o Objeto
             if(canGet == true){
                 canCarry = true;
@@ -60,6 +68,26 @@ public class Hand : MonoBehaviour
                     canCarry = false;
                     target = null;
                 }
+            }
+        }
+    }
+    void CommunicationSystem(){
+        RaycastHit hitCharater;
+        if(Physics.Raycast(ray, out hitCharater) && hitCharater.collider.gameObject.tag == "Character"){
+            targetCharacter = hitCharater.collider.gameObject;
+            distTrain = Vector3.Distance(targetCharacter.transform.position, transform.position);
+            if(distTrain <= distCanGiveTrain){
+                canActiveCharaceterLines = true;
+            }else{
+                canActiveCharaceterLines = false;
+                if(speechBubble != null){
+                    speechBubble.SetActive(false);
+                }
+            }
+        }else{
+            canActiveCharaceterLines = false;
+            if(speechBubble != null){
+                speechBubble.SetActive(false);
             }
         }
     }

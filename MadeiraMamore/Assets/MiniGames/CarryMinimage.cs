@@ -12,13 +12,16 @@ public class CarryMinimage : MonoBehaviour
     [SerializeField] private GameObject[] wagons;
     [SerializeField] private Transform boxsPosition;
     [SerializeField] private int optionsBox;
+    [SerializeField] private RaffleQuest rafflequestScript;
 
     private int numberMinigame;
     private int beforeNumberMinigame;
     private GameObject packages;
+    private Box boxScript;
     // Start is called before the first frame update
     void Start()
     {
+
         DecideAmoutBox();
     }
 
@@ -52,10 +55,13 @@ public class CarryMinimage : MonoBehaviour
                 break;
         }
         beforeNumberMinigame = numberMinigame;
-        packages.GetComponent<Box>().carryMinimageScript = GetComponent<CarryMinimage>();
+        boxScript = packages.GetComponent<Box>();
+        boxScript.carryMinimageScript = GetComponent<CarryMinimage>();
+        boxScript.rafflequestScript = rafflequestScript;
+
     }
     public void GiveLayerGenerated(){
-        Box boxScript = packages.GetComponent<Box>();
+        boxScript = packages.GetComponent<Box>();
         int layerAmout = boxScript.layerOfPackage.Length;
         int saveLayerAmout = boxScript.saveLayers.ToArray().Length;
         int[] transferLayerBox = boxScript.saveLayers.ToArray();

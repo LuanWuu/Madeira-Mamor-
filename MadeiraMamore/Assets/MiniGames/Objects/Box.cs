@@ -8,6 +8,7 @@ public class Box : MonoBehaviour
     [SerializeField] private Color[] packageColor;
     [System.NonSerialized] public CarryMinimage carryMinimageScript;
     [System.NonSerialized] public List<int> saveLayers = new List<int>();
+    [System.NonSerialized] public RaffleQuest rafflequestScript;
     
     private GameObject[] package;
 
@@ -31,7 +32,7 @@ public class Box : MonoBehaviour
                 if(saveLayerPackege[i] == LayerMask.NameToLayer(layerOfPackage[e])){
                     if (!saveLayers.Contains(LayerMask.NameToLayer(layerOfPackage[e]))){
                         saveLayers.Add(LayerMask.NameToLayer(layerOfPackage[e]));
-                        Debug.Log("funcoiunarq " + i + "i numero E" + e + " layer " + LayerMask.NameToLayer(layerOfPackage[e]));
+                        //Debug.Log("funcoiunarq " + i + "i numero E" + e + " layer " + LayerMask.NameToLayer(layerOfPackage[e]));
                     }
                 }
             }
@@ -41,9 +42,11 @@ public class Box : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if(Input.GetKeyDown("l")){
-        //    teste();
-        //}
+        if (transform.childCount == 0)
+        {
+            rafflequestScript.CompleteQuest();
+            Destroy(gameObject,0.05f);
+        }
     }
     //void teste(){
     //    int decideTypePackage = Random.Range(0,layerOfPackage.Length);
