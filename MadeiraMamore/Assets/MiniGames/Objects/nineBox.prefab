@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3241632365325424157}
+  - component: {fileID: -2382964827215236973}
   m_Layer: 0
   m_Name: nineBox
   m_TagString: Untagged
@@ -39,6 +40,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2382964827215236973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523238799751112691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6a2d43ec7f1934c817fbd7c13dc2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerOfPackage:
+  - Wood
+  - Fruits
+  - Stone
+  - Dirt
+  - Treasures
+  packageColor:
+  - {r: 0.4056604, g: 0.28861398, b: 0.13649577, a: 1}
+  - {r: 0.6509434, g: 0.23480965, b: 0.22516905, a: 1}
+  - {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+  - {r: 0.254717, g: 0.16600837, b: 0.07849767, a: 1}
+  - {r: 0.8679245, g: 0.8138328, b: 0.45579678, a: 1}
 --- !u!1001 &332993494774843351
 PrefabInstance:
   m_ObjectHideFlags: 0
