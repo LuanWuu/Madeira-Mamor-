@@ -17,15 +17,14 @@ public class ToFillTrain : MonoBehaviour
         {
             boxFulfilling[i]= fulfilling.transform.GetChild(i).gameObject;
         }
-        Debug.Log(boxFulfilling.Length);
+        //Debug.Log(boxFulfilling.Length);
     }
 
     public void CheckLayerPackage(Color boxColor,int boxLayer, GameObject target){
-        Debug.Log("Box layer " + boxLayer);
         if (LayerAccept.Contains(boxLayer)){
             FillTheLoad(boxColor);
             Destroy(target, 0.15f);
-            Debug.Log("entregou");
+            //Debug.Log("entregou");
         }
     }
     void FillTheLoad (Color boxColor) {

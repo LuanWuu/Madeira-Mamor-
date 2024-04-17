@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Box
   - Train
+  - menu
+  - player
+  - Character
+  - SpeechBubble
   layers:
   - Default
   - TransparentFX
