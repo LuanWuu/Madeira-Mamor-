@@ -52,14 +52,13 @@ public class Hand : MonoBehaviour
                 canMoviLerp = true;
                 //Debug.Log("Solto");
                 if(canGive == true){
-                    Debug.Log("entregou");
                     if(targetTrain != null){
                         targetTrain.GetComponent<ToFillTrain>().CheckLayerPackage(target.GetComponent<Renderer>().materials[1].color,
-                                                                                  target.layer);
+                                                                                  target.layer,target);
                     }
-                    Destroy(target, 0.2f);
-                    target = null;
                     canGive = false;
+                    canCarry = false;
+                    target = null;
                 }
             }
         }

@@ -6,8 +6,8 @@ public class Box : MonoBehaviour
 {
     public string[] layerOfPackage;
     [SerializeField] private Color[] packageColor;
-    [System.NonSerialized] public int[] saveLayers;
     [System.NonSerialized] public CarryMinimage carryMinimageScript;
+    [System.NonSerialized] public List<int> saveLayers = new List<int>();
     
     private GameObject[] package;
 
@@ -15,7 +15,6 @@ public class Box : MonoBehaviour
     void Start()
     {
         package = new GameObject[transform.childCount];
-         saveLayers = new int[1];
         int[] saveLayerPackege = new int[transform.childCount];
 
         for (int i = 0; i < transform.childCount; i++)
@@ -27,13 +26,14 @@ public class Box : MonoBehaviour
             //Debug.Log(LayerMask.LayerToName(gameObject.layer) + LayerMask.NameToLayer(layerOfPackage[i])); 
             saveLayerPackege[i] = LayerMask.NameToLayer(layerOfPackage[decideTypePackage]);
         }
-        int e = 0;
         for(int i = 0; i < saveLayerPackege.Length; i++) {
-            if(saveLayerPackege[i] == LayerMask.NameToLayer(layerOfPackage[e])){
-                saveLayers[e] = LayerMask.NameToLayer(layerOfPackage[e]);
-                Debug.Log("funcoiunarq " + e + " " +saveLayers[e]);
-                e++;
-                saveLayers = new int[e + 1];
+            for(int e = 0; e < layerOfPackage.Length; e++) {
+                if(saveLayerPackege[i] == LayerMask.NameToLayer(layerOfPackage[e])){
+                    if (!saveLayers.Contains(LayerMask.NameToLayer(layerOfPackage[e]))){
+                        saveLayers.Add(LayerMask.NameToLayer(layerOfPackage[e]));
+                        Debug.Log("funcoiunarq " + i + "i numero E" + e + " layer " + LayerMask.NameToLayer(layerOfPackage[e]));
+                    }
+                }
             }
         }
         carryMinimageScript.GiveLayerGenerated();

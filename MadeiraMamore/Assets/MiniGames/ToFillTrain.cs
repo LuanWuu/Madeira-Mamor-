@@ -5,9 +5,9 @@ using UnityEngine;
 public class ToFillTrain : MonoBehaviour
 {
     [SerializeField] private GameObject fulfilling;
+    [System.NonSerialized] public List<int> LayerAccept  = new List<int>();
     private GameObject[] boxFulfilling;
     private int turn = 0;
-    private bool canGetPackage;
     private int[] transferLayerFilter;
     // Start is called before the first frame update
     void Start()
@@ -19,21 +19,13 @@ public class ToFillTrain : MonoBehaviour
         }
         Debug.Log(boxFulfilling.Length);
     }
-    public void FilterLayerAccept (int[] layersAccpet) {
-        transferLayerFilter = layersAccpet;
-        //for(int i = 0; i < transferLayerFilter.Length; i++) {
-        //    Debug.Log("LayerAccept " + transferLayerFilter[i]);
-        //}
-    }
-    public void CheckLayerPackage(Color boxColor,int boxLayer){
+
+    public void CheckLayerPackage(Color boxColor,int boxLayer, GameObject target){
         Debug.Log("Box layer " + boxLayer);
-        for(int i = 0; i < transferLayerFilter.Length; i++) {
-            if(boxLayer == transferLayerFilter[i]){
-                canGetPackage = true;
-            }
-        }
-        if(canGetPackage == true){
+        if (LayerAccept.Contains(boxLayer)){
             FillTheLoad(boxColor);
+            Destroy(target, 0.15f);
+            Debug.Log("entregou");
         }
     }
     void FillTheLoad (Color boxColor) {
@@ -43,7 +35,6 @@ public class ToFillTrain : MonoBehaviour
             Debug.Log(" turn " + turn);
         }
         turn++;
-        canGetPackage = false;
     }
 
     // Update is called once per frame
