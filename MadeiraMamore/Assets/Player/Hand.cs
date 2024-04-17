@@ -53,8 +53,9 @@ public class Hand : MonoBehaviour
                 //Debug.Log("Solto");
                 if(canGive == true){
                     Debug.Log("entregou");
-                    if(targetTrain != null){ 
-                        targetTrain.GetComponent<ToFillTrain>().FillTheLoad();
+                    if(targetTrain != null){
+                        targetTrain.GetComponent<ToFillTrain>().CheckLayerPackage(target.GetComponent<Renderer>().materials[1].color,
+                                                                                  target.layer);
                     }
                     Destroy(target, 0.2f);
                     target = null;
