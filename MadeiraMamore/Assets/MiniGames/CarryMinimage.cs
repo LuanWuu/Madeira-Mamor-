@@ -29,14 +29,14 @@ public class CarryMinimage : MonoBehaviour
     void Update()
     {
          if(Input.GetKeyDown("l")){
-            GiveLayerGenerated();
+            DecideAmoutBox();
         }
     }
     void DecideAmoutBox(){
         while (true){
             numberMinigame = Random.Range(0, optionsBox);
             if (numberMinigame != beforeNumberMinigame){
-                Debug.Log("minigame: " + numberMinigame);
+                //Debug.Log("minigame: " + numberMinigame);
                 break;
             }
         }
@@ -61,27 +61,30 @@ public class CarryMinimage : MonoBehaviour
 
     }
     public void GiveLayerGenerated(){
-        boxScript = packages.GetComponent<Box>();
         int layerAmout = boxScript.layerOfPackage.Length;
         int saveLayerAmout = boxScript.saveLayers.ToArray().Length;
         int[] transferLayerBox = boxScript.saveLayers.ToArray();
         List<int> transferList = boxScript.saveLayers;
 
         int[] giveWagonsAmoutLayer = new int[wagons.Length];
-        int randomizedWagons = Random.Range(0,wagons.Length);
-        int halfTipLayer = saveLayerAmout/2; 
+        int halfTipLayer = saveLayerAmout/wagons.Length; 
 
-        if (saveLayerAmout % 2 != 0){
-            giveWagonsAmoutLayer[randomizedWagons] = saveLayerAmout % 2;
+        //foreach (int elemento in transferList)
+        //{
+        //   Debug.Log("layer da  lista " + elemento);
+        //}
+        if (saveLayerAmout % wagons.Length != 0){
+            int randomizedWagons = Random.Range(0,wagons.Length);
+            int remainingLayers = saveLayerAmout % wagons.Length;
+            giveWagonsAmoutLayer[randomizedWagons] = remainingLayers;
         }
         for(int i = 0; i < giveWagonsAmoutLayer.Length; i++) {
             giveWagonsAmoutLayer[i] += halfTipLayer;
-            //Debug.Log("valor do wagons " + giveWagonsAmoutLayer[i]);
         }
         for(int i = 0; i < wagons.Length; i++){
             for(int a = 0; a < giveWagonsAmoutLayer[i]; a++){
                 int  givelayer = transferList[0];
-                Debug.Log(" vez a " + a + " vez i vagao " + i + "givelayer " + givelayer);
+                //Debug.Log(" vez i vagao " + i + "givelayer " + givelayer + "rodou quantas vezes " + a);
                 wagons[i].GetComponent<ToFillTrain>().LayerAccept.Add(givelayer);
                 transferList.RemoveAt(0);
             }

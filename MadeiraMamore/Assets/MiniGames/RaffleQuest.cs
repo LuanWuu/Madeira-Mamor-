@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class RaffleQuest : MonoBehaviour
 {
-    [Header("nomes das quest")]
-    [SerializeField] private string[] minigame;
     [Header("Mangers dos minigames")]
     [SerializeField] private GameObject carry;
     [Header("Timer")]
@@ -56,34 +54,12 @@ public class RaffleQuest : MonoBehaviour
         Invoke("Reset", 0.5f);
     }
     void Reset(){
-        SceneManager.LoadScene("SecondArea");
+        //SceneManager.LoadScene("SecondArea");
     }
     void DecideQuest(){
-        //while (true){
-        //    numberMinigame = Random.Range(0, minigame.Length);
-        //    if (numberMinigame != beforeNumberMinigame){
-        //        Debug.Log("minigame: " + numberMinigame);
-        //        break;
-        //    }
-        //}
-        numberMinigame = 0;
-        switch(numberMinigame){
-            case 0:
-                carry.SetActive(true);
-                timeMinigame = carryTime;
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            default:
-                break;
-        }
-        beforeNumberMinigame = numberMinigame;
+ 
+        carry.SetActive(true);
+        timeMinigame = carryTime;
         timer.SetActive(true);
         timerScript.timerleft = timeMinigame;
         timerScript.stop = false;

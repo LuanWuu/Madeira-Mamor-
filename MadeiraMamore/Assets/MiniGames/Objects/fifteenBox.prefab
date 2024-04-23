@@ -66,10 +66,10 @@ MonoBehaviour:
   - Dirt
   - Treasures
   packageColor:
-  - {r: 0.4056604, g: 0.28861398, b: 0.13649577, a: 1}
+  - {r: 0.9716981, g: 0.5310396, b: 0.07944696, a: 1}
   - {r: 0.6509434, g: 0.23480965, b: 0.22516905, a: 1}
   - {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
-  - {r: 0.254717, g: 0.16600837, b: 0.07849767, a: 1}
+  - {r: 0.20754719, g: 0.107138425, b: 0.011095275, a: 1}
   - {r: 0.8679245, g: 0.8138328, b: 0.45579678, a: 1}
 --- !u!1001 &767418393541733503
 PrefabInstance:
@@ -122,6 +122,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box (10)
@@ -184,6 +188,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box (12)
@@ -246,6 +254,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box (14)
@@ -308,6 +320,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box (8)
@@ -370,6 +386,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box (5)
@@ -432,6 +452,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box (6)
@@ -494,6 +518,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box
@@ -556,6 +584,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box (3)
@@ -618,6 +650,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box (13)
@@ -680,6 +716,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box (4)
@@ -742,6 +782,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box (9)
@@ -804,6 +848,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box (1)
@@ -866,6 +914,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box (2)
@@ -928,6 +980,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box (11)
@@ -990,6 +1046,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935637472939648888, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
     - target: {fileID: 6955484788515891951, guid: fa4f3161fece020479c9cb7203e41ece, type: 3}
       propertyPath: m_Name
       value: Box (7)

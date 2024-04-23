@@ -41,17 +41,19 @@ public class Hand : MonoBehaviour
     void Update()
     {
         ray = cam.ScreenPointToRay(Input.mousePosition); //Raio Vindo do Centro da camera
-        CarrySystem();
         InputManager();
-        CheckDelivery();
-        CommunicationSystem();
+        RaycastCheck();
+        if(canCarry == true){
+            Carry();
+            //Debug.Log("Pego");
+        }
     }
     void InputManager(){
         if (Input.GetKeyDown("e") && canActiveCharaceterLines == true){
             speechBubble.SetActive(true);
             targetCharacter.GetComponent<roadMap>().Randomized();
         }
-        if (Input.GetMouseButtonDown(0)){ // pegando o Objeto
+        if (Input.GetKeyDown("e")){ // pegando o Objeto
             if(canGet == true){
                 canCarry = true;
                 startCarryTime = Time.time + durationLerpMovi;
@@ -71,69 +73,48 @@ public class Hand : MonoBehaviour
             }
         }
     }
-    void CommunicationSystem(){
-        RaycastHit hitCharater;
-        if(Physics.Raycast(ray, out hitCharater) && hitCharater.collider.gameObject.tag == "Character"){
-            targetCharacter = hitCharater.collider.gameObject;
-            distTrain = Vector3.Distance(targetCharacter.transform.position, transform.position);
-            if(distTrain <= distCanGiveTrain){
-                canActiveCharaceterLines = true;
-            }else{
-                canActiveCharaceterLines = false;
-                if(speechBubble != null){
-                    speechBubble.SetActive(false);
-                }
+    void RaycastCheck(){
+        RaycastHit hit; // alvo acertado pode ser qualquer objeto com collider
+        if(Physics.Raycast(ray, out hit, distCanGet)){
+            switch(hit.collider.gameObject.tag){
+                case "Character":
+                    canActiveCharaceterLines = true;
+                    break;
+                case "Train":
+                    if(canCarry == true){
+                        targetTrain = hit.collider.gameObject;
+                        CheckDelivery();
+                    }
+                    break;
+                case "Box":
+                    if(canCarry == false){
+                        target = hit.collider.gameObject;
+                        CarrySystem();
+                    }
+                    break;
+                default:
+                    break;
             }
         }else{
-            canActiveCharaceterLines = false;
-            if(speechBubble != null){
-                speechBubble.SetActive(false);
-            }
+            Reset();
         }
     }
+
     void CheckDelivery(){
-        RaycastHit hitTrain;
-        if(Physics.Raycast(ray, out hitTrain) && hitTrain.collider.gameObject.tag == "Train" && canCarry == true){
-            targetTrain = hitTrain.collider.gameObject;
-            distTrain = Vector3.Distance(targetTrain.transform.position, transform.position);
-            if(distTrain <= distCanGiveTrain){
-                if(activeOneTime2 == true){
-                    canGive = true;
-                    targetRendererDelivery = targetTrain.GetComponent<Renderer>();
-                    targetRendererDelivery.material.SetFloat("_ValueMultiplay", outilineSizeTrain);// Ativando o Contorno
-                }
-            }else{
-                ResetValuesDelivery();
-            }
-        }else{
-            ResetValuesDelivery();
+        if(activeOneTime2 == true){
+            canGive = true;
+            targetRendererDelivery = targetTrain.GetComponent<Renderer>();
+            targetTrain.GetComponent<ToFillTrain>().CompatibleLayer(target.layer);
         }
     }
     void CarrySystem(){
-        RaycastHit hit; // alvo acertado pode ser qualquer objeto com collider
-        if(Physics.Raycast(ray, out hit) && hit.collider.gameObject.tag == "Box" && canCarry == false){ // verificando qual o objeto foi acertado
-            target = hit.collider.gameObject;
-            distOfObjects = Vector3.Distance(target.transform.position, transform.position);// distance do player com o obejto
-            //Debug.Log("distance doa objetos " + distOfObjects);
-            if(distOfObjects <= distCanGet){ // se o Player esta perto do Objeto
-                if(activeOneTime == true && canCarry == false){
-                    canGet = true;
-                    targetRenderer = target.GetComponent<Renderer>();
-                    targetRenderer.material.SetFloat("_ValueMultiplay", outilineSizeBox);// Ativando o Contorno
-                    activeOneTime = false;
-                }
-            }else{
-                ResetValuesCarry();
-            }
-            //Debug.Log("pegou a caixa + " + target.name);
-        }else{
-            ResetValuesCarry();
+        if(activeOneTime == true){
+            canGet = true;
+            targetRenderer = target.GetComponent<Renderer>();
+            targetRenderer.material.SetFloat("_ValueMultiplay", outilineSizeBox);// Ativando o Contorno
+            activeOneTime = false;
+            //Debug.Log("game " + target.name);
         }
-        if(canCarry == true){
-            Carry();
-            //Debug.Log("Pego");
-        }
-     
     }
     void Carry(){ 
         target.transform.rotation = transform.rotation;
@@ -155,19 +136,24 @@ public class Hand : MonoBehaviour
                                                    Mathf.Lerp(targetTransY,hand.transform.position.y,lerpVelocity),
                                                    Mathf.Lerp(targetTransZ,hand.transform.position.z,lerpVelocity));
     }
-    void ResetValuesCarry(){// resetando as variaveis Quando nao pode haver interacao com o objeto
+
+    void Reset(){
+        canActiveCharaceterLines = false;
+        if(speechBubble != null){
+            speechBubble.SetActive(false);
+        }
+
+        activeOneTime2 = true;
+        distTrain = float.NaN;
+        if(targetRendererDelivery != null){
+            targetRendererDelivery.material.SetFloat("_ValueMultiplay", 0);
+        }
+
         canGet = false;
         activeOneTime = true;
         distOfObjects = float.NaN;
         if(targetRenderer != null){
             targetRenderer.material.SetFloat("_ValueMultiplay", 0);
-        }
-    }
-    void ResetValuesDelivery(){
-        activeOneTime2 = true;
-        distTrain = float.NaN;
-        if(targetRendererDelivery != null){
-            targetRendererDelivery.material.SetFloat("_ValueMultiplay", 0);
         }
     }
 }

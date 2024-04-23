@@ -9,6 +9,7 @@ public class ToFillTrain : MonoBehaviour
     private GameObject[] boxFulfilling;
     private int turn = 0;
     private int[] transferLayerFilter;
+    private Renderer renderTrain;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,20 +19,27 @@ public class ToFillTrain : MonoBehaviour
             boxFulfilling[i]= fulfilling.transform.GetChild(i).gameObject;
         }
         //Debug.Log(boxFulfilling.Length);
+        renderTrain = GetComponent<Renderer>();
+    }
+     public void CompatibleLayer(int boxLayer){
+        if (LayerAccept.Contains(boxLayer)){
+            renderTrain.material.SetFloat("_ValueMultiplay", 1.02f);// Ativando o Contorno
+        }else{
+            renderTrain.material.SetFloat("_ValueMultiplay", 0);// desativando o o Contorno
+        }
     }
 
     public void CheckLayerPackage(Color boxColor,int boxLayer, GameObject target){
         if (LayerAccept.Contains(boxLayer)){
             FillTheLoad(boxColor);
             Destroy(target, 0.15f);
-            //Debug.Log("entregou");
         }
     }
     void FillTheLoad (Color boxColor) {
         if(turn < boxFulfilling.Length){ 
             boxFulfilling[turn].SetActive(true);
-            boxFulfilling[turn].GetComponent<Renderer>().material.color = boxColor;
-            Debug.Log(" turn " + turn);
+            boxFulfilling[turn].GetComponent<Renderer>().materials[1].color = boxColor;
+            //Debug.Log(" turn " + turn);
         }
         turn++;
     }
