@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCamera : MonoBehaviour
 {
     [SerializeField] private Transform playerHead;
     [SerializeField] private Transform playerBody;
-
+    [SerializeField] private GameObject cursor;
+ 
     [System.NonSerialized] public float sensitivityX = 1.0f;
     [System.NonSerialized] public float sensitivityY = 1.0f;
 
     [System.NonSerialized] public float controlSensitivityX = 1.0f;
     [System.NonSerialized] public float controlSensitivityY = 1.0f;
+
+    [System.NonSerialized] public float cursorSize = 1.0f;
+    [System.NonSerialized] public Color  cursorColor;
 
     private float rotateX;
     private float rotateY;
@@ -25,11 +30,12 @@ public class PlayerCamera : MonoBehaviour
     private float coefSmoothX = 0.005f;
     private float coefSmoothY = 0.005f;
 
+    private bool canChange = false;
+
     void Start()
     {
-        Cursor.visible = false;//cursos invisivel
         Cursor.lockState = CursorLockMode.Locked;//cursor travado no mesmo local
-        
+        Cursor.visible = false;
     }
 
     private void LateUpdate() 
@@ -41,8 +47,20 @@ public class PlayerCamera : MonoBehaviour
         if (Input.GetKeyDown("b"))
         {
             Debug.Log(" valor da sensivilidade " + sensitivityX);
+            Cursor.visible = true;
         }
-
+        if(Time.timeScale == 0){
+            Cursor.visible = true;
+            cursor.SetActive(false);
+            Cursor.lockState = CursorLockMode.None;
+            canChange = true;
+        }else if(canChange == true){
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            cursor.SetActive(true);
+            canChange = false;
+        }
+    
         Mouse();
         string[] joysticksController = Input.GetJoystickNames();
 
@@ -51,6 +69,9 @@ public class PlayerCamera : MonoBehaviour
         {
             JoyStick();
         }
+    }
+    public void CursorCustomize(){
+        cursor.transform.localScale = new Vector3(cursorSize, cursorSize, cursorSize);
     }
     void Mouse(){
         float horizontalDelta = Input.GetAxisRaw("Mouse X") * sensitivityX;// Valor de Eixo X

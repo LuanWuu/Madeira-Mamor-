@@ -22,27 +22,24 @@ public class InGameMenu : MonoBehaviour
     {
         if(Input.GetKeyDown("escape")){
             if(isOpen == false){
+                Time.timeScale = 0;
                 canvas.SetActive(true);
-                Cursor.visible = true;//cursos invisivel
-                Cursor.lockState = CursorLockMode.None;//cursor livre
                 isOpen = true;
                 Debug.Log("Abriu");
                 EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(optionsFirstButton);
             }else{
+                Time.timeScale = 1;
                 canvas.SetActive(false);
-                Cursor.visible = false;//cursos invisivel
-                Cursor.lockState = CursorLockMode.Locked;//cursor travado no mesmo local
                 isOpen = false;
                 Debug.Log("Fechou");
             }
         }
     }
     public void BackToGame(){
+        Time.timeScale = 1;
         canvas.SetActive(false);
         isOpen = false;
-        Cursor.visible = false;//cursos invisivel
-        Cursor.lockState = CursorLockMode.Locked;//cursor travado no mesmo local
     }
     public void BackToMenu() {
         canvas.SetActive(true);

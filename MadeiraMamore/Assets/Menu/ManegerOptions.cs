@@ -26,6 +26,12 @@ public class ManegerOptions : MonoBehaviour
     [System.NonSerialized] public float valueControlSensitX;
     [System.NonSerialized] public float valueControlSensitY;
 
+    
+    [Header("Ponter Size")]
+    [SerializeField] private Slider cursorSize;
+
+    [System.NonSerialized] public float valueCursorSize;
+
     private PlayerCamera scriptPlayerCamera;
     private MoviPlayer scriptMoviPlayer;
     // Start is called before the first frame update
@@ -41,6 +47,8 @@ public class ManegerOptions : MonoBehaviour
         valueSensitY = sensitivityY.value;
         valueControlSensitX = controlSensitivityX.value;
         valueControlSensitY = controlSensitivityY.value;
+
+        valueCursorSize = cursorSize.value;
     }
 
     public void KeyBoard(){
@@ -81,6 +89,9 @@ public class ManegerOptions : MonoBehaviour
         scriptPlayerCamera.sensitivityY = valueSensitY;
         scriptPlayerCamera.controlSensitivityX = valueControlSensitX;
         scriptPlayerCamera.controlSensitivityY = valueControlSensitY;
+
+        scriptPlayerCamera.cursorSize = valueCursorSize;
+         scriptPlayerCamera.CursorCustomize();
         }
     }
 }
