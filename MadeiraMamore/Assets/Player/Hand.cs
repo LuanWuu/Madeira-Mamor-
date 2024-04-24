@@ -7,14 +7,11 @@ public class Hand : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private Transform hand;
     [SerializeField] private float distCanGet;
-    [SerializeField] private float distCanGiveTrain;
     [SerializeField] private float outilineSizeBox;
-    [SerializeField] private float outilineSizeTrain;
     [SerializeField] private float lerpVelocity;
     [SerializeField] private float durationLerpMovi;
     [SerializeField] private GameObject speechBubble;
    
-
     private bool canGet;
     private bool activeOneTime;
     private bool activeOneTime2;
