@@ -8,6 +8,8 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private Transform playerHead;
     [SerializeField] private Transform playerBody;
     [SerializeField] private GameObject cursor;
+    [SerializeField] private Transform cheif;
+    [SerializeField] private bool canMoviCamera;
  
     [System.NonSerialized] public float sensitivityX = 1.0f;
     [System.NonSerialized] public float sensitivityY = 1.0f;
@@ -34,8 +36,6 @@ public class PlayerCamera : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;//cursor travado no mesmo local
-        Cursor.visible = false;
     }
 
     private void LateUpdate() 
@@ -44,31 +44,32 @@ public class PlayerCamera : MonoBehaviour
 
     }
     void Update(){
-        if (Input.GetKeyDown("b"))
-        {
-            Debug.Log(" valor da sensivilidade " + sensitivityX);
-            Cursor.visible = true;
-        }
         if(Time.timeScale == 0){
-            Cursor.visible = true;
+            EnabledCursor();
             cursor.SetActive(false);
-            Cursor.lockState = CursorLockMode.None;
             canChange = true;
         }else if(canChange == true){
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            DisabledCursor();
             cursor.SetActive(true);
             canChange = false;
         }
-    
-        Mouse();
-        string[] joysticksController = Input.GetJoystickNames();
-
-        // Verifique se há controle conectado
-        if (joysticksController.Length > 0 && !string.IsNullOrEmpty(joysticksController[0]))
-        {
+        if(canMoviCamera == true){
+            DisabledCursor();
+            Mouse();
             JoyStick();
+        }else{
+            transform.LookAt(cheif);
+            EnabledCursor();
         }
+
+    }
+    void EnabledCursor(){
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    void DisabledCursor(){
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     public void CursorCustomize(){
         cursor.transform.localScale = new Vector3(cursorSize, cursorSize, cursorSize);

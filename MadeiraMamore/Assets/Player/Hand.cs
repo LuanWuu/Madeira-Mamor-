@@ -20,8 +20,6 @@ public class Hand : MonoBehaviour
     private bool canGive;
     private bool canActiveCharaceterLines;
     private float startCarryTime;
-    private float distOfObjects;
-    private float distTrain;
     private GameObject target;
     private GameObject targetTrain;
     private GameObject targetCharacter;
@@ -46,9 +44,9 @@ public class Hand : MonoBehaviour
         }
     }
     void InputManager(){
-        if (Input.GetKeyDown("e") && canActiveCharaceterLines == true){
+        if (Input.GetKeyDown("e") && canActiveCharaceterLines == true){ // Ativando Caixa de teste
             speechBubble.SetActive(true);
-            targetCharacter.GetComponent<roadMap>().Randomized();
+            //targetCharacter.
         }
         if (Input.GetKeyDown("e")){ // pegando o Objeto
             if(canGet == true){
@@ -76,6 +74,7 @@ public class Hand : MonoBehaviour
             switch(hit.collider.gameObject.tag){
                 case "Character":
                     canActiveCharaceterLines = true;
+                    targetCharacter = hit.collider.gameObject;
                     break;
                 case "Train":
                     if(canCarry == true){
@@ -141,14 +140,12 @@ public class Hand : MonoBehaviour
         }
 
         activeOneTime2 = true;
-        distTrain = float.NaN;
         if(targetRendererDelivery != null){
             targetRendererDelivery.material.SetFloat("_ValueMultiplay", 0);
         }
 
         canGet = false;
         activeOneTime = true;
-        distOfObjects = float.NaN;
         if(targetRenderer != null){
             targetRenderer.material.SetFloat("_ValueMultiplay", 0);
         }
