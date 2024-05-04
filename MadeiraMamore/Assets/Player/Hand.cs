@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hand : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Hand : MonoBehaviour
     [SerializeField] private float lerpVelocity;
     [SerializeField] private float durationLerpMovi;
     [SerializeField] private GameObject speechBubble;
+
+    [SerializeField] private PlayerCamera playerCameraScript;
    
     private bool canGet;
     private bool activeOneTime;
@@ -26,6 +29,7 @@ public class Hand : MonoBehaviour
     private Renderer targetRenderer;
     private Renderer targetRendererDelivery;
     private Ray ray;
+    private MensageController mensageControllerScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +50,7 @@ public class Hand : MonoBehaviour
     void InputManager(){
         if (Input.GetKeyDown("e") && canActiveCharaceterLines == true){ // Ativando Caixa de teste
             speechBubble.SetActive(true);
-            //targetCharacter.
+            playerCameraScript.canMoviCamera = false;
         }
         if (Input.GetKeyDown("e")){ // pegando o Objeto
             if(canGet == true){
@@ -138,7 +142,8 @@ public class Hand : MonoBehaviour
         if(speechBubble != null){
             speechBubble.SetActive(false);
         }
-
+        playerCameraScript.canMoviCamera = true;
+        
         activeOneTime2 = true;
         if(targetRendererDelivery != null){
             targetRendererDelivery.material.SetFloat("_ValueMultiplay", 0);

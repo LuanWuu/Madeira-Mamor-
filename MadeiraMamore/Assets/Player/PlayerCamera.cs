@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class PlayerCamera : MonoBehaviour
 {
+    public bool canMoviCamera;
+
     [SerializeField] private Transform playerHead;
     [SerializeField] private Transform playerBody;
     [SerializeField] private GameObject cursor;
     [SerializeField] private Transform cheif;
-    [SerializeField] private bool canMoviCamera;
  
     [System.NonSerialized] public float sensitivityX = 1.0f;
     [System.NonSerialized] public float sensitivityY = 1.0f;
@@ -58,7 +59,7 @@ public class PlayerCamera : MonoBehaviour
             Mouse();
             JoyStick();
         }else{
-            transform.LookAt(cheif);
+            //transform.LookAt(cheif);
             EnabledCursor();
         }
 

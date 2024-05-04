@@ -7,8 +7,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7896d599a36fd7459efc427db402dab, type: 3}
   m_Name: CharactersTalk
   m_EditorClassIdentifier: 
+  cheif:
+  - "Chefe: Essa \xE9 sua lista. Tudo tem que ser terminado hoje."
+  - 'Chefe: Nem pense em ficar enrolando.'
+  - "Chefe: Mais r\xE1pido! N\xE3o temos o dia todo."
+  - "Chefe: Voc\xEA n\xE3o \xE9 pago pra ficar parado."
+  - 'Chefe: Muito lento...'
+  - "Chefe: Se quiser ser pago \xE9 melhor trabalhar direito."
+  - "Chefe: Continue assim e nem precisa voltar amanh\xE3."
+  - 'Chefe: Nesse ritmo o trabalho nunca vai acabar.'
+  - "Chefe: Fa\xE7a melhor da pr\xF3xima vez."
+  - "Chefe: Med\xEDocre \xE9 melhor que nada..."
+  - "Chefe: Voc\xEA podia se esfor\xE7ar como os melhores trabalhadores."
+  - "Chefe: Mantenha esse desempenho e n\xE3o teremos problemas."
+  - "Chefe: Bom trabalho. At\xE9 depois."
+  guard:
+  - 'Capataz: Pensa que vai aonde?'
+  - 'Guarda: Seu trabalho fica pro outro lado.'
+  - 'Guarda: Prefere que eu acabe logo com isso?'

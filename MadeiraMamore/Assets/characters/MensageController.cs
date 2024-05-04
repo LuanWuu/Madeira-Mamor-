@@ -10,6 +10,7 @@ public class MensageController : MonoBehaviour
     [SerializeField] private bool cheif;
     [SerializeField] private bool guard;
     [SerializeField] private bool[] worker;
+    int placeNumber;
     private  List<string> myCharacterlist = new List<string>();
     private void Start() {
         if(cheif == true){
@@ -21,11 +22,17 @@ public class MensageController : MonoBehaviour
                 if(worker[i] == true){
                     characterWords.InitializeWorkerTalk();
                     myCharacterlist = characterWords.workerTalk[i];
+                    //speechBubble.text = myCharacterlist[0];
                 }
             }
         }
     }
-    private void Update() {
-        
+    public void ChangePhrase(){
+        placeNumber++;
+        if(placeNumber <= myCharacterlist.Count){
+            speechBubble.text = myCharacterlist[placeNumber];
+        }else{
+            Debug.Log("acabou as frases");
+        }
     }
 }
