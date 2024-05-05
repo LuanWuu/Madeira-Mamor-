@@ -12,8 +12,6 @@ public class Hand : MonoBehaviour
     [SerializeField] private float durationLerpMovi;
     [SerializeField] private GameObject speechBubble;
 
-    [SerializeField] private PlayerCamera playerCameraScript;
-   
     private bool canGet;
     private bool activeOneTime;
     private bool activeOneTime2;
@@ -28,7 +26,6 @@ public class Hand : MonoBehaviour
     private Renderer targetRenderer;
     private Renderer targetRendererDelivery;
     private Ray ray;
-    private MensageController mensageControllerScript;
     private Vector3 screenCenter;
     // Start is called before the first frame update
     void Start()
@@ -52,7 +49,8 @@ public class Hand : MonoBehaviour
     void InputManager(){
         if (Input.GetKeyDown("e") && canActiveCharaceterLines == true){ // Ativando Caixa de teste
             speechBubble.SetActive(true);
-            playerCameraScript.canMoviCamera = false;
+            PlayerCamera.EnabledCursor();
+            targetCharacter.GetComponent<MensageController>().GiveToBottun();
         }
         if (Input.GetKeyDown("e")){ // pegando o Objeto
             if(canGet == true){
@@ -81,7 +79,6 @@ public class Hand : MonoBehaviour
                 case "Character":
                     canActiveCharaceterLines = true;
                     targetCharacter = hit.collider.gameObject;
-                    Debug.Log("hit");
                     break;
                 case "Train":
                     if(canCarry == true){
@@ -145,7 +142,7 @@ public class Hand : MonoBehaviour
         if(speechBubble != null){
             speechBubble.SetActive(false);
         }
-        playerCameraScript.canMoviCamera = true;
+        PlayerCamera.DisabledCursor();
         
         activeOneTime2 = true;
         if(targetRendererDelivery != null){

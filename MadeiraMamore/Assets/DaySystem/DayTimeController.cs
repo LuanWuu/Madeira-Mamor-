@@ -6,6 +6,7 @@ public class DayTimeController : MonoBehaviour
 {
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private roadMap roadMapController;
+    [SerializeField] private List<MensageController> mensageControllerScript;
     // Start is called before the first frame update
     void Awake()
     {
@@ -24,24 +25,31 @@ public class DayTimeController : MonoBehaviour
             case 2:
                 roadMapController.InitializeWorkerTalkDay2();
                 break;
-            case 12:
+            case 3:
                 roadMapController.InitializeWorkerTalkDay12();
                 break;
-            case 20:
+            case 4:
                 roadMapController.InitializeWorkerTalkDay20();
                 break;
-            case 22:
+            case 5:
                 roadMapController.InitializeWorkerTalkDay22();
                 break;
-            case 25:
+            case 6:
                 roadMapController.InitializeWorkerTalkDay25();
                 break;
-            case 26:
+            case 7:
                 roadMapController.InitializeWorkerTalkDay26();
                 break;
-            case 27:
+            case 8:
                 roadMapController.InitializeWorkerTalkDay27();
                 break;
+            default:
+                break;
         }
+        foreach (MensageController script in mensageControllerScript)
+        {
+            script.PickWorkerWords();
+        }
+        
     }
 }

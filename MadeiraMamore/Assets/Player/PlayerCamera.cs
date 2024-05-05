@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerCamera : MonoBehaviour
 {
-    public bool canMoviCamera;
+    private static bool canMoviCamera;
 
     [SerializeField] private Transform playerHead;
     [SerializeField] private Transform playerBody;
@@ -55,22 +55,19 @@ public class PlayerCamera : MonoBehaviour
             canChange = false;
         }
         if(canMoviCamera == true){
-            DisabledCursor();
             Mouse();
             JoyStick();
-        }else{
-            //transform.LookAt(cheif);
-            EnabledCursor();
         }
-
     }
-    void EnabledCursor(){
+    public static void EnabledCursor(){
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        canMoviCamera = false;
     }
-    void DisabledCursor(){
+    public static void DisabledCursor(){
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        canMoviCamera = true;
     }
     public void CursorCustomize(){
         cursor.transform.localScale = new Vector3(cursorSize, cursorSize, cursorSize);

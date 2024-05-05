@@ -7,7 +7,8 @@ public class MensageController : MonoBehaviour
 {
     [SerializeField] private roadMap characterWords;
     [SerializeField] private StoragaDayValues DaySystem;
-    [SerializeField] private TextMeshProUGUI speechBubble;
+    [SerializeField] private TextMeshProUGUI speechBubbleText;
+    [SerializeField] private GameObject speechBubble;
     [SerializeField] private bool cheif;
     [SerializeField] private bool guard;
     [SerializeField] private bool[] worker;
@@ -19,11 +20,9 @@ public class MensageController : MonoBehaviour
             myCharacterlist = characterWords.cheif;
         }else if(guard == true){
             myCharacterlist = characterWords.guard;
-        }else{
-            PickWorkerWords();
         }
     }
-    void PickWorkerWords(){
+    public void PickWorkerWords(){
         switch(DaySystem.day){
             case 1:
                 speechesOfDay = characterWords.workerTalkDay1;
@@ -50,19 +49,30 @@ public class MensageController : MonoBehaviour
                 speechesOfDay = characterWords.workerTalkDay27;
                 break;
         }
+        GiveTalk();
+    }
+    void GiveTalk(){
         for(int i = 0; i < worker.Length; i++) {
-                if(worker[i] == true){
-                    myCharacterlist = speechesOfDay[i];
-                    speechBubble.text = myCharacterlist[0];
-                }
+            if(worker[i] == true){
+                myCharacterlist = speechesOfDay[i];
+                speechBubbleText.text = myCharacterlist[0];
+                break;
             }
+        }
+        placeNumber = 0;
     }
     public void ChangePhrase(){
         placeNumber++;
-        if(placeNumber <= myCharacterlist.Count){
-            speechBubble.text = myCharacterlist[placeNumber];
+        if(placeNumber < myCharacterlist.Count){
+            speechBubbleText.text = myCharacterlist[placeNumber];
         }else{
             Debug.Log("acabou as frases");
+            speechBubble.gameObject.SetActive(false);
+            GiveTalk();
+            PlayerCamera.DisabledCursor();
         }
+    }
+    public void GiveToBottun(){
+        ButtonPlayerTalk.mensageControllerScript = GetComponent<MensageController>();
     }
 }

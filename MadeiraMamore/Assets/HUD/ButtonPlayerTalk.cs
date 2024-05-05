@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ButtonPlayerTalk : MonoBehaviour, IPointerDownHandler
 {
+    [System.NonSerialized] public static MensageController mensageControllerScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,6 @@ public class ButtonPlayerTalk : MonoBehaviour, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        
+        mensageControllerScript.ChangePhrase();
     }
 }
