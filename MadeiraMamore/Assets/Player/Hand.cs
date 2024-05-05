@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Hand : MonoBehaviour
 {
-    [SerializeField] private Camera cam;
     [SerializeField] private Transform hand;
     [SerializeField] private float distCanGet;
     [SerializeField] private float outilineSizeBox;
@@ -30,16 +29,19 @@ public class Hand : MonoBehaviour
     private Renderer targetRendererDelivery;
     private Ray ray;
     private MensageController mensageControllerScript;
+    private Vector3 screenCenter;
     // Start is called before the first frame update
     void Start()
     {
+        screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
         canMoviLerp = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        ray = cam.ScreenPointToRay(Input.mousePosition); //Raio Vindo do Centro da camera
+        ray =  Camera.main.ScreenPointToRay(screenCenter); //Raio Vindo do Centro da camera
+
         InputManager();
         RaycastCheck();
         if(canCarry == true){
@@ -79,6 +81,7 @@ public class Hand : MonoBehaviour
                 case "Character":
                     canActiveCharaceterLines = true;
                     targetCharacter = hit.collider.gameObject;
+                    Debug.Log("hit");
                     break;
                 case "Train":
                     if(canCarry == true){
