@@ -9,28 +9,13 @@ public class roadMap : ScriptableObject {
     public List<string> cheif = new List<string>(){
         // Ao falar com o chefe de equipe para iniciar o trabalho:
         "Chefe: Essa é sua lista. Tudo tem que ser terminado hoje.",
-        "Chefe: Nem pense em ficar enrolando.",
+        "Chefe: Nem pense em ficar enrolando."
         };
     public List<string> chiefScrean = new List<string>(){
         // Durante o trabalho:
         "Chefe: Mais rápido! Não temos o dia todo.",
         "Chefe: Você não é pago pra ficar parado.",
         "Chefe: Muito lento..."
-        };
-    public List<string> chiefAssessment = new List<string>(){
-        // Ao terminar o trabalho:
-        // Trabalho não feito:
-        "Chefe: Se quiser ser pago é melhor trabalhar direito.",
-        "Chefe: Continue assim e nem precisa voltar amanhã.",
-        // Trabalho ruim:
-        "Chefe: Nesse ritmo o trabalho nunca vai acabar.",
-        "Chefe: Faça melhor da próxima vez.",
-        // Trabalho mediano:
-        "Chefe: Medíocre é melhor que nada...",
-        "Chefe: Você podia se esforçar como os melhores trabalhadores.",
-        // Trabalho bom:
-        "Chefe: Mantenha esse desempenho e não teremos problemas.",
-        "Chefe: Bom trabalho. Até depois."
         };
     public List<string> guard = new List<string>(){
         // Caso o jogador tente sair do perímetro:
@@ -90,6 +75,35 @@ public class roadMap : ScriptableObject {
     public List<string>[] workerTalkDay27 = new List<string>[6];
 
     public List<string>[] playerAnswers = new List<string>[6];
+    public void GoodWork(){
+        cheif = new List<string>(){ 
+        // Trabalho bom:
+        "Chefe: Mantenha esse desempenho e não teremos problemas.",
+        "Chefe: Bom trabalho. Até depois."
+        };
+    }
+    public void MediumWork(){
+        cheif = new List<string>(){ 
+        // Trabalho mediano:
+        "Chefe: Medíocre é melhor que nada...",
+        "Chefe: Você podia se esforçar como os melhores trabalhadores."
+        };
+    }
+    public void BadWork(){
+        cheif = new List<string>(){ 
+            // Trabalho ruim:
+            "Chefe: Nesse ritmo o trabalho nunca vai acabar.",
+            "Chefe: Faça melhor da próxima vez."
+        };
+    }
+    public void DontFinshWork(){
+        cheif = new List<string>(){ 
+            // Ao terminar o trabalho:
+            // Trabalho não feito:
+            "Chefe: Se quiser ser pago é melhor trabalhar direito.",
+            "Chefe: Continue assim e nem precisa voltar amanhã."
+        };
+    }
     public void SpecialNight1(){
         worker6Special = new List<string>(){
          // Noite 1:

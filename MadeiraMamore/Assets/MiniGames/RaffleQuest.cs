@@ -16,6 +16,8 @@ public class RaffleQuest : MonoBehaviour
     [Header("Nivelamento")]
     [SerializeField] private float goodScore;
     [SerializeField] private float normalScore;
+    [Header("Roteiro")]
+    [SerializeField] private roadMap roadMapScriptable;
 
     private Timer timerScript;
     private int numberMinigame;
@@ -41,10 +43,13 @@ public class RaffleQuest : MonoBehaviour
         float score = (timerScript.timerleft * pointTimeQuest)/timeMinigame;
         Debug.Log("Complete" +  score);
         if(score > goodScore){
+            roadMapScriptable.GoodWork();
             Debug.Log("Complete" +  score);
         }else if(score > normalScore){
+            roadMapScriptable.MediumWork();
             Debug.Log("Complete" +  score);
         }else{
+            roadMapScriptable.BadWork();
             Debug.Log("Complete" +  score);
         }
         Invoke("Reset", 0.5f);

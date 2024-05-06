@@ -95,6 +95,10 @@ public class MensageController : MonoBehaviour
             numberAnswerPositive = 0;
             numberAnswerNegative = 0;
             GetIndexOfList();
+        }else if(cheif == true){
+            myCharacterlist = characterWords.cheif;
+        }else if(guard == true){
+            myCharacterlist = characterWords.guard;
         }
         speechBubbleText.text = myCharacterlist[0];
     }
@@ -108,6 +112,9 @@ public class MensageController : MonoBehaviour
         }else{
             speechBubble.gameObject.SetActive(false);
             PlayerCamera.DisabledCursor();
+            if(cheif == true) {
+                Debug.Log("Start MInugames");
+            }
         }
     }
     public void GiveToBottun(){

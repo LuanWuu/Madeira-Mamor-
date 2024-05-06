@@ -17,17 +17,10 @@ MonoBehaviour:
   cheif:
   - "Chefe: Essa \xE9 sua lista. Tudo tem que ser terminado hoje."
   - 'Chefe: Nem pense em ficar enrolando.'
+  chiefScrean:
   - "Chefe: Mais r\xE1pido! N\xE3o temos o dia todo."
   - "Chefe: Voc\xEA n\xE3o \xE9 pago pra ficar parado."
   - 'Chefe: Muito lento...'
-  - "Chefe: Se quiser ser pago \xE9 melhor trabalhar direito."
-  - "Chefe: Continue assim e nem precisa voltar amanh\xE3."
-  - 'Chefe: Nesse ritmo o trabalho nunca vai acabar.'
-  - "Chefe: Fa\xE7a melhor da pr\xF3xima vez."
-  - "Chefe: Med\xEDocre \xE9 melhor que nada..."
-  - "Chefe: Voc\xEA podia se esfor\xE7ar como os melhores trabalhadores."
-  - "Chefe: Mantenha esse desempenho e n\xE3o teremos problemas."
-  - "Chefe: Bom trabalho. At\xE9 depois."
   guard:
   - 'Capataz: Pensa que vai aonde?'
   - 'Guarda: Seu trabalho fica pro outro lado.'
@@ -60,7 +53,7 @@ MonoBehaviour:
   - "T6: N\xE3o seja burro! E n\xE3o seja hip\xF3crita! Diz que fazem sentido mas
     veio beber..."
   worker6Special:
-  - "\"T6: Ah, \xC1lcool, uma das melhores coisas inventadas.\""
-  - "\"T6: Como eles podem proibir algo t\xE3o bom? Isso \xE9 o que me faz mais produtivo!
-    Como esperam que eu viva sem?\","
-  - "\"T6: A gente n\xE3o devia continuar aguentando essas regras sem sentido.\" "
+  - "T6: Ah, \xC1lcool, uma das melhores coisas inventadas."
+  - "T6: Como eles podem proibir algo t\xE3o bom? Isso \xE9 o que me faz mais produtivo!
+    Como esperam que eu viva sem?"
+  - "T6: A gente n\xE3o devia continuar aguentando essas regras sem sentido."
