@@ -26,8 +26,11 @@ public class MensageController : MonoBehaviour
     private List<string> myCharacterlist;
     private List<string> myCharacterAnswerPositive;
     private List<string> myCharacterAnswerNegative;
+    private List<string> localPlayerAnswers;
     private List<string>[] speechesOfDay;
-     
+
+    ButtonPlayerTalk posiButton;
+    ButtonPlayerTalk negaButton;
 
     private void Start() {
         if(cheif == true){
@@ -35,6 +38,8 @@ public class MensageController : MonoBehaviour
         }else if(guard == true){
             myCharacterlist = characterWords.guard;
         }
+        posiButton = buttonPositive.GetComponent<ButtonPlayerTalk>();
+        negaButton = buttonNegative.GetComponent<ButtonPlayerTalk>();
     }
     public void PickWorkerWords(){
         switch(DaySystem.day){
@@ -73,30 +78,33 @@ public class MensageController : MonoBehaviour
         }
     }
     public void GiveTalk(){
-        for(int i = 0; i < worker.Length; i++) {
-            if (worker[i] == true){
-                if(i == 5){
-                    myCharacterlist = characterWords.worker6Special;
-                    speechBubbleText.text = myCharacterlist[0];
+        placeNumber = 0;
+        if(guard == false && cheif == false){ 
+            for(int i = 0; i < worker.Length; i++) {
+                if (worker[i] == true){
+                    if(i == 5){
+                        myCharacterlist = characterWords.worker6Special;
+                        numeberOfWorker = i;
+                        break;
+                    }
+                    myCharacterlist = speechesOfDay[i];
                     numeberOfWorker = i;
                     break;
                 }
-                myCharacterlist = speechesOfDay[i];
-                speechBubbleText.text = myCharacterlist[0];
-                numeberOfWorker = i;
-                break;
             }
+            numberAnswerPositive = 0;
+            numberAnswerNegative = 0;
+            GetIndexOfList();
         }
-        placeNumber = 0;
-        numberAnswerPositive = 0;
-        numberAnswerNegative = 0;
-        GetIndexOfList();
+        speechBubbleText.text = myCharacterlist[0];
     }
     public void ChangePhrase(){
         placeNumber++;
         if(placeNumber < myCharacterlist.Count){
             speechBubbleText.text = myCharacterlist[placeNumber];
-            GetIndexOfList();
+            if(guard == false && cheif == false){
+                GetIndexOfList();
+            }
         }else{
             speechBubble.gameObject.SetActive(false);
             PlayerCamera.DisabledCursor();
@@ -126,10 +134,8 @@ public class MensageController : MonoBehaviour
     void ActiveButtonsAnswer(){
         nextButton.SetActive(false);
         buttonPositive.SetActive(true);
-        ButtonPlayerTalk posiButton = buttonPositive.GetComponent<ButtonPlayerTalk>();
         posiButton.mensageControllerScript = GetComponent<MensageController>();
         buttonNegative.SetActive(true);
-        ButtonPlayerTalk negaButton = buttonNegative.GetComponent<ButtonPlayerTalk>();
         negaButton.mensageControllerScript = GetComponent<MensageController>();
         characterWords.answer = true;
     }
@@ -150,7 +156,6 @@ public class MensageController : MonoBehaviour
             if(numberAnswerPositive > (myCharacterAnswerPositive.Count-1)){
                 DisableAnswer();
             }
-            Debug.Log(numeberOfWorker);
             if(numeberOfWorker == 5){
                 SpecialEnd();
             }
@@ -167,6 +172,10 @@ public class MensageController : MonoBehaviour
         }         
         DisableButtonsAnswer();
     }
+    void GivePlayerAnswer(List<string> give){
+        posiButton.PlayerAnswersButtons(give);
+        negaButton.PlayerAnswersButtons(give);
+    }
     void Worker0(){
         myCharacterAnswerPositive = characterWords.worker0AnswerPositive;
         myCharacterAnswerNegative = characterWords.worker0AnswerNegative;
@@ -174,32 +183,32 @@ public class MensageController : MonoBehaviour
         switch(DaySystem.day){
             case 1:
                 if(placeNumber == 1){
-                    Debug.Log("ativar pergunta do dia 1");
                     ActiveButtonsAnswer();
+                    GivePlayerAnswer(characterWords.playerAnswers[0]);
                 }
                 break;
             case 2:
-                if(placeNumber == 1){
-                    Debug.Log("ativar pergunta do dia 2");
+                if(placeNumber == 1){;
                     ActiveButtonsAnswer();
+                    GivePlayerAnswer(characterWords.playerAnswers[0]);
                 }
                 break;
             case 4:
                 if(placeNumber == 3){
-                    Debug.Log("ativar pergunta do dia 4");
                     ActiveButtonsAnswer();
+                    GivePlayerAnswer(characterWords.playerAnswers[0]);
                 }
                 break;
             case 5:
-                if(placeNumber == 0){
-                    Debug.Log("ativar pergunta do dia 5 0");
+                if (placeNumber == 0){
+                    GivePlayerAnswer(characterWords.playerAnswers[0]);
                     ActiveButtonsAnswer();
                 }else if (placeNumber == 3){
-                    Debug.Log("ativar pergunta do dia 5 desugnasd");
                     myCharacterAnswerPositive = characterWords.worker0AnswerPositive2Day22;
                     numberAnswerPositive = 0;
                     myCharacterAnswerNegative = characterWords.worker0AnswerNegative2Day22;
                     numberAnswerNegative = 0;
+                    GivePlayerAnswer(characterWords.playerAnswers[3]);
                     ActiveButtonsAnswer();
                 }
                 break;
@@ -209,8 +218,13 @@ public class MensageController : MonoBehaviour
     void Worker2(){
         myCharacterAnswerPositive = characterWords.worker2AnswerPositive;
         myCharacterAnswerNegative = characterWords.worker2AnswerNegative;
-        if(DaySystem.day == 3 && placeNumber == 2 ){
+        if(DaySystem.day == 3){
+            if(placeNumber == 0){
+                nextButton.GetComponent<ButtonPlayerTalk>().buttonNext(characterWords.playerAnswers[2]);
+            }else if(placeNumber ==2){
                 ActiveButtonsAnswer();
+                GivePlayerAnswer(characterWords.playerAnswers[2]);
+            }
         }
     }
     void Worker4(){
@@ -218,6 +232,7 @@ public class MensageController : MonoBehaviour
         myCharacterAnswerNegative = characterWords.worker4AnswerNegative;
         if(DaySystem.day == 8 && placeNumber == 1 ){
                 ActiveButtonsAnswer();
+                GivePlayerAnswer(characterWords.playerAnswers[4]);
         }
     }
     void Worker5(){
@@ -225,6 +240,7 @@ public class MensageController : MonoBehaviour
         myCharacterAnswerNegative = characterWords.worker5AnswerNegative;
         if(count == 0 && placeNumber == 2) {
             ActiveButtonsAnswer();
+            GivePlayerAnswer(characterWords.playerAnswers[5]);
             count++;
         }
         if(count > 0 && placeNumber == 3){

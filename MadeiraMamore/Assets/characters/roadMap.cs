@@ -10,10 +10,14 @@ public class roadMap : ScriptableObject {
         // Ao falar com o chefe de equipe para iniciar o trabalho:
         "Chefe: Essa é sua lista. Tudo tem que ser terminado hoje.",
         "Chefe: Nem pense em ficar enrolando.",
+        };
+    public List<string> chiefScrean = new List<string>(){
         // Durante o trabalho:
         "Chefe: Mais rápido! Não temos o dia todo.",
         "Chefe: Você não é pago pra ficar parado.",
-        "Chefe: Muito lento...",
+        "Chefe: Muito lento..."
+        };
+    public List<string> chiefAssessment = new List<string>(){
         // Ao terminar o trabalho:
         // Trabalho não feito:
         "Chefe: Se quiser ser pago é melhor trabalhar direito.",
@@ -28,13 +32,12 @@ public class roadMap : ScriptableObject {
         "Chefe: Mantenha esse desempenho e não teremos problemas.",
         "Chefe: Bom trabalho. Até depois."
         };
-
     public List<string> guard = new List<string>(){
         // Caso o jogador tente sair do perímetro:
         "Capataz: Pensa que vai aonde?",
-        "Guarda: Seu trabalho fica pro outro lado.",
+        "Capataz: Seu trabalho fica pro outro lado.",
         // Após tentar pela terceira vez seguida:
-        "Guarda: Prefere que eu acabe logo com isso?"
+        "Capataz: Prefere que eu acabe logo com isso?"
         };
     public List<string> worker0AnswerPositive;
     public List<string> worker0AnswerNegative;
@@ -85,6 +88,8 @@ public class roadMap : ScriptableObject {
     public List<string>[] workerTalkDay25 = new List<string>[6];
     public List<string>[] workerTalkDay26 = new List<string>[6];
     public List<string>[] workerTalkDay27 = new List<string>[6];
+
+    public List<string>[] playerAnswers = new List<string>[6];
     public void SpecialNight1(){
         worker6Special = new List<string>(){
          // Noite 1:
@@ -135,6 +140,14 @@ public class roadMap : ScriptableObject {
             // Protagonista: Quando a ferrovia estiver pronta.
             "T1: Isso só até arranjarmos outro emprego tão ruim quanto esse."
         };
+        playerAnswers[0] = new List<string>{
+            "P: Quando a ferrovia estiver pronta.",
+            "P: Nunca."
+        };
+        playerAnswers[5] = new List<string>{
+            "P: Talvez tenha motivo pra essas regras.",
+            "P: Não aguento mais essas regras."
+        };
     }
     public void InitializeWorkerTalkDay2(){
         workerTalkDay2[0] = new List<string>{// Dia 2: o jogo assume seu ritmo normal e as escolhas noturnas são desbloqueadas.
@@ -162,6 +175,10 @@ public class roadMap : ScriptableObject {
              // P: Não.
             "T1: Pois está perdendo a melhor parte desse lugar.",
         };
+        playerAnswers[0] = new List<string>{
+            "P: Não.",
+            "P: Sim."
+        };
         
     }
     public void InitializeWorkerTalkDay12(){
@@ -185,6 +202,11 @@ public class roadMap : ScriptableObject {
         workerTalkDay12[3] = new List<string>{// Dia 12
             "T4: aamkel"
             };
+        playerAnswers[2] = new List<string>{
+            "P: Talvez devesse parar.",
+            "P: ...",
+            "P: Você tá bem?"
+        };
     }
     public void InitializeWorkerTalkDay20(){
         workerTalkDay20[0] = new List<string>{// Dia 20: Um novo grupo de trabalhadores chega, demonstrando a constante circulação de novos trabalhadores para substituir os antigos.
@@ -209,6 +231,10 @@ public class roadMap : ScriptableObject {
             "T1: Você realmente acredita no que dizem sobre a importância desse trabalho?",
             "T1: Eu duvido de tudo que nos contam."
         };
+        playerAnswers[0] = new List<string>{
+            "P: Pela ferrovia.",
+            "P: Pelo dinheiro"
+        };
     }
     public void InitializeWorkerTalkDay22(){
         workerTalkDay22[0] = new List<string>{// Dia 22: Nesse dia o Trabalhador 1 foge floresta adentro, tentando voltar para sua casa.
@@ -229,6 +255,14 @@ public class roadMap : ScriptableObject {
             // P: Não.
             "T1: Nem mesmo uma vez? Invejo você...",
             "T1: Queria ser tão despreocupado assim.",
+        };
+        playerAnswers[0] = new List<string>{
+            "P: Não.",
+            "P: Sim.",
+        };
+        playerAnswers[3] = new List<string>{
+            "P: Boa sorte.",
+            "P: Mas é muito perigoso"
         };
     }
     public void InitializeWorkerTalkDay25(){
@@ -252,5 +286,9 @@ public class roadMap : ScriptableObject {
             "T5: Tá se sentindo bem?",
             "T5: Ainda aguenta depois de ontem?",
             };
+        playerAnswers[0] = new List<string>{
+            "P: Tá tudo bem.",
+            "P: Talvez esteja doente."
+        };
     }
 }
