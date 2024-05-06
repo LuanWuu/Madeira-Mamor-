@@ -12,7 +12,6 @@ public class MoviPlayer : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
     }
-
     // Update is called once per frame
 
     private void FixedUpdate()

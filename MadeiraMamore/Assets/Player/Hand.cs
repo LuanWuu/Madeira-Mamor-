@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hand : MonoBehaviour
 {
-    [SerializeField] private Camera cam;
     [SerializeField] private Transform hand;
     [SerializeField] private float distCanGet;
     [SerializeField] private float outilineSizeBox;
     [SerializeField] private float lerpVelocity;
     [SerializeField] private float durationLerpMovi;
     [SerializeField] private GameObject speechBubble;
-   
+
     private bool canGet;
     private bool activeOneTime;
     private bool activeOneTime2;
@@ -20,24 +20,25 @@ public class Hand : MonoBehaviour
     private bool canGive;
     private bool canActiveCharaceterLines;
     private float startCarryTime;
-    private float distOfObjects;
-    private float distTrain;
     private GameObject target;
     private GameObject targetTrain;
     private GameObject targetCharacter;
     private Renderer targetRenderer;
     private Renderer targetRendererDelivery;
     private Ray ray;
+    private Vector3 screenCenter;
     // Start is called before the first frame update
     void Start()
     {
+        screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
         canMoviLerp = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        ray = cam.ScreenPointToRay(Input.mousePosition); //Raio Vindo do Centro da camera
+        ray =  Camera.main.ScreenPointToRay(screenCenter); //Raio Vindo do Centro da camera
+
         InputManager();
         RaycastCheck();
         if(canCarry == true){
@@ -46,9 +47,11 @@ public class Hand : MonoBehaviour
         }
     }
     void InputManager(){
-        if (Input.GetKeyDown("e") && canActiveCharaceterLines == true){
+        if (Input.GetKeyDown("e") && canActiveCharaceterLines == true){ // Ativando Caixa de teste
             speechBubble.SetActive(true);
-            targetCharacter.GetComponent<roadMap>().Randomized();
+            PlayerCamera.EnabledCursor();
+            targetCharacter.GetComponent<MensageController>().GiveTalk();
+            targetCharacter.GetComponent<MensageController>().GiveToBottun();
         }
         if (Input.GetKeyDown("e")){ // pegando o Objeto
             if(canGet == true){
@@ -76,6 +79,7 @@ public class Hand : MonoBehaviour
             switch(hit.collider.gameObject.tag){
                 case "Character":
                     canActiveCharaceterLines = true;
+                    targetCharacter = hit.collider.gameObject;
                     break;
                 case "Train":
                     if(canCarry == true){
@@ -139,16 +143,15 @@ public class Hand : MonoBehaviour
         if(speechBubble != null){
             speechBubble.SetActive(false);
         }
-
+        PlayerCamera.DisabledCursor();
+        
         activeOneTime2 = true;
-        distTrain = float.NaN;
         if(targetRendererDelivery != null){
             targetRendererDelivery.material.SetFloat("_ValueMultiplay", 0);
         }
 
         canGet = false;
         activeOneTime = true;
-        distOfObjects = float.NaN;
         if(targetRenderer != null){
             targetRenderer.material.SetFloat("_ValueMultiplay", 0);
         }
