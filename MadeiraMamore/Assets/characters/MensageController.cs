@@ -21,6 +21,7 @@ public class MensageController : MonoBehaviour
     int numberAnswerPositive;
     int numberAnswerNegative;
     int? count = 0;
+    int saveDayTime = 0;
 
     private List<string> myCharacterlist;
     private List<string> myCharacterAnswerPositive;
@@ -62,6 +63,14 @@ public class MensageController : MonoBehaviour
                 speechesOfDay = characterWords.workerTalkDay27;
                 break;
         }
+        if(saveDayTime == DaySystem.day){
+            if(count == 10){
+                characterWords.SpecialNight3();
+            }else{
+                characterWords.SpecialNight2();
+            }
+            Debug.Log("dsadas" + count);
+        }
     }
     public void GiveTalk(){
         for(int i = 0; i < worker.Length; i++) {
@@ -86,13 +95,10 @@ public class MensageController : MonoBehaviour
     public void ChangePhrase(){
         placeNumber++;
         if(placeNumber < myCharacterlist.Count){
-            Debug.Log("index da frase " + placeNumber);
             speechBubbleText.text = myCharacterlist[placeNumber];
             GetIndexOfList();
         }else{
-            Debug.Log("acabou as frases");
             speechBubble.gameObject.SetActive(false);
-            GiveTalk();
             PlayerCamera.DisabledCursor();
         }
     }
@@ -137,7 +143,6 @@ public class MensageController : MonoBehaviour
     }
     public void AnswerPositive(){
         nextButton.GetComponent<ButtonPlayerTalk>().localSignal = true;
-        Debug.Log("positive" + numberAnswerPositive);
             if(numberAnswerPositive <= (myCharacterAnswerPositive.Count-1)){
                 speechBubbleText.text =  myCharacterAnswerPositive[numberAnswerPositive];
                 numberAnswerPositive++;
@@ -147,14 +152,12 @@ public class MensageController : MonoBehaviour
             }
             Debug.Log(numeberOfWorker);
             if(numeberOfWorker == 5){
-                characterWords.SpecialNight2();
-                Debug.Log("oxi");
+                SpecialEnd();
             }
         DisableButtonsAnswer();
     }
     public void AnswerNegative(){
         nextButton.GetComponent<ButtonPlayerTalk>().localSignal = false;
-        Debug.Log("negat" + numberAnswerNegative);
         if(numberAnswerNegative <= (myCharacterAnswerNegative.Count-1)){
             speechBubbleText.text =  myCharacterAnswerNegative[numberAnswerNegative];
             numberAnswerNegative++;
@@ -207,7 +210,6 @@ public class MensageController : MonoBehaviour
         myCharacterAnswerPositive = characterWords.worker2AnswerPositive;
         myCharacterAnswerNegative = characterWords.worker2AnswerNegative;
         if(DaySystem.day == 3 && placeNumber == 2 ){
-             Debug.Log("trabalhador 2 dia 3 ou 12");
                 ActiveButtonsAnswer();
         }
     }
@@ -215,7 +217,6 @@ public class MensageController : MonoBehaviour
         myCharacterAnswerPositive = characterWords.worker4AnswerPositive;
         myCharacterAnswerNegative = characterWords.worker4AnswerNegative;
         if(DaySystem.day == 8 && placeNumber == 1 ){
-             Debug.Log("trabalhador 4 dia 8 ou 27");
                 ActiveButtonsAnswer();
         }
     }
@@ -223,13 +224,16 @@ public class MensageController : MonoBehaviour
         myCharacterAnswerPositive = characterWords.worker5AnswerPositive;
         myCharacterAnswerNegative = characterWords.worker5AnswerNegative;
         if(count == 0 && placeNumber == 2) {
-            Debug.Log("trabalhador 5 todos os dias");
             ActiveButtonsAnswer();
             count++;
         }
         if(count > 0 && placeNumber == 3){
-            characterWords.SpecialNight3();
-            count = null;
+            SpecialEnd();
+            count = 10;
         }
+    }
+    void SpecialEnd(){
+        saveDayTime = DaySystem.day;
+        saveDayTime++;
     }
 }

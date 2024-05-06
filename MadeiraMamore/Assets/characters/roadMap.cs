@@ -75,12 +75,8 @@ public class roadMap : ScriptableObject {
         // P: Talvez tenha motivo pra essas regras.
         "T6: Não seja burro! E não seja hipócrita! Diz que fazem sentido mas veio beber..."       
     };
-    public List<string> worker6Special = new List<string>(){
-        // Noite 1:
-        "T6: Ah, Álcool, uma das melhores coisas inventadas.",
-        "T6: Como eles podem proibir algo tão bom? Isso é o que me faz mais produtivo! Como esperam que eu viva sem?",
-        "T6: A gente não devia continuar aguentando essas regras sem sentido." 
-    };
+    public List<string> worker6Special;
+
     public List<string>[] workerTalkDay1 = new List<string>[6];
     public List<string>[] workerTalkDay2 = new List<string>[6];
     public List<string>[] workerTalkDay12 = new List<string>[6];
@@ -89,19 +85,25 @@ public class roadMap : ScriptableObject {
     public List<string>[] workerTalkDay25 = new List<string>[6];
     public List<string>[] workerTalkDay26 = new List<string>[6];
     public List<string>[] workerTalkDay27 = new List<string>[6];
+    public void SpecialNight1(){
+        worker6Special = new List<string>(){
+         // Noite 1:
+        "T6: Ah, Álcool, uma das melhores coisas inventadas.",
+        "T6: Como eles podem proibir algo tão bom? Isso é o que me faz mais produtivo! Como esperam que eu viva sem?",
+        "T6: A gente não devia continuar aguentando essas regras sem sentido."
+        };
+    }
     public void SpecialNight2(){
-        List<string> worker6Special = new List<string>(){
+        worker6Special = new List<string>(){
         // Noite 2:
             "T6: Você voltou! Estávamos discutindo o plano.",
             "T6: O que acha de ganhar um pouco mais? Dinheiro sempre é bom!",
             "T6: Borracha em alta, poder comprar armas e sair da ferrovia. O que acha?",
-            "T6: Se estiver de acordo, vamos sair daqui na próxima noite de álcool, depois de uma bebida final.",
-            "T6: Ao seringueiro! Não vai se arrepender."
+            "T6: Se estiver de acordo, vamos sair daqui na próxima noite de álcool, depois de uma bebida final."
         };
-        Debug.Log("galho");
     }
     public void SpecialNight3(){
-        List<string> worker6Special = new List<string>(){
+        worker6Special = new List<string>(){
             // Noite 12:
             "T6: Ao seringueiro! Não vai se arrepender."
         };

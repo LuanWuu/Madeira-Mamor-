@@ -11,12 +11,16 @@ public class DayTimeController : MonoBehaviour
     void Awake()
     {
         ChangedDay();
+        roadMapController.SpecialNight1();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ChangedDay();
+        if (Input.GetKeyDown("l")){
+            DaySystem.day++;
+            ChangedDay();
+        }
     }
     void ChangedDay(){
         switch(DaySystem.day){

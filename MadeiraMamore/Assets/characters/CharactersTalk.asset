@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7896d599a36fd7459efc427db402dab, type: 3}
   m_Name: CharactersTalk
   m_EditorClassIdentifier: 
+  amoutWorker: 6
+  answer: 0
   cheif:
   - "Chefe: Essa \xE9 sua lista. Tudo tem que ser terminado hoje."
   - 'Chefe: Nem pense em ficar enrolando.'
@@ -30,3 +32,35 @@ MonoBehaviour:
   - 'Capataz: Pensa que vai aonde?'
   - 'Guarda: Seu trabalho fica pro outro lado.'
   - 'Guarda: Prefere que eu acabe logo com isso?'
+  worker0AnswerPositive:
+  - "T1: haha voc\xEA t\xE1 certo, s\xF3 quando morrermos seremos livres."
+  worker0AnswerNegative:
+  - "T1: Isso s\xF3 at\xE9 arranjarmos outro emprego t\xE3o ruim quanto esse."
+  worker0AnswerPositive2Day22:
+  - "T1: Aqui tamb\xE9m \xE9."
+  - "T1: \xC9 s\xF3 mais um risco, uma \xFAltima aposta."
+  worker0AnswerNegative2Day22:
+  - "T1: Se sair daqui vivo, espero que possamos nos reencontrar pra uma bebida.
+    Talvez at\xE9 uma \xFAltima rodada de poker."
+  worker2AnswerPositive:
+  - "T3: Voc\xEA deveria... ficar longe."
+  worker2AnswerNegative:
+  - 'T3: Preciso... do dinheiro.'
+  - "T3: N\xE3o pagam pra... ficar... no hospital."
+  worker4AnswerPositive:
+  - 'T5: Deve ter sido um desses mosquitos.'
+  - 'T5: Eu vi um homem que vivia reclamando deles morrer.'
+  worker4AnswerNegative:
+  - "T5: N\xE3o parece..."
+  worker5AnswerPositive:
+  - 'T6: Hmm eu ouvi um conhecido falando sobre um lugar interessante aqui perto...'
+  - "T6: Talvez eu tenha um plano, mas talvez esteja meio b\xEAbado.."
+  - 'T6: Discutimos isso outra noite?'
+  worker5AnswerNegative:
+  - "T6: N\xE3o seja burro! E n\xE3o seja hip\xF3crita! Diz que fazem sentido mas
+    veio beber..."
+  worker6Special:
+  - "\"T6: Ah, \xC1lcool, uma das melhores coisas inventadas.\""
+  - "\"T6: Como eles podem proibir algo t\xE3o bom? Isso \xE9 o que me faz mais produtivo!
+    Como esperam que eu viva sem?\","
+  - "\"T6: A gente n\xE3o devia continuar aguentando essas regras sem sentido.\" "
