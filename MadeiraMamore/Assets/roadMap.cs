@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "roadMap", menuName = "talk/characterTalk")]
 public class roadMap : ScriptableObject {
     public int amoutWorker = 6;
+    public bool answer;
     public List<string> cheif = new List<string>(){
         // Ao falar com o chefe de equipe para iniciar o trabalho:
         "Chefe: Essa é sua lista. Tudo tem que ser terminado hoje.",
@@ -29,13 +30,57 @@ public class roadMap : ScriptableObject {
         };
 
     public List<string> guard = new List<string>(){
-
         // Caso o jogador tente sair do perímetro:
         "Capataz: Pensa que vai aonde?",
         "Guarda: Seu trabalho fica pro outro lado.",
         // Após tentar pela terceira vez seguida:
         "Guarda: Prefere que eu acabe logo com isso?"
         };
+    public List<string> worker0AnswerPositive;
+    public List<string> worker0AnswerNegative;
+    public List<string> worker0AnswerPositive2Day22 = new List<string>(){
+        // P: Mas é muito perigoso.
+        "T1: Aqui também é.",
+        "T1: É só mais um risco, uma última aposta."
+    };
+    public List<string> worker0AnswerNegative2Day22= new List<string>(){
+        // P: Boa sorte.
+        "T1: Se sair daqui vivo, espero que possamos nos reencontrar pra uma bebida. Talvez até uma última rodada de poker."
+        };
+    public List<string> worker2AnswerPositive = new List<string>(){
+            // P: ...
+        "T3: Você deveria... ficar longe."
+    };
+    public List<string> worker2AnswerNegative = new List<string>(){
+        // P: Talvez devesse parar.
+        "T3: Preciso... do dinheiro.",
+        "T3: Não pagam pra... ficar... no hospital."
+    };
+    public List<string> worker4AnswerPositive = new List<string>(){  
+        // P: Talvez esteja doente.
+        "T5: Deve ter sido um desses mosquitos.",
+        "T5: Eu vi um homem que vivia reclamando deles morrer."
+        };
+    public List<string> worker4AnswerNegative = new List<string>(){
+        // P: Tá tudo bem.
+        "T5: Não parece...",
+    };
+    public List<string> worker5AnswerPositive = new List<string>(){
+        // P: Não aguento mais essas regras.
+        "T6: Hmm eu ouvi um conhecido falando sobre um lugar interessante aqui perto...",
+        "T6: Talvez eu tenha um plano, mas talvez esteja meio bêbado..",
+        "T6: Discutimos isso outra noite?"    
+    };
+    public List<string> worker5AnswerNegative = new List<string>(){
+        // P: Talvez tenha motivo pra essas regras.
+        "T6: Não seja burro! E não seja hipócrita! Diz que fazem sentido mas veio beber..."       
+    };
+    public List<string> worker6Special = new List<string>(){
+        // Noite 1:
+        "T6: Ah, Álcool, uma das melhores coisas inventadas.",
+        "T6: Como eles podem proibir algo tão bom? Isso é o que me faz mais produtivo! Como esperam que eu viva sem?",
+        "T6: A gente não devia continuar aguentando essas regras sem sentido." 
+    };
     public List<string>[] workerTalkDay1 = new List<string>[6];
     public List<string>[] workerTalkDay2 = new List<string>[6];
     public List<string>[] workerTalkDay12 = new List<string>[6];
@@ -44,15 +89,27 @@ public class roadMap : ScriptableObject {
     public List<string>[] workerTalkDay25 = new List<string>[6];
     public List<string>[] workerTalkDay26 = new List<string>[6];
     public List<string>[] workerTalkDay27 = new List<string>[6];
-
+    public void SpecialNight2(){
+        List<string> worker6Special = new List<string>(){
+        // Noite 2:
+            "T6: Você voltou! Estávamos discutindo o plano.",
+            "T6: O que acha de ganhar um pouco mais? Dinheiro sempre é bom!",
+            "T6: Borracha em alta, poder comprar armas e sair da ferrovia. O que acha?",
+            "T6: Se estiver de acordo, vamos sair daqui na próxima noite de álcool, depois de uma bebida final.",
+            "T6: Ao seringueiro! Não vai se arrepender."
+        };
+        Debug.Log("galho");
+    }
+    public void SpecialNight3(){
+        List<string> worker6Special = new List<string>(){
+            // Noite 12:
+            "T6: Ao seringueiro! Não vai se arrepender."
+        };
+    }
     public void InitializeWorkerTalkDay1(){
         workerTalkDay1[0] = new List<string>{// Dia 1
             "T1: Mais um dia, mais trabalho.",
-            "T1: Quando esse ciclo vai acabar?",
-            // Protagonista: Quando a ferrovia estiver pronta.
-            "T1: Isso só até arranjarmos outro emprego tão ruim quanto esse.",
-            // P: Nunca.
-            "T1: haha você tá certo, só quando morrermos seremos livres."
+            "T1: Quando esse ciclo vai acabar?"
             };
         workerTalkDay1[1] = new List<string>{// Dia 1
             "T2: Uuhhh esse trabalho ainda vai me matar.",
@@ -67,26 +124,19 @@ public class roadMap : ScriptableObject {
             // Dia 1
             "T4: ampolk merlous fidim"
             };
-        workerTalkDay1[5] = new List<string>{
-            // Noite 1:
-            "T6: Ah, Álcool, uma das melhores coisas inventadas.",
-            "T6: Como eles podem proibir algo tão bom? Isso é o que me faz mais produtivo! Como esperam que eu viva sem?",
-            "T6: A gente não devia continuar aguentando essas regras sem sentido.",
-            // P: Talvez tenha motivo pra essas regras.
-            "T6: Não seja burro! E não seja hipócrita! Diz que fazem sentido mas veio beber...",
-            // P: Não aguento mais essas regras.
-            "T6: Hmm eu ouvi um conhecido falando sobre um lugar interessante aqui perto...",
-            "T6: Talvez eu tenha um plano, mas talvez esteja meio bêbado..",
-            "T6: Discutimos isso outra noite?"       
-            };
+        worker0AnswerPositive = new List<string>(){
+            //P: Nunca.
+            "T1: haha você tá certo, só quando morrermos seremos livres."
+
+        };
+        worker0AnswerNegative = new List<string>(){
+            // Protagonista: Quando a ferrovia estiver pronta.
+            "T1: Isso só até arranjarmos outro emprego tão ruim quanto esse."
+        };
     }
     public void InitializeWorkerTalkDay2(){
         workerTalkDay2[0] = new List<string>{// Dia 2: o jogo assume seu ritmo normal e as escolhas noturnas são desbloqueadas.
             "T1: Ei, [protagonista], você vem jogar poker hoje?",
-            // P: Não.
-            "T1: Pois está perdendo a melhor parte desse lugar.",
-            // P: Sim.
-            "T1: É assim que tem que ser! Te espero lá, amigo.",
             "T1: Nada aqui tem muito sentido sem umas apostas de vez em quando."
             };
         workerTalkDay2[1] = new List<string>{ // Dia 2
@@ -101,12 +151,16 @@ public class roadMap : ScriptableObject {
         workerTalkDay2[3] = new List<string>{// Dia 2
             "T4: elkool prelcho"
             };
-        workerTalkDay2[5] = new List<string>{ // Noite 2:
-            "T6: Você voltou! Estávamos discutindo o plano.",
-            "T6: O que acha de ganhar um pouco mais? Dinheiro sempre é bom!",
-            "T6: Borracha em alta, poder comprar armas e sair da ferrovia. O que acha?",
-            "T6: Se estiver de acordo, vamos sair daqui na próxima noite de álcool, depois de uma bebida final.",
-            "T6: Ao seringueiro! Não vai se arrepender."};
+        worker0AnswerPositive = new List<string>(){
+            // P: Sim.
+            "T1: É assim que tem que ser! Te espero lá, amigo."
+
+        };
+        worker0AnswerNegative = new List<string>(){
+             // P: Não.
+            "T1: Pois está perdendo a melhor parte desse lugar.",
+        };
+        
     }
     public void InitializeWorkerTalkDay12(){
         workerTalkDay12[0] = new List<string>{// Dia 12: Alguns trabalhadores parecem doentes. Esse dia serve como uma introdução às condições ruins de saúde.
@@ -125,17 +179,10 @@ public class roadMap : ScriptableObject {
             // P: Você tá bem?
             "T3: Me sinto doente.",
             "T3: O dia podia... acabar logo.",
-            // P: Talvez devesse parar.
-            "T3: Preciso... do dinheiro.",
-            "T3: Não pagam pra... ficar... no hospital.",
-            // P: ...
-            "T3: Você deveria... ficar longe."
             };
         workerTalkDay12[3] = new List<string>{// Dia 12
             "T4: aamkel"
             };
-        workerTalkDay12[5] = new List<string>{// Noite 12:
-            "T6: Ao seringueiro! Não vai se arrepender."};
     }
     public void InitializeWorkerTalkDay20(){
         workerTalkDay20[0] = new List<string>{// Dia 20: Um novo grupo de trabalhadores chega, demonstrando a constante circulação de novos trabalhadores para substituir os antigos.
@@ -145,38 +192,42 @@ public class roadMap : ScriptableObject {
             "T1: Os outros devem ter morrido.",
             "T1: Seremos os próximos, é impossível ficar tanto tempo vivo aqui.",
             "T1: E tudo isso pra que?",
-            // P: Pela ferrovia.
-            "T1: Você realmente acredita no que dizem sobre a importância desse trabalho?",
-            "T1: Eu duvido de tudo que nos contam.",
-            // P: Pelo dinheiro.
-            "T1: Tanto trabalho e morte só pelo dinheiro..."
             };
         workerTalkDay20[1] = new List<string>{// Dia 20
             "T2: Veio se despedir? Vou embora essa tarde.",
             "T2: Espero que tenha uma casa pra onde me transferiram...",
-            "T2: Nem me importaria em dividir ela com tanta gente, só quero um lugar mais decente pra dormir."};
+            "T2: Nem me importaria em dividir ela com tanta gente, só quero um lugar mais decente pra dormir."
+            };
+        worker0AnswerPositive = new List<string>(){
+            // P: Pelo dinheiro.
+            "T1: Tanto trabalho e morte só pelo dinheiro..."
+        };
+        worker0AnswerNegative = new List<string>(){
+            // P: Pela ferrovia.
+            "T1: Você realmente acredita no que dizem sobre a importância desse trabalho?",
+            "T1: Eu duvido de tudo que nos contam."
+        };
     }
     public void InitializeWorkerTalkDay22(){
         workerTalkDay22[0] = new List<string>{// Dia 22: Nesse dia o Trabalhador 1 foge floresta adentro, tentando voltar para sua casa.
             // Esse dia dá a possibilidade do jogador tentar fugir e assim alcançar um final alternativo.
             "T1: Você já pensou em tentar voltar pra casa?",
-            // P: Não.
-            "T1: Nem mesmo uma vez? Invejo você...",
-            "T1: Queria ser tão despreocupado assim.",
-            // P: Sim.
-            "T1: Então você me entende.",
-            "T1: Mas é difícil sair daqui com tantos capatazes.",
-            "T1: Ainda assim eu preciso tentar.",
             "T1: Eu não aguento mais esse lugar, cansei disso tudo. Só quero ver minha família de novo.",
             "T1: *sussurrando* Hoje a noite vou fugir, prefiro tirar a sorte nessa mata do que ficar mais um dia nesse inferno.",
             "T1: Me deseje sorte.",
-            // P: Boa sorte.
-            "T1: Se sair daqui vivo, espero que possamos nos reencontrar pra uma bebida. Talvez até uma última rodada de poker.",
-            // P: Mas é muito perigoso.
-            "T1: Aqui também é.",
-            "T1: É só mais um risco, uma última aposta.",
             "T1: Te vejo do outro lado, amigo."
             };
+        worker0AnswerPositive = new List<string>(){
+             // P: Sim.
+            "T1: Então você me entende.",
+            "T1: Mas é difícil sair daqui com tantos capatazes.",
+            "T1: Ainda assim eu preciso tentar.",
+        };
+        worker0AnswerNegative = new List<string>(){
+            // P: Não.
+            "T1: Nem mesmo uma vez? Invejo você...",
+            "T1: Queria ser tão despreocupado assim.",
+        };
     }
     public void InitializeWorkerTalkDay25(){
         workerTalkDay25[4] = new List<string>{// Dia 25: Ocorre um deslizamento durante a noite anterior,
@@ -198,12 +249,6 @@ public class roadMap : ScriptableObject {
         workerTalkDay27[4] = new List<string>{ // Dia 27: Os sintomas do jogador pioram, tornando o trabalho ainda mais difícil.
             "T5: Tá se sentindo bem?",
             "T5: Ainda aguenta depois de ontem?",
-            // P: Tá tudo bem.
-            "T5: Não parece...",
-            // P: Talvez esteja doente.
-            "T5: Deve ter sido um desses mosquitos.",
-            "T5: Eu vi um homem que vivia reclamando deles morrer."
             };
-
     }
 }

@@ -6,7 +6,9 @@ using UnityEngine.EventSystems;
 
 public class ButtonPlayerTalk : MonoBehaviour, IPointerDownHandler
 {
-    [System.NonSerialized] public static MensageController mensageControllerScript;
+    [System.NonSerialized] public MensageController mensageControllerScript;
+    [SerializeField] private roadMap characterWords;
+    public bool localSignal;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,10 +17,20 @@ public class ButtonPlayerTalk : MonoBehaviour, IPointerDownHandler
     // Update is called once per frame
     void Update()
     {
-        
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        mensageControllerScript.ChangePhrase();
+        if(characterWords.answer == false){
+            mensageControllerScript.ChangePhrase();
+        }else if(characterWords.answer == true){
+            HaveAnswer();
+        }
+    }
+    void HaveAnswer(){
+        if(localSignal == true){
+            mensageControllerScript.AnswerPositive();
+        }else if(localSignal == false){
+            mensageControllerScript.AnswerNegative();
+        }
     }
 }

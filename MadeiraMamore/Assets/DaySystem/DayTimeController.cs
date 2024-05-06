@@ -16,6 +16,7 @@ public class DayTimeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ChangedDay();
     }
     void ChangedDay(){
         switch(DaySystem.day){

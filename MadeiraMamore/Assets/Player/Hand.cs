@@ -50,6 +50,7 @@ public class Hand : MonoBehaviour
         if (Input.GetKeyDown("e") && canActiveCharaceterLines == true){ // Ativando Caixa de teste
             speechBubble.SetActive(true);
             PlayerCamera.EnabledCursor();
+            targetCharacter.GetComponent<MensageController>().GiveTalk();
             targetCharacter.GetComponent<MensageController>().GiveToBottun();
         }
         if (Input.GetKeyDown("e")){ // pegando o Objeto
