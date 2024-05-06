@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -103,7 +103,217 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: botoesSelecionados_0
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 2000
+        width: 870
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 141d2e7b18fbd2f4783ba19dcdc61269
+      internalID: -1249445437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: botoesSelecionados_1
+      rect:
+        serializedVersion: 2
+        x: 1070
+        y: 2001
+        width: 866
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f68c260dd821fc42861cbcdcadea6b6
+      internalID: 1296796183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: botoesSelecionados_2
+      rect:
+        serializedVersion: 2
+        x: 2003
+        y: 2000
+        width: 868
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21b2caeb2ddd0874996246697b6f8904
+      internalID: -1446368902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: botoesSelecionados_3
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 1561
+        width: 868
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcf8d269900468d46985568185c60460
+      internalID: -157449248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: botoesSelecionados_4
+      rect:
+        serializedVersion: 2
+        x: 1066
+        y: 1559
+        width: 870
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f34e973f23a9ee04887826f3e80a7034
+      internalID: -624825649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: botoesSelecionados_5
+      rect:
+        serializedVersion: 2
+        x: 2007
+        y: 1560
+        width: 863
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d41b0cf48571b742a60cb3438162cf1
+      internalID: 295316199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: botoesSelecionados_6
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 1118
+        width: 866
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d34c608169295b479e793b60eaa8f53
+      internalID: 461366087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: botoesSelecionados_7
+      rect:
+        serializedVersion: 2
+        x: 1068
+        y: 1116
+        width: 868
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ef016cfe80ea7f489a4d5829bab46e0
+      internalID: 1728553004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: botoesSelecionados_8
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 681
+        width: 865
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31937d2fb55c91d47b957eedad64662c
+      internalID: -744266923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: botoesSelecionados_9
+      rect:
+        serializedVersion: 2
+        x: 1068
+        y: 681
+        width: 868
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38d9a605a62c08e4c927f5b2221187b6
+      internalID: -43264045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -114,7 +324,17 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      botoesSelecionados_2: -1446368902
+      botoesSelecionados_3: -157449248
+      botoesSelecionados_5: 295316199
+      botoesSelecionados_0: -1249445437
+      botoesSelecionados_7: 1728553004
+      botoesSelecionados_9: -43264045
+      botoesSelecionados_1: 1296796183
+      botoesSelecionados_4: -624825649
+      botoesSelecionados_8: -744266923
+      botoesSelecionados_6: 461366087
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
