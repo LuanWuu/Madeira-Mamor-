@@ -14,11 +14,12 @@ public class RaffleQuest : MonoBehaviour
     [Header("Total Points of time")]
     [SerializeField] private float pointTimeQuest;
     [Header("Nivelamento")]
-    [SerializeField] private float goodScore;
-    [SerializeField] private float normalScore;
+    public float goodScore;
+    public float normalScore;
+    public float badScore;
     [Header("Roteiro")]
     [SerializeField] private roadMap roadMapScriptable;
-
+    [System.NonSerialized] public float score;
     private Timer timerScript;
     private int numberMinigame;
     private int beforeNumberMinigame;
@@ -34,18 +35,18 @@ public class RaffleQuest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        score = (timerScript.timerleft * pointTimeQuest)/timeMinigame;
         if(Input.GetKeyDown("v")){
             CompleteQuest();
         }
     }
     public void CompleteQuest(){
         timerScript.stop = true;
-        float score = (timerScript.timerleft * pointTimeQuest)/timeMinigame;
         Debug.Log("Complete" +  score);
         if(score > goodScore){
             roadMapScriptable.GoodWork();
             Debug.Log("Complete" +  score);
-        }else if(score > normalScore){
+        }else if(score > badScore){
             roadMapScriptable.MediumWork();
             Debug.Log("Complete" +  score);
         }else{

@@ -13,6 +13,7 @@ public class roadMap : ScriptableObject {
         };
     public List<string> chiefScrean = new List<string>(){
         // Durante o trabalho:
+        "Chefe: Venha falar commigo quando acoradar",
         "Chefe: Mais rápido! Não temos o dia todo.",
         "Chefe: Você não é pago pra ficar parado.",
         "Chefe: Muito lento..."
