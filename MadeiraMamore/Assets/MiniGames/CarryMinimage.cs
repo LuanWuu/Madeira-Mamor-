@@ -13,7 +13,7 @@ public class CarryMinimage : MonoBehaviour
     [SerializeField] private Transform boxsPosition;
     [SerializeField] private int optionsBox;
     [SerializeField] private RaffleQuest rafflequestScript;
-    [SerializeField] private QuestUI QuestUIscript;
+    [SerializeField] private CarryUI CarryUIScript;
 
     private int numberMinigame;
     private int beforeNumberMinigame;
@@ -88,9 +88,9 @@ public class CarryMinimage : MonoBehaviour
                 wagons[i].GetComponent<ToFillTrain>().LayerAccept.Add(givelayer);
                 transferList.RemoveAt(0);
             }
-            QuestUIscript.Wagon(i);
+            CarryUIScript.Wagon(i);
         }
-        QuestUIscript.gameObject.SetActive(true);
+        CarryUIScript.gameObject.SetActive(true);
         int maxValueLayer = transferLayerBox.Max() + 1;
         int minValuerLayer = transferLayerBox.Min();
         //Debug.Log("mim " + minValuerLayer + " max " + maxValueLayer);

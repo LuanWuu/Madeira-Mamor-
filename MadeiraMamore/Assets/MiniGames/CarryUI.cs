@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuestUI : MonoBehaviour
+public class CarryUI : MonoBehaviour
 {
-    private bool isOpen;
     int amoutTipeBox;
     [SerializeField] private GameObject[] boxList;
     [SerializeField] private ToFillTrain[] wagonScripts;
@@ -13,10 +12,7 @@ public class QuestUI : MonoBehaviour
     private Image[] boxImage;
     private List<int> boxLayer;
     private int numberOfWAGON;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+
     public void Wagon(int numerberWagon){
         numberOfWAGON = numerberWagon;
         boxList[numerberWagon].SetActive(true);
@@ -45,20 +41,5 @@ public class QuestUI : MonoBehaviour
             int o = i -1;
             boxImage[o].gameObject.SetActive(false);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Tab)){
-            if(isOpen == false){
-                isOpen = true;
-                gameObject.SetActive(false);
-            }else{
-                isOpen = false;
-                gameObject.SetActive(true);
-            }
-        }
-        
     }
 }
