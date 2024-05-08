@@ -16,4 +16,4 @@ MonoBehaviour:
   sensitY: 1
   controlSensitX: 1
   controlSensitY: 1
-  cursorSize: 40
+  cursorSize: 5
