@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class DayTimeController : MonoBehaviour
 {
@@ -114,6 +115,7 @@ public class DayTimeController : MonoBehaviour
                 break;
             case 9:
                 DayText.text = "Dia " + DaySystem.OrderDay[8].ToString();
+                Invoke("EndGame", 2);
                 break;
             default:
                 break;
@@ -123,5 +125,8 @@ public class DayTimeController : MonoBehaviour
             script.PickWorkerWords();
         }
         StartCoroutine(DayAnimator());
+    }
+    void EndGame(){
+        SceneManager.LoadScene("EndGame");
     }
 }

@@ -56,11 +56,15 @@ public class RaffleQuest : MonoBehaviour
             roadMapScriptable.BadWork();
            // Debug.Log("Complete" +  score);
         }
+        timer.SetActive(false);
         Invoke("Reset", 0.5f);
     }
     public void EndTime(){
         Debug.Log("time is over");
-        CompleteQuest();
+        carryUI.SetActive(false);
+        carryScript.ResetFillWagons();
+        mensagControlScrpt.oneTime = true;
+        timerScript.stop = true;
         carryScript.DestroyPackages();
     }
     void Reset(){

@@ -7,10 +7,10 @@ using UnityEngine.SceneManagement;
 public class InGameMenu : MonoBehaviour
 {
     [SerializeField] private GameObject canvas;
-    [SerializeField] private GameObject optionsFirstButton;
-    [SerializeField] private GameObject buttonBackToMenu;
-    [SerializeField] private GameObject playFirtButton;
     [SerializeField] private string nameSceneMenu;
+    [SerializeField] private GameObject firstMenu;
+    [SerializeField] private GameObject options;
+    [SerializeField] private GameObject credits;
     private bool isOpen = false;
     // Start is called before the first frame update
     void Start()
@@ -22,31 +22,58 @@ public class InGameMenu : MonoBehaviour
     {
         if(Input.GetKeyDown("escape")){
             if(isOpen == false){
-                Time.timeScale = 0;
                 canvas.SetActive(true);
-                isOpen = true;
                 Debug.Log("Abriu");
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+                PlayerCamera.EnabledCursor();
+                isOpen = true;
+                Time.timeScale = 0;
+                //EventSystem.current.SetSelectedGameObject(null);
+                //EventSystem.current.SetSelectedGameObject(optionsFirstButton);
             }else{
-                Time.timeScale = 1;
                 canvas.SetActive(false);
-                isOpen = false;
+                PlayerCamera.DisabledCursor();
                 Debug.Log("Fechou");
+                isOpen = false;
+                Time.timeScale = 1;
             }
         }
     }
     public void BackToGame(){
         Time.timeScale = 1;
+        PlayerCamera.DisabledCursor();
         canvas.SetActive(false);
         isOpen = false;
     }
     public void BackToMenu() {
-        canvas.SetActive(true);
-        buttonBackToMenu.SetActive(false);
         SceneManager.LoadScene(nameSceneMenu);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(playFirtButton);
-        gameObject.SetActive(false);
+    }
+    public void openOptions()
+    {
+        firstMenu.SetActive(false);
+        options.SetActive(true);
+        //EventSystem.current.SetSelectedGameObject(null);
+        //EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+    }
+    public void closeOptions()
+    {
+        firstMenu.SetActive(true);
+        options.SetActive(false);
+    }
+    public void openCredits()
+    {
+        firstMenu.SetActive(false);
+        credits.SetActive(true);
+        //EventSystem.current.SetSelectedGameObject(null);
+        //EventSystem.current.SetSelectedGameObject(closeCreditsFirstButton);
+    }
+    public void closeCredits()
+    {
+        firstMenu.SetActive(true);
+        credits.SetActive(false);
+    }
+    public void Quit()
+    {
+        Application.Quit();
+        Debug.Log("Quito");
     }
 }

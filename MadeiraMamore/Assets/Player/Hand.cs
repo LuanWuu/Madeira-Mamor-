@@ -143,8 +143,10 @@ public class Hand : MonoBehaviour
         if(speechBubble != null){
             speechBubble.SetActive(false);
         }
-        PlayerCamera.DisabledCursor();
-        
+        if(Time.timeScale != 0){
+            PlayerCamera.DisabledCursor();
+        }
+     
         activeOneTime2 = true;
         if(targetRendererDelivery != null){
             targetRendererDelivery.material.SetFloat("_ValueMultiplay", 0);

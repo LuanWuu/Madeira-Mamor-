@@ -8,7 +8,6 @@ public class MangerMenu : MonoBehaviour
 {
     [Header("menus")]
     [SerializeField] private GameObject menu;
-    [SerializeField] private GameObject inGameMenu;
     [SerializeField] private GameObject firstMenu;
     [SerializeField] private GameObject playButton;
     [SerializeField] private GameObject optionsButton;
@@ -28,8 +27,6 @@ public class MangerMenu : MonoBehaviour
     [Header("Script do Menu")]
     [SerializeField] private ManegerOptions scriptManegerOptions;  
 
-    private bool inGame = false;
-    private bool playOn = false;
     void Awake(){
         GameObject[] objs = GameObject.FindGameObjectsWithTag("menu");
         Debug.Log("Número de GameObjects com tag 'menu': " + objs.Length);
@@ -59,24 +56,9 @@ public class MangerMenu : MonoBehaviour
     }
     public void StartGame()
     { 
-        if(SceneManager.GetActiveScene().buildIndex == 0){
-            DontDestroyOnLoad(menu);
-            inGame = true;
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.LoadScene(nameGame);
-            closeMenuInGame.SetActive(true);
-            Debug.Log("foi");
-            playOn = true;
-        }
-    }
-    void OnSceneLoaded(Scene cena, LoadSceneMode modo)
-    {
-        if(playOn == true){
-            canvas.SetActive(false);
-            scriptManegerOptions.FindPlayer();
-            inGameMenu.SetActive(true);
-            playOn = false;
-        }
+        SceneManager.LoadScene(nameGame);
+        closeMenuInGame.SetActive(true);
+        Debug.Log("foi");
     }
 
     public void openOptions()
@@ -90,11 +72,7 @@ public class MangerMenu : MonoBehaviour
     {
         firstMenu.SetActive(true);
         options.SetActive(false);
-        if(inGame == false){
-            FirtButton();
-        }else{
-            SecondButton();
-        }
+        FirtButton();
     }
     public void openCredits()
     {
@@ -107,11 +85,7 @@ public class MangerMenu : MonoBehaviour
     {
         firstMenu.SetActive(true);
         credits.SetActive(false);
-        if(inGame == false){
-            FirtButton();
-        }else{
-            SecondButton();
-        }
+        FirtButton();
     }
     public void Quit()
     {

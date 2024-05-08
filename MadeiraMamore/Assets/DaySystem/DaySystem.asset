@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e0d6c96e2812f74faddf09ee10a53d4, type: 3}
   m_Name: DaySystem
   m_EditorClassIdentifier: 
-  day: 1
-  dayTime: Night
+  day: 2
+  dayTime: Morning
   OrderDay: 01000000020000000c0000001400000016000000190000001a0000001b0000001e000000

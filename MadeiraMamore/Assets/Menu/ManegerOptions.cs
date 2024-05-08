@@ -16,24 +16,24 @@ public class ManegerOptions : MonoBehaviour
     [SerializeField] private Slider sensitivityX;
     [SerializeField] private Slider sensitivityY;
 
-    [System.NonSerialized] public float valueSensitX;
-    [System.NonSerialized] public float valueSensitY;
+    private float valueSensitX;
+    private float valueSensitY;
 
     [Header("Slider Control Sensitivity")]
     [SerializeField] private Slider controlSensitivityX;
     [SerializeField] private Slider controlSensitivityY;
 
-    [System.NonSerialized] public float valueControlSensitX;
-    [System.NonSerialized] public float valueControlSensitY;
+    private float valueControlSensitX;
+    private float valueControlSensitY;
 
     
     [Header("Ponter Size")]
     [SerializeField] private Slider cursorSize;
 
-    [System.NonSerialized] public float valueCursorSize;
+    private float valueCursorSize;
 
-    private PlayerCamera scriptPlayerCamera;
-    private MoviPlayer scriptMoviPlayer;
+    [SerializeField] private OptionsValue optionsScriptable;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -47,7 +47,6 @@ public class ManegerOptions : MonoBehaviour
         valueSensitY = sensitivityY.value;
         valueControlSensitX = controlSensitivityX.value;
         valueControlSensitY = controlSensitivityY.value;
-
         valueCursorSize = cursorSize.value;
     }
 
@@ -76,22 +75,13 @@ public class ManegerOptions : MonoBehaviour
         soundOptions.SetActive(true);
     }
 
-    public void FindPlayer(){
-        scriptPlayerCamera = GameObject.FindWithTag("MainCamera").GetComponent<PlayerCamera>();
-        scriptMoviPlayer = GameObject.FindWithTag("player").GetComponent<MoviPlayer>();
-        ApplyConfig();
-    }
     public void ApplyConfig(){
-        if(SceneManager.GetActiveScene().buildIndex != 0){
         //Debug.Log(scriptPlayerCamera.gameObject.name);
         //Debug.Log(scriptMoviPlayer.gameObject.name);
-        scriptPlayerCamera.sensitivityX = valueSensitX;
-        scriptPlayerCamera.sensitivityY = valueSensitY;
-        scriptPlayerCamera.controlSensitivityX = valueControlSensitX;
-        scriptPlayerCamera.controlSensitivityY = valueControlSensitY;
-
-        scriptPlayerCamera.cursorSize = valueCursorSize;
-         scriptPlayerCamera.CursorCustomize();
-        }
+        optionsScriptable.sensitX = valueSensitX;
+        optionsScriptable.sensitY = valueSensitY;
+        optionsScriptable.controlSensitX = valueControlSensitX;
+        optionsScriptable.controlSensitY = valueControlSensitY;
+        optionsScriptable.cursorSize = valueCursorSize;
     }
 }
