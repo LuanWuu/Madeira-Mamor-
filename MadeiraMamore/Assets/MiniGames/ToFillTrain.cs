@@ -23,6 +23,7 @@ public class ToFillTrain : MonoBehaviour
     }
     public void ResetWagons(){
         LayerAccept.Clear();
+        turn = 0;
         for (int i = 0; i < fulfilling.transform.childCount; i++)
         {
             fulfilling.transform.GetChild(i).gameObject.SetActive(false);

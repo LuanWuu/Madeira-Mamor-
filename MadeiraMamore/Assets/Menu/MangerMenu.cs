@@ -59,22 +59,19 @@ public class MangerMenu : MonoBehaviour
     }
     public void StartGame()
     { 
-        if(SceneManager.GetActiveScene().buildIndex == 0){
-            DontDestroyOnLoad(menu);
-            inGame = true;
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.LoadScene(nameGame);
-            closeMenuInGame.SetActive(true);
-            Debug.Log("foi");
-            playOn = true;
-        }
+        inGame = true;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene(nameGame);
+        closeMenuInGame.SetActive(true);
+        Debug.Log("foi");
+        playOn = true;
     }
     void OnSceneLoaded(Scene cena, LoadSceneMode modo)
     {
         if(playOn == true){
             canvas.SetActive(false);
             scriptManegerOptions.FindPlayer();
-            inGameMenu.SetActive(true);
+    
             playOn = false;
         }
     }
