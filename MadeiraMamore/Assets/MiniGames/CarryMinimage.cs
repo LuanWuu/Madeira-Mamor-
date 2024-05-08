@@ -13,26 +13,21 @@ public class CarryMinimage : MonoBehaviour
     [SerializeField] private Transform boxsPosition;
     [SerializeField] private int optionsBox;
     [SerializeField] private RaffleQuest rafflequestScript;
+    [SerializeField] private CarryUI CarryUIScript;
 
     private int numberMinigame;
     private int beforeNumberMinigame;
     private GameObject packages;
     private Box boxScript;
     // Start is called before the first frame update
-    void Start()
-    {
-
-        DecideAmoutBox();
-    }
-
-    // Update is called once per frame
+      // Update is called once per frame
     void Update()
     {
-         if(Input.GetKeyDown("l")){
-            DecideAmoutBox();
-        }
+        //if(Input.GetKeyDown("l")){
+        //    DecideAmoutBox();
+        //}
     }
-    void DecideAmoutBox(){
+    public void DecideAmoutBox(){
         while (true){
             numberMinigame = Random.Range(0, optionsBox);
             if (numberMinigame != beforeNumberMinigame){
@@ -60,8 +55,16 @@ public class CarryMinimage : MonoBehaviour
         boxScript.rafflequestScript = rafflequestScript;
 
     }
+    public void DestroyPackages(){
+        Destroy(packages,0.05f);
+    }
+    public void ResetFillWagons(){
+        for(int i = 0; i < wagons.Length; i++){
+            wagons[i].GetComponent<ToFillTrain>().ResetWagons();
+        }
+        CarryUIScript.Reset();
+    }
     public void GiveLayerGenerated(){
-        int layerAmout = boxScript.layerOfPackage.Length;
         int saveLayerAmout = boxScript.saveLayers.ToArray().Length;
         int[] transferLayerBox = boxScript.saveLayers.ToArray();
         List<int> transferList = boxScript.saveLayers;
@@ -81,6 +84,7 @@ public class CarryMinimage : MonoBehaviour
         for(int i = 0; i < giveWagonsAmoutLayer.Length; i++) {
             giveWagonsAmoutLayer[i] += halfTipLayer;
         }
+        CarryUIScript.gameObject.SetActive(true);
         for(int i = 0; i < wagons.Length; i++){
             for(int a = 0; a < giveWagonsAmoutLayer[i]; a++){
                 int  givelayer = transferList[0];
@@ -88,6 +92,7 @@ public class CarryMinimage : MonoBehaviour
                 wagons[i].GetComponent<ToFillTrain>().LayerAccept.Add(givelayer);
                 transferList.RemoveAt(0);
             }
+            CarryUIScript.Wagon(i);
         }
         int maxValueLayer = transferLayerBox.Max() + 1;
         int minValuerLayer = transferLayerBox.Min();

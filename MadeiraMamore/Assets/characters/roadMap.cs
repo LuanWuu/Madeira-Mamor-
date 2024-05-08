@@ -6,13 +6,10 @@ using UnityEngine;
 public class roadMap : ScriptableObject {
     public int amoutWorker = 6;
     public bool answer;
-    public List<string> cheif = new List<string>(){
-        // Ao falar com o chefe de equipe para iniciar o trabalho:
-        "Chefe: Essa é sua lista. Tudo tem que ser terminado hoje.",
-        "Chefe: Nem pense em ficar enrolando."
-        };
+    public List<string> cheif = new List<string>(){};
     public List<string> chiefScrean = new List<string>(){
         // Durante o trabalho:
+        "Chefe: Venha falar commigo quando acoradar",
         "Chefe: Mais rápido! Não temos o dia todo.",
         "Chefe: Você não é pago pra ficar parado.",
         "Chefe: Muito lento..."
@@ -74,26 +71,63 @@ public class roadMap : ScriptableObject {
     public List<string>[] workerTalkDay26 = new List<string>[6];
     public List<string>[] workerTalkDay27 = new List<string>[6];
 
+    public List<string>[] NotTalkMoment = new List<string>[6];
+
     public List<string>[] playerAnswers = new List<string>[6];
+    public void NotWords(){
+        NotTalkMoment[0] = new List<string>(){
+            "T1: Não posso falar no momento, nos falamos no almoço"
+        };
+        NotTalkMoment[1] = new List<string>(){
+            "T2: Quando chega a droga do almoço"
+        };
+        NotTalkMoment[2] = new List<string>(){
+            "T3: Pare de me atrapalhar"
+        };
+        NotTalkMoment[3] = new List<string>(){
+            "T4: STOP"
+        };
+        NotTalkMoment[4] = new List<string>(){
+            "T5: Não aguento mais."
+        };
+        NotTalkMoment[5] = new List<string>(){
+            "T5: Compania de merda, a seringueira paga mais."
+        };
+    }
+    public void ChefWords(){
+        cheif = new List<string>(){ 
+            // Ao falar com o chefe de equipe para iniciar o trabalho:
+            "Chefe: Essa é sua lista, use `` TAB ´´ para acessar. Tudo tem que ser terminado hoje.",
+            "Chefe: Nem pense em ficar enrolando."
+        };
+    }
     public void GoodWork(){
         cheif = new List<string>(){ 
-        // Trabalho bom:
-        "Chefe: Mantenha esse desempenho e não teremos problemas.",
-        "Chefe: Bom trabalho. Até depois."
+            // Trabalho bom:
+            "Chefe: Mantenha esse desempenho e não teremos problemas.",
+            "Chefe: Bom trabalho. Aproveite a pausa, quando terminar fale comigo."
         };
     }
     public void MediumWork(){
         cheif = new List<string>(){ 
-        // Trabalho mediano:
-        "Chefe: Medíocre é melhor que nada...",
-        "Chefe: Você podia se esforçar como os melhores trabalhadores."
+            // Trabalho mediano:
+            "Chefe: Medíocre é melhor que nada...",
+            "Chefe: Você podia se esforçar como os melhores trabalhadores.",
+            "Chefe: Coma bastate para compensar no segundo turno, fala comigo quando terminar"
         };
     }
     public void BadWork(){
         cheif = new List<string>(){ 
             // Trabalho ruim:
             "Chefe: Nesse ritmo o trabalho nunca vai acabar.",
-            "Chefe: Faça melhor da próxima vez."
+            "Chefe: Faça melhor da próxima vez.",
+            "Chefe: Quando terminar a pausa me procure, vou reformar sua tarefas"
+        };
+    }
+    public void ChefOrders(){
+        cheif = new List<string>(){ 
+            // Ao falar com o chefe de equipe para iniciar o trabalho:
+            "Chefe: Vai dormir na sua barraca que amanhã tem mais",
         };
     }
     public void DontFinshWork(){

@@ -8,6 +8,7 @@ public class MensageController : MonoBehaviour
     [SerializeField] private roadMap characterWords;
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private TextMeshProUGUI speechBubbleText;
+    [SerializeField] private DayTimeController DayTCScript;
     [SerializeField] private GameObject speechBubble;
     [SerializeField] private GameObject nextButton;
     [SerializeField] private GameObject buttonPositive;
@@ -15,6 +16,7 @@ public class MensageController : MonoBehaviour
     [SerializeField] private bool cheif;
     [SerializeField] private bool guard;
     [SerializeField] private bool[] worker;
+    [SerializeField] private RaffleQuest rafflequestScript;
 
     int numeberOfWorker;
     int placeNumber;
@@ -22,7 +24,8 @@ public class MensageController : MonoBehaviour
     int numberAnswerNegative;
     int? count = 0;
     int saveDayTime = 0;
-
+    [System.NonSerialized] public int moment = 0;
+    [System.NonSerialized] public bool oneTime = true;
     private List<string> myCharacterlist;
     private List<string> myCharacterAnswerPositive;
     private List<string> myCharacterAnswerNegative;
@@ -79,7 +82,7 @@ public class MensageController : MonoBehaviour
     }
     public void GiveTalk(){
         placeNumber = 0;
-        if(guard == false && cheif == false){ 
+        if(cheif == false && guard == false){
             for(int i = 0; i < worker.Length; i++) {
                 if (worker[i] == true){
                     if(i == 5){
@@ -87,20 +90,27 @@ public class MensageController : MonoBehaviour
                         numeberOfWorker = i;
                         break;
                     }
-                    myCharacterlist = speechesOfDay[i];
                     numeberOfWorker = i;
                     break;
                 }
             }
+            if(DaySystem.dayTime != "Lunch" && DaySystem.dayTime != "Night"){
+                myCharacterlist = characterWords.NotTalkMoment[numeberOfWorker];
+                Debug.Log("negativa");
+            }else if(numeberOfWorker !=5 && (DaySystem.dayTime == "Lunch" || DaySystem.dayTime == "Night")){
+                myCharacterlist = speechesOfDay[numeberOfWorker];
+                Debug.Log("normal");
+            }
             numberAnswerPositive = 0;
             numberAnswerNegative = 0;
             GetIndexOfList();
-        }else if(cheif == true){
+        }
+        if(cheif == true){
             myCharacterlist = characterWords.cheif;
         }else if(guard == true){
             myCharacterlist = characterWords.guard;
         }
-        speechBubbleText.text = myCharacterlist[0];
+        speechBubbleText.text = myCharacterlist[0];    
     }
     public void ChangePhrase(){
         placeNumber++;
@@ -112,8 +122,13 @@ public class MensageController : MonoBehaviour
         }else{
             speechBubble.gameObject.SetActive(false);
             PlayerCamera.DisabledCursor();
-            if(cheif == true) {
-                Debug.Log("Start MInugames");
+            if(cheif == true && oneTime== true){
+                DayTCScript.TimeOfDay(moment);
+                moment++;
+                if(DaySystem.dayTime != "Night" && DaySystem.dayTime != "Lunch"){
+                    rafflequestScript.DecideQuest();
+                    oneTime = false;
+                }
             }
         }
     }

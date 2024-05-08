@@ -59,18 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6a2d43ec7f1934c817fbd7c13dc2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerOfPackage:
-  - Wood
-  - Fruits
-  - Stone
-  - Dirt
-  - Treasures
-  packageColor:
-  - {r: 0.9716981, g: 0.5310396, b: 0.07944696, a: 1}
-  - {r: 0.6509434, g: 0.23480965, b: 0.22516905, a: 1}
-  - {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
-  - {r: 0.20754719, g: 0.107138425, b: 0.011095275, a: 1}
-  - {r: 0.8679245, g: 0.8138328, b: 0.45579678, a: 1}
+  colorLayerScriptable: {fileID: 11400000, guid: 289a74e888ec88648911bd5b19673946, type: 2}
 --- !u!1001 &767418393541733503
 PrefabInstance:
   m_ObjectHideFlags: 0
