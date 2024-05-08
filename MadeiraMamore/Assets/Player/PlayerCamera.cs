@@ -35,8 +35,6 @@ public class PlayerCamera : MonoBehaviour
     private float coefSmoothX = 0.005f;
     private float coefSmoothY = 0.005f;
 
-    private bool canChange = false;
-
     void Start()
     {
     }
