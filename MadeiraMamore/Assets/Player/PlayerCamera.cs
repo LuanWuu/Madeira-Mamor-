@@ -11,14 +11,16 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private Transform playerBody;
     [SerializeField] private GameObject cursor;
     [SerializeField] private Transform cheif;
+
+    [SerializeField] private OptionsValue optionsScriptable;
  
-    [System.NonSerialized] public float sensitivityX = 1.0f;
-    [System.NonSerialized] public float sensitivityY = 1.0f;
+    private float sensitivityX = 1.0f;
+    private float sensitivityY = 1.0f;
 
-    [System.NonSerialized] public float controlSensitivityX = 1.0f;
-    [System.NonSerialized] public float controlSensitivityY = 1.0f;
+    private float controlSensitivityX = 1.0f;
+    private float controlSensitivityY = 1.0f;
 
-    [System.NonSerialized] public float cursorSize = 1.0f;
+    private float cursorSize = 1.0f;
     [System.NonSerialized] public Color  cursorColor;
 
     private float rotateX;
@@ -45,19 +47,16 @@ public class PlayerCamera : MonoBehaviour
 
     }
     void Update(){
-        if(Time.timeScale == 0){
-            EnabledCursor();
-            cursor.SetActive(false);
-            canChange = true;
-        }else if(canChange == true){
-            DisabledCursor();
-            cursor.SetActive(true);
-            canChange = false;
-        }
         if(canMoviCamera == true){
             Mouse();
             JoyStick();
         }
+        sensitivityX = optionsScriptable.sensitX ;
+        sensitivityY = optionsScriptable.sensitY ;
+        controlSensitivityX = optionsScriptable.controlSensitX;
+        controlSensitivityY = optionsScriptable.controlSensitY;
+        cursorSize = optionsScriptable.cursorSize;
+        CursorCustomize();
     }
     public static void EnabledCursor(){
         Cursor.visible = true;
@@ -69,7 +68,7 @@ public class PlayerCamera : MonoBehaviour
         Cursor.visible = false;
         canMoviCamera = true;
     }
-    public void CursorCustomize(){
+    void CursorCustomize(){
         cursor.transform.localScale = new Vector3(cursorSize, cursorSize, cursorSize);
     }
     void Mouse(){
