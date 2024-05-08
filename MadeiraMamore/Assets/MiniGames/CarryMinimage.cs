@@ -20,20 +20,14 @@ public class CarryMinimage : MonoBehaviour
     private GameObject packages;
     private Box boxScript;
     // Start is called before the first frame update
-    void Start()
-    {
-
-        DecideAmoutBox();
-    }
-
-    // Update is called once per frame
+      // Update is called once per frame
     void Update()
     {
-         if(Input.GetKeyDown("l")){
-            DecideAmoutBox();
-        }
+        //if(Input.GetKeyDown("l")){
+        //    DecideAmoutBox();
+        //}
     }
-    void DecideAmoutBox(){
+    public void DecideAmoutBox(){
         while (true){
             numberMinigame = Random.Range(0, optionsBox);
             if (numberMinigame != beforeNumberMinigame){
@@ -61,6 +55,15 @@ public class CarryMinimage : MonoBehaviour
         boxScript.rafflequestScript = rafflequestScript;
 
     }
+    public void DestroyPackages(){
+        Destroy(packages,0.05f);
+    }
+    public void ResetFillWagons(){
+        for(int i = 0; i < wagons.Length; i++){
+            wagons[i].GetComponent<ToFillTrain>().ResetWagons();
+        }
+        CarryUIScript.Reset();
+    }
     public void GiveLayerGenerated(){
         int saveLayerAmout = boxScript.saveLayers.ToArray().Length;
         int[] transferLayerBox = boxScript.saveLayers.ToArray();
@@ -81,6 +84,7 @@ public class CarryMinimage : MonoBehaviour
         for(int i = 0; i < giveWagonsAmoutLayer.Length; i++) {
             giveWagonsAmoutLayer[i] += halfTipLayer;
         }
+        CarryUIScript.gameObject.SetActive(true);
         for(int i = 0; i < wagons.Length; i++){
             for(int a = 0; a < giveWagonsAmoutLayer[i]; a++){
                 int  givelayer = transferList[0];
@@ -90,7 +94,6 @@ public class CarryMinimage : MonoBehaviour
             }
             CarryUIScript.Wagon(i);
         }
-        CarryUIScript.gameObject.SetActive(true);
         int maxValueLayer = transferLayerBox.Max() + 1;
         int minValuerLayer = transferLayerBox.Min();
         //Debug.Log("mim " + minValuerLayer + " max " + maxValueLayer);

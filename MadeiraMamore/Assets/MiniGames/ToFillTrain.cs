@@ -21,6 +21,13 @@ public class ToFillTrain : MonoBehaviour
         //Debug.Log(boxFulfilling.Length);
         renderTrain = GetComponent<Renderer>();
     }
+    public void ResetWagons(){
+        LayerAccept.Clear();
+        for (int i = 0; i < fulfilling.transform.childCount; i++)
+        {
+            fulfilling.transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
      public void CompatibleLayer(int boxLayer){
         if (LayerAccept.Contains(boxLayer)){
             renderTrain.material.SetFloat("_ValueMultiplay", 1.02f);// Ativando o Contorno
