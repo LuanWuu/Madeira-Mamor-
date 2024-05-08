@@ -82,38 +82,38 @@ public class DayTimeController : MonoBehaviour
         switch(DaySystem.day){
             case 1:
                 roadMapController.InitializeWorkerTalkDay1();
-                DayText.text = "Day " + DaySystem.OrderDay[0].ToString();
+                DayText.text = "Dia " + DaySystem.OrderDay[0].ToString();
                 break;
             case 2:
                 roadMapController.InitializeWorkerTalkDay2();
-                DayText.text = "Day " + DaySystem.OrderDay[1].ToString();
+                DayText.text = "Dia " + DaySystem.OrderDay[1].ToString();
                 break;
             case 3:
                 roadMapController.InitializeWorkerTalkDay12();
-                DayText.text = "Day " + DaySystem.OrderDay[2].ToString();
+                DayText.text = "Dia " + DaySystem.OrderDay[2].ToString();
                 break;
             case 4:
                 roadMapController.InitializeWorkerTalkDay20();
-                DayText.text = "Day " + DaySystem.OrderDay[3].ToString();
+                DayText.text = "Dia " + DaySystem.OrderDay[3].ToString();
                 break;
             case 5:
                 roadMapController.InitializeWorkerTalkDay22();
-                DayText.text = "Day " + DaySystem.OrderDay[4].ToString();
+                DayText.text = "Dia " + DaySystem.OrderDay[4].ToString();
                 break;
             case 6:
                 roadMapController.InitializeWorkerTalkDay25();
-                DayText.text = "Day " + DaySystem.OrderDay[5].ToString();
+                DayText.text = "Dia " + DaySystem.OrderDay[5].ToString();
                 break;
             case 7:
                 roadMapController.InitializeWorkerTalkDay26();
-                DayText.text = "Day " + DaySystem.OrderDay[6].ToString();
+                DayText.text = "Dia " + DaySystem.OrderDay[6].ToString();
                 break;
             case 8:
                 roadMapController.InitializeWorkerTalkDay27();
-                DayText.text = "Day " + DaySystem.OrderDay[7].ToString();
+                DayText.text = "Dia " + DaySystem.OrderDay[7].ToString();
                 break;
             case 9:
-                DayText.text = "Day " + DaySystem.OrderDay[8].ToString();
+                DayText.text = "Dia " + DaySystem.OrderDay[8].ToString();
                 break;
             default:
                 break;
