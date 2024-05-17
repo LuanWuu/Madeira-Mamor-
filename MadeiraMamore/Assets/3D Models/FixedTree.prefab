@@ -5074,6 +5074,7 @@ GameObject:
   - component: {fileID: 3957487620745480831}
   - component: {fileID: 5868101593280526668}
   - component: {fileID: 1580806486433877612}
+  - component: {fileID: 1307310829405117345}
   m_Layer: 0
   m_Name: Arvore2.0(Clone)
   m_TagString: Untagged
@@ -5325,6 +5326,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 1ade637806ca4d343a37c4d1576f813f, type: 2}
+  - {fileID: 2100000, guid: 0594222d38538a44b97826cbbd629251, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5346,6 +5348,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1307310829405117345
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247142831751701651}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.97, y: 26.446032, z: 2.94}
+  m_Center: {x: 0.31657028, y: 12.223016, z: -0.11}
 --- !u!1 &3372241410383041027
 GameObject:
   m_ObjectHideFlags: 0
@@ -6051,8 +6066,8 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3573751566611304296}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.117959976, y: 12.535626, z: -0.51957583}
-  m_Size: 26.870096
+  m_LocalReferencePoint: {x: 0.117985725, y: 12.535605, z: -0.51957226}
+  m_Size: 26.870054
   m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
