@@ -11,6 +11,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private float lerpVelocity;
     [SerializeField] private float durationLerpMovi;
     [SerializeField] private GameObject speechBubble;
+    [SerializeField] private MensageController mensageControllerScript;
 
     private bool canGet;
     private bool activeOneTime;
@@ -50,8 +51,8 @@ public class Hand : MonoBehaviour
         if (Input.GetKeyDown("e") && canActiveCharaceterLines == true){ // Ativando Caixa de teste
             speechBubble.SetActive(true);
             PlayerCamera.EnabledCursor();
-            targetCharacter.GetComponent<MensageController>().GiveTalk();
-            targetCharacter.GetComponent<MensageController>().GiveToBottun();
+            mensageControllerScript.GiveTalk(targetCharacter.name);
+            mensageControllerScript.GiveToBottun();
         }
         if (Input.GetKeyDown("e")){ // pegando o Objeto
             if(canGet == true){

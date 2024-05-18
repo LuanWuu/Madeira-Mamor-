@@ -60,7 +60,6 @@ public class roadMap : ScriptableObject {
         // P: Talvez tenha motivo pra essas regras.
         "Não seja burro! E não seja hipócrita! Diz que fazem sentido, mas veio beber mesmo assim..."       
     };
-    public List<string> worker6Special;
 
     public List<string>[] workerTalkDay1 = new List<string>[6];
     public List<string>[] workerTalkDay2 = new List<string>[6];
@@ -147,7 +146,7 @@ public class roadMap : ScriptableObject {
         };
     }
     public void SpecialNight1(){
-        worker6Special = new List<string>(){
+        workerTalkDay1[5] = new List<string>(){
          // Noite 1:
         "Ah, Álcool, uma das melhores coisas inventadas.",
         "Como podem proibir-nos algo tão bom? Isto é o que me faz mais produtivo! Como esperam que viva sem?",
@@ -155,7 +154,7 @@ public class roadMap : ScriptableObject {
         };
     }
     public void SpecialNight2(){
-        worker6Special = new List<string>(){
+        workerTalkDay2[5] = new List<string>(){
         // Noite 2:
             "Você voltou! Estávamos discutindo o plano.",
             "O que acha de ganhar um pouco mais? Dinheiro sempre é bom!",
@@ -164,7 +163,7 @@ public class roadMap : ScriptableObject {
         };
     }
     public void SpecialNight3(){
-        worker6Special = new List<string>(){
+        workerTalkDay12[5] = new List<string>(){
             // Noite 12:
             "Ao seringueiro! Não vai se arrepender."
         };
@@ -187,7 +186,7 @@ public class roadMap : ScriptableObject {
             // Dia 1
             "Eimai kourasmenos."
             };
-        worker6Special = new List<string>(){
+         workerTalkDay1[5]= new List<string>(){
             // Dia 1:
             "Uma bebida seria boa agora."
         };
@@ -224,7 +223,7 @@ public class roadMap : ScriptableObject {
         workerTalkDay2[3] = new List<string>{// Dia 2
             "The theleis?"
             };
-        worker6Special = new List<string>(){
+        workerTalkDay2[5]= new List<string>(){
             // Dia 1:
             "Não vá dormir cedo hoje!",
             "Encontre-nos de noite.",
@@ -270,7 +269,7 @@ public class roadMap : ScriptableObject {
             "...",
             "Você está bem?"
         };
-        worker6Special = new List<string>(){
+        workerTalkDay12[5]= new List<string>(){
             // Dia 1:
             "Você vem hoje à noite?",
             "Apenas traga alguns trocados e poderá beber o quanto quiser."
@@ -292,7 +291,7 @@ public class roadMap : ScriptableObject {
             "É bom estar em lugar diferente, venho contente.",
             "Já estava enlouquecendo. "
         };
-        worker6Special = new List<string>(){// Dia 20:
+         workerTalkDay20[5]= new List<string>(){// Dia 20:
             "Um capataz acusou-me de estar bebendo no trabalho.",
             "Por sorte desistiu de falar com os punhos.",
         };
@@ -323,7 +322,7 @@ public class roadMap : ScriptableObject {
             "Por que proíbem mulheres de aproximarem-se?",
             "Sei que não são fortes e não servem para ferrovia, mas servem a outras funções."
         };
-        worker6Special = new List<string>(){// Dia 22:
+         workerTalkDay22[5]= new List<string>(){// Dia 22:
             "Um grupo foi buscar algumas garrafas na vizinhança...",
             " Espero que retornem logo."
         };
@@ -353,7 +352,7 @@ public class roadMap : ScriptableObject {
             "T5: Ao menos não fui eu quem construiu os trilhos destruídos.",
             "T5: Hei de fazer este trabalho pela primeira vez, e não pela segunda."
             };
-        worker6Special = new List<string>(){// Dia 25:
+         workerTalkDay25[5]= new List<string>(){// Dia 25:
             "Um deslizamento? Demorou para outro acontecer...",
             "Toda vez que chove forte há um destes."
         };
@@ -366,7 +365,7 @@ public class roadMap : ScriptableObject {
             "T5: Penso que vão fazer-nos trabalhar além do anoitecer...",
             "T5: Maldito deslizamento."
             };
-        worker6Special = new List<string>(){// Dia 26:
+         workerTalkDay26[5]= new List<string>(){// Dia 26:
             "É melhor não me obrigarem a trabalhar de noite.",
         };
     }
@@ -375,7 +374,7 @@ public class roadMap : ScriptableObject {
             "T5: Tá se sentindo bem?",
             "T5: Ainda aguenta depois de ontem?"
             };
-        worker6Special = new List<string>(){// Dia 27:
+         workerTalkDay27[5] = new List<string>(){// Dia 27:
             "Ei, acho que você deveria descansar.",
             "Parece mal a ponto que uma garrafa inteira não resolveria."
         };

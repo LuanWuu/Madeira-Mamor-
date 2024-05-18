@@ -60,6 +60,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorLayerScriptable: {fileID: 11400000, guid: 289a74e888ec88648911bd5b19673946, type: 2}
+  package:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &767418393541733503
 PrefabInstance:
   m_ObjectHideFlags: 0
