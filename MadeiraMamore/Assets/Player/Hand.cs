@@ -12,18 +12,21 @@ public class Hand : MonoBehaviour
     [SerializeField] private float durationLerpMovi;
     [SerializeField] private GameObject speechBubble;
     [SerializeField] private MensageController mensageControllerScript;
+    [SerializeField] private StoragaDayValues DaySystem;
 
+    [System.NonSerialized] public bool takePackage;
     private bool canGet;
     private bool activeOneTime;
-    private bool activeOneTime2;
     private bool canCarry;
     private bool canMoviLerp;
     private bool canGive;
     private bool canActiveCharaceterLines;
+    private bool canGetPackage;
     private float startCarryTime;
     private GameObject target;
     private GameObject targetTrain;
     private GameObject targetCharacter;
+    private GameObject lastHitObject; 
     private Renderer targetRenderer;
     private Renderer targetRendererDelivery;
     private Ray ray;
@@ -44,7 +47,6 @@ public class Hand : MonoBehaviour
         RaycastCheck();
         if(canCarry == true){
             Carry();
-            //Debug.Log("Pego");
         }
     }
     void InputManager(){
@@ -55,7 +57,20 @@ public class Hand : MonoBehaviour
             mensageControllerScript.GiveToBottun();
         }
         if (Input.GetKeyDown("e")){ // pegando o Objeto
-            if(canGet == true){
+            switch(DaySystem.dayTime){
+            case "Morning":
+                ControlerHadMorning();
+                break;
+            case "Afternoon":
+                ControlerHadAfternoon();
+                break;
+            default:
+                    break;
+        }
+        }
+    }
+    void ControlerHadAfternoon(){
+        if(canGet == true){
                 canCarry = true;
                 startCarryTime = Time.time + durationLerpMovi;
             }else if(canCarry == true){
@@ -72,30 +87,52 @@ public class Hand : MonoBehaviour
                     target = null;
                 }
             }
+    }
+    void ControlerHadMorning(){
+        if(canGetPackage == true){
+            targetTrain.GetComponent<DeschargeMinigame>().GiveClone(hand); 
+            canGetPackage = false;
         }
+        if(canGet == true){
+            canCarry = true;
+            startCarryTime = Time.time + durationLerpMovi;
+            }else if(canCarry == true){
+                canCarry = false;
+                canMoviLerp = true;
+                //Debug.Log("Solto");
+        }      
     }
     void RaycastCheck(){
         RaycastHit hit; // alvo acertado pode ser qualquer objeto com collider
         if(Physics.Raycast(ray, out hit, distCanGet)){
-            switch(hit.collider.gameObject.tag){
-                case "Character":
-                    canActiveCharaceterLines = true;
-                    targetCharacter = hit.collider.gameObject;
-                    break;
-                case "Train":
-                    if(canCarry == true){
-                        targetTrain = hit.collider.gameObject;
-                        CheckDelivery();
-                    }
-                    break;
-                case "Box":
-                    if(canCarry == false){
-                        target = hit.collider.gameObject;
-                        CarrySystem();
-                    }
-                    break;
-                default:
-                    break;
+            if(hit.collider.gameObject != lastHitObject) {
+                switch(hit.collider.gameObject.tag){
+                    case "Character":
+                            canActiveCharaceterLines = true;
+                            targetCharacter = hit.collider.gameObject;
+                            lastHitObject = hit.collider.gameObject;
+                        break;
+                    case "Train":
+                            if(canCarry == true) {
+                                targetTrain = hit.collider.gameObject;
+                                CheckDelivery();
+                            }else if(takePackage == true){
+                                targetTrain = hit.collider.gameObject;
+                                GetPackage();
+                            }
+                            lastHitObject = hit.collider.gameObject;
+                        break;
+                    case "Box":
+                        if(canCarry == false){
+                            target = hit.collider.gameObject;
+                            CarrySystem();
+                            lastHitObject = hit.collider.gameObject;
+                        }
+                        break;
+                    default:
+                        Reset();
+                        break;
+                }
             }
         }else{
             Reset();
@@ -103,11 +140,14 @@ public class Hand : MonoBehaviour
     }
 
     void CheckDelivery(){
-        if(activeOneTime2 == true){
-            canGive = true;
-            targetRendererDelivery = targetTrain.GetComponent<Renderer>();
-            targetTrain.GetComponent<ToFillTrain>().CompatibleLayer(target.layer);
-        }
+        canGive = true;
+        targetRendererDelivery = targetTrain.GetComponent<Renderer>();
+        targetTrain.GetComponent<ToFillTrain>().CompatibleLayer(target.layer);
+    }
+    void GetPackage(){
+        canGetPackage = true;
+        targetTrain.GetComponent<DeschargeMinigame>().ActiveOutiline();
+        targetRendererDelivery = targetTrain.GetComponent<Renderer>();
     }
     void CarrySystem(){
         if(activeOneTime == true){
@@ -140,6 +180,7 @@ public class Hand : MonoBehaviour
     }
 
     void Reset(){
+        lastHitObject = null;
         canActiveCharaceterLines = false;
         if(speechBubble != null){
             speechBubble.SetActive(false);
@@ -147,12 +188,10 @@ public class Hand : MonoBehaviour
         if(Time.timeScale != 0){
             PlayerCamera.DisabledCursor();
         }
-     
-        activeOneTime2 = true;
         if(targetRendererDelivery != null){
             targetRendererDelivery.material.SetFloat("_ValueMultiplay", 0);
         }
-
+        canGetPackage = false;
         canGet = false;
         activeOneTime = true;
         if(targetRenderer != null){

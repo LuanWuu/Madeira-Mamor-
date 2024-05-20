@@ -8,10 +8,13 @@ public class RaffleQuest : MonoBehaviour
     [Header("Mangers dos minigames")]
     [SerializeField] private CarryMinimage carryScript;
     [SerializeField] private GameObject carryUI;
+    [SerializeField] private ManagerDescharge ManagerDesScript;
     [Header("Timer")]
     [SerializeField] private GameObject timer;
     [Header("Timer of Carry Minigame")]
     [SerializeField] private float carryTime;
+    [Header("Timer of Descharge wagons")]
+    [SerializeField] private float deschargeTime;
     [Header("Total Points of time")]
     [SerializeField] private float pointTimeQuest;
     [Header("Nivelamento")]
@@ -22,6 +25,10 @@ public class RaffleQuest : MonoBehaviour
     [SerializeField] private roadMap roadMapScriptable;
     [System.NonSerialized] public float score;
     [SerializeField] private MensageController mensagControlScrpt;
+    [Header("Day time")]
+    [SerializeField] private StoragaDayValues DaySystem;
+    [Header("Day time")]
+    [SerializeField] private Hand handScript;
     private Timer timerScript;
     private int numberMinigame;
     private int beforeNumberMinigame;
@@ -71,8 +78,21 @@ public class RaffleQuest : MonoBehaviour
         //SceneManager.LoadScene("SecondArea");
     }
     public void DecideQuest(){
-        carryScript.DecideAmoutBox();
-        timeMinigame = carryTime;
+         switch(DaySystem.dayTime){
+            case "Morning":
+                ManagerDesScript.StartMinigame();
+                timeMinigame = deschargeTime;
+                 handScript.takePackage = true;
+                break;
+
+            case "Afternoon":
+                carryScript.DecideAmoutBox();
+                timeMinigame = carryTime;
+                handScript.takePackage = false;
+                break;
+            default:
+                    break;
+        }
         timer.SetActive(true);
         timerScript.timerleft = timeMinigame;
         timerScript.stop = false;

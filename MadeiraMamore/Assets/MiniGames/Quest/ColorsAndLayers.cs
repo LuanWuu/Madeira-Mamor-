@@ -6,4 +6,5 @@ public class ColorsAndLayers: ScriptableObject
 {
     public  Color[] packageColor;
     public string[] layerOfPackage;
+    public List<int> packageLayer = new List<int>();
 }
