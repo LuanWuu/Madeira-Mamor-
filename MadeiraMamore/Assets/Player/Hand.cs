@@ -26,9 +26,11 @@ public class Hand : MonoBehaviour
     private GameObject target;
     private GameObject targetTrain;
     private GameObject targetCharacter;
+    private GameObject targetDesposit;
     private GameObject lastHitObject; 
     private Renderer targetRenderer;
     private Renderer targetRendererDelivery;
+    private Renderer targetRendererDeposity;
     private Ray ray;
     private Vector3 screenCenter;
     // Start is called before the first frame update
@@ -105,7 +107,8 @@ public class Hand : MonoBehaviour
     void RaycastCheck(){
         RaycastHit hit; // alvo acertado pode ser qualquer objeto com collider
         if(Physics.Raycast(ray, out hit, distCanGet)){
-            if(hit.collider.gameObject != lastHitObject) {
+            if(hit.collider.gameObject != lastHitObject){
+                Reset();
                 switch(hit.collider.gameObject.tag){
                     case "Character":
                             canActiveCharaceterLines = true;
@@ -129,6 +132,11 @@ public class Hand : MonoBehaviour
                             lastHitObject = hit.collider.gameObject;
                         }
                         break;
+                    case "Desposit":
+                        targetDesposit = hit.collider.gameObject;
+                        CheckDeposit();
+                        lastHitObject = hit.collider.gameObject;
+                        break;
                     default:
                         Reset();
                         break;
@@ -148,6 +156,12 @@ public class Hand : MonoBehaviour
         canGetPackage = true;
         targetTrain.GetComponent<DeschargeMinigame>().ActiveOutiline();
         targetRendererDelivery = targetTrain.GetComponent<Renderer>();
+    }
+    void CheckDeposit(){
+        if(target != null){
+            targetRendererDeposity = targetDesposit.GetComponent<Renderer>();
+            targetDesposit.GetComponent<PackgeController>().CompatibleLayer(target.layer);            
+        }
     }
     void CarrySystem(){
         if(activeOneTime == true){
@@ -190,6 +204,9 @@ public class Hand : MonoBehaviour
         }
         if(targetRendererDelivery != null){
             targetRendererDelivery.material.SetFloat("_ValueMultiplay", 0);
+        }
+        if(targetRendererDeposity  != null){
+            targetRendererDeposity.material.SetFloat("_ValueMultiplay", 0);
         }
         canGetPackage = false;
         canGet = false;

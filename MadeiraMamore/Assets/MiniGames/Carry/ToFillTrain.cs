@@ -46,8 +46,8 @@ public class ToFillTrain : MonoBehaviour
     void FillTheLoad (Color boxColor) {
         if(turn < boxFulfilling.Length){ 
             boxFulfilling[turn].SetActive(true);
-            boxFulfilling[turn].GetComponent<Renderer>().materials[1].color = boxColor;
-            //Debug.Log(" turn " + turn);
+            GameObject boxColorFill = boxFulfilling[turn].transform.GetChild(1).gameObject;
+            boxColorFill.GetComponent<Renderer>().materials[1].color = boxColor;
         }
         turn++;
     }

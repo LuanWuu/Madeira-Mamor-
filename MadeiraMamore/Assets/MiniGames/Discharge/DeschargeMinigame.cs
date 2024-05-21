@@ -19,7 +19,7 @@ public class DeschargeMinigame : MonoBehaviour
     // Start is called before the first frame update
     public void CreateBoxs()
     {
-        int amoutBox = Random.Range(2, maxBOX);
+        int amoutBox = Random.Range(3, maxBOX);
 
         localPackageColor = new Color[colorLayerScriptable.packageColor.Length];
         localPackageColor = colorLayerScriptable.packageColor;

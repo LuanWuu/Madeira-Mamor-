@@ -10,13 +10,7 @@ TagManager:
   - player
   - Character
   - SpeechBubble
-  - Assis
-  - Baltasar
-  - Cururu
-  - Emanuel
-  - Solon
-  - Joaquim
-  - Raimundo
+  - Desposit
   layers:
   - Default
   - TransparentFX
