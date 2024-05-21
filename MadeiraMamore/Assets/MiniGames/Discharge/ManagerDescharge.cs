@@ -41,9 +41,9 @@ public class ManagerDescharge : MonoBehaviour
         UIDepositScript.gameObject.SetActive(true);
         for(int i = 0; i < depositPosition.Length; i++){
             deposit[i] = Instantiate(depositPrefab, depositPosition[i].position, depositPosition[i].rotation);
-            UIDepositScript.packageScript = new PackgeController[deposit.Length];
-            UIDepositScript.packageScript[i] = deposit[i].GetComponent<PackgeController>();
             GameObject depositChild = deposit[i].transform.GetChild(0).gameObject;
+            UIDepositScript.packageScript = new PackgeController[deposit.Length];
+            UIDepositScript.packageScript[i] = depositChild.GetComponent<PackgeController>();
             for(int a = 0; a < giveDepositAmoutLayer[i]; a++){
                 int  givelayer = colorLayerScriptable.packageLayer[0];
                 //Debug.Log(" vez i vagao " + i + "givelayer " + givelayer + "rodou quantas vezes " + a);
