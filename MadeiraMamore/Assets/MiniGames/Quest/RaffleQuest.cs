@@ -9,6 +9,7 @@ public class RaffleQuest : MonoBehaviour
     [SerializeField] private CarryMinimage carryScript;
     [SerializeField] private GameObject carryUI;
     [SerializeField] private ManagerDescharge ManagerDesScript;
+    [SerializeField] private GameObject DepositUI;
     [Header("Timer")]
     [SerializeField] private GameObject timer;
     [Header("Timer of Carry Minigame")]
@@ -48,8 +49,17 @@ public class RaffleQuest : MonoBehaviour
         }
     }
     public void CompleteQuest(){
-        carryUI.SetActive(false);
-        carryScript.ResetFillWagons();
+        switch(DaySystem.dayTime){
+            case "Morning":
+                DepositUI.SetActive(false);
+                break;
+            case "Afternoon":
+                carryUI.SetActive(false);
+                carryScript.ResetFillWagons();
+                break;
+            default:
+                    break;
+        }
         mensagControlScrpt.oneTime = true;
         timerScript.stop = true;
         //Debug.Log("Complete" +  score);
@@ -64,7 +74,6 @@ public class RaffleQuest : MonoBehaviour
            // Debug.Log("Complete" +  score);
         }
         timer.SetActive(false);
-        Invoke("Reset", 0.5f);
     }
     public void EndTime(){
         Debug.Log("time is over");

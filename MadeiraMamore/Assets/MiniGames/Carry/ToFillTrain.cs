@@ -5,7 +5,7 @@ using UnityEngine;
 public class ToFillTrain : MonoBehaviour
 {
     [SerializeField] private GameObject fulfilling;
-    [System.NonSerialized] public List<int> LayerAccept  = new List<int>();
+    [System.NonSerialized] public List<int> LayerAcceptWagon  = new List<int>();
     private GameObject[] boxFulfilling;
     private int turn = 0;
     private int[] transferLayerFilter;
@@ -22,7 +22,7 @@ public class ToFillTrain : MonoBehaviour
         renderTrain = GetComponent<Renderer>();
     }
     public void ResetWagons(){
-        LayerAccept.Clear();
+        LayerAcceptWagon.Clear();
         turn = 0;
         for (int i = 0; i < fulfilling.transform.childCount; i++)
         {
@@ -30,7 +30,7 @@ public class ToFillTrain : MonoBehaviour
         }
     }
      public void CompatibleLayer(int boxLayer){
-        if (LayerAccept.Contains(boxLayer)){
+        if (LayerAcceptWagon.Contains(boxLayer)){
             renderTrain.material.SetFloat("_ValueMultiplay", 1.02f);// Ativando o Contorno
         }else{
             renderTrain.material.SetFloat("_ValueMultiplay", 0);// desativando o o Contorno
@@ -38,7 +38,7 @@ public class ToFillTrain : MonoBehaviour
     }
 
     public void CheckLayerPackage(Color boxColor,int boxLayer, GameObject target){
-        if (LayerAccept.Contains(boxLayer)){
+        if (LayerAcceptWagon.Contains(boxLayer)){
             FillTheLoad(boxColor);
             Destroy(target, 0.15f);
         }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PackgeController : MonoBehaviour
 {
     [SerializeField] private GameObject fulfilling;
+    [SerializeField] private ColorsAndLayers colorLayerScriptable;
 
     public List<int> layerAccept = new List<int>();
 
@@ -47,8 +48,10 @@ public class PackgeController : MonoBehaviour
     void FillTheLoad (Color boxColor) {
         if(turn < boxFulfilling.Length){ 
             boxFulfilling[turn].SetActive(true);
-            GameObject boxColorFill = boxFulfilling[turn].transform.GetChild(1).gameObject;
-            boxColorFill.GetComponent<Renderer>().materials[1].color = boxColor;
+            GameObject boxColorChild = boxFulfilling[turn].transform.GetChild(1).gameObject;
+            boxColorChild.GetComponent<Renderer>().materials[1].color = boxColor;
+            colorLayerScriptable.amoutPackage--;
+            Debug.Log("amout " + colorLayerScriptable.amoutPackage);
         }
         turn++;
     }

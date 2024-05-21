@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CarryUI : MonoBehaviour
+public class UIDeposit : MonoBehaviour
 {
     int amoutTipeBox;
     [SerializeField] private GameObject[] boxList;
-    [SerializeField] private ToFillTrain[] wagonScripts;
+    [System.NonSerialized] public PackgeController[] packageScript;
     [SerializeField] private ColorsAndLayers colorLayerScriptable;
     private Image[] boxImage;
-    private int numberOfWAGON;
+    private int numberOfDeposit;
     void Start(){
 
     }
@@ -21,21 +21,21 @@ public class CarryUI : MonoBehaviour
             }
         }
     }
-    public void Wagon(int numerberWagon){
-        numberOfWAGON = numerberWagon;
-        boxList[numerberWagon].SetActive(true);
+    public void Deposit(int numerberDeposit){
+        numberOfDeposit = numerberDeposit;
+        boxList[numerberDeposit].SetActive(true);
         CheckWagonAccpet();
     }
     void CheckWagonAccpet(){
-        boxImage = new Image[boxList[numberOfWAGON].transform.childCount];
+        boxImage = new Image[boxList[numberOfDeposit].transform.childCount];
         for(int i = 0; i < boxImage.Length; i++) {
-            boxImage[i] = boxList[numberOfWAGON].transform.GetChild(i).GetComponent<Image>();
+            boxImage[i] = boxList[numberOfDeposit].transform.GetChild(i).GetComponent<Image>();
         } 
         LayerListToColorList();         
     }
     void LayerListToColorList(){
-        int[] numberlayers = new int[wagonScripts[numberOfWAGON].LayerAcceptWagon.Count];
-        numberlayers = wagonScripts[numberOfWAGON].LayerAcceptWagon.ToArray();
+        int[] numberlayers = new int[packageScript[numberOfDeposit].layerAccept .Count];
+        numberlayers = packageScript[numberOfDeposit].layerAccept .ToArray();
         Debug.Log(" numberlayers " + numberlayers.Length);
         int amoutNotPainting = 0;
         for(int i = 0; i < numberlayers.Length; i++) {

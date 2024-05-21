@@ -81,8 +81,9 @@ public class Hand : MonoBehaviour
                 //Debug.Log("Solto");
                 if(canGive == true){
                     if(targetTrain != null){
-                        targetTrain.GetComponent<ToFillTrain>().CheckLayerPackage(target.GetComponent<Renderer>().materials[1].color,
-                                                                                  target.layer,target);
+                        GameObject box = target.transform.GetChild(1).gameObject;
+                        Renderer boxColor = box.GetComponent<Renderer>();
+                        targetTrain.GetComponent<ToFillTrain>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
                     }
                     canGive = false;
                     canCarry = false;
@@ -102,6 +103,16 @@ public class Hand : MonoBehaviour
                 canCarry = false;
                 canMoviLerp = true;
                 //Debug.Log("Solto");
+                if(canGive == true){
+                    if(targetDesposit  != null){
+                        GameObject box = target.transform.GetChild(1).gameObject;
+                        Renderer boxColor = box.GetComponent<Renderer>();
+                        targetDesposit .GetComponent<PackgeController>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
+                    }
+                    canGive = false;
+                    canCarry = false;
+                    target = null;
+                }
         }      
     }
     void RaycastCheck(){
@@ -159,6 +170,7 @@ public class Hand : MonoBehaviour
     }
     void CheckDeposit(){
         if(target != null){
+            canGive = true;
             targetRendererDeposity = targetDesposit.GetComponent<Renderer>();
             targetDesposit.GetComponent<PackgeController>().CompatibleLayer(target.layer);            
         }

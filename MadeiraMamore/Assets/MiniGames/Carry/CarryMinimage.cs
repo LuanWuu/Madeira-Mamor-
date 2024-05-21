@@ -72,10 +72,6 @@ public class CarryMinimage : MonoBehaviour
         int[] giveWagonsAmoutLayer = new int[wagons.Length];
         int halfTipLayer = saveLayerAmout/wagons.Length; 
 
-        //foreach (int elemento in transferList)
-        //{
-        //   Debug.Log("layer da  lista " + elemento);
-        //}
         if (saveLayerAmout % wagons.Length != 0){
             int randomizedWagons = Random.Range(0,wagons.Length);
             int remainingLayers = saveLayerAmout % wagons.Length;
@@ -89,7 +85,7 @@ public class CarryMinimage : MonoBehaviour
             for(int a = 0; a < giveWagonsAmoutLayer[i]; a++){
                 int  givelayer = transferList[0];
                 //Debug.Log(" vez i vagao " + i + "givelayer " + givelayer + "rodou quantas vezes " + a);
-                wagons[i].GetComponent<ToFillTrain>().LayerAccept.Add(givelayer);
+                wagons[i].GetComponent<ToFillTrain>().LayerAcceptWagon.Add(givelayer);
                 transferList.RemoveAt(0);
             }
             CarryUIScript.Wagon(i);

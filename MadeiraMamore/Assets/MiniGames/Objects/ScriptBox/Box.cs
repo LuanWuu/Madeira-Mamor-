@@ -33,7 +33,6 @@ public class Box : MonoBehaviour
             int decideTypePackage = Random.Range(0,localLayerOfPackage.Length);
             package.layer = LayerMask.NameToLayer(localLayerOfPackage[decideTypePackage]);
             packageColor[i].GetComponent<Renderer>().materials[1].color = localPackageColor[decideTypePackage];
-            Debug.Log("caloraedsa " + packageColor[i].name);
             //Debug.Log(LayerMask.LayerToName(gameObject.layer) + LayerMask.NameToLayer(layerOfPackage[i])); 
             saveLayerPackege[i] = LayerMask.NameToLayer(localLayerOfPackage[decideTypePackage]);
         }

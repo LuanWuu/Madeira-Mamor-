@@ -37,10 +37,10 @@ public class DeschargeMinigame : MonoBehaviour
             int decideTypePackage = Random.Range(0,localLayerOfPackage.Length);
             package[i].layer = LayerMask.NameToLayer(localLayerOfPackage[decideTypePackage]);
             packageColor[i].GetComponent<Renderer>().materials[1].color = localPackageColor[decideTypePackage];
-            Debug.Log("caloraedsa " + packageColor[i].name);
             //Debug.Log(LayerMask.LayerToName(gameObject.layer) + LayerMask.NameToLayer(layerOfPackage[i])); 
             saveLayerPackege[i] = LayerMask.NameToLayer(localLayerOfPackage[decideTypePackage]);
             package[i].SetActive(true);
+            colorLayerScriptable.amoutPackage++;
         }
         for(int i = 0; i < saveLayerPackege.Length; i++) {
             for(int e = 0; e < localLayerOfPackage.Length; e++) {
