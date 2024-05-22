@@ -52,13 +52,13 @@ public class Hand : MonoBehaviour
         }
     }
     void InputManager(){
-        if (Input.GetKeyDown("e") && canActiveCharaceterLines == true){ // Ativando Caixa de teste
-            speechBubble.SetActive(true);
-            PlayerCamera.EnabledCursor();
-            mensageControllerScript.GiveTalk(targetCharacter.name);
-            mensageControllerScript.GiveToBottun();
-        }
-        if (Input.GetKeyDown("e")){ // pegando o Objeto
+        if (Input.GetButtonDown("Interactions")){ 
+            if(canActiveCharaceterLines == true){ // Ativando Caixa de teste
+                speechBubble.SetActive(true);
+                PlayerCamera.EnabledCursor();
+                mensageControllerScript.GiveTalk(targetCharacter.name);
+                mensageControllerScript.GiveToBottun();
+            }
             switch(DaySystem.dayTime){
             case "Morning":
                 ControlerHadMorning();
@@ -68,7 +68,7 @@ public class Hand : MonoBehaviour
                 break;
             default:
                     break;
-        }
+            }
         }
     }
     void ControlerHadAfternoon(){
