@@ -4,56 +4,75 @@ using UnityEngine;
 
 public class MoviPlayer : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private ScrpitTablePlayer scriptTableValues;
+
+    private float localMoveSpeed;
+    private float localAcceleraWalk;
+    private float localRunnigSpeed;
+    private float localAcceleraRunnig;
+
+    private float localSpeed = 0;
+    private bool isRuning;
     Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        SaveOrigin();
     }
     // Update is called once per frame
-
+    void SaveOrigin(){
+        localMoveSpeed = scriptTableValues.moveSpeed;
+        localAcceleraWalk = scriptTableValues.acceleraWalk;
+        localRunnigSpeed = scriptTableValues.runnigSpeed;
+        localAcceleraRunnig = scriptTableValues.acceleraRunnig;
+    }
+    public void RestSpeed(){
+        scriptTableValues.moveSpeed = localMoveSpeed;
+        scriptTableValues.acceleraWalk = localAcceleraWalk;
+        scriptTableValues.runnigSpeed = localRunnigSpeed;
+        scriptTableValues.acceleraRunnig = localAcceleraRunnig;
+    }
     private void FixedUpdate()
     {
-        Keyboard();
-    
-
-        string[] joysticksController = Input.GetJoystickNames();
-
-        // Verifique se há controle conectado
-        if (joysticksController.Length > 0 && !string.IsNullOrEmpty(joysticksController[0]))
-        {
-            JoyStick();
+        if(Input.GetAxis("RT") != 0 ||Input.GetKey(KeyCode.LeftShift)){
+            isRuning = true;
+        }else{
+            isRuning = false;
+        }
+        if (Input.GetAxis("VerticalMoviJoystick") != 0 || Input.GetAxis("HorizontalMoviJoystick") != 0){
+            MovePlayer(Input.GetAxis("HorizontalMoviJoystick"),  Input.GetAxis("VerticalMoviJoystick"));
+        }else if(Input.GetAxis("KeyBoardH") != 0 || Input.GetAxis("KeyBoardY") != 0){
+            MovePlayer(Input.GetAxis("KeyBoardH"), Input.GetAxis("KeyBoardY"));
+        }else{
+            rb.velocity = new Vector3(0,0,0);
+            localSpeed = 0;
         }
     }
-    private void Keyboard()
-    {
-        float horizontalInput = Input.GetAxis("KeyBoardH");
-        float verticalInput = Input.GetAxis("KeyBoardY");
-        if (horizontalInput != 0 || verticalInput != 0)
-        {
-            //Debug.Log("teste");
-            Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * moveSpeed * Time.fixedDeltaTime;
-            Vector3 localMovement = transform.TransformDirection(movement);
-            rb.velocity = new Vector3(localMovement.x, rb.velocity.y, localMovement.z);
+    void MovePlayer(float horizontal, float vertical){
+        if(isRuning == true){
+            AccelerationRunnig();
+        }else{
+            AccelerationWalk();  
         }
+        Vector3 movement = new Vector3(horizontal, 0f, vertical) * localSpeed  * Time.fixedDeltaTime;
 
+        Vector3 localMovement = transform.TransformDirection(movement);
+
+        rb.velocity = new Vector3(localMovement.x, rb.velocity.y, localMovement.z);
     }
-    private void JoyStick()
-    {
-
-        float horizontalInput = Input.GetAxis("HorizontalMoviJoystick");
-        float verticalInput = Input.GetAxis("VerticalMoviJoystick");
-
-        if (horizontalInput != 0 || verticalInput != 0)
-        {
-            //Debug.Log("horizintal " + horizontalInput);
-            //Debug.Log("vertical" + verticalInput);
-            Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * moveSpeed * Time.fixedDeltaTime;
-            Vector3 localMovement = transform.TransformDirection(movement);
-            rb.velocity =  rb.velocity = new Vector3(localMovement.x, rb.velocity.y, localMovement.z);
+    void AccelerationWalk(){
+        if(localSpeed < scriptTableValues.moveSpeed){
+            localSpeed += scriptTableValues.acceleraWalk;
+        }else{
+            localSpeed = scriptTableValues.moveSpeed;
         }
-
+    }
+    void AccelerationRunnig(){
+        if(localSpeed < scriptTableValues.runnigSpeed){
+            localSpeed += scriptTableValues.acceleraRunnig;
+        }else{
+            localSpeed = scriptTableValues.runnigSpeed;
+        }
     }
 }
