@@ -11,7 +11,8 @@ public class Box : MonoBehaviour
     private Color[] localPackageColor;
     private string[] localLayerOfPackage;
     
-    private GameObject[] package;
+    private GameObject package;
+    private GameObject[] packageColor;
 
     // Start is called before the first frame update
     void Start()
@@ -22,15 +23,16 @@ public class Box : MonoBehaviour
         localLayerOfPackage = new string[colorLayerScriptable.layerOfPackage.Length];
         localLayerOfPackage = colorLayerScriptable.layerOfPackage;
 
-        package = new GameObject[transform.childCount];
+        packageColor = new GameObject[transform.childCount];
         int[] saveLayerPackege = new int[transform.childCount];
 
         for (int i = 0; i < transform.childCount; i++)
         {
-            package[i]= transform.GetChild(i).gameObject;
+            package = transform.GetChild(i).gameObject;
+            packageColor[i] = package.transform.GetChild(1).gameObject;
             int decideTypePackage = Random.Range(0,localLayerOfPackage.Length);
-            package[i].layer = LayerMask.NameToLayer(localLayerOfPackage[decideTypePackage]);
-            package[i].GetComponent<Renderer>().materials[1].color = localPackageColor[decideTypePackage];
+            package.layer = LayerMask.NameToLayer(localLayerOfPackage[decideTypePackage]);
+            packageColor[i].GetComponent<Renderer>().materials[1].color = localPackageColor[decideTypePackage];
             //Debug.Log(LayerMask.LayerToName(gameObject.layer) + LayerMask.NameToLayer(layerOfPackage[i])); 
             saveLayerPackege[i] = LayerMask.NameToLayer(localLayerOfPackage[decideTypePackage]);
         }
@@ -55,15 +57,6 @@ public class Box : MonoBehaviour
             Destroy(gameObject,0.05f);
         }
     }
-    //void teste(){
-    //    int decideTypePackage = Random.Range(0,layerOfPackage.Length);
-    //    for (int i = 0; i < layerOfPackage.Length; i++)
-    //    {
-    //        if(decideTypePackage == i){
-    //            gameObject.layer = LayerMask.NameToLayer(layerOfPackage[i]);
-    //            Debug.Log(LayerMask.LayerToName(gameObject.layer) + LayerMask.NameToLayer(layerOfPackage[i]));
-    //       }
-    //    }
 
 }
 

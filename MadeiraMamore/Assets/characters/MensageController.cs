@@ -5,6 +5,7 @@ using TMPro;
 
 public class MensageController : MonoBehaviour
 {
+    public List<string> characterNames;
     [SerializeField] private roadMap characterWords;
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private TextMeshProUGUI speechBubbleText;
@@ -13,9 +14,6 @@ public class MensageController : MonoBehaviour
     [SerializeField] private GameObject nextButton;
     [SerializeField] private GameObject buttonPositive;
     [SerializeField] private GameObject buttonNegative;
-    [SerializeField] private bool cheif;
-    [SerializeField] private bool guard;
-    [SerializeField] private bool[] worker;
     [SerializeField] private RaffleQuest rafflequestScript;
 
     int numeberOfWorker;
@@ -36,11 +34,6 @@ public class MensageController : MonoBehaviour
     ButtonPlayerTalk negaButton;
 
     private void Start() {
-        if(cheif == true){
-            myCharacterlist = characterWords.cheif;
-        }else if(guard == true){
-            myCharacterlist = characterWords.guard;
-        }
         posiButton = buttonPositive.GetComponent<ButtonPlayerTalk>();
         negaButton = buttonNegative.GetComponent<ButtonPlayerTalk>();
     }
@@ -80,34 +73,27 @@ public class MensageController : MonoBehaviour
             Debug.Log("dsadas" + count);
         }
     }
-    public void GiveTalk(){
-        placeNumber = 0;
-        if(cheif == false && guard == false){
-            for(int i = 0; i < worker.Length; i++) {
-                if (worker[i] == true){
-                    if(i == 5){
-                        myCharacterlist = characterWords.worker6Special;
-                        numeberOfWorker = i;
-                        break;
-                    }
-                    numeberOfWorker = i;
-                    break;
-                }
+    
+    public void GiveTalk(string name){
+        for(int i = 0; i < characterNames.Count; i++) {
+            if(name == characterNames[i]){
+                numeberOfWorker = i;
+                break;
             }
+        }       
+        placeNumber = 0;
+        if(numeberOfWorker != 6 && numeberOfWorker !=7){
             if(DaySystem.dayTime != "Lunch" && DaySystem.dayTime != "Night"){
                 myCharacterlist = characterWords.NotTalkMoment[numeberOfWorker];
-                Debug.Log("negativa");
-            }else if(numeberOfWorker !=5 && (DaySystem.dayTime == "Lunch" || DaySystem.dayTime == "Night")){
+            }else if(DaySystem.dayTime == "Lunch" || DaySystem.dayTime == "Night"){
                 myCharacterlist = speechesOfDay[numeberOfWorker];
-                Debug.Log("normal");
             }
             numberAnswerPositive = 0;
             numberAnswerNegative = 0;
             GetIndexOfList();
-        }
-        if(cheif == true){
+        }else if(numeberOfWorker == 6){//Chief
             myCharacterlist = characterWords.cheif;
-        }else if(guard == true){
+        }else if(numeberOfWorker == 7){ //Guard
             myCharacterlist = characterWords.guard;
         }
         speechBubbleText.text = myCharacterlist[0];    
@@ -116,13 +102,13 @@ public class MensageController : MonoBehaviour
         placeNumber++;
         if(placeNumber < myCharacterlist.Count){
             speechBubbleText.text = myCharacterlist[placeNumber];
-            if(guard == false && cheif == false){
+            if(numeberOfWorker != 6 && numeberOfWorker !=7){
                 GetIndexOfList();
             }
         }else{
             speechBubble.gameObject.SetActive(false);
             PlayerCamera.DisabledCursor();
-            if(cheif == true && oneTime== true){
+            if(numeberOfWorker == 6){ 
                 DayTCScript.TimeOfDay(moment);
                 moment++;
                 if(DaySystem.dayTime != "Night" && DaySystem.dayTime != "Lunch"){

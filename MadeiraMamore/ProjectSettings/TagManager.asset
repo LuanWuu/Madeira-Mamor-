@@ -10,6 +10,7 @@ TagManager:
   - player
   - Character
   - SpeechBubble
+  - Desposit
   layers:
   - Default
   - TransparentFX

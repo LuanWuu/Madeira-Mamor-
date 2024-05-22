@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ToFillTrain : MonoBehaviour
+public class PackgeController : MonoBehaviour
 {
     [SerializeField] private GameObject fulfilling;
-    [System.NonSerialized] public List<int> LayerAccept  = new List<int>();
+    [SerializeField] private ColorsAndLayers colorLayerScriptable;
+
+    public List<int> layerAccept = new List<int>();
+
     private GameObject[] boxFulfilling;
     private int turn = 0;
     private int[] transferLayerFilter;
@@ -21,8 +24,7 @@ public class ToFillTrain : MonoBehaviour
         //Debug.Log(boxFulfilling.Length);
         renderTrain = GetComponent<Renderer>();
     }
-    public void ResetWagons(){
-        LayerAccept.Clear();
+    public void ResetDeposit(){
         turn = 0;
         for (int i = 0; i < fulfilling.transform.childCount; i++)
         {
@@ -30,7 +32,7 @@ public class ToFillTrain : MonoBehaviour
         }
     }
      public void CompatibleLayer(int boxLayer){
-        if (LayerAccept.Contains(boxLayer)){
+        if (layerAccept.Contains(boxLayer)){
             renderTrain.material.SetFloat("_ValueMultiplay", 1.02f);// Ativando o Contorno
         }else{
             renderTrain.material.SetFloat("_ValueMultiplay", 0);// desativando o o Contorno
@@ -38,7 +40,7 @@ public class ToFillTrain : MonoBehaviour
     }
 
     public void CheckLayerPackage(Color boxColor,int boxLayer, GameObject target){
-        if (LayerAccept.Contains(boxLayer)){
+        if (layerAccept.Contains(boxLayer)){
             FillTheLoad(boxColor);
             Destroy(target, 0.15f);
         }
@@ -46,15 +48,12 @@ public class ToFillTrain : MonoBehaviour
     void FillTheLoad (Color boxColor) {
         if(turn < boxFulfilling.Length){ 
             boxFulfilling[turn].SetActive(true);
-            boxFulfilling[turn].GetComponent<Renderer>().materials[1].color = boxColor;
-            //Debug.Log(" turn " + turn);
+            GameObject boxColorChild = boxFulfilling[turn].transform.GetChild(1).gameObject;
+            boxColorChild.GetComponent<Renderer>().materials[1].color = boxColor;
+            colorLayerScriptable.amoutPackage--;
+            Debug.Log("amout " + colorLayerScriptable.amoutPackage);
         }
         turn++;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

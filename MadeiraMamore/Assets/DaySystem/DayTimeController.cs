@@ -8,8 +8,7 @@ public class DayTimeController : MonoBehaviour
 {
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private roadMap roadMapController;
-    [SerializeField] private MensageController ChiefScript;
-    [SerializeField] private List<MensageController> mensageControllerScript;
+    [SerializeField] private MensageController mensageControllerScript;
     [SerializeField] private string[] dayTime;
     [SerializeField] private GameObject bed;
     [SerializeField] private GameObject DayIcon;
@@ -79,7 +78,7 @@ public class DayTimeController : MonoBehaviour
         }
     }
     public void ChangedDay(){
-        ChiefScript.moment = 0;
+        mensageControllerScript.moment = 0;
         switch(DaySystem.day){
             case 1:
                 roadMapController.InitializeWorkerTalkDay1();
@@ -120,10 +119,9 @@ public class DayTimeController : MonoBehaviour
             default:
                 break;
         }
-        foreach (MensageController script in mensageControllerScript)
-        {
-            script.PickWorkerWords();
-        }
+ 
+        mensageControllerScript.PickWorkerWords();
+        
         StartCoroutine(DayAnimator());
     }
     void EndGame(){

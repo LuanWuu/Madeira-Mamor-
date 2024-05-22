@@ -34,8 +34,8 @@ public class CarryUI : MonoBehaviour
         LayerListToColorList();         
     }
     void LayerListToColorList(){
-        int[] numberlayers = new int[wagonScripts[numberOfWAGON].LayerAccept.Count];
-        numberlayers = wagonScripts[numberOfWAGON].LayerAccept.ToArray();
+        int[] numberlayers = new int[wagonScripts[numberOfWAGON].LayerAcceptWagon.Count];
+        numberlayers = wagonScripts[numberOfWAGON].LayerAcceptWagon.ToArray();
         Debug.Log(" numberlayers " + numberlayers.Length);
         int amoutNotPainting = 0;
         for(int i = 0; i < numberlayers.Length; i++) {
@@ -49,11 +49,11 @@ public class CarryUI : MonoBehaviour
         DesabledAdditional(amoutNotPainting);
     }
     void DesabledAdditional(int amout){
-        Debug.Log("amoutPainting " + amout);
+        //Debug.Log("amoutPainting " + amout);
         for(int i = boxImage.Length; i > amout; i--){
             boxImage[i-1].gameObject.SetActive(false);
-            Debug.Log("oBJETO dESABILITADO " + (i-1));
-            Debug.Log("vez lifasd " + i);
+            //Debug.Log("oBJETO dESABILITADO " + (i-1));
+            //Debug.Log("vez lifasd " + i);
         }
     }
 }

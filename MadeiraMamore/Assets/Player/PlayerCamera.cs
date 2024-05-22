@@ -77,7 +77,7 @@ public class PlayerCamera : MonoBehaviour
         smoothY = Mathf.Lerp(smoothY, verticalDelta, coefSmoothY);// deixando suave as mudancas do eixo y
 
         rotateX += horizontalDelta;// somando horizontal
-        rotateY += verticalDelta;// omando Vetivcal
+        rotateY += verticalDelta;// somando Vetivcal
 
         rotateY = Mathf.Clamp(rotateY, angleYmim, angleYmax); // limitando o Eixo Y
 
