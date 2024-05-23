@@ -14,7 +14,7 @@ public class UIDeposit : MonoBehaviour
     void Start(){
 
     }
-    public void Reset(){
+    void Reset(){
         for(int i = 0; i < boxList.Length; i++) {
             for(int c = 0; c < boxList[i].transform.childCount; c++) {
                 boxList[i].transform.GetChild(c).gameObject.SetActive(true);
@@ -22,6 +22,7 @@ public class UIDeposit : MonoBehaviour
         }
     }
     public void Deposit(int numerberDeposit){
+        Reset();
         numberOfDeposit = numerberDeposit;
         boxList[numerberDeposit].SetActive(true);
         CheckWagonAccpet();

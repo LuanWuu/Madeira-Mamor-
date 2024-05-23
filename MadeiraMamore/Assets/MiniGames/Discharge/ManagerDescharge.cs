@@ -14,6 +14,8 @@ public class ManagerDescharge : MonoBehaviour
     private GameObject[] deposit;
     private bool startGame;
     public void StartMinigame(){
+        colorLayerScriptable.amoutPackage = 0;
+        
         startGame = false;
         for(int i = 0; i < DescharMiniScricpt.Length; i++) {
             DescharMiniScricpt[i].CreateBoxs();

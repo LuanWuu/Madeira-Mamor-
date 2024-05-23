@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerComponents
   m_EditorClassIdentifier: 
   moveSpeed: 200
-  acceleraWalk: 5
+  acceleraWalk: 10
   runnigSpeed: 700
   acceleraRunnig: 40
