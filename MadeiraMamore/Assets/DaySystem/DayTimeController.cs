@@ -54,6 +54,7 @@ public class DayTimeController : MonoBehaviour
         }
         switch(DaySystem.dayTime){
             case "Morning":
+                //chamar as cutscene transiçao
                 train.SetActive(true);
                 roadMapController.ChefWords();
                 mornig.SetActive(true);

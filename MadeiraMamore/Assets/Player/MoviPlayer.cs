@@ -5,14 +5,13 @@ using UnityEngine;
 public class MoviPlayer : MonoBehaviour
 {
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
-    [SerializeField] private Transform stamina;
-    [SerializeField] private Transform backStamina;
+    [SerializeField] private RectTransform stamina;
 
     private float localMoveSpeed;
     private float localAcceleraWalk;
     private float localRunnigSpeed;
     private float localAcceleraRunnig;
-    private float amoutStamina;
+    private Vector3 amoutStamina;
 
     private float localSpeed = 0;
     private bool isRuning;
@@ -22,7 +21,8 @@ public class MoviPlayer : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         SaveOrigin();
-        amoutStamina = stamina.localScale.y / scriptTableValues.baseStamina;
+        float valueStamina = stamina.localScale.y / scriptTableValues.baseStamina;
+        amoutStamina = new Vector3(0, valueStamina,0);
     }
     // Update is called once per frame
     void SaveOrigin(){
@@ -39,7 +39,7 @@ public class MoviPlayer : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(Input.GetAxis("RT") != 0 ||Input.GetKey(KeyCode.LeftShift)){
+        if(Input.GetAxis("RT") != 0 ||Input.GetKey(KeyCode.LeftShift) && stamina.localScale.y > 0.001f){
             isRuning = true;
         }else{
             isRuning = false;
@@ -78,5 +78,6 @@ public class MoviPlayer : MonoBehaviour
         }else{
             localSpeed = scriptTableValues.runnigSpeed;
         }
+        stamina.localScale -= amoutStamina;
     }
 }
