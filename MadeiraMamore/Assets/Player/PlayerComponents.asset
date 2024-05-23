@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79652fa2aa38dc438c677fce670b26c, type: 3}
   m_Name: PlayerComponents
   m_EditorClassIdentifier: 
-  moveSpeed: 200
+  moveSpeed: 600
   acceleraWalk: 10
-  runnigSpeed: 700
-  acceleraRunnig: 40
+  runnigSpeed: 0
+  acceleraRunnig: 0
   baseStamina: 1000
+  money: 300

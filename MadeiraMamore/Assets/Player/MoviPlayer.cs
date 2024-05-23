@@ -21,8 +21,6 @@ public class MoviPlayer : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         SaveOrigin();
-        float valueStamina = stamina.localScale.y / scriptTableValues.baseStamina;
-        amoutStamina = new Vector3(0, valueStamina,0);
     }
     // Update is called once per frame
     void SaveOrigin(){
@@ -39,11 +37,6 @@ public class MoviPlayer : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(Input.GetAxis("RT") != 0 ||Input.GetKey(KeyCode.LeftShift) && stamina.localScale.y > 0.001f){
-            isRuning = true;
-        }else{
-            isRuning = false;
-        }
         if (Input.GetAxis("VerticalMoviJoystick") != 0 || Input.GetAxis("HorizontalMoviJoystick") != 0){
             MovePlayer(Input.GetAxis("HorizontalMoviJoystick"),  Input.GetAxis("VerticalMoviJoystick"));
         }else if(Input.GetAxis("KeyBoardH") != 0 || Input.GetAxis("KeyBoardY") != 0){
@@ -54,11 +47,7 @@ public class MoviPlayer : MonoBehaviour
         }
     }
     void MovePlayer(float horizontal, float vertical){
-        if(isRuning == true){
-            AccelerationRunnig();
-        }else{
-            AccelerationWalk();  
-        }
+        AccelerationWalk();  
         Vector3 movement = new Vector3(horizontal, 0f, vertical) * localSpeed  * Time.fixedDeltaTime;
 
         Vector3 localMovement = transform.TransformDirection(movement);
@@ -72,12 +61,5 @@ public class MoviPlayer : MonoBehaviour
             localSpeed = scriptTableValues.moveSpeed;
         }
     }
-    void AccelerationRunnig(){
-        if(localSpeed < scriptTableValues.runnigSpeed){
-            localSpeed += scriptTableValues.acceleraRunnig;
-        }else{
-            localSpeed = scriptTableValues.runnigSpeed;
-        }
-        stamina.localScale -= amoutStamina;
-    }
+
 }

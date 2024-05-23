@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class RaffleQuest : MonoBehaviour
 {
@@ -61,18 +60,21 @@ public class RaffleQuest : MonoBehaviour
             default:
                     break;
         }
-        score = (timerScript.timerleft * pointTimeQuest)/timeMinigame;
+        score = timeMinigame - timerScript.timerleft;
+        Debug.Log("saceore " + score);
         mensagControlScrpt.oneTime = true;
         timerScript.stop = true;
         //Debug.Log("Complete" +  score);
         if(score > goodScore){
             roadMapScriptable.GoodWork();
-            MoneySystemScript.GetSalary();
+            StartCoroutine( MoneySystemScript.GetSalary(3));
         }else if(score > badScore){
             roadMapScriptable.MediumWork();
-           // Debug.Log("Complete" +  score);
+            // Debug.Log("Complete" +  score);
+            StartCoroutine( MoneySystemScript.GetSalary(2));
         }else{
             roadMapScriptable.BadWork();
+            StartCoroutine( MoneySystemScript.GetSalary(1));
            // Debug.Log("Complete" +  score);
         }
         timer.SetActive(false);
@@ -108,6 +110,7 @@ public class RaffleQuest : MonoBehaviour
         }
         timer.SetActive(true);
         timerScript.timerleft = timeMinigame;
+        timerScript.timerOn = true;
         timerScript.stop = false;
         timerScript.end = false;
     }
