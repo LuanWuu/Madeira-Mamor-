@@ -1,0 +1,100 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+
+public class Notification : MonoBehaviour
+{
+    [SerializeField] private roadMap roadMapScriptable;
+    [SerializeField] private TextMeshProUGUI textNotifi;
+    [SerializeField] private RaffleQuest rafflequestScript;
+    [SerializeField] private Timer timerScript;
+    [SerializeField] private Transform targetPosi;
+    [SerializeField] private float time;
+    private List<string> localList;
+    private float localGodScore;
+    private float localNormalScore;
+    private float localBadScore;
+    private int localScore;
+    private bool isNotify;
+    private bool canNotify;
+    private Vector3 iniPosition;
+    // Start is called before the first frame update
+    void Start()
+    {
+        localList = roadMapScriptable.chiefScrean;
+        localGodScore = rafflequestScript.goodScore;
+        localNormalScore = rafflequestScript.normalScore;
+        localBadScore = rafflequestScript.badScore;
+        textNotifi.text = localList[0];
+        iniPosition = transform.position;
+        canNotify = true;
+    }
+    IEnumerator StartMoviment(){
+        while(Vector3.Distance(transform.position, targetPosi.position) <=3){
+            transform.position = Vector3.Lerp(transform.position, targetPosi.position, 2 * Time.deltaTime);
+            yield return new WaitForSeconds(0.25f); 
+        }
+            transform.position = targetPosi.position;
+            StartCoroutine(PuaseMoviment());
+    }
+    IEnumerator PuaseMoviment(){
+        yield return new WaitForSeconds(time);
+        StartCoroutine(BackMovimente());
+    }
+    IEnumerator BackMovimente(){
+        while(Vector3.Distance(transform.position, iniPosition) <= 50){
+            transform.position = Vector3.Lerp(transform.position,  iniPosition, 2 * Time.deltaTime);    
+            yield return new WaitForSeconds(0.25f);       
+        }
+        transform.position = iniPosition;
+        canNotify = true;
+    }
+    private void Update(){
+        if(canNotify == true){
+            CheckScore();      
+        }           
+    }
+    void CheckScore(){
+        localScore = (int)timerScript.timerleft;
+        if(localGodScore == localScore){
+            Debug.Log("local " + localScore);
+            StartCoroutine(Good());
+        }else if(localScore == localNormalScore){
+            Debug.Log("local " + localScore);
+            StartCoroutine(Normal());
+        }else if(localScore == localBadScore){
+            Debug.Log("local " + localScore);
+            StartCoroutine(Bad());
+        }
+    }
+    IEnumerator Good(){
+        textNotifi.text = localList[1];
+        isNotify = false;
+        yield return StartCoroutine(StartMoviment());
+        isNotify = true;
+                canNotify = false;
+    }
+    IEnumerator Normal(){
+        textNotifi.text = localList[2];
+        if(isNotify == false){
+           StartCoroutine(StartMoviment());
+        }else{
+            yield return StartCoroutine(BackMovimente());
+            yield return StartCoroutine(StartMoviment());
+        }
+        isNotify = true;
+                canNotify = false;
+    }
+    IEnumerator Bad(){
+        textNotifi.text = localList[3];
+        if(isNotify == false){
+           StartCoroutine(StartMoviment());
+        }else{
+            yield return StartCoroutine(BackMovimente());
+            yield return StartCoroutine(StartMoviment());
+        }
+        isNotify = true;
+                canNotify = false;
+    }
+}

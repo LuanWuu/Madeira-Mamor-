@@ -25,7 +25,6 @@ public class RaffleQuest : MonoBehaviour
     [SerializeField] private MoneySystem MoneySystemScript;
     [Header("Roteiro")]
     [SerializeField] private roadMap roadMapScriptable;
-    [System.NonSerialized] public float score;
     [SerializeField] private MensageController mensagControlScrpt;
     [Header("Day time")]
     [SerializeField] private StoragaDayValues DaySystem;
@@ -60,22 +59,19 @@ public class RaffleQuest : MonoBehaviour
             default:
                     break;
         }
-        score = timeMinigame - timerScript.timerleft;
-        Debug.Log("saceore " + score);
         mensagControlScrpt.oneTime = true;
         timerScript.stop = true;
-        //Debug.Log("Complete" +  score);
-        if(score > goodScore){
-            roadMapScriptable.GoodWork();
-            StartCoroutine( MoneySystemScript.GetSalary(3));
-        }else if(score > badScore){
-            roadMapScriptable.MediumWork();
-            // Debug.Log("Complete" +  score);
-            StartCoroutine( MoneySystemScript.GetSalary(2));
-        }else{
-            roadMapScriptable.BadWork();
-            StartCoroutine( MoneySystemScript.GetSalary(1));
-           // Debug.Log("Complete" +  score);
+        if(timerScript.timerleft != 0){
+            if(timerScript.timerleft > goodScore){
+                roadMapScriptable.GoodWork();
+                StartCoroutine( MoneySystemScript.GetSalary(3));
+            }else if(timerScript.timerleft  > normalScore){
+                roadMapScriptable.MediumWork();
+                StartCoroutine( MoneySystemScript.GetSalary(2));
+            }else{
+                roadMapScriptable.BadWork();
+                StartCoroutine( MoneySystemScript.GetSalary(1));
+            }
         }
         timer.SetActive(false);
     }
