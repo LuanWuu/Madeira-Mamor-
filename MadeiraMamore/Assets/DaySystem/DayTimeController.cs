@@ -10,6 +10,7 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private roadMap roadMapController;
     [SerializeField] private MensageController mensageControllerScript;
     [SerializeField] private string[] dayTime;
+    [SerializeField] private GameObject train;
     [SerializeField] private GameObject bed;
     [SerializeField] private GameObject DayIcon;
     [SerializeField] private GameObject mornig;
@@ -53,6 +54,8 @@ public class DayTimeController : MonoBehaviour
         }
         switch(DaySystem.dayTime){
             case "Morning":
+                //chamar as cutscene transiçao
+                train.SetActive(true);
                 roadMapController.ChefWords();
                 mornig.SetActive(true);
                 afternoon.SetActive(false);
@@ -67,6 +70,7 @@ public class DayTimeController : MonoBehaviour
                 night.SetActive(false);
                 break;
             case "Night":
+                train.SetActive(false);
                 roadMapController.ChefOrders();
                 bed.SetActive(true);
                 mornig.SetActive(false);

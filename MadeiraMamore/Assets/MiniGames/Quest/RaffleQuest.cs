@@ -91,13 +91,15 @@ public class RaffleQuest : MonoBehaviour
             case "Morning":
                 ManagerDesScript.StartMinigame();
                 timeMinigame = deschargeTime;
-                 handScript.takePackage = true;
+                handScript.takePackage = true;
+                Debug.Log(" mornig " + handScript.takePackage);
                 break;
 
             case "Afternoon":
                 carryScript.DecideAmoutBox();
                 timeMinigame = carryTime;
                 handScript.takePackage = false;
+                Debug.Log(" Afternoon" + handScript.takePackage);
                 break;
             default:
                     break;

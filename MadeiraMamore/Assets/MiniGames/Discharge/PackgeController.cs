@@ -24,13 +24,7 @@ public class PackgeController : MonoBehaviour
         //Debug.Log(boxFulfilling.Length);
         renderTrain = GetComponent<Renderer>();
     }
-    public void ResetDeposit(){
-        turn = 0;
-        for (int i = 0; i < fulfilling.transform.childCount; i++)
-        {
-            fulfilling.transform.GetChild(i).gameObject.SetActive(false);
-        }
-    }
+
      public void CompatibleLayer(int boxLayer){
         if (layerAccept.Contains(boxLayer)){
             renderTrain.material.SetFloat("_ValueMultiplay", 1.02f);// Ativando o Contorno
