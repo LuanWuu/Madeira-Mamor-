@@ -5,11 +5,14 @@ using UnityEngine;
 public class MoviPlayer : MonoBehaviour
 {
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
+    [SerializeField] private Transform stamina;
+    [SerializeField] private Transform backStamina;
 
     private float localMoveSpeed;
     private float localAcceleraWalk;
     private float localRunnigSpeed;
     private float localAcceleraRunnig;
+    private float amoutStamina;
 
     private float localSpeed = 0;
     private bool isRuning;
@@ -19,6 +22,7 @@ public class MoviPlayer : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         SaveOrigin();
+        amoutStamina = stamina.localScale.y / scriptTableValues.baseStamina;
     }
     // Update is called once per frame
     void SaveOrigin(){
