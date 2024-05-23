@@ -22,6 +22,8 @@ public class RaffleQuest : MonoBehaviour
     public float goodScore;
     public float normalScore;
     public float badScore;
+    [Header("Money")]
+    [SerializeField] private MoneySystem MoneySystemScript;
     [Header("Roteiro")]
     [SerializeField] private roadMap roadMapScriptable;
     [System.NonSerialized] public float score;
@@ -43,7 +45,6 @@ public class RaffleQuest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        score = (timerScript.timerleft * pointTimeQuest)/timeMinigame;
         if(Input.GetKeyDown("v")){
             CompleteQuest();
         }
@@ -60,12 +61,13 @@ public class RaffleQuest : MonoBehaviour
             default:
                     break;
         }
+        score = (timerScript.timerleft * pointTimeQuest)/timeMinigame;
         mensagControlScrpt.oneTime = true;
         timerScript.stop = true;
         //Debug.Log("Complete" +  score);
         if(score > goodScore){
             roadMapScriptable.GoodWork();
-            //Debug.Log("Complete" +  score);
+            MoneySystemScript.GetSalary();
         }else if(score > badScore){
             roadMapScriptable.MediumWork();
            // Debug.Log("Complete" +  score);
