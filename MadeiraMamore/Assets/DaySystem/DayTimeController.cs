@@ -32,7 +32,9 @@ public class DayTimeController : MonoBehaviour
     public AudioClip Mosquito;
     public AudioClip Chuva;
     public AudioClip Trem;
+    public AudioClip Alarm;
     public AudioSource sound;
+    public GameObject chuva;
 
     private bool cutscene = true;
 
@@ -124,8 +126,7 @@ public class DayTimeController : MonoBehaviour
                 cutscene = false;
                 videoPlayer.clip = transition;
                 Invoke("PlayVideo", 0f);
-                sound.clip = Trem;
-                sound.Play();
+                Invoke("TremSound", 1f);
                 //==
                 train.SetActive(false);
                 roadMapController.ChefOrders();
@@ -147,6 +148,7 @@ public class DayTimeController : MonoBehaviour
                 videoPlayer.clip = cutscene1;
                 Invoke("PlayVideo", 0f);
                 Invoke("FinishCutscene", 30f);
+                Invoke("PlayAlarm", 31f);
                 //==
                 roadMapController.InitializeWorkerTalkDay1();
                 DayText.text = "Dia " + DaySystem.OrderDay[0].ToString();
@@ -158,6 +160,7 @@ public class DayTimeController : MonoBehaviour
                 Invoke("PlayVideo", 0f);
                 sound.clip = Mosquito;
                 sound.Play();
+                Invoke("PlayAlarm", 3f);
                 //==
                 roadMapController.InitializeWorkerTalkDay2();
                 DayText.text = "Dia " + DaySystem.OrderDay[1].ToString();
@@ -168,17 +171,20 @@ public class DayTimeController : MonoBehaviour
                 videoPlayer.clip = cutscene2;
                 Invoke("PlayVideo", 0f);
                 Invoke("FinishCutscene", 30f);
+                Invoke("PlayAlarm", 31f);
                 //==
                 roadMapController.InitializeWorkerTalkDay12();
                 DayText.text = "Dia " + DaySystem.OrderDay[2].ToString();
                 break;
             case 4:
-                //transition
+                //transition              
                 cutscene = false;
                 videoPlayer.clip = transition;
                 Invoke("PlayVideo", 0f);
                 sound.clip = Chuva;
                 sound.Play();
+                chuva.gameObject.SetActive(true);
+                Invoke("PlayAlarm", 3f);
                 //==
                 roadMapController.InitializeWorkerTalkDay20();
                 DayText.text = "Dia " + DaySystem.OrderDay[3].ToString();
@@ -188,6 +194,7 @@ public class DayTimeController : MonoBehaviour
                 cutscene = false;
                 videoPlayer.clip = transition;
                 Invoke("PlayVideo", 0f);
+                Invoke("PlayAlarm", 3f);
                 //==
                 roadMapController.InitializeWorkerTalkDay22();
                 DayText.text = "Dia " + DaySystem.OrderDay[4].ToString();
@@ -197,6 +204,8 @@ public class DayTimeController : MonoBehaviour
                 cutscene = false;
                 videoPlayer.clip = transition;
                 Invoke("PlayVideo", 0f);
+                chuva.gameObject.SetActive(false);
+                Invoke("PlayAlarm", 3f);
                 //==
                 roadMapController.InitializeWorkerTalkDay25();
                 DayText.text = "Dia " + DaySystem.OrderDay[5].ToString();
@@ -206,6 +215,7 @@ public class DayTimeController : MonoBehaviour
                 cutscene = false;
                 videoPlayer.clip = transition;
                 Invoke("PlayVideo", 0f);
+                Invoke("PlayAlarm", 3f);
                 //==
                 roadMapController.InitializeWorkerTalkDay26();
                 DayText.text = "Dia " + DaySystem.OrderDay[6].ToString();
@@ -215,6 +225,7 @@ public class DayTimeController : MonoBehaviour
                 cutscene = false;
                 videoPlayer.clip = transition;
                 Invoke("PlayVideo", 0f);
+                Invoke("PlayAlarm", 3f);
                 //==
                 roadMapController.InitializeWorkerTalkDay27();
                 DayText.text = "Dia " + DaySystem.OrderDay[7].ToString();
@@ -245,6 +256,17 @@ public class DayTimeController : MonoBehaviour
     {
         videoPlayer.Play();
     }
+    public void PlayAlarm()
+    {
+        sound.clip = Alarm;
+        sound.Play();
+    }
+    public void TremSound()
+    {
+        sound.clip = Trem;
+        sound.Play();
+    }
+
     public void FinishCutscene()
     {
         cutscene = false;
