@@ -76,17 +76,15 @@ public class Hand : MonoBehaviour
                 canCarry = true;
                 startCarryTime = Time.time + durationLerpMovi;
             }else if(canCarry == true){
-                canCarry = false;
-                canMoviLerp = true;
-                //Debug.Log("Solto");
                 if(canGive == true){
                     if(targetTrain != null){
                         GameObject box = target.transform.GetChild(1).gameObject;
                         Renderer boxColor = box.GetComponent<Renderer>();
                         targetTrain.GetComponent<ToFillTrain>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
+                        canMoviLerp = true;
+                        canCarry = false;
                     }
                     canGive = false;
-                    canCarry = false;
                     target = null;
                 }
             }
@@ -100,17 +98,15 @@ public class Hand : MonoBehaviour
             canCarry = true;
             startCarryTime = Time.time + durationLerpMovi;
             }else if(canCarry == true){
-                canCarry = false;
-                canMoviLerp = true;
-                //Debug.Log("Solto");
                 if(canGive == true){
                     if(targetDesposit  != null){
                         GameObject box = target.transform.GetChild(1).gameObject;
                         Renderer boxColor = box.GetComponent<Renderer>();
                         targetDesposit .GetComponent<PackgeController>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
+                        canMoviLerp = true;
+                        canCarry = false;
                     }
                     canGive = false;
-                    canCarry = false;
                     target = null;
                 }
         }      
