@@ -12,5 +12,7 @@ public class ScrpitTablePlayer : ScriptableObject
     public float acceleraRunnig;
     [Header("Stamina")]
     public float baseStamina;
+    [Header("Money")]
+    public int money;
 
 }

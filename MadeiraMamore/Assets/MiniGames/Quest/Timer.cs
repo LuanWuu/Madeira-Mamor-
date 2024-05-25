@@ -25,11 +25,11 @@ public class Timer : MonoBehaviour
                 if(timerleft > 0){
                     timerleft -= Time.deltaTime;
                     UpdateTimer(timerleft);
+                }else{
+                    timerleft = 0;
+                    end = true;
+                    timerOn = false;
                 }
-            }else{
-                timerleft = 0;
-                timerOn = false;
-                end = true;
             }
             if(end == true) {
                 rafflequestScript.EndTime();
