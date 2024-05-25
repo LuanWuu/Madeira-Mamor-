@@ -6,19 +6,11 @@ using TMPro;
 
 public class ButtonPlayerTalk : MonoBehaviour, IPointerDownHandler
 {
-    [System.NonSerialized] public MensageController mensageControllerScript;
+    [SerializeField] private MensageController mensageControllerScript;
     [SerializeField] private roadMap characterWords;
     [SerializeField] private TMP_Text buttonText;
     public bool localSignal;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
     public void OnPointerDown(PointerEventData eventData)
     {
         if(characterWords.answer == false){

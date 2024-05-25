@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public class MensageController : MonoBehaviour
 {
@@ -15,13 +16,12 @@ public class MensageController : MonoBehaviour
     [SerializeField] private GameObject buttonPositive;
     [SerializeField] private GameObject buttonNegative;
     [SerializeField] private RaffleQuest rafflequestScript;
+    [SerializeField] private ScrpitTablePlayer scriptTableValues;
 
     int numeberOfWorker;
     int placeNumber;
     int numberAnswerPositive;
     int numberAnswerNegative;
-    int? count = 0;
-    int saveDayTime = 0;
     [System.NonSerialized] public int moment = 0;
     [System.NonSerialized] public bool oneTime = true;
     private List<string> myCharacterlist;
@@ -29,13 +29,22 @@ public class MensageController : MonoBehaviour
     private List<string> myCharacterAnswerNegative;
     private List<string> localPlayerAnswers;
     private List<string>[] speechesOfDay;
+    private List<string> saveNameList = new List<string>();
 
-    ButtonPlayerTalk posiButton;
-    ButtonPlayerTalk negaButton;
+    private bool seringueiraFinal = true;
+    private bool haveAnswer = false;
+    private int firstTime = 0;
+
+    [SerializeField] private ButtonPlayerTalk posiButton;
+    [SerializeField] private ButtonPlayerTalk negaButton;
 
     private void Start() {
-        posiButton = buttonPositive.GetComponent<ButtonPlayerTalk>();
-        negaButton = buttonNegative.GetComponent<ButtonPlayerTalk>();
+         DisableAnswer();
+    }
+    public void RestNameList(){
+        //if (saveNameList.Count > 0) {
+            saveNameList.Clear();
+        //}
     }
     public void PickWorkerWords(){
         switch(DaySystem.day){
@@ -64,24 +73,25 @@ public class MensageController : MonoBehaviour
                 speechesOfDay = characterWords.workerTalkDay27;
                 break;
         }
-        if(saveDayTime == DaySystem.day){
-            if(count == 10){
-                characterWords.SpecialNight3();
-            }else{
-                characterWords.SpecialNight2();
-            }
-            Debug.Log("dsadas" + count);
-        }
     }
     
     public void GiveTalk(string name){
-        for(int i = 0; i < characterNames.Count; i++) {
-            if(name == characterNames[i]){
-                numeberOfWorker = i;
-                break;
-            }
-        }       
-        placeNumber = 0;
+        if(!saveNameList.Contains(name)){
+            for(int i = 0; i < characterNames.Count; i++) {
+                if(name == characterNames[i]){
+                    saveNameList.Add(name);
+                    numeberOfWorker = i;
+                    Senteces();
+                    break;
+                }
+            }   
+        }    
+    }
+    void Senteces(){
+        scriptTableValues.canMovi = false;
+        speechBubble.SetActive(true);
+        scriptTableValues.EnabledCursor();
+        placeNumber = 0;  
         if(numeberOfWorker != 6 && numeberOfWorker !=7){
             if(DaySystem.dayTime != "Lunch" && DaySystem.dayTime != "Night"){
                 myCharacterlist = characterWords.NotTalkMoment[numeberOfWorker];
@@ -96,7 +106,7 @@ public class MensageController : MonoBehaviour
         }else if(numeberOfWorker == 7){ //Guard
             myCharacterlist = characterWords.guard;
         }
-        speechBubbleText.text = myCharacterlist[0];    
+        speechBubbleText.text = myCharacterlist[0];  
     }
     public void ChangePhrase(){
         placeNumber++;
@@ -106,34 +116,41 @@ public class MensageController : MonoBehaviour
                 GetIndexOfList();
             }
         }else{
-            speechBubble.gameObject.SetActive(false);
-            PlayerCamera.DisabledCursor();
-            if(numeberOfWorker == 6){ 
+            scriptTableValues.canMovi = true;
+            Debug.Log(scriptTableValues.canMovi);
+            speechBubble.SetActive(false);
+            scriptTableValues.DisabledCursor();
+            if(numeberOfWorker == 6){
                 DayTCScript.TimeOfDay(moment);
-                moment++;
+                moment++; 
+                if(DaySystem.dayTime == "Lunch"){
+                    RestNameList();
+                } 
                 if(DaySystem.dayTime != "Night" && DaySystem.dayTime != "Lunch"){
                     rafflequestScript.DecideQuest();
                     oneTime = false;
                 }
+                if(numeberOfWorker == 5 && firstTime == 3){
+                    //EndGameSeringueiro
+                }
             }
         }
     }
-    public void GiveToBottun(){
-        nextButton.GetComponent<ButtonPlayerTalk>().mensageControllerScript = GetComponent<MensageController>();
-    }
     void GetIndexOfList(){
         switch(numeberOfWorker){
-            case 0:
+            case 0://1
                 Worker0();
                 break;
-            case 2:
+            case 2://3
                 Worker2();
                 break;
-            case 4:
+            case 4://5
                 Worker4();
                 break;
-            case 5:
-               Worker5();
+            case 5://6
+                if(DaySystem.dayTime == "Night"){
+                    Worker5();
+                }
                 break;
             default:
                 break;
@@ -142,9 +159,7 @@ public class MensageController : MonoBehaviour
     void ActiveButtonsAnswer(){
         nextButton.SetActive(false);
         buttonPositive.SetActive(true);
-        posiButton.mensageControllerScript = GetComponent<MensageController>();
         buttonNegative.SetActive(true);
-        negaButton.mensageControllerScript = GetComponent<MensageController>();
         characterWords.answer = true;
     }
     void DisableButtonsAnswer(){
@@ -164,9 +179,6 @@ public class MensageController : MonoBehaviour
             if(numberAnswerPositive > (myCharacterAnswerPositive.Count-1)){
                 DisableAnswer();
             }
-            if(numeberOfWorker == 5){
-                SpecialEnd();
-            }
         DisableButtonsAnswer();
     }
     public void AnswerNegative(){
@@ -178,13 +190,16 @@ public class MensageController : MonoBehaviour
         if(numberAnswerNegative > (myCharacterAnswerNegative.Count-1)){
             DisableAnswer();
         }         
+        if(numeberOfWorker == 5){
+            seringueiraFinal = false;
+        }
         DisableButtonsAnswer();
     }
     void GivePlayerAnswer(List<string> give){
         posiButton.PlayerAnswersButtons(give);
         negaButton.PlayerAnswersButtons(give);
     }
-    void Worker0(){
+    void Worker0(){//Assis tem final
         myCharacterAnswerPositive = characterWords.worker0AnswerPositive;
         myCharacterAnswerNegative = characterWords.worker0AnswerNegative;
         int[] indexAnswer = new int[]{ 1,1,4,0,1};
@@ -207,7 +222,8 @@ public class MensageController : MonoBehaviour
                     GivePlayerAnswer(characterWords.playerAnswers[0]);
                 }
                 break;
-            case 5:
+            case 5:// puxar final
+                //colocar uma varivael para abilitar uo final
                 if (placeNumber == 0){
                     GivePlayerAnswer(characterWords.playerAnswers[0]);
                     ActiveButtonsAnswer();
@@ -243,21 +259,35 @@ public class MensageController : MonoBehaviour
                 GivePlayerAnswer(characterWords.playerAnswers[4]);
         }
     }
-    void Worker5(){
+    void Worker5(){//O fodao
         myCharacterAnswerPositive = characterWords.worker5AnswerPositive;
         myCharacterAnswerNegative = characterWords.worker5AnswerNegative;
-        if(count == 0 && placeNumber == 2) {
+        if(seringueiraFinal == true && placeNumber == 0){
+            switch(firstTime % 3){
+            case 0:
+                characterWords.SpecialNight1();
+                haveAnswer = true;
+                break;
+            case 1:
+                characterWords.SpecialNight2();
+                break;
+            case 2:
+                characterWords.SpecialNight3();
+                Debug.Log("terceiro");
+                break;
+            }
+            firstTime++;
+                    Debug.Log(firstTime);
+        }
+        if(seringueiraFinal == false){
+            //frase generica
+            characterWords.Rejected();
+        }
+        myCharacterlist = characterWords.workerSpecial;
+        if(haveAnswer == true && placeNumber == 2) {
             ActiveButtonsAnswer();
             GivePlayerAnswer(characterWords.playerAnswers[5]);
-            count++;
+            haveAnswer = false;
         }
-        if(count > 0 && placeNumber == 3){
-            SpecialEnd();
-            count = 10;
-        }
-    }
-    void SpecialEnd(){
-        saveDayTime = DaySystem.day;
-        saveDayTime++;
     }
 }

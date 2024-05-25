@@ -13,6 +13,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private GameObject speechBubble;
     [SerializeField] private MensageController mensageControllerScript;
     [SerializeField] private StoragaDayValues DaySystem;
+    [SerializeField] private ScrpitTablePlayer scriptTableValues;
 
     [System.NonSerialized] public bool takePackage;
     private bool canGet;
@@ -54,10 +55,7 @@ public class Hand : MonoBehaviour
     void InputManager(){
         if (Input.GetButtonDown("Interactions")){ 
             if(canActiveCharaceterLines == true){ // Ativando Caixa de teste
-                speechBubble.SetActive(true);
-                PlayerCamera.EnabledCursor();
                 mensageControllerScript.GiveTalk(targetCharacter.name);
-                mensageControllerScript.GiveToBottun();
             }
             switch(DaySystem.dayTime){
             case "Morning":
@@ -208,7 +206,7 @@ public class Hand : MonoBehaviour
             speechBubble.SetActive(false);
         }
         if(Time.timeScale != 0){
-            PlayerCamera.DisabledCursor();
+            scriptTableValues.DisabledCursor();
         }
         if(targetRendererDelivery != null){
             targetRendererDelivery.material.SetFloat("_ValueMultiplay", 0);

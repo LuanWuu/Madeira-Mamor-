@@ -48,6 +48,7 @@ public class RaffleQuest : MonoBehaviour
         }
     }
     public void CompleteQuest(){
+        mensagControlScrpt.RestNameList();
         switch(DaySystem.dayTime){
             case "Morning":
                 DepositUI.SetActive(false);
@@ -76,7 +77,7 @@ public class RaffleQuest : MonoBehaviour
         timer.SetActive(false);
     }
     public void EndTime(){
-        Debug.Log("time is over");
+        mensagControlScrpt.RestNameList();
         carryUI.SetActive(false);
         carryScript.ResetFillWagons();
         mensagControlScrpt.oneTime = true;
@@ -92,14 +93,12 @@ public class RaffleQuest : MonoBehaviour
                 ManagerDesScript.StartMinigame();
                 timeMinigame = deschargeTime;
                 handScript.takePackage = true;
-                Debug.Log(" mornig " + handScript.takePackage);
                 break;
 
             case "Afternoon":
                 carryScript.DecideAmoutBox();
                 timeMinigame = carryTime;
                 handScript.takePackage = false;
-                Debug.Log(" Afternoon" + handScript.takePackage);
                 break;
             default:
                     break;

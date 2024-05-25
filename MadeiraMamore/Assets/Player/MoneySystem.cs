@@ -28,6 +28,5 @@ public class MoneySystem : MonoBehaviour
             yield return new WaitForSeconds(0.1f); 
             moneyText.text = string.Format("${0:0}", playerValues.money += grow); 
         }
-        Debug.Log("salary " + salary);
     }
 }

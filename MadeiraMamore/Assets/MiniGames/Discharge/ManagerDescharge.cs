@@ -25,7 +25,7 @@ public class ManagerDescharge : MonoBehaviour
 
         colorLayerScriptable.packageLayer = uniqueNumbers;
 
-        Debug.Log("teste");
+
         int saveLayerAmout = colorLayerScriptable.packageLayer.ToArray().Length;
         int[] giveDepositAmoutLayer = new int[depositPosition.Length];
         int halfTipLayer = saveLayerAmout/depositPosition.Length; 

@@ -37,7 +37,7 @@ public class UIDeposit : MonoBehaviour
     void LayerListToColorList(){
         int[] numberlayers = new int[packageScript[numberOfDeposit].layerAccept.Count];
         numberlayers = packageScript[numberOfDeposit].layerAccept.ToArray();
-        Debug.Log(" numberlayers " + numberlayers.Length);
+       // Debug.Log(" numberlayers " + numberlayers.Length);
         int amoutNotPainting = 0;
         for(int i = 0; i < numberlayers.Length; i++) {
             for(int l = 0; l < colorLayerScriptable.layerOfPackage.Length; l++) {

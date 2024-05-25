@@ -6,7 +6,7 @@ public class MoviPlayer : MonoBehaviour
 {
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
     [SerializeField] private RectTransform stamina;
-
+    
     private float localMoveSpeed;
     private float localAcceleraWalk;
     private float localRunnigSpeed;
@@ -14,11 +14,11 @@ public class MoviPlayer : MonoBehaviour
     private Vector3 amoutStamina;
 
     private float localSpeed = 0;
-    private bool isRuning;
     Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
+        scriptTableValues.canMovi = true;
         rb = GetComponent<Rigidbody>();
         SaveOrigin();
     }
@@ -37,13 +37,15 @@ public class MoviPlayer : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (Input.GetAxis("VerticalMoviJoystick") != 0 || Input.GetAxis("HorizontalMoviJoystick") != 0){
-            MovePlayer(Input.GetAxis("HorizontalMoviJoystick"),  Input.GetAxis("VerticalMoviJoystick"));
-        }else if(Input.GetAxis("KeyBoardH") != 0 || Input.GetAxis("KeyBoardY") != 0){
-            MovePlayer(Input.GetAxis("KeyBoardH"), Input.GetAxis("KeyBoardY"));
-        }else{
-            rb.velocity = new Vector3(0,0,0);
-            localSpeed = 0;
+        if(scriptTableValues.canMovi == true){
+            if (Input.GetAxis("VerticalMoviJoystick") != 0 || Input.GetAxis("HorizontalMoviJoystick") != 0){
+                MovePlayer(Input.GetAxis("HorizontalMoviJoystick"),  Input.GetAxis("VerticalMoviJoystick"));
+            }else if(Input.GetAxis("KeyBoardH") != 0 || Input.GetAxis("KeyBoardY") != 0){
+                MovePlayer(Input.GetAxis("KeyBoardH"), Input.GetAxis("KeyBoardY"));
+            }else{
+                rb.velocity = new Vector3(0,0,0);
+                localSpeed = 0;
+            }
         }
     }
     void MovePlayer(float horizontal, float vertical){

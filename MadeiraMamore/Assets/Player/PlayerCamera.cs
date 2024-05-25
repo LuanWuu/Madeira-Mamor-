@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerCamera : MonoBehaviour
 {
-    private static bool canMoviCamera;
+    [SerializeField] private ScrpitTablePlayer scriptTableValues;
 
     [SerializeField] private Transform playerHead;
     [SerializeField] private Transform playerBody;
@@ -45,7 +45,7 @@ public class PlayerCamera : MonoBehaviour
 
     }
     void Update(){
-        if(canMoviCamera == true){
+        if(scriptTableValues.canMoviCamera == true){
             Mouse();
             JoyStick();
         }
@@ -55,16 +55,6 @@ public class PlayerCamera : MonoBehaviour
         controlSensitivityY = optionsScriptable.controlSensitY;
         cursorSize = optionsScriptable.cursorSize;
         CursorCustomize();
-    }
-    public static void EnabledCursor(){
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        canMoviCamera = false;
-    }
-    public static void DisabledCursor(){
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        canMoviCamera = true;
     }
     void CursorCustomize(){
         cursor.transform.localScale = new Vector3(cursorSize, cursorSize, cursorSize);

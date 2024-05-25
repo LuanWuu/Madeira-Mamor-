@@ -46,7 +46,6 @@ public class DayTimeController : MonoBehaviour
         DaySystem.day = 1;
         ChangedDay();
         TimeOfDay(0);
-        roadMapController.SpecialNight1();
         roadMapController.NotWords();
         roadMapController.ChefWords();
         StartCoroutine(DayAnimator());
@@ -141,6 +140,7 @@ public class DayTimeController : MonoBehaviour
     }
     public void ChangedDay(){
         mensageControllerScript.moment = 0;
+        mensageControllerScript.RestNameList();
         switch(DaySystem.day){
             case 1:
                 //cutscene 1
@@ -254,7 +254,7 @@ public class DayTimeController : MonoBehaviour
     //Cutscenes
     public void PlayVideo ()
     {
-        videoPlayer.Play();
+        //videoPlayer.Play();
     }
     public void PlayAlarm()
     {

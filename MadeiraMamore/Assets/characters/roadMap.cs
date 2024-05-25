@@ -60,7 +60,7 @@ public class roadMap : ScriptableObject {
         // P: Talvez tenha motivo pra essas regras.
         "Não seja burro! E não seja hipócrita! Diz que fazem sentido, mas veio beber mesmo assim..."       
     };
-
+    public List<string> workerSpecial = new List<string>();
     public List<string>[] workerTalkDay1 = new List<string>[6];
     public List<string>[] workerTalkDay2 = new List<string>[6];
     public List<string>[] workerTalkDay12 = new List<string>[6];
@@ -146,7 +146,7 @@ public class roadMap : ScriptableObject {
         };
     }
     public void SpecialNight1(){
-        workerTalkDay1[5] = new List<string>(){
+        workerSpecial = new List<string>(){
          // Noite 1:
         "Ah, Álcool, uma das melhores coisas inventadas.",
         "Como podem proibir-nos algo tão bom? Isto é o que me faz mais produtivo! Como esperam que viva sem?",
@@ -154,7 +154,7 @@ public class roadMap : ScriptableObject {
         };
     }
     public void SpecialNight2(){
-        workerTalkDay2[5] = new List<string>(){
+        workerSpecial = new List<string>(){
         // Noite 2:
             "Você voltou! Estávamos discutindo o plano.",
             "O que acha de ganhar um pouco mais? Dinheiro sempre é bom!",
@@ -163,9 +163,15 @@ public class roadMap : ScriptableObject {
         };
     }
     public void SpecialNight3(){
-        workerTalkDay12[5] = new List<string>(){
+        workerSpecial = new List<string>(){
             // Noite 12:
             "Ao seringueiro! Não vai se arrepender."
+        };
+    }
+    public void Rejected(){
+        workerSpecial = new List<string>(){
+            // resposta errada:
+            "se adora tanto esta Companhia, por que sempre volta aqui?"
         };
     }
     public void InitializeWorkerTalkDay1(){

@@ -6,6 +6,8 @@ using UnityEngine;
 public class ScrpitTablePlayer : ScriptableObject
 {
     [Header("Origin Player")]
+    public bool canMovi = true;
+    public bool canMoviCamera = true;
     public float moveSpeed;
     public float acceleraWalk;
     public float runnigSpeed;
@@ -14,5 +16,16 @@ public class ScrpitTablePlayer : ScriptableObject
     public float baseStamina;
     [Header("Money")]
     public int money;
+
+    public void EnabledCursor(){
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        canMoviCamera = false;
+    }
+    public void DisabledCursor(){
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        canMoviCamera = true;
+    }
 
 }
