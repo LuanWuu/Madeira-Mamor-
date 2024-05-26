@@ -6,12 +6,14 @@ using UnityEngine.Video;
 public class CutsceneController : MonoBehaviour
 {
     [SerializeField] private GameObject HUD;
+    [SerializeField] private GameObject MenuNight;
     [SerializeField] private Camera cameraMain;
     [SerializeField] private Camera myCamera;
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private AudioSource sound;
     [SerializeField] private AudioSource ambianceSound;
     [SerializeField] private DayTimeController dayController;
+    [SerializeField] private StoragaDayValues DaySystem;
     private AudioClip effect;
     private AudioClip ambiance;
     private bool canAlarm;
@@ -28,6 +30,9 @@ public class CutsceneController : MonoBehaviour
         Ambiance();
         if(canAlarm == true){
             PlaySoundEffect();
+        }
+        if(DaySystem.dayTime == "Night"){
+            MenuNight.SetActive(true);
         }
     }
 
