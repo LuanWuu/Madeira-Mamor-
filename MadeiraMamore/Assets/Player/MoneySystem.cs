@@ -12,6 +12,7 @@ public class MoneySystem : MonoBehaviour
     void Start()
     {
         playerValues.money = 0;
+        StartCoroutine(GetSalary(2));
     }
 
     // Update is called once per frame

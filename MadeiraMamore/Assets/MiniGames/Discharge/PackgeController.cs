@@ -25,12 +25,16 @@ public class PackgeController : MonoBehaviour
         renderTrain = GetComponent<Renderer>();
     }
 
-     public void CompatibleLayer(int boxLayer){
+     public bool CompatibleLayer(int boxLayer){
+        bool rightLayer;
         if (layerAccept.Contains(boxLayer)){
             renderTrain.material.SetFloat("_ValueMultiplay", 1.02f);// Ativando o Contorno
+            rightLayer = true;
         }else{
             renderTrain.material.SetFloat("_ValueMultiplay", 0);// desativando o o Contorno
+            rightLayer = false;
         }
+        return rightLayer;
     }
 
     public void CheckLayerPackage(Color boxColor,int boxLayer, GameObject target){

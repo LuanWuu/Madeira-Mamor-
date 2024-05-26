@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class NighthChoses : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField] private StoragaDayValues DaySystem;
+    [SerializeField] private DayTimeController DayTCScript;
+    [SerializeField] private Transform localToDrink;
+    [SerializeField] private Transform player;
+    [SerializeField] private GameObject BetMenu;
+    public void Sleep(){
+        DaySystem.day++;
+        DayTCScript.TimeOfDay(0);
+        DayTCScript.ChangedDay();
+        DisableChoses();
     }
+    public void Drink(){
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("beber");
+        DisableChoses();
+    }
+    public void Bet(){
+
+        Debug.Log("Bet");
+        DisableChoses();
+    }
+    void DisableChoses(){
+        gameObject.SetActive(false);
     }
 }

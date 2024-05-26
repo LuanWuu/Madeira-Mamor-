@@ -14,6 +14,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private MensageController mensageControllerScript;
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
+    [SerializeField] private StaminaSystem staminaController;
 
     [System.NonSerialized] public bool takePackage;
     private bool canGet;
@@ -23,6 +24,7 @@ public class Hand : MonoBehaviour
     private bool canGive;
     private bool canActiveCharaceterLines;
     private bool canGetPackage;
+    private bool pickedUp = false;
     private float startCarryTime;
     private GameObject target;
     private GameObject targetTrain;
@@ -57,6 +59,10 @@ public class Hand : MonoBehaviour
             if(canActiveCharaceterLines == true){ // Ativando Caixa de teste
                 mensageControllerScript.GiveTalk(targetCharacter.name);
             }
+            if(target != null && pickedUp == false) {
+                StartCoroutine(staminaController.DecreaseStamina(1));
+                pickedUp = true;
+            }
             switch(DaySystem.dayTime){
             case "Morning":
                 ControlerHadMorning();
@@ -71,21 +77,18 @@ public class Hand : MonoBehaviour
     }
     void ControlerHadAfternoon(){
         if(canGet == true){
-                canCarry = true;
-                startCarryTime = Time.time + durationLerpMovi;
-            }else if(canCarry == true){
-                if(canGive == true){
-                    if(targetTrain != null){
-                        GameObject box = target.transform.GetChild(1).gameObject;
-                        Renderer boxColor = box.GetComponent<Renderer>();
-                        targetTrain.GetComponent<ToFillTrain>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
-                        canMoviLerp = true;
-                        canCarry = false;
-                    }
-                    canGive = false;
-                    target = null;
-                }
-            }
+            canCarry = true;
+            startCarryTime = Time.time + durationLerpMovi;
+        }else if(canCarry == true && canGive == true && targetTrain != null && canCarry == true){
+            GameObject box = target.transform.GetChild(1).gameObject;
+            Renderer boxColor = box.GetComponent<Renderer>();
+            targetTrain.GetComponent<ToFillTrain>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
+            pickedUp = false;
+            canMoviLerp = true;
+            canCarry = false;
+            canGive = false;
+            target = null;
+        }
     }
     void ControlerHadMorning(){
         if(canGetPackage == true){
@@ -95,18 +98,15 @@ public class Hand : MonoBehaviour
         if(canGet == true){
             canCarry = true;
             startCarryTime = Time.time + durationLerpMovi;
-            }else if(canCarry == true){
-                if(canGive == true){
-                    if(targetDesposit  != null){
-                        GameObject box = target.transform.GetChild(1).gameObject;
-                        Renderer boxColor = box.GetComponent<Renderer>();
-                        targetDesposit .GetComponent<PackgeController>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
-                        canMoviLerp = true;
-                        canCarry = false;
-                    }
-                    canGive = false;
-                    target = null;
-                }
+        }else if(canCarry == true && canGive == true && targetDesposit  != null ){
+            GameObject box = target.transform.GetChild(1).gameObject;
+            Renderer boxColor = box.GetComponent<Renderer>();
+            targetDesposit .GetComponent<PackgeController>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
+            pickedUp = false;
+            canMoviLerp = true;
+            canCarry = false;
+            canGive = false;
+            target = null;
         }      
     }
     void RaycastCheck(){
@@ -153,9 +153,8 @@ public class Hand : MonoBehaviour
     }
 
     void CheckDelivery(){
-        canGive = true;
         targetRendererDelivery = targetTrain.GetComponent<Renderer>();
-        targetTrain.GetComponent<ToFillTrain>().CompatibleLayer(target.layer);
+        canGive = targetTrain.GetComponent<ToFillTrain>().CompatibleLayer(target.layer);
     }
     void GetPackage(){
         canGetPackage = true;
@@ -164,9 +163,8 @@ public class Hand : MonoBehaviour
     }
     void CheckDeposit(){
         if(target != null){
-            canGive = true;
-            targetRendererDeposity = targetDesposit.GetComponent<Renderer>();
-            targetDesposit.GetComponent<PackgeController>().CompatibleLayer(target.layer);            
+            targetRendererDeposity = targetDesposit.GetComponent<Renderer>();   
+            canGive = targetDesposit.GetComponent<PackgeController>().CompatibleLayer(target.layer);      
         }
     }
     void CarrySystem(){
@@ -180,6 +178,7 @@ public class Hand : MonoBehaviour
     }
     void Carry(){ 
         target.transform.rotation = transform.rotation;
+        target.tag = "Untagged";
         if(canMoviLerp == true){
             if (startCarryTime > Time.time){
                 LerpMovi();

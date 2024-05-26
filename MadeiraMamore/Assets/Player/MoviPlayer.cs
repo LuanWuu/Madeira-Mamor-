@@ -9,8 +9,6 @@ public class MoviPlayer : MonoBehaviour
     
     private float localMoveSpeed;
     private float localAcceleraWalk;
-    private float localRunnigSpeed;
-    private float localAcceleraRunnig;
     private Vector3 amoutStamina;
 
     private float localSpeed = 0;
@@ -26,14 +24,10 @@ public class MoviPlayer : MonoBehaviour
     void SaveOrigin(){
         localMoveSpeed = scriptTableValues.moveSpeed;
         localAcceleraWalk = scriptTableValues.acceleraWalk;
-        localRunnigSpeed = scriptTableValues.runnigSpeed;
-        localAcceleraRunnig = scriptTableValues.acceleraRunnig;
     }
     public void RestSpeed(){
         scriptTableValues.moveSpeed = localMoveSpeed;
         scriptTableValues.acceleraWalk = localAcceleraWalk;
-        scriptTableValues.runnigSpeed = localRunnigSpeed;
-        scriptTableValues.acceleraRunnig = localAcceleraRunnig;
     }
     private void FixedUpdate()
     {

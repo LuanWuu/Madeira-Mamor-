@@ -10,8 +10,6 @@ public class ScrpitTablePlayer : ScriptableObject
     public bool canMoviCamera = true;
     public float moveSpeed;
     public float acceleraWalk;
-    public float runnigSpeed;
-    public float acceleraRunnig;
     [Header("Stamina")]
     public float baseStamina;
     [Header("Money")]
