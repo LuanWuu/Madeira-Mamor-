@@ -5,37 +5,43 @@ using UnityEngine.Video;
 
 public class CutsceneController : MonoBehaviour
 {
-    [SerializeField] private GameObject video;
     [SerializeField] private GameObject HUD;
+    [SerializeField] private Camera cameraMain;
+    [SerializeField] private Camera myCamera;
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private AudioSource sound;
     [SerializeField] private AudioSource ambianceSound;
     [SerializeField] private DayTimeController dayController;
-    //[SerializeField] private DayTimeController
-    private long totalFrames;
     private AudioClip effect;
     private AudioClip ambiance;
+    private bool canAlarm;
     private void Start() {
          videoPlayer.Prepare();
     }
     void OnVideoEnd(VideoPlayer vp){
+        myCamera.enabled = false;
+        cameraMain.enabled = true;
         videoPlayer.gameObject.SetActive(false);
-        ambianceSound.mute = false;
         HUD.SetActive(true);
+        ambianceSound.mute = false;
         StartCoroutine(dayController.DayAnimator());
-        PlaySoundEffect();
         Ambiance();
+        if(canAlarm == true){
+            PlaySoundEffect();
+        }
     }
 
     void OnVideoPrepared(VideoPlayer vp){
         videoPlayer.frame = 0;
         vp.Play();
     }
-    public void PlayVideo(VideoClip cutscene) {
-        video.SetActive(true);
-        Debug.Log("teste");
-        ambianceSound.mute = true;
+    public void PlayVideo(VideoClip cutscene){
+        myCamera.enabled = true;
+        cameraMain.enabled = false;
+        videoPlayer.gameObject.SetActive(true);
         HUD.SetActive(false);
+        ambianceSound.mute = true;
+        videoPlayer.clip = cutscene;
         videoPlayer.loopPointReached += OnVideoEnd;
         videoPlayer.prepareCompleted += OnVideoPrepared;
         videoPlayer.Prepare();
@@ -43,11 +49,13 @@ public class CutsceneController : MonoBehaviour
     }
 
     public void SoundEffect(AudioClip audio){
+        canAlarm = true;
         effect = audio;
     }
     void PlaySoundEffect(){
         sound.clip = effect;
         sound.Play();
+        canAlarm = false;
     }
     public void GiveAmbianceSound(AudioClip audio){
         ambiance = audio;

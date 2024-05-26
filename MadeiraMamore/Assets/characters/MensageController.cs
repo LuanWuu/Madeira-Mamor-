@@ -130,11 +130,14 @@ public class MensageController : MonoBehaviour
                     rafflequestScript.DecideQuest();
                     oneTime = false;
                 }
-                if(numeberOfWorker == 5 && firstTime == 3){
-                    //EndGameSeringueiro
-                }
+            }
+            if(numeberOfWorker == 5 && firstTime == 3){
+                Invoke("EndGameSeringueiro", 1f);    
             }
         }
+    }
+    void EndGameSeringueiro(){
+        DayTCScript.EndGameSeringueiro();
     }
     void GetIndexOfList(){
         switch(numeberOfWorker){

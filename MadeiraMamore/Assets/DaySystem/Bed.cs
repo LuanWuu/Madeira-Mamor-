@@ -10,8 +10,8 @@ public class Bed : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         DaySystem.day++;
-        DayTCScript.ChangedDay();
         DayTCScript.TimeOfDay(0);
+        DayTCScript.ChangedDay();
         gameObject.SetActive(false);
     }
 }

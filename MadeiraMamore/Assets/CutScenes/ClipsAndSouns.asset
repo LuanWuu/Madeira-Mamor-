@@ -23,7 +23,7 @@ MonoBehaviour:
   Trem: {fileID: 8300000, guid: 8299b9b57331f744ab05d0a255bc743f, type: 3}
   Alarm: {fileID: 8300000, guid: 49414507ddac1df408cbd35189ed0417, type: 3}
   workSound: {fileID: 8300000, guid: 3952fcc066d68de4dbb1e39e8fab0194, type: 3}
-  lunchMoment: {fileID: 8300000, guid: f827786186489d142a78449ceaeb551c, type: 3}
+  lunchMoment: {fileID: 8300000, guid: 6ed607ef0219c11439e458bc48585602, type: 3}
   ambiance: {fileID: 8300000, guid: d5c5bb15012ec1748a26ed59cd08094d, type: 3}
   night: {fileID: 8300000, guid: 274c581accc558d4fb7604d54a5cd23a, type: 3}
   betSound: {fileID: 8300000, guid: 9baab5d351e08f84a824d035a9603d38, type: 3}

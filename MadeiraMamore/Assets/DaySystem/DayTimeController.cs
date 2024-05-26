@@ -16,11 +16,12 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private GameObject train;
     [SerializeField] private GameObject bed;
     [SerializeField] private GameObject DayIcon;
+    [SerializeField] private TextMeshProUGUI DayText;
     [SerializeField] private GameObject mornig;
     [SerializeField] private GameObject afternoon;
     [SerializeField] private GameObject night;
-    [SerializeField] private TextMeshProUGUI DayText;
     [SerializeField] private GameObject chuva;
+    [SerializeField] private GameObject mosquito;
 
     void Awake()
     {
@@ -50,6 +51,8 @@ public class DayTimeController : MonoBehaviour
         }
     }
     public void TimeOfDay(int moment){
+        Debug.Log("mommente");
+        cutscene.PlayVideo(database.transition);
         for(int i = 0; i < dayTime.Length; i++) {
             if(i == moment) {
                 DaySystem.dayTime = dayTime[i];
@@ -57,25 +60,29 @@ public class DayTimeController : MonoBehaviour
             }
         }
         switch(DaySystem.dayTime){
-            case "Morning": 
-                cutscene.GiveAmbianceSound(database.ambiance);              
+            case "Morning":  
+                DayText.text = "Periodo do dia: " + "Primeiro turno";
+                cutscene.GiveAmbianceSound(database.workSound);            
                 train.SetActive(true);
                 roadMapController.ChefWords();
                 mornig.SetActive(true);
                 afternoon.SetActive(false);
                 night.SetActive(false);
                 break;
-            case "Lunch":              
+            case "Lunch":    
+                DayText.text = "Periodo do dia: " + "Almoço"; 
+                cutscene.GiveAmbianceSound(database.lunchMoment);                     
                 roadMapController.ChefWords();
                 break;
             case "Afternoon":
-                cutscene.PlayVideo(database.transition);
+                DayText.text = "Periodo do dia: " + "Segundo turno"; 
+                cutscene.GiveAmbianceSound(database.workSound);
                 mornig.SetActive(false);
                 afternoon.SetActive(true);
                 night.SetActive(false);
                 break;
             case "Night":
-                cutscene.PlayVideo(database.transition);
+                DayText.text = "Periodo do dia: " + "Noite"; 
                 cutscene.GiveAmbianceSound(database.night);   
                 cutscene.SoundEffect(database.Trem);
                 train.SetActive(false);
@@ -90,21 +97,25 @@ public class DayTimeController : MonoBehaviour
         }
     }
     public void ChangedDay(){
+        Debug.Log("changeaday");
         mensageControllerScript.moment = 0;
         mensageControllerScript.RestNameList();
         switch(DaySystem.day){
             case 1:
+                cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.cutscene1);
                 roadMapController.InitializeWorkerTalkDay1();
                 DayText.text = "Dia " + DaySystem.OrderDay[0].ToString();
                 break;
             case 2:
-                cutscene.GiveAmbianceSound(database.Mosquito);
+                mosquito.SetActive(true);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay2();
                 DayText.text = "Dia " + DaySystem.OrderDay[1].ToString();
                 break;
             case 3:
+                mosquito.SetActive(false);
+                cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.cutscene2);
                 roadMapController.InitializeWorkerTalkDay12();
                 DayText.text = "Dia " + DaySystem.OrderDay[2].ToString();
@@ -117,31 +128,33 @@ public class DayTimeController : MonoBehaviour
                 DayText.text = "Dia " + DaySystem.OrderDay[3].ToString();
                 break;
             case 5:
+                cutscene.GiveAmbianceSound(database.Chuva);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay22();
                 DayText.text = "Dia " + DaySystem.OrderDay[4].ToString();
                 break;
             case 6:
-                cutscene.GiveAmbianceSound(database.workSound);
+                cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.transition);
                 chuva.SetActive(false);
                 roadMapController.InitializeWorkerTalkDay25();
                 DayText.text = "Dia " + DaySystem.OrderDay[5].ToString();
                 break;
             case 7:
+                cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay26();
                 DayText.text = "Dia " + DaySystem.OrderDay[6].ToString();
                 break;
             case 8:
+                cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay27();
                 DayText.text = "Dia " + DaySystem.OrderDay[7].ToString();
                 break;
             case 9:
-                cutscene.PlayVideo(database.end1);
                 DayText.text = "Dia " + DaySystem.OrderDay[8].ToString();
-                Invoke("EndGame", 30);
+                Invoke("EndGame", 5);
                 break;
             default:
                 break;
@@ -152,6 +165,11 @@ public class DayTimeController : MonoBehaviour
         
     }
     void EndGame(){
+        database.chosenEnding = database.end1;
+        SceneManager.LoadScene("EndGame");
+    }
+    public void EndGameSeringueiro(){
+        database.chosenEnding = database.end3;
         SceneManager.LoadScene("EndGame");
     }
 }

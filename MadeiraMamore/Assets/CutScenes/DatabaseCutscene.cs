@@ -10,8 +10,8 @@ public class DatabaseCutscene : ScriptableObject
     public VideoClip end1;
     public VideoClip end2;
     public VideoClip end3;
+    public VideoClip chosenEnding;
     public VideoClip transition;
-    public AudioClip Mosquito;
     public AudioClip Chuva;
     public AudioClip Trem;
     public AudioClip Alarm;
