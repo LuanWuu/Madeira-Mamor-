@@ -7,6 +7,8 @@ using UnityEngine.Video;
 
 public class DayTimeController : MonoBehaviour
 {
+    [SerializeField] private CutsceneController cutscene;
+    [SerializeField] private DatabaseCutscene database;
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private roadMap roadMapController;
     [SerializeField] private MensageController mensageControllerScript;
@@ -18,40 +20,19 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private GameObject afternoon;
     [SerializeField] private GameObject night;
     [SerializeField] private TextMeshProUGUI DayText;
-
-    private VideoPlayer videoPlayer;
-    public GameObject VideoCamera;
-    public AudioSource MainCamera;
-    public GameObject Hud;
-    public VideoClip cutscene1;
-    public VideoClip cutscene2;
-    public VideoClip end1;
-    public VideoClip end2;
-    public VideoClip end3;
-    public VideoClip transition;
-    public AudioClip Mosquito;
-    public AudioClip Chuva;
-    public AudioClip Trem;
-    public AudioClip Alarm;
-    public AudioSource sound;
-    public GameObject chuva;
-
-    private bool cutscene = true;
+    [SerializeField] private GameObject chuva;
 
     void Awake()
     {
-        //Cutscenes
-        videoPlayer = GetComponent<VideoPlayer>();
-
         DaySystem.day = 1;
+        DaySystem.dayTime = "Morning";
         ChangedDay();
-        TimeOfDay(0);
         roadMapController.NotWords();
         roadMapController.ChefWords();
-        StartCoroutine(DayAnimator());
+        //StartCoroutine(DayAnimator());
     }
 
-    IEnumerator DayAnimator(){
+    public IEnumerator DayAnimator(){
         DayIcon.SetActive(true);
         yield return new WaitForSeconds(4);
         DayIcon.SetActive(false);
@@ -60,30 +41,6 @@ public class DayTimeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Cutscenes
-        if (videoPlayer.isPlaying)
-        {
-            VideoCamera.gameObject.SetActive(true);
-            Hud.gameObject.SetActive(false);       
-        }
-        else
-        {
-            VideoCamera.gameObject.SetActive(false);
-            Hud.gameObject.SetActive(true);         
-        }
-
-        if(cutscene == true)
-        {
-            MainCamera.mute = true;
-        }
-        else
-        {
-            MainCamera.mute = false;
-        }
-
-        //pausar
-
-
         if (Input.GetKeyDown("l")){
             DaySystem.day++;
             ChangedDay();
@@ -100,7 +57,8 @@ public class DayTimeController : MonoBehaviour
             }
         }
         switch(DaySystem.dayTime){
-            case "Morning":               
+            case "Morning": 
+                cutscene.GiveAmbianceSound(database.ambiance);              
                 train.SetActive(true);
                 roadMapController.ChefWords();
                 mornig.SetActive(true);
@@ -111,22 +69,15 @@ public class DayTimeController : MonoBehaviour
                 roadMapController.ChefWords();
                 break;
             case "Afternoon":
-                //transition
-                cutscene = false;
-                videoPlayer.clip = transition;
-                Invoke("PlayVideo", 0f);
-                //==
+                cutscene.PlayVideo(database.transition);
                 mornig.SetActive(false);
                 afternoon.SetActive(true);
                 night.SetActive(false);
                 break;
             case "Night":
-                //transition
-                cutscene = false;
-                videoPlayer.clip = transition;
-                Invoke("PlayVideo", 0f);
-                Invoke("TremSound", 1f);
-                //==
+                cutscene.PlayVideo(database.transition);
+                cutscene.GiveAmbianceSound(database.night);   
+                cutscene.SoundEffect(database.Trem);
                 train.SetActive(false);
                 roadMapController.ChefOrders();
                 bed.SetActive(true);
@@ -143,99 +94,52 @@ public class DayTimeController : MonoBehaviour
         mensageControllerScript.RestNameList();
         switch(DaySystem.day){
             case 1:
-                //cutscene 1
-                cutscene = true;
-                videoPlayer.clip = cutscene1;
-                Invoke("PlayVideo", 0f);
-                Invoke("FinishCutscene", 30f);
-                Invoke("PlayAlarm", 31f);
-                //==
+                cutscene.PlayVideo(database.cutscene1);
                 roadMapController.InitializeWorkerTalkDay1();
                 DayText.text = "Dia " + DaySystem.OrderDay[0].ToString();
                 break;
             case 2:
-                //transition
-                cutscene = false;
-                videoPlayer.clip = transition;
-                Invoke("PlayVideo", 0f);
-                sound.clip = Mosquito;
-                sound.Play();
-                Invoke("PlayAlarm", 3f);
-                //==
+                cutscene.GiveAmbianceSound(database.Mosquito);
+                cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay2();
                 DayText.text = "Dia " + DaySystem.OrderDay[1].ToString();
                 break;
             case 3:
-                //cutscene 2
-                cutscene = true;
-                videoPlayer.clip = cutscene2;
-                Invoke("PlayVideo", 0f);
-                Invoke("FinishCutscene", 30f);
-                Invoke("PlayAlarm", 31f);
-                //==
+                cutscene.PlayVideo(database.cutscene2);
                 roadMapController.InitializeWorkerTalkDay12();
                 DayText.text = "Dia " + DaySystem.OrderDay[2].ToString();
                 break;
             case 4:
-                //transition              
-                cutscene = false;
-                videoPlayer.clip = transition;
-                Invoke("PlayVideo", 0f);
-                sound.clip = Chuva;
-                sound.Play();
-                chuva.gameObject.SetActive(true);
-                Invoke("PlayAlarm", 3f);
-                //==
+                cutscene.GiveAmbianceSound(database.Chuva);
+                chuva.SetActive(true);
+                cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay20();
                 DayText.text = "Dia " + DaySystem.OrderDay[3].ToString();
                 break;
             case 5:
-                //transition
-                cutscene = false;
-                videoPlayer.clip = transition;
-                Invoke("PlayVideo", 0f);
-                Invoke("PlayAlarm", 3f);
-                //==
+                cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay22();
                 DayText.text = "Dia " + DaySystem.OrderDay[4].ToString();
                 break;
             case 6:
-                //transition
-                cutscene = false;
-                videoPlayer.clip = transition;
-                Invoke("PlayVideo", 0f);
-                chuva.gameObject.SetActive(false);
-                Invoke("PlayAlarm", 3f);
-                //==
+                cutscene.GiveAmbianceSound(database.workSound);
+                cutscene.PlayVideo(database.transition);
+                chuva.SetActive(false);
                 roadMapController.InitializeWorkerTalkDay25();
                 DayText.text = "Dia " + DaySystem.OrderDay[5].ToString();
                 break;
             case 7:
-                //transition
-                cutscene = false;
-                videoPlayer.clip = transition;
-                Invoke("PlayVideo", 0f);
-                Invoke("PlayAlarm", 3f);
-                //==
+                cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay26();
                 DayText.text = "Dia " + DaySystem.OrderDay[6].ToString();
                 break;
             case 8:
-                //transition
-                cutscene = false;
-                videoPlayer.clip = transition;
-                Invoke("PlayVideo", 0f);
-                Invoke("PlayAlarm", 3f);
-                //==
+                cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay27();
                 DayText.text = "Dia " + DaySystem.OrderDay[7].ToString();
                 break;
             case 9:
-                //não deixar dia aparecer
-                //ending 1
-                videoPlayer.clip = end1;
-                Invoke("PlayVideo", 0f);
-                //==
+                cutscene.PlayVideo(database.end1);
                 DayText.text = "Dia " + DaySystem.OrderDay[8].ToString();
                 Invoke("EndGame", 30);
                 break;
@@ -244,31 +148,10 @@ public class DayTimeController : MonoBehaviour
         }
  
         mensageControllerScript.PickWorkerWords();
+        cutscene.SoundEffect(database.Alarm);
         
-        StartCoroutine(DayAnimator());
     }
     void EndGame(){
         SceneManager.LoadScene("EndGame");
-    }
-
-    //Cutscenes
-    public void PlayVideo ()
-    {
-        //videoPlayer.Play();
-    }
-    public void PlayAlarm()
-    {
-        sound.clip = Alarm;
-        sound.Play();
-    }
-    public void TremSound()
-    {
-        sound.clip = Trem;
-        sound.Play();
-    }
-
-    public void FinishCutscene()
-    {
-        cutscene = false;
     }
 }
