@@ -13,6 +13,7 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private roadMap roadMapController;
     [SerializeField] private MensageController mensageControllerScript;
     [SerializeField] private ScrpitTablePlayer playerValues;
+    [SerializeField] private Notification notificationScript;
     [SerializeField] private string[] dayTime;
     [SerializeField] private GameObject train;
     [SerializeField] private GameObject DayIcon;
@@ -23,6 +24,7 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private GameObject chuva;
     [SerializeField] private GameObject mosquito;
     [SerializeField] private GameObject Baltasar;
+    [SerializeField] private GameObject FoodIcon;
 
     void Awake()
     {
@@ -70,7 +72,10 @@ public class DayTimeController : MonoBehaviour
                 Baltasar.SetActive(true);
                 break;
             case "Lunch":    
-                DayText.text = "Periodo do dia: " + "Almoço"; 
+                DayText.text = "Periodo do dia: " + "Almoço";
+                notificationScript.PanIcon();
+                FoodIcon.SetActive(true);
+                StartCoroutine(notificationScript.StartMoviment());
                 cutscene.GiveAmbianceSound(database.lunchMoment);                     
                 roadMapController.ChefWords();
                 break;

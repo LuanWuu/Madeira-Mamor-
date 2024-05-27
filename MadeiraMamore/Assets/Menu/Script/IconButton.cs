@@ -11,6 +11,11 @@ public class IconButton : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Face");
+        if (Input.GetJoystickNames().Length > 0){
+            text.text = "A";
+        }else{
+            text.text = "E";
+        }
     }
 
     // Update is called once per frame

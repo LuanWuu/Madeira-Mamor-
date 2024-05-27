@@ -10,6 +10,8 @@ public class Notification : MonoBehaviour
     [SerializeField] private RaffleQuest rafflequestScript;
     [SerializeField] private Timer timerScript;
     [SerializeField] private Transform targetPosi;
+    [SerializeField] private GameObject iconChef;
+    [SerializeField] private GameObject iconFood;
     [SerializeField] private float time;
     private List<string> localList;
     private float localGodScore;
@@ -37,7 +39,7 @@ public class Notification : MonoBehaviour
         }
         transform.position = targetPosi.position;
     }
-    IEnumerator StartMoviment(){
+    public IEnumerator StartMoviment(){
         while(Vector3.Distance(transform.position, targetPosi.position) >=3){
             transform.position = Vector3.Lerp(transform.position, targetPosi.position, 2 * Time.deltaTime);
             yield return new WaitForSeconds(0.25f); 
@@ -72,8 +74,18 @@ public class Notification : MonoBehaviour
             StartCoroutine(Bad());
         }
     }
+    public void PanIcon(){
+        iconChef.SetActive(false);
+        iconFood.SetActive(true);
+        textNotifi.text = "Hora do almoço: vá até o refeitório para comer";
+    }
+    void ChefIcon(){
+        iconChef.SetActive(true);
+        iconFood.SetActive(false);
+    }
     IEnumerator Good(){
         canNotify = false;
+        ChefIcon();
         textNotifi.text = localList[1];
         isNotify = false;
         if(isNotify == false){
@@ -86,6 +98,7 @@ public class Notification : MonoBehaviour
     }
     IEnumerator Normal(){
         canNotify = false;
+        ChefIcon();
         textNotifi.text = localList[2];
         if(isNotify == false){
            StartCoroutine(StartMoviment());
@@ -97,6 +110,7 @@ public class Notification : MonoBehaviour
     }
     IEnumerator Bad(){
         canNotify = false;
+        ChefIcon();
         textNotifi.text = localList[3];
         if(isNotify == false){
            StartCoroutine(StartMoviment());
