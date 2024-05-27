@@ -31,19 +31,19 @@ public class Notification : MonoBehaviour
         canNotify = true;
     }
     IEnumerator StartMoviment(){
-        while(Vector3.Distance(transform.position, targetPosi.position) <=3){
+        while(Vector3.Distance(transform.position, targetPosi.position) >=3){
             transform.position = Vector3.Lerp(transform.position, targetPosi.position, 2 * Time.deltaTime);
             yield return new WaitForSeconds(0.25f); 
         }
-            transform.position = targetPosi.position;
-            StartCoroutine(PuaseMoviment());
+        transform.position = targetPosi.position;
+        StartCoroutine(PuaseMoviment());
     }
     IEnumerator PuaseMoviment(){
         yield return new WaitForSeconds(time);
         StartCoroutine(BackMovimente());
     }
     IEnumerator BackMovimente(){
-        while(Vector3.Distance(transform.position, iniPosition) <= 50){
+        while(Vector3.Distance(transform.position, iniPosition) >= 50){
             transform.position = Vector3.Lerp(transform.position,  iniPosition, 2 * Time.deltaTime);    
             yield return new WaitForSeconds(0.25f);       
         }
@@ -58,24 +58,27 @@ public class Notification : MonoBehaviour
     void CheckScore(){
         localScore = (int)timerScript.timerleft;
         if(localGodScore == localScore){
-            Debug.Log("local " + localScore);
             StartCoroutine(Good());
         }else if(localScore == localNormalScore){
-            Debug.Log("local " + localScore);
             StartCoroutine(Normal());
         }else if(localScore == localBadScore){
-            Debug.Log("local " + localScore);
             StartCoroutine(Bad());
         }
     }
     IEnumerator Good(){
+        canNotify = false;
         textNotifi.text = localList[1];
         isNotify = false;
-        yield return StartCoroutine(StartMoviment());
+        if(isNotify == false){
+           StartCoroutine(StartMoviment());
+        }else{
+            yield return StartCoroutine(BackMovimente());
+            yield return StartCoroutine(StartMoviment());
+        }
         isNotify = true;
-                canNotify = false;
     }
     IEnumerator Normal(){
+        canNotify = false;
         textNotifi.text = localList[2];
         if(isNotify == false){
            StartCoroutine(StartMoviment());
@@ -84,9 +87,9 @@ public class Notification : MonoBehaviour
             yield return StartCoroutine(StartMoviment());
         }
         isNotify = true;
-                canNotify = false;
     }
     IEnumerator Bad(){
+        canNotify = false;
         textNotifi.text = localList[3];
         if(isNotify == false){
            StartCoroutine(StartMoviment());
@@ -95,6 +98,5 @@ public class Notification : MonoBehaviour
             yield return StartCoroutine(StartMoviment());
         }
         isNotify = true;
-                canNotify = false;
     }
 }

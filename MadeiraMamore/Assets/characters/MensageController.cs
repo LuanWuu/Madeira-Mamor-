@@ -134,6 +134,11 @@ public class MensageController : MonoBehaviour
             if(numeberOfWorker == 5 && firstTime == 3){
                 Invoke("EndGameSeringueiro", 1f);    
             }
+            if(scriptTableValues.dontFineshed == true) {
+                scriptTableValues.dontFineshed = false;
+                scriptTableValues.canMoviCamera = true;
+                scriptTableValues.canMovi = true;
+            }
         }
     }
     void EndGameSeringueiro(){

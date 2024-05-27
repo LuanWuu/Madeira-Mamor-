@@ -7,11 +7,13 @@ public class ScrpitTablePlayer : ScriptableObject
 {
     [Header("Origin Player")]
     public bool canMovi = true;
-    public bool canMoviCamera = true;
     public float moveSpeed;
     public float acceleraWalk;
     [Header("Money")]
     public int money;
+    [Header("Camera")]
+    public bool dontFineshed = false;
+    public bool canMoviCamera = true;
 
     public void EnabledCursor(){
         Cursor.visible = true;

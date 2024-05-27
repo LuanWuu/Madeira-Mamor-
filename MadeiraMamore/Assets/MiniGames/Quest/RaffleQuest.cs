@@ -33,6 +33,8 @@ public class RaffleQuest : MonoBehaviour
     [SerializeField] private Hand handScript;
     [Header("Positions Dont Finished Game")]
     [SerializeField] private Transform DontFinishPosi;
+    [SerializeField] private Transform player;
+    [SerializeField] private ScrpitTablePlayer scriptTableValues;
     private Timer timerScript;
     private int numberMinigame;
     private int beforeNumberMinigame;
@@ -79,13 +81,23 @@ public class RaffleQuest : MonoBehaviour
         }
         timer.SetActive(false);
     }
+    public void NoStamina(){
+        roadMapScriptable.DontStamina();
+        DesableMinigame();
+    }
     public void EndTime(){
+        roadMapScriptable.DontFinishWork();
+        DesableMinigame();
+    }
+    void  DesableMinigame(){
         mensagControlScrpt.RestNameList();
         mensagControlScrpt.oneTime = true;
         timerScript.stop = true;
         timer.SetActive(false);
         ManagerDesScript.Reset();
-
+        scriptTableValues.dontFineshed = true;
+        scriptTableValues.canMovi = false;
+        player.position =  DontFinishPosi.position;
         switch(DaySystem.dayTime){
             case "Morning":
                 ManagerDesScript.Reset();

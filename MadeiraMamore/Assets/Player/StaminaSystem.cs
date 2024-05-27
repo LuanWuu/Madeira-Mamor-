@@ -6,6 +6,7 @@ public class StaminaSystem : MonoBehaviour
 {
     [SerializeField] private float staminaBasae;
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
+    [SerializeField] private RaffleQuest questScript;
     [SerializeField] private Transform staminaBar;
     private float amoutStamina;
     private Vector3 valueStamina;
@@ -21,17 +22,18 @@ public class StaminaSystem : MonoBehaviour
         valueStamina.y = amoutStamina;
     }
     void Update(){
-        //if(Input.GetKeyDown(KeyCode.M)) {
-        //    StartCoroutine(IncreaseStamina(1));
-        //}
-        //if(Input.GetKeyDown(KeyCode.N)) {
-        //    StartCoroutine(DecreaseStamina(1));
-         // }
+        if(Input.GetKeyDown(KeyCode.M)) {
+            StartCoroutine(IncreaseStamina(1));
+        }
+        if(Input.GetKeyDown(KeyCode.N)) {
+            StartCoroutine(DecreaseStamina(1));
+        }
     }
     public IEnumerator DecreaseStamina(int amout){
         for(int i = 0; i < amout; i++) {
             if(staminaBar.localScale.y <= 0) {
                 staminaBar.localScale = zeroStamina;
+                questScript.NoStamina();
             } else {
                 yield return new WaitForSeconds(0.1f); 
                 staminaBar.localScale -= valueStamina;                   

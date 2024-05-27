@@ -22,6 +22,7 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private GameObject night;
     [SerializeField] private GameObject chuva;
     [SerializeField] private GameObject mosquito;
+    [SerializeField] private GameObject Baltasar;
 
     void Awake()
     {
@@ -66,8 +67,8 @@ public class DayTimeController : MonoBehaviour
                 train.SetActive(true);
                 roadMapController.ChefWords();
                 mornig.SetActive(true);
-                afternoon.SetActive(false);
                 night.SetActive(false);
+                Baltasar.SetActive(true);
                 break;
             case "Lunch":    
                 DayText.text = "Periodo do dia: " + "Almoço"; 
@@ -79,7 +80,6 @@ public class DayTimeController : MonoBehaviour
                 cutscene.GiveAmbianceSound(database.workSound);
                 mornig.SetActive(false);
                 afternoon.SetActive(true);
-                night.SetActive(false);
                 break;
             case "Night":
                 DayText.text = "Periodo do dia: " + "Noite"; 
@@ -88,9 +88,9 @@ public class DayTimeController : MonoBehaviour
                 train.SetActive(false);
                 roadMapController.ChefOrders();
                 bed.SetActive(true);
-                mornig.SetActive(false);
                 afternoon.SetActive(false);
                 night.SetActive(true);
+                Baltasar.SetActive(false);
                 break;
             default:
                     break;

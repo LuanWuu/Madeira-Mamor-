@@ -64,6 +64,9 @@ public class Hand : MonoBehaviour
                 StartCoroutine(staminaController.DecreaseStamina(1));
                 pickedUp = true;
             }
+            if(iconButton != null) {
+                iconButton.SetActive(false);
+            }
             switch(DaySystem.dayTime){
             case "Morning":
                 ControlerHadMorning();
@@ -137,15 +140,15 @@ public class Hand : MonoBehaviour
                         if(canCarry == false){
                             target = hit.collider.gameObject;
                             CarrySystem();
+                            IconEnabled(target);
                             lastHitObject = hit.collider.gameObject;
                         }
-                        IconEnabled(target);
                         break;
                     case "Desposit":
                         targetDesposit = hit.collider.gameObject;
                         CheckDeposit();
-                        lastHitObject = hit.collider.gameObject;
                         IconEnabled(targetDesposit);
+                        lastHitObject = hit.collider.gameObject;
                         break;
                     default:
                         Reset();

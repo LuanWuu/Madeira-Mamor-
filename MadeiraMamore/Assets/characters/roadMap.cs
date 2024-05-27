@@ -120,7 +120,7 @@ public class roadMap : ScriptableObject {
             // Trabalho ruim:
             "Neste ritmo o trabalho nunca acabará.",
             "Faça melhor da próxima vez.",
-            "Volte logo para o segundo turno"
+            "Volte logo para o próximo turno"
         };
     }
     public void DontFinishWork(){
@@ -128,7 +128,16 @@ public class roadMap : ScriptableObject {
             // Não terminou:
             "Se quiser ser pago é melhor trabalhar direito",
             "Continue assim e não precisará voltar amanhã.",
-            "Volte logo para o segundo turno"
+            "Volte logo para o próximo turno"
+        };
+    }
+    public void DontStamina(){
+        cheif = new List<string>(){ 
+            // Não terminou:
+            "Fingindo estar cansado ?",
+            "Se quiser ser pago é melhor trabalhar direito",
+            "Continue assim e não precisará voltar amanhã.",
+            "Volte logo para o próximo turno"
         };
     }
     public void ChefOrders(){
