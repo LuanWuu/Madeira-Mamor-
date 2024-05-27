@@ -11,6 +11,8 @@ TagManager:
   - Character
   - SpeechBubble
   - Desposit
+  - Face
+  - Icon
   layers:
   - Default
   - TransparentFX

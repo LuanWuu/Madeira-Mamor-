@@ -10,8 +10,6 @@ public class ScrpitTablePlayer : ScriptableObject
     public bool canMoviCamera = true;
     public float moveSpeed;
     public float acceleraWalk;
-    [Header("Stamina")]
-    public float baseStamina;
     [Header("Money")]
     public int money;
 
@@ -25,5 +23,4 @@ public class ScrpitTablePlayer : ScriptableObject
         Cursor.visible = false;
         canMoviCamera = true;
     }
-
 }

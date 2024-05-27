@@ -22,7 +22,6 @@ public class UIDeposit : MonoBehaviour
         }
     }
     public void Deposit(int numerberDeposit){
-        Reset();
         numberOfDeposit = numerberDeposit;
         boxList[numerberDeposit].SetActive(true);
         CheckWagonAccpet();

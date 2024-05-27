@@ -9,6 +9,7 @@ public class RaffleQuest : MonoBehaviour
     [SerializeField] private GameObject carryUI;
     [SerializeField] private ManagerDescharge ManagerDesScript;
     [SerializeField] private GameObject DepositUI;
+    [SerializeField] private DeschargeMinigame[] descharger;
     [Header("Timer")]
     [SerializeField] private GameObject timer;
     [Header("Timer of Carry Minigame")]
@@ -30,6 +31,8 @@ public class RaffleQuest : MonoBehaviour
     [SerializeField] private StoragaDayValues DaySystem;
     [Header("Day time")]
     [SerializeField] private Hand handScript;
+    [Header("Positions Dont Finished Game")]
+    [SerializeField] private Transform DontFinishPosi;
     private Timer timerScript;
     private int numberMinigame;
     private int beforeNumberMinigame;
@@ -44,7 +47,7 @@ public class RaffleQuest : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown("v")){
-            CompleteQuest();
+            EndTime();
         }
     }
     public void CompleteQuest(){
@@ -78,11 +81,28 @@ public class RaffleQuest : MonoBehaviour
     }
     public void EndTime(){
         mensagControlScrpt.RestNameList();
-        carryUI.SetActive(false);
-        carryScript.ResetFillWagons();
         mensagControlScrpt.oneTime = true;
         timerScript.stop = true;
-        carryScript.DestroyPackages();
+        timer.SetActive(false);
+        ManagerDesScript.Reset();
+
+        switch(DaySystem.dayTime){
+            case "Morning":
+                ManagerDesScript.Reset();
+                DepositUI.SetActive(false);
+                handScript.takePackage = false;
+                for(int i = 0; i < descharger.Length; i++) {
+                   descharger[i].Reset();
+                }
+                break;
+            case "Afternoon":
+                carryUI.SetActive(false);
+                carryScript.ResetFillWagons();
+                carryScript.DestroyPackages();
+                break;
+            default:
+                    break;
+        }
     }
     void Reset(){
         //SceneManager.LoadScene("SecondArea");

@@ -14,7 +14,6 @@ public class StaminaSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scriptTableValues.baseStamina = staminaBasae;
         originStaminabar = staminaBar.localScale;
         zeroStamina = staminaBar.localScale;
         zeroStamina.y = 0;

@@ -69,4 +69,9 @@ public class ManagerDescharge : MonoBehaviour
             startGame = false;
         }
     }
+    public void Reset(){
+        for(int i = 0; i < deposit.Length; i++) {
+            Destroy(deposit[i], 0.5f);
+        }
+    }
 }

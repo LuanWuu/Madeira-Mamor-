@@ -31,6 +31,7 @@ public class Hand : MonoBehaviour
     private GameObject targetCharacter;
     private GameObject targetDesposit;
     private GameObject lastHitObject; 
+    private GameObject iconButton;
     private Renderer targetRenderer;
     private Renderer targetRendererDelivery;
     private Renderer targetRendererDeposity;
@@ -118,6 +119,7 @@ public class Hand : MonoBehaviour
                     case "Character":
                             canActiveCharaceterLines = true;
                             targetCharacter = hit.collider.gameObject;
+                            IconEnabled(targetCharacter);
                             lastHitObject = hit.collider.gameObject;
                         break;
                     case "Train":
@@ -128,6 +130,7 @@ public class Hand : MonoBehaviour
                                 targetTrain = hit.collider.gameObject;
                                 GetPackage();
                             }
+                            IconEnabled(targetTrain);
                             lastHitObject = hit.collider.gameObject;
                         break;
                     case "Box":
@@ -136,11 +139,13 @@ public class Hand : MonoBehaviour
                             CarrySystem();
                             lastHitObject = hit.collider.gameObject;
                         }
+                        IconEnabled(target);
                         break;
                     case "Desposit":
                         targetDesposit = hit.collider.gameObject;
                         CheckDeposit();
                         lastHitObject = hit.collider.gameObject;
+                        IconEnabled(targetDesposit);
                         break;
                     default:
                         Reset();
@@ -151,7 +156,18 @@ public class Hand : MonoBehaviour
             Reset();
         }
     }
-
+    void IconEnabled(GameObject luckTarget){
+        for(int i = 0; i < luckTarget.transform.childCount; i++) {
+            GameObject chield = luckTarget.transform.GetChild(i).gameObject;
+            if(chield.tag == "Icon") {
+                 iconButton = chield;
+                 break;
+            }
+        }
+        if(iconButton != null) {
+            iconButton.gameObject.SetActive(true); 
+        }
+    }
     void CheckDelivery(){
         targetRendererDelivery = targetTrain.GetComponent<Renderer>();
         canGive = targetTrain.GetComponent<ToFillTrain>().CompatibleLayer(target.layer);
@@ -212,6 +228,9 @@ public class Hand : MonoBehaviour
         }
         if(targetRendererDeposity  != null){
             targetRendererDeposity.material.SetFloat("_ValueMultiplay", 0);
+        }
+        if(iconButton != null) {
+            iconButton.SetActive(false);
         }
         canGetPackage = false;
         canGet = false;

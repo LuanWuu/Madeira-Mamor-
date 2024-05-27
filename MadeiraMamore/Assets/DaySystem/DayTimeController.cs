@@ -159,7 +159,7 @@ public class DayTimeController : MonoBehaviour
             default:
                 break;
         }
- 
+
         mensageControllerScript.PickWorkerWords();
         cutscene.SoundEffect(database.Alarm);
         
