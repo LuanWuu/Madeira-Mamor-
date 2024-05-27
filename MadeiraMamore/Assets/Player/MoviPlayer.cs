@@ -40,6 +40,9 @@ public class MoviPlayer : MonoBehaviour
                 rb.velocity = new Vector3(0,0,0);
                 localSpeed = 0;
             }
+        }else{
+            rb.velocity = new Vector3(0,0,0);
+            localSpeed = 0;
         }
     }
     void MovePlayer(float horizontal, float vertical){

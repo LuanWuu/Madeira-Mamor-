@@ -7,7 +7,6 @@ public class NighthChoses : MonoBehaviour
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private DayTimeController DayTCScript;
     [SerializeField] private ScrpitTablePlayer playerValues;
-    [SerializeField] private StaminaSystem staminaController;
     [SerializeField] private Bet BetScript;
     [SerializeField] private Transform localToDrink;
     [SerializeField] private Transform player;
@@ -21,24 +20,28 @@ public class NighthChoses : MonoBehaviour
         DayTCScript.ChangedDay();
         playerValues.DisabledCursor();
         player.position = tent.position;
-        staminaController.IncreaseStamina(60);
+        playerValues.staminaRecuperNight = 60;
         DisableChoses();
     }
     public void Drink(){
         player.position = localToDrink.position;
         playerValues.DisabledCursor();
-        staminaController.IncreaseStamina(20);
+        playerValues.staminaRecuperNight = 20;
         DisableChoses();
     }
     public void Bet(){
-        BetMenu.SetActive(true);
-        staminaController.IncreaseStamina(30);
-        DisableChoses();
+        if(playerValues.money != 0){
+            BetMenu.SetActive(true);
+            DisableChoses();
+        }
     }
     public void BetSleep(){
         BetScript.valueBet = 0;
         BetScript.valueTextBet = 0;
+        BetScript.canBet = true;
         player.position = tent.position;
+        playerValues.staminaRecuperNight = 30;
+        DaySystem.day++;
         BetMenu.SetActive(false);
         DayTCScript.TimeOfDay(0);
         DayTCScript.ChangedDay();

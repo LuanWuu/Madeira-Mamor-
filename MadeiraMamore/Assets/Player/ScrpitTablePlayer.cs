@@ -14,6 +14,8 @@ public class ScrpitTablePlayer : ScriptableObject
     [Header("Camera")]
     public bool dontFineshed = false;
     public bool canMoviCamera = true;
+    [Header("stamina")]
+    public int staminaRecuperNight;
 
     public void EnabledCursor(){
         Cursor.visible = true;

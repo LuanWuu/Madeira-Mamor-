@@ -15,6 +15,7 @@ public class MensageController : MonoBehaviour
     [SerializeField] private GameObject nextButton;
     [SerializeField] private GameObject buttonPositive;
     [SerializeField] private GameObject buttonNegative;
+    [SerializeField] private GameObject escapeButton;
     [SerializeField] private RaffleQuest rafflequestScript;
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
 
@@ -230,7 +231,7 @@ public class MensageController : MonoBehaviour
                 }
                 break;
             case 5:// puxar final
-                //colocar uma varivael para abilitar uo final
+                escapeButton.SetActive(true);
                 if (placeNumber == 0){
                     GivePlayerAnswer(characterWords.playerAnswers[0]);
                     ActiveButtonsAnswer();

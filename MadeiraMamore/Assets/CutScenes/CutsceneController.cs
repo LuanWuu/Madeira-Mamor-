@@ -15,10 +15,12 @@ public class CutsceneController : MonoBehaviour
     [SerializeField] private DayTimeController dayController;
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private ScrpitTablePlayer playerValues;
+    [SerializeField] private StaminaSystem staminaScript;
     private AudioClip effect;
     private AudioClip ambiance;
     private bool canAlarm;
     private bool isPlaying;
+    private bool canGive;
     private void Start() {
          videoPlayer.Prepare();
     }
@@ -43,6 +45,16 @@ public class CutsceneController : MonoBehaviour
             MenuNight.SetActive(true);
             playerValues.EnabledCursor();
         }
+        if(DaySystem.dayTime == "Night"){
+            MenuNight.SetActive(true);
+            playerValues.EnabledCursor();
+        }
+        if(DaySystem.dayTime == "Morning" && canGive == true) {
+            canGive = false;
+            Debug.Log("stamanuda");
+            StartCoroutine(staminaScript.IncreaseStamina(playerValues.staminaRecuperNight));
+            playerValues.staminaRecuperNight = 0;
+        }
     }
 
     void OnVideoPrepared(VideoPlayer vp){
@@ -53,6 +65,7 @@ public class CutsceneController : MonoBehaviour
     public void PlayVideo(VideoClip cutscene){
         myCamera.enabled = true;
         cameraMain.enabled = false;
+        canGive = true;
         videoPlayer.gameObject.SetActive(true);
         HUD.SetActive(false);
         ambianceSound.mute = true;

@@ -13,11 +13,14 @@ public class Bet : MonoBehaviour
     [SerializeField] private TextMeshProUGUI betText;
     [System.NonSerialized] public int valueBet = 0;
     [System.NonSerialized] public int valueTextBet = 0;
+    [System.NonSerialized] public bool canBet = true;
     [SerializeField] private Image dice;
     [SerializeField] private Sprite[] diceFaces;
     private int number;
+    private bool canGetMOney = true;
     public void NumberMore(){
-        if(number < 7) {
+        if (!canBet) return;
+        if(number < 6) {
             number++;
             ChoseNumberText.text = number.ToString();
         }else{
@@ -26,7 +29,8 @@ public class Bet : MonoBehaviour
         }
     }
     public void NumberLess(){
-        if(number < 1) {
+        if (!canBet) return;
+        if(number > 1) {
             number--;
             ChoseNumberText.text = number.ToString();
         }else{
@@ -35,25 +39,55 @@ public class Bet : MonoBehaviour
         }
     }
     public void BetMore(){
-        GetMoney(1);
+        if (!canBet) return;
+        if(canGetMOney == true) {
+             StartCoroutine(GetMoney(1));
+        }
     }
     public void BetLess(){
-         GetMoney(-1);
+        if (!canBet) return;
+        if(valueBet > 0  && canGetMOney == true) {
+             StartCoroutine(RefundMoney(1));
+        }else{
+            betText.text = "$0";
+        }
     }
     public void Play(){
+        if (!canBet) return;
         if(valueBet != 0 && number != 0) {
             StartCoroutine(BetGame());
         }
     }
-    void GetMoney(int money){
-        if(playerValues.money != 0) {
+    IEnumerator GetMoney(int money){
+        if(playerValues.money >= 100) {
+            canGetMOney = false;
             valueBet++;
             int totalIncrease =  money * 100;
-            betText.text = string.Format("${0:0}", valueTextBet += totalIncrease); 
-            StartCoroutine(moneyScript.TakeMoney(money));      
+            int grow = 10;
+            int counter = totalIncrease / grow;
+            StartCoroutine(moneyScript.TakeMoney(money));  
+            for(int i = 0; i < counter; i++) {
+                yield return new WaitForSeconds(0.1f); 
+                betText.text = string.Format("${0:0}", valueTextBet += grow); 
+            }
+            canGetMOney = true;          
         }
     }
+    IEnumerator RefundMoney(int money){
+        valueBet--;
+        canGetMOney = false;
+        int totalIncrease =  money * 100;
+        int grow = 10;
+        int counter = totalIncrease / grow;
+        StartCoroutine(moneyScript.GetSalary(1)); 
+        for(int i = 0; i < counter; i++) {
+            yield return new WaitForSeconds(0.1f); 
+            betText.text = string.Format("${0:0}", valueTextBet -= grow); 
+        } 
+        canGetMOney = true;          
+    }
     IEnumerator BetGame(){
+        canBet = false;
         int DiceNumber = Random.Range(0,6);
         int diceRotation = 0;
         while(diceRotation < 3){
@@ -64,7 +98,7 @@ public class Bet : MonoBehaviour
             diceRotation++;
         }
         dice.sprite = diceFaces[DiceNumber];
-        if(DiceNumber == number) {
+        if(DiceNumber == number-1) {
             StartCoroutine(Win());
         }else{
             StartCoroutine(Lose());
@@ -72,13 +106,19 @@ public class Bet : MonoBehaviour
     }
     IEnumerator Win(){
         int diceRotation = 0;
-        StartCoroutine(moneyScript.GetSalary(valueBet)); 
+        Debug.Log(valueBet);
+        valueBet = valueBet * 2;
+        Debug.Log("vezes 2 " + valueBet);
         while(diceRotation < 3){
             dice.color = Color.green;
             yield return new WaitForSeconds(0.25f);
             dice.color = Color.white;
             diceRotation++;
         }    
+        yield return StartCoroutine(moneyScript.GetSalary(valueBet)); 
+        yield return new WaitForSeconds(0.5f);
+        ChoseNumberText.text = "";
+        betText.text = "$0";
         NighthChosesScript.BetSleep();
     }
     IEnumerator Lose(){
@@ -89,6 +129,8 @@ public class Bet : MonoBehaviour
             dice.color = Color.white;
             diceRotation++;
         }    
+        ChoseNumberText.text = "";
+        betText.text = "";
         NighthChosesScript.BetSleep();
     }
 }

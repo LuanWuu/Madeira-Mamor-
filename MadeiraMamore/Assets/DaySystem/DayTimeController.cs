@@ -170,4 +170,8 @@ public class DayTimeController : MonoBehaviour
         database.chosenEnding = database.end3;
         SceneManager.LoadScene("EndGame");
     }
+     public void EndGameEscape(){
+        database.chosenEnding = database.end2;
+        SceneManager.LoadScene("EndGame");
+    }
 }

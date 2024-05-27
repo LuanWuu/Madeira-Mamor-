@@ -13,6 +13,7 @@ TagManager:
   - Desposit
   - Face
   - Icon
+  - CloneBox
   layers:
   - Default
   - TransparentFX

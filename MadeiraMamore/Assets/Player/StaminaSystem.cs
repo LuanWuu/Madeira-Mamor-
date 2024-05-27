@@ -19,6 +19,7 @@ public class StaminaSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scriptTableValues.staminaRecuperNight = 0;
         originStaminabar = staminaBar.localScale;
         zeroStamina = staminaBar.localScale;
         zeroStamina.y = 0;
@@ -31,7 +32,7 @@ public class StaminaSystem : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.N)) {
             StartCoroutine(DecreaseStamina(60));
-        }
+       }
     }
     public IEnumerator DecreaseStamina(int amout){
         StartCoroutine(EnabledStamina(amout));
@@ -69,16 +70,13 @@ public class StaminaSystem : MonoBehaviour
             valueTodecreased = 0.05f;
         }
         Color colorvalue = Color.white;
-        Debug.Log(colorvalue.a);
-        Debug.Log("vallue " + valuevisibility);
         while(colorvalue.a > 0){
-            Debug.Log("transparrete");
             colorvalue.a = valuevisibility;
             staminaBarImage.color = colorvalue;
             staminaInterface.color = colorvalue;
             staminaBackGround.color = colorvalue;
             valuevisibility -= valueTodecreased;
-            yield return new WaitForSeconds(0.125f);
+            yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitForSeconds(0.05f);
         staminaBarImage.gameObject.SetActive(false);

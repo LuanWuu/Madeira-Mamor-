@@ -22,13 +22,20 @@ public class Notification : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        localList = roadMapScriptable.chiefScrean;
         localGodScore = rafflequestScript.goodScore;
         localNormalScore = rafflequestScript.normalScore;
         localBadScore = rafflequestScript.badScore;
-        textNotifi.text = localList[0];
         iniPosition = transform.position;
-        canNotify = true;
+        StartCoroutine(BaseNotifi());
+    }
+    IEnumerator BaseNotifi(){
+        localList = roadMapScriptable.chiefScrean;
+        textNotifi.text = localList[0];
+        while(Vector3.Distance(transform.position, targetPosi.position) >=3){
+            transform.position = Vector3.Lerp(transform.position, targetPosi.position, 2 * Time.deltaTime);
+            yield return new WaitForSeconds(0.25f); 
+        }
+        transform.position = targetPosi.position;
     }
     IEnumerator StartMoviment(){
         while(Vector3.Distance(transform.position, targetPosi.position) >=3){
@@ -42,7 +49,7 @@ public class Notification : MonoBehaviour
         yield return new WaitForSeconds(time);
         StartCoroutine(BackMovimente());
     }
-    IEnumerator BackMovimente(){
+    public IEnumerator BackMovimente(){
         while(Vector3.Distance(transform.position, iniPosition) >= 50){
             transform.position = Vector3.Lerp(transform.position,  iniPosition, 2 * Time.deltaTime);    
             yield return new WaitForSeconds(0.25f);       

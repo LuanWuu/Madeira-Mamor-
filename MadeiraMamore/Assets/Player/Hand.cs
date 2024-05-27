@@ -51,7 +51,7 @@ public class Hand : MonoBehaviour
 
         InputManager();
         RaycastCheck();
-        if(canCarry == true){
+        if(canCarry == true && target != null){
             Carry();
         }
     }
@@ -61,6 +61,7 @@ public class Hand : MonoBehaviour
                 mensageControllerScript.GiveTalk(targetCharacter.name);
             }
             if(target != null && pickedUp == false) {
+                target.tag = "CloneBox";
                 StartCoroutine(staminaController.DecreaseStamina(1));
                 pickedUp = true;
             }
@@ -197,7 +198,6 @@ public class Hand : MonoBehaviour
     }
     void Carry(){ 
         target.transform.rotation = transform.rotation;
-        target.tag = "Untagged";
         if(canMoviLerp == true){
             if (startCarryTime > Time.time){
                 LerpMovi();

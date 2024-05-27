@@ -35,6 +35,8 @@ public class RaffleQuest : MonoBehaviour
     [SerializeField] private Transform DontFinishPosi;
     [SerializeField] private Transform player;
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
+    [Header("Notification")]
+    [SerializeField] private Notification notificationScript;
     private Timer timerScript;
     private int numberMinigame;
     private int beforeNumberMinigame;
@@ -115,11 +117,23 @@ public class RaffleQuest : MonoBehaviour
             default:
                     break;
         }
+        Invoke("NeedDestroy", 1.5f);
+    }
+    void NeedDestroy(){
+        GameObject[] ObjectsRemaining = GameObject.FindGameObjectsWithTag("CloneBox");
+        if(ObjectsRemaining != null) {
+            for(int i = 0; i < ObjectsRemaining.Length; i++) {
+                if(ObjectsRemaining[i] != null) {
+                    Destroy(ObjectsRemaining[i]);
+                }
+            }
+        }
     }
     void Reset(){
         //SceneManager.LoadScene("SecondArea");
     }
     public void DecideQuest(){
+        StartCoroutine(notificationScript.BackMovimente());
          switch(DaySystem.dayTime){
             case "Morning":
                 ManagerDesScript.StartMinigame();
