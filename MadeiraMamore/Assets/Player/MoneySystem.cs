@@ -30,4 +30,14 @@ public class MoneySystem : MonoBehaviour
             moneyText.text = string.Format("${0:0}", playerValues.money += grow); 
         }
     }
+    public IEnumerator TakeMoney(int salary){
+        int totalIncrease = salary * 100;
+        int grow = 10;
+        int counter = totalIncrease / grow;
+
+        for(int i = 0; i < counter; i++) {
+            yield return new WaitForSeconds(0.1f); 
+            moneyText.text = string.Format("${0:0}", playerValues.money -= grow); 
+        }
+    }
 }

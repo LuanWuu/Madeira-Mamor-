@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StaminaSystem : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class StaminaSystem : MonoBehaviour
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
     [SerializeField] private RaffleQuest questScript;
     [SerializeField] private Transform staminaBar;
+    [SerializeField] private Image staminaBarImage;
+    [SerializeField] private Image staminaInterface;
+    [SerializeField] private Image staminaBackGround;
     private float amoutStamina;
     private Vector3 valueStamina;
     private Vector3 originStaminabar;
@@ -26,28 +30,59 @@ public class StaminaSystem : MonoBehaviour
             StartCoroutine(IncreaseStamina(1));
         }
         if(Input.GetKeyDown(KeyCode.N)) {
-            StartCoroutine(DecreaseStamina(1));
+            StartCoroutine(DecreaseStamina(60));
         }
     }
     public IEnumerator DecreaseStamina(int amout){
+        StartCoroutine(EnabledStamina(amout));
         for(int i = 0; i < amout; i++) {
             if(staminaBar.localScale.y <= 0) {
                 staminaBar.localScale = zeroStamina;
                 questScript.NoStamina();
             } else {
-                yield return new WaitForSeconds(0.1f); 
+                yield return new WaitForSeconds(0.075f); 
                 staminaBar.localScale -= valueStamina;                   
             }
         }
     }
     public IEnumerator IncreaseStamina(int amout){
+        StartCoroutine(EnabledStamina(amout));
         for(int i = 0; i < amout; i++) {
             if(staminaBar.localScale.y >= originStaminabar.y) {
                 staminaBar.localScale = originStaminabar;
             } else {
-                yield return new WaitForSeconds(0.1f); 
+                yield return new WaitForSeconds(0.075f); 
                 staminaBar.localScale += valueStamina;
             }
         }
+    }
+    IEnumerator EnabledStamina(int amout){
+        staminaBarImage.gameObject.SetActive(true);
+        staminaInterface.gameObject.SetActive(true);
+        staminaBackGround.gameObject.SetActive(true);
+        staminaBarImage.color = Color.white;
+        staminaInterface.color = Color.white;
+        staminaBackGround.color = Color.white;
+        float valuevisibility = 1;
+        float valueTodecreased = (float) 1/amout;
+        if(amout < 10) {
+            valueTodecreased = 0.05f;
+        }
+        Color colorvalue = Color.white;
+        Debug.Log(colorvalue.a);
+        Debug.Log("vallue " + valuevisibility);
+        while(colorvalue.a > 0){
+            Debug.Log("transparrete");
+            colorvalue.a = valuevisibility;
+            staminaBarImage.color = colorvalue;
+            staminaInterface.color = colorvalue;
+            staminaBackGround.color = colorvalue;
+            valuevisibility -= valueTodecreased;
+            yield return new WaitForSeconds(0.125f);
+        }
+        yield return new WaitForSeconds(0.05f);
+        staminaBarImage.gameObject.SetActive(false);
+        staminaInterface.gameObject.SetActive(false);
+        staminaBackGround.gameObject.SetActive(false);
     }
 }

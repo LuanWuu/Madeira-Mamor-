@@ -8,6 +8,7 @@ public class NighthChoses : MonoBehaviour
     [SerializeField] private DayTimeController DayTCScript;
     [SerializeField] private ScrpitTablePlayer playerValues;
     [SerializeField] private StaminaSystem staminaController;
+    [SerializeField] private Bet BetScript;
     [SerializeField] private Transform localToDrink;
     [SerializeField] private Transform player;
     [SerializeField] private Transform tent;
@@ -35,6 +36,8 @@ public class NighthChoses : MonoBehaviour
         DisableChoses();
     }
     public void BetSleep(){
+        BetScript.valueBet = 0;
+        BetScript.valueTextBet = 0;
         player.position = tent.position;
         BetMenu.SetActive(false);
         DayTCScript.TimeOfDay(0);
