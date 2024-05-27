@@ -12,9 +12,9 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private roadMap roadMapController;
     [SerializeField] private MensageController mensageControllerScript;
+    [SerializeField] private ScrpitTablePlayer playerValues;
     [SerializeField] private string[] dayTime;
     [SerializeField] private GameObject train;
-    [SerializeField] private GameObject bed;
     [SerializeField] private GameObject DayIcon;
     [SerializeField] private TextMeshProUGUI DayText;
     [SerializeField] private GameObject mornig;
@@ -47,12 +47,11 @@ public class DayTimeController : MonoBehaviour
             DaySystem.day++;
             ChangedDay();
         }
-        if(Input.GetKeyDown("j")){
-                  Debug.Log("DaySystem.dayTime " + DaySystem.dayTime);  
+        if (Input.GetKeyDown("u")){
+            TimeOfDay(3);
         }
     }
     public void TimeOfDay(int moment){
-        Debug.Log("mommente");
         cutscene.PlayVideo(database.transition);
         for(int i = 0; i < dayTime.Length; i++) {
             if(i == moment) {
@@ -87,9 +86,9 @@ public class DayTimeController : MonoBehaviour
                 cutscene.SoundEffect(database.Trem);
                 train.SetActive(false);
                 roadMapController.ChefOrders();
-                bed.SetActive(true);
                 afternoon.SetActive(false);
                 night.SetActive(true);
+                playerValues.EnabledCursor();
                 Baltasar.SetActive(false);
                 break;
             default:
@@ -97,7 +96,6 @@ public class DayTimeController : MonoBehaviour
         }
     }
     public void ChangedDay(){
-        Debug.Log("changeaday");
         mensageControllerScript.moment = 0;
         mensageControllerScript.RestNameList();
         switch(DaySystem.day){

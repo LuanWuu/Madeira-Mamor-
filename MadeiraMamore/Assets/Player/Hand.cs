@@ -223,9 +223,6 @@ public class Hand : MonoBehaviour
         if(speechBubble != null){
             speechBubble.SetActive(false);
         }
-        if(Time.timeScale != 0){
-            scriptTableValues.DisabledCursor();
-        }
         if(targetRendererDelivery != null){
             targetRendererDelivery.material.SetFloat("_ValueMultiplay", 0);
         }

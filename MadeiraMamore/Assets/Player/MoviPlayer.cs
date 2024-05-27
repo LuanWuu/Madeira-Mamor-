@@ -32,13 +32,8 @@ public class MoviPlayer : MonoBehaviour
     private void FixedUpdate()
     {
         if(scriptTableValues.canMovi == true){
-            if (Input.GetJoystickNames().Length > 0){
-                if (Input.GetAxis("VerticalMoviJoystick") != 0 || Input.GetAxis("HorizontalMoviJoystick") != 0){
-                    MovePlayer(Input.GetAxis("HorizontalMoviJoystick"),  Input.GetAxis("VerticalMoviJoystick"));
-                }else{
-                    rb.velocity = new Vector3(0,0,0);
-                    localSpeed = 0;
-                }
+            if (Input.GetAxis("VerticalMoviJoystick") != 0 || Input.GetAxis("HorizontalMoviJoystick") != 0){
+                MovePlayer(Input.GetAxis("HorizontalMoviJoystick"),  Input.GetAxis("VerticalMoviJoystick"));
             }else if(Input.GetAxis("KeyBoardH") != 0 || Input.GetAxis("KeyBoardY") != 0){
                 MovePlayer(Input.GetAxis("KeyBoardH"), Input.GetAxis("KeyBoardY"));
             }else{

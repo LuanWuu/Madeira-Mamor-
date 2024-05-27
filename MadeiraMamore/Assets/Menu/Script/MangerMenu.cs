@@ -29,7 +29,6 @@ public class MangerMenu : MonoBehaviour
 
     void Awake(){
         GameObject[] objs = GameObject.FindGameObjectsWithTag("menu");
-        Debug.Log("Número de GameObjects com tag 'menu': " + objs.Length);
         if (objs.Length > 1)
         {
             Destroy(menu);
@@ -58,7 +57,6 @@ public class MangerMenu : MonoBehaviour
     { 
         SceneManager.LoadScene(nameGame);
         closeMenuInGame.SetActive(true);
-        Debug.Log("foi");
     }
 
     public void openOptions()
@@ -90,6 +88,5 @@ public class MangerMenu : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
-        Debug.Log("Quito");
     }
 }

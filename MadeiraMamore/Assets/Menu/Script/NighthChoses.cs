@@ -10,30 +10,38 @@ public class NighthChoses : MonoBehaviour
     [SerializeField] private StaminaSystem staminaController;
     [SerializeField] private Transform localToDrink;
     [SerializeField] private Transform player;
+    [SerializeField] private Transform tent;
     [SerializeField] private GameObject BetMenu;
+    [SerializeField] private GameObject ChosesMenu;
 
     public void Sleep(){
         DaySystem.day++;
         DayTCScript.TimeOfDay(0);
         DayTCScript.ChangedDay();
         playerValues.DisabledCursor();
+        player.position = tent.position;
         staminaController.IncreaseStamina(60);
         DisableChoses();
     }
     public void Drink(){
-
-        Debug.Log("beber");
+        player.position = localToDrink.position;
         playerValues.DisabledCursor();
         staminaController.IncreaseStamina(20);
         DisableChoses();
     }
     public void Bet(){
-
-        Debug.Log("Bet");
+        BetMenu.SetActive(true);
         staminaController.IncreaseStamina(30);
         DisableChoses();
     }
+    public void BetSleep(){
+        player.position = tent.position;
+        BetMenu.SetActive(false);
+        DayTCScript.TimeOfDay(0);
+        DayTCScript.ChangedDay();
+        playerValues.DisabledCursor();
+    }
     void DisableChoses(){
-        gameObject.SetActive(false);
+        ChosesMenu.SetActive(false);
     }
 }

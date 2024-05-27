@@ -117,7 +117,6 @@ public class MensageController : MonoBehaviour
             }
         }else{
             scriptTableValues.canMovi = true;
-            Debug.Log(scriptTableValues.canMovi);
             speechBubble.SetActive(false);
             scriptTableValues.DisabledCursor();
             if(numeberOfWorker == 6){
@@ -281,11 +280,9 @@ public class MensageController : MonoBehaviour
                 break;
             case 2:
                 characterWords.SpecialNight3();
-                Debug.Log("terceiro");
                 break;
             }
             firstTime++;
-                    Debug.Log(firstTime);
         }
         if(seringueiraFinal == false){
             //frase generica

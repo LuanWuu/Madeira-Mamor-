@@ -14,7 +14,6 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private Transform EyesBaltasar;
     [SerializeField] private Transform Baltasar;
 
-
     [SerializeField] private OptionsValue optionsScriptable;
  
     private float sensitivityX = 1.0f;
@@ -42,6 +41,7 @@ public class PlayerCamera : MonoBehaviour
     {
         scriptTableValues.dontFineshed = false;
         scriptTableValues.canMoviCamera = true;
+        scriptTableValues.DisabledCursor();
     }
 
     private void LateUpdate() 
