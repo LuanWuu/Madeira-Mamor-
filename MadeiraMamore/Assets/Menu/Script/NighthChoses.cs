@@ -7,6 +7,7 @@ public class NighthChoses : MonoBehaviour
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private DayTimeController DayTCScript;
     [SerializeField] private ScrpitTablePlayer playerValues;
+    [SerializeField] private Notification notificationScript;
     [SerializeField] private Bet BetScript;
     [SerializeField] private Transform localToDrink;
     [SerializeField] private Transform player;
@@ -25,6 +26,7 @@ public class NighthChoses : MonoBehaviour
     }
     public void Drink(){
         player.position = localToDrink.position;
+        notificationScript.Night();
         playerValues.DisabledCursor();
         playerValues.staminaRecuperNight = 20;
         DisableChoses();

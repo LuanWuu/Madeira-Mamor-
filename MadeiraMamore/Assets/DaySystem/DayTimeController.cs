@@ -14,6 +14,7 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private MensageController mensageControllerScript;
     [SerializeField] private ScrpitTablePlayer playerValues;
     [SerializeField] private Notification notificationScript;
+    [SerializeField] private DisableCharacters disableCha;
     [SerializeField] private string[] dayTime;
     [SerializeField] private GameObject train;
     [SerializeField] private GameObject DayIcon;
@@ -108,39 +109,42 @@ public class DayTimeController : MonoBehaviour
         mensageControllerScript.RestNameList();
         mensageControllerScript.PickWorkerWords();
         switch(DaySystem.day){
-            case 1:
+            case 1://1
                 cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.cutscene1);
                 roadMapController.InitializeWorkerTalkDay1();
                 DayText.text = "Dia " + DaySystem.OrderDay[0].ToString();
                 break;
-            case 2:
+            case 2://2
                 mosquito.SetActive(true);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay2();
                 DayText.text = "Dia " + DaySystem.OrderDay[1].ToString();
                 break;
-            case 3:
+            case 3://12
                 mosquito.SetActive(false);
                 cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.cutscene2);
                 roadMapController.InitializeWorkerTalkDay12();
                 DayText.text = "Dia " + DaySystem.OrderDay[2].ToString();
                 break;
-            case 4:
+            case 4://20
+                disableCha.DisableDia4();
                 cutscene.GiveAmbianceSound(database.Chuva);
                 chuva.SetActive(true);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay20();
                 DayText.text = "Dia " + DaySystem.OrderDay[3].ToString();
                 break;
-            case 5:
+            case 5://22
+                disableCha.DisableDia5();
                 cutscene.GiveAmbianceSound(database.Chuva);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay22();
                 DayText.text = "Dia " + DaySystem.OrderDay[4].ToString();
                 break;
-            case 6:
+            case 6://25
+                disableCha.DisableDia6();
                 normalFoodPrice.text = "Gratuito";
                 cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.transition);
@@ -148,20 +152,20 @@ public class DayTimeController : MonoBehaviour
                 roadMapController.InitializeWorkerTalkDay25();
                 DayText.text = "Dia " + DaySystem.OrderDay[5].ToString();
                 break;
-            case 7:
+            case 7://26
                 cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay26();
                 DayText.text = "Dia " + DaySystem.OrderDay[6].ToString();
                 break;
-            case 8:
+            case 8://27
                 normalFoodPrice.text = "$200";
                 cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay27();
                 DayText.text = "Dia " + DaySystem.OrderDay[7].ToString();
                 break;
-            case 9:
+            case 9://30 
                 DayText.text = "Dia " + DaySystem.OrderDay[8].ToString();
                 Invoke("EndGame", 5);
                 break;

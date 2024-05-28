@@ -67,6 +67,11 @@ public class Notification : MonoBehaviour
             Bad();
         }
     }
+    public void Night(){
+        ChefIcon();
+        textNotifi.text = "Vá para a cama, amanhã se terá um longo dia";
+        StartCoroutine(StartMovement());
+    }
     public void Reward(){
         ChefIcon();
         textNotifi.text = "Fale comigo para receber o pagamento";
