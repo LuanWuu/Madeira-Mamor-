@@ -65,7 +65,7 @@ public class DayTimeController : MonoBehaviour
         }
         switch(DaySystem.dayTime){
             case "Morning":  
-                cutscene.MuteMusic();
+                cutscene.MuteMusic(true);
                 DayText.text = "Primeiro turno";          
                 train.SetActive(true);
                 roadMapController.ChefWords();
@@ -79,19 +79,19 @@ public class DayTimeController : MonoBehaviour
                 FoodIcon.SetActive(true);
                 playerValues.canOpenFoodMenu = true;
                 StartCoroutine(notificationScript.StartMovement());
-                cutscene.DesMuteMusic();
+                cutscene.MuteMusic(false);
                 cutscene.MusicAmbiente(database.lunchMoment);                     
                 roadMapController.ChefWords();
                 break;
             case "Afternoon":
-                cutscene.MuteMusic();
+                cutscene.MuteMusic(true);
                 DayText.text = "Segundo turno"; 
                 mornig.SetActive(false);
                 afternoon.SetActive(true);
                 break;
             case "Night":
                 DayText.text = "Noite"; 
-                cutscene.DesMuteMusic();
+                cutscene.MuteMusic(true);
                 cutscene.MusicAmbiente(database.night);   
                 cutscene.SoundEffect(database.Trem);
                 train.SetActive(false);
