@@ -9,6 +9,7 @@ public class RaffleQuest : MonoBehaviour
     [SerializeField] private GameObject carryUI;
     [SerializeField] private ManagerDescharge ManagerDesScript;
     [SerializeField] private GameObject DepositUI;
+    [SerializeField] private DeschargeMinigame[] descharger;
     [Header("Timer")]
     [SerializeField] private GameObject timer;
     [Header("Timer of Carry Minigame")]
@@ -30,6 +31,12 @@ public class RaffleQuest : MonoBehaviour
     [SerializeField] private StoragaDayValues DaySystem;
     [Header("Day time")]
     [SerializeField] private Hand handScript;
+    [Header("Positions Dont Finished Game")]
+    [SerializeField] private Transform DontFinishPosi;
+    [SerializeField] private Transform player;
+    [SerializeField] private ScrpitTablePlayer scriptTableValues;
+    [Header("Notification")]
+    [SerializeField] private Notification notificationScript;
     private Timer timerScript;
     private int numberMinigame;
     private int beforeNumberMinigame;
@@ -44,10 +51,12 @@ public class RaffleQuest : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown("v")){
-            CompleteQuest();
+            EndTime();
         }
     }
     public void CompleteQuest(){
+        notificationScript.Reward();
+        mensagControlScrpt.RestNameList();
         switch(DaySystem.dayTime){
             case "Morning":
                 DepositUI.SetActive(false);
@@ -75,13 +84,51 @@ public class RaffleQuest : MonoBehaviour
         }
         timer.SetActive(false);
     }
+    public void NoStamina(){
+        roadMapScriptable.DontStamina();
+        DesableMinigame();
+    }
     public void EndTime(){
-        Debug.Log("time is over");
-        carryUI.SetActive(false);
-        carryScript.ResetFillWagons();
+        roadMapScriptable.DontFinishWork();
+        DesableMinigame();
+    }
+    void  DesableMinigame(){
+        mensagControlScrpt.RestNameList();
         mensagControlScrpt.oneTime = true;
         timerScript.stop = true;
-        carryScript.DestroyPackages();
+        timer.SetActive(false);
+        ManagerDesScript.Reset();
+        scriptTableValues.dontFineshed = true;
+        scriptTableValues.canMovi = false;
+        player.position =  DontFinishPosi.position;
+        switch(DaySystem.dayTime){
+            case "Morning":
+                ManagerDesScript.Reset();
+                DepositUI.SetActive(false);
+                handScript.takePackage = false;
+                for(int i = 0; i < descharger.Length; i++) {
+                   descharger[i].Reset();
+                }
+                break;
+            case "Afternoon":
+                carryUI.SetActive(false);
+                carryScript.ResetFillWagons();
+                carryScript.DestroyPackages();
+                break;
+            default:
+                    break;
+        }
+        Invoke("NeedDestroy", 1.5f);
+    }
+    void NeedDestroy(){
+        GameObject[] ObjectsRemaining = GameObject.FindGameObjectsWithTag("CloneBox");
+        if(ObjectsRemaining != null) {
+            for(int i = 0; i < ObjectsRemaining.Length; i++) {
+                if(ObjectsRemaining[i] != null) {
+                    Destroy(ObjectsRemaining[i]);
+                }
+            }
+        }
     }
     void Reset(){
         //SceneManager.LoadScene("SecondArea");
@@ -92,18 +139,18 @@ public class RaffleQuest : MonoBehaviour
                 ManagerDesScript.StartMinigame();
                 timeMinigame = deschargeTime;
                 handScript.takePackage = true;
-                Debug.Log(" mornig " + handScript.takePackage);
                 break;
 
             case "Afternoon":
                 carryScript.DecideAmoutBox();
                 timeMinigame = carryTime;
                 handScript.takePackage = false;
-                Debug.Log(" Afternoon" + handScript.takePackage);
                 break;
             default:
                     break;
         }
+        notificationScript.Instructions();
+        StartCoroutine(notificationScript.StartMovement());
         timer.SetActive(true);
         timerScript.timerleft = timeMinigame;
         timerScript.timerOn = true;

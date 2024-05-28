@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class InGameMenu : MonoBehaviour
 {
+    [SerializeField] private ScrpitTablePlayer scriptTableValues;
     [SerializeField] private GameObject canvas;
     [SerializeField] private string nameSceneMenu;
     [SerializeField] private GameObject firstMenu;
@@ -23,16 +24,16 @@ public class InGameMenu : MonoBehaviour
         if(Input.GetKeyDown("escape")){
             if(isOpen == false){
                 canvas.SetActive(true);
-                Debug.Log("Abriu");
-                PlayerCamera.EnabledCursor();
+                //Debug.Log("Abriu");
+                scriptTableValues.EnabledCursor();
                 isOpen = true;
                 Time.timeScale = 0;
                 //EventSystem.current.SetSelectedGameObject(null);
                 //EventSystem.current.SetSelectedGameObject(optionsFirstButton);
             }else{
                 canvas.SetActive(false);
-                PlayerCamera.DisabledCursor();
-                Debug.Log("Fechou");
+                scriptTableValues.DisabledCursor();
+                //Debug.Log("Fechou");
                 isOpen = false;
                 Time.timeScale = 1;
             }
@@ -40,7 +41,7 @@ public class InGameMenu : MonoBehaviour
     }
     public void BackToGame(){
         Time.timeScale = 1;
-        PlayerCamera.DisabledCursor();
+        scriptTableValues.DisabledCursor();
         canvas.SetActive(false);
         isOpen = false;
     }

@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class PlayerCamera : MonoBehaviour
 {
-    private static bool canMoviCamera;
+    [SerializeField] private ScrpitTablePlayer scriptTableValues;
 
     [SerializeField] private Transform playerHead;
     [SerializeField] private Transform playerBody;
     [SerializeField] private GameObject cursor;
     [SerializeField] private Transform cheif;
+    [SerializeField] private Transform EyesBaltasar;
+    [SerializeField] private Transform Baltasar;
 
     [SerializeField] private OptionsValue optionsScriptable;
  
@@ -37,6 +39,9 @@ public class PlayerCamera : MonoBehaviour
 
     void Start()
     {
+        scriptTableValues.dontFineshed = false;
+        scriptTableValues.canMoviCamera = true;
+        scriptTableValues.DisabledCursor();
     }
 
     private void LateUpdate() 
@@ -45,9 +50,24 @@ public class PlayerCamera : MonoBehaviour
 
     }
     void Update(){
-        if(canMoviCamera == true){
-            Mouse();
-            JoyStick();
+        if(scriptTableValues.canMoviCamera == true){
+            if (Input.GetJoystickNames().Length > 0){
+                float horizontalDeltaJoystick = Input.GetAxis("HorizontalCameraJoystick") * controlSensitivityX;// Valor de Eixo X
+                float verticalDeltaJoystick = Input.GetAxis("VerticalCameraJoystick") * controlSensitivityY; // Valor de Eixo Y
+                if(horizontalDeltaJoystick != 0 || verticalDeltaJoystick != 0){
+                    MoveCamera(horizontalDeltaJoystick, verticalDeltaJoystick);
+                }
+            }
+            float horizontalDeltaMouse = Input.GetAxisRaw("Mouse X") * sensitivityX;// Valor de Eixo X
+            float verticalDeltaMouse = Input.GetAxisRaw("Mouse Y") * sensitivityY; // Valor de Eixo Y
+            if(horizontalDeltaMouse != 0 || verticalDeltaMouse != 0){
+                MoveCamera(horizontalDeltaMouse, verticalDeltaMouse);
+            }
+        }
+        if(scriptTableValues.dontFineshed == true) {
+            transform.LookAt(EyesBaltasar);
+            playerBody.LookAt(Baltasar);  
+            scriptTableValues.canMoviCamera = false;
         }
         sensitivityX = optionsScriptable.sensitX ;
         sensitivityY = optionsScriptable.sensitY ;
@@ -56,48 +76,20 @@ public class PlayerCamera : MonoBehaviour
         cursorSize = optionsScriptable.cursorSize;
         CursorCustomize();
     }
-    public static void EnabledCursor(){
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        canMoviCamera = false;
-    }
-    public static void DisabledCursor(){
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        canMoviCamera = true;
-    }
     void CursorCustomize(){
         cursor.transform.localScale = new Vector3(cursorSize, cursorSize, cursorSize);
     }
-    void Mouse(){
-        float horizontalDelta = Input.GetAxisRaw("Mouse X") * sensitivityX;// Valor de Eixo X
-        float verticalDelta = Input.GetAxisRaw("Mouse Y") * sensitivityY; // Valor de Eixo Y
+    void MoveCamera(float horizontal, float vertical){
 
-        smoothX = Mathf.Lerp(smoothX,horizontalDelta,coefSmoothX);// deixando suave as mudancas do eixo x
-        smoothY = Mathf.Lerp(smoothY, verticalDelta, coefSmoothY);// deixando suave as mudancas do eixo y
+        smoothX = Mathf.Lerp(smoothX, horizontal,coefSmoothX);// deixando suave as mudancas do eixo x
+        smoothY = Mathf.Lerp(smoothY, vertical, coefSmoothY);// deixando suave as mudancas do eixo y
 
-        rotateX += horizontalDelta;// somando horizontal
-        rotateY += verticalDelta;// somando Vetivcal
+        rotateX += horizontal;// somando horizontal
+        rotateY += vertical;// somando Vetivcal
 
         rotateY = Mathf.Clamp(rotateY, angleYmim, angleYmax); // limitando o Eixo Y
 
         playerBody.localEulerAngles = new Vector3(0,rotateX,0); // Rotacionado o Player
-        transform.localEulerAngles = new Vector3(-rotateY,rotateX,0); // rotacionando a Camera
-    }
-
-    void JoyStick(){
-        float horizontalDelta = Input.GetAxis("HorizontalCameraJoystick") * controlSensitivityX;// Valor de Eixo X
-        float verticalDelta = Input.GetAxis("VerticalCameraJoystick") * controlSensitivityY; // Valor de Eixo Y
-
-        smoothX = Mathf.Lerp(smoothX,horizontalDelta,coefSmoothX);// deixando suave as mudancas do eixo x
-        smoothY = Mathf.Lerp(smoothY, verticalDelta, coefSmoothY);// deixando suave as mudancas do eixo y
-
-        rotateX += horizontalDelta;// somando horizontal
-        rotateY += verticalDelta;// omando Vetivcal
-
-        rotateY = Mathf.Clamp(rotateY, angleYmim, angleYmax); // limitando o Eixo Y
-
-        playerBody.localEulerAngles = new Vector3(0,rotateX,0); // Rotacionado o Player
-        transform.localEulerAngles = new Vector3(-rotateY,rotateX,0); // rotacionando a Camera
+        transform.localEulerAngles = new Vector3(-rotateY,rotateX,0); // rotacionando a Camera  
     }
 }

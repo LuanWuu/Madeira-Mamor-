@@ -8,47 +8,49 @@ public class Notification : MonoBehaviour
     [SerializeField] private roadMap roadMapScriptable;
     [SerializeField] private TextMeshProUGUI textNotifi;
     [SerializeField] private RaffleQuest rafflequestScript;
+    [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private Timer timerScript;
     [SerializeField] private Transform targetPosi;
+    [SerializeField] private Transform iniPosition;
+    [SerializeField] private GameObject iconChef;
+    [SerializeField] private GameObject iconFood;
     [SerializeField] private float time;
     private List<string> localList;
     private float localGodScore;
     private float localNormalScore;
     private float localBadScore;
+    private bool canNotify = true;
     private int localScore;
-    private bool isNotify;
-    private bool canNotify;
-    private Vector3 iniPosition;
     // Start is called before the first frame update
     void Start()
     {
-        localList = roadMapScriptable.chiefScrean;
         localGodScore = rafflequestScript.goodScore;
         localNormalScore = rafflequestScript.normalScore;
         localBadScore = rafflequestScript.badScore;
+        BaseNotifi();
+    }
+    public void BaseNotifi(){
+        localList = roadMapScriptable.chiefScrean;
         textNotifi.text = localList[0];
-        iniPosition = transform.position;
-        canNotify = true;
+        ChefIcon();
     }
-    IEnumerator StartMoviment(){
-        while(Vector3.Distance(transform.position, targetPosi.position) <=3){
-            transform.position = Vector3.Lerp(transform.position, targetPosi.position, 2 * Time.deltaTime);
-            yield return new WaitForSeconds(0.25f); 
-        }
-            transform.position = targetPosi.position;
-            StartCoroutine(PuaseMoviment());
-    }
-    IEnumerator PuaseMoviment(){
+    public IEnumerator StartMovement(){
+        canNotify = false;
+        transform.position = iniPosition.position;
+        yield return MoveToPosition(targetPosi.position);
         yield return new WaitForSeconds(time);
-        StartCoroutine(BackMovimente());
-    }
-    IEnumerator BackMovimente(){
-        while(Vector3.Distance(transform.position, iniPosition) <= 50){
-            transform.position = Vector3.Lerp(transform.position,  iniPosition, 2 * Time.deltaTime);    
-            yield return new WaitForSeconds(0.25f);       
-        }
-        transform.position = iniPosition;
+        yield return MoveToPosition(iniPosition.position);
         canNotify = true;
+    }
+
+    private IEnumerator MoveToPosition(Vector3 targetPosition)
+    {
+        while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, 50 * Time.deltaTime);
+            yield return null; // Espera até o próximo frame
+        }
+        transform.position = targetPosition; // Certifique-se de chegar exatamente ao ponto final
     }
     private void Update(){
         if(canNotify == true){
@@ -58,43 +60,52 @@ public class Notification : MonoBehaviour
     void CheckScore(){
         localScore = (int)timerScript.timerleft;
         if(localGodScore == localScore){
-            Debug.Log("local " + localScore);
-            StartCoroutine(Good());
+            Good();
         }else if(localScore == localNormalScore){
-            Debug.Log("local " + localScore);
-            StartCoroutine(Normal());
+            Normal();
         }else if(localScore == localBadScore){
-            Debug.Log("local " + localScore);
-            StartCoroutine(Bad());
+            Bad();
         }
     }
-    IEnumerator Good(){
+    public void Night(){
+        ChefIcon();
+        textNotifi.text = "Vá para a cama, amanhã se terá um longo dia";
+        StartCoroutine(StartMovement());
+    }
+    public void Reward(){
+        ChefIcon();
+        textNotifi.text = "Fale comigo para receber o pagamento";
+    }
+    public void Instructions(){
+        ChefIcon();
+        textNotifi.text = "Use 'TAB' para acessar a lista de afazeres";
+    }
+    public void PanIcon(){
+        iconChef.SetActive(false);
+        iconFood.SetActive(true);
+        if(DaySystem.day != 6 || DaySystem.day != 7) {
+            textNotifi.text = "Hora do almoço: vá até o refeitório para comer";
+        }else{
+            textNotifi.text = "Hora do almoço: vá até o refeitório para comer, refeição media gratuita";
+        }
+    }
+    void ChefIcon(){
+        iconChef.SetActive(true);
+        iconFood.SetActive(false);
+    }
+    void Good(){
+        ChefIcon();
         textNotifi.text = localList[1];
-        isNotify = false;
-        yield return StartCoroutine(StartMoviment());
-        isNotify = true;
-                canNotify = false;
+        StartCoroutine(StartMovement());
     }
-    IEnumerator Normal(){
+    void Normal(){
+        ChefIcon();
         textNotifi.text = localList[2];
-        if(isNotify == false){
-           StartCoroutine(StartMoviment());
-        }else{
-            yield return StartCoroutine(BackMovimente());
-            yield return StartCoroutine(StartMoviment());
-        }
-        isNotify = true;
-                canNotify = false;
+        StartCoroutine(StartMovement());
     }
-    IEnumerator Bad(){
+    void Bad(){
+        ChefIcon();
         textNotifi.text = localList[3];
-        if(isNotify == false){
-           StartCoroutine(StartMoviment());
-        }else{
-            yield return StartCoroutine(BackMovimente());
-            yield return StartCoroutine(StartMoviment());
-        }
-        isNotify = true;
-                canNotify = false;
+        StartCoroutine(StartMovement());
     }
 }
