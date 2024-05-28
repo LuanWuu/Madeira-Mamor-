@@ -106,9 +106,7 @@ public class Bet : MonoBehaviour
     }
     IEnumerator Win(){
         int diceRotation = 0;
-        Debug.Log(valueBet);
         valueBet = valueBet * 2;
-        Debug.Log("vezes 2 " + valueBet);
         while(diceRotation < 3){
             dice.color = Color.green;
             yield return new WaitForSeconds(0.25f);

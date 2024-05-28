@@ -18,6 +18,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private StaminaSystem staminaController;
 
     [System.NonSerialized] public bool takePackage;
+
     private bool canGet;
     private bool activeOneTime;
     private bool canCarry;
@@ -25,9 +26,11 @@ public class Hand : MonoBehaviour
     private bool canGive;
     private bool canActiveCharaceterLines;
     private bool canGetPackage;
-    private bool canOpenFoodMenu;
     private bool pickedUp = false;
+    private bool lookBox;
+
     private float startCarryTime;
+
     private GameObject target;
     private GameObject targetTrain;
     private GameObject targetCharacter;
@@ -64,13 +67,18 @@ public class Hand : MonoBehaviour
             if(canActiveCharaceterLines == true){ // Ativando Caixa de teste
                 mensageControllerScript.GiveTalk(targetCharacter.name);
             }
-            if(targetFood != null && canOpenFoodMenu == true){ // Ativando Caixa de teste
+            if(targetFood != null && scriptTableValues.canOpenFoodMenu == true){ // Ativando Caixa de teste
                 menuFood.SetActive(true);
+                scriptTableValues.EnabledCursor();
+                scriptTableValues.canMovi = false;
             }
             if(target != null && pickedUp == false) {
                 target.tag = "CloneBox";
                 StartCoroutine(staminaController.DecreaseStamina(1));
                 pickedUp = true;
+            }
+            if(target != null && lookBox == true) {
+                target.tag = "CloneBox";
             }
             if(iconButton != null) {
                 iconButton.SetActive(false);
@@ -141,7 +149,6 @@ public class Hand : MonoBehaviour
                                 targetTrain = hit.collider.gameObject;
                                 GetPackage();
                             }
-                            IconEnabled(targetTrain);
                             lastHitObject = hit.collider.gameObject;
                         break;
                     case "Box":
@@ -159,9 +166,8 @@ public class Hand : MonoBehaviour
                         lastHitObject = hit.collider.gameObject;
                         break;
                     case "Food":
-                        if(DaySystem.dayTime == "Lunch"){
+                        if(DaySystem.dayTime == "Lunch" && scriptTableValues.canOpenFoodMenu == true){
                             targetFood = hit.collider.gameObject;
-                            canOpenFoodMenu = true;
                             FoodOutilene();
                             IconEnabled(targetFood);
                             lastHitObject = hit.collider.gameObject;
@@ -177,6 +183,7 @@ public class Hand : MonoBehaviour
         }
     }
     void IconEnabled(GameObject luckTarget){
+        Debug.Log(luckTarget.name);
         for(int i = 0; i < luckTarget.transform.childCount; i++) {
             GameObject chield = luckTarget.transform.GetChild(i).gameObject;
             if(chield.tag == "Icon") {
@@ -212,6 +219,7 @@ public class Hand : MonoBehaviour
     void CarrySystem(){
         if(activeOneTime == true){
             canGet = true;
+            lookBox = true;
             targetRenderer = target.GetComponent<Renderer>();
             targetRenderer.material.SetFloat("_ValueMultiplay", outilineSizeBox);// Ativando o Contorno
             activeOneTime = false;
@@ -258,11 +266,12 @@ public class Hand : MonoBehaviour
         if(targetRenderer != null){
             targetRenderer.material.SetFloat("_ValueMultiplay", 0);
         }
+        targetFood = null;
         lastHitObject = null;
         canGetPackage = false;
         canGet = false;
+        lookBox = false;
         activeOneTime = true;
         canActiveCharaceterLines = false;
-        canOpenFoodMenu = false;
     }
 }

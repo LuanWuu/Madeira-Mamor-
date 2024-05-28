@@ -55,6 +55,7 @@ public class RaffleQuest : MonoBehaviour
         }
     }
     public void CompleteQuest(){
+        notificationScript.Reward();
         mensagControlScrpt.RestNameList();
         switch(DaySystem.dayTime){
             case "Morning":
@@ -133,7 +134,6 @@ public class RaffleQuest : MonoBehaviour
         //SceneManager.LoadScene("SecondArea");
     }
     public void DecideQuest(){
-        StartCoroutine(notificationScript.BackMovimente());
          switch(DaySystem.dayTime){
             case "Morning":
                 ManagerDesScript.StartMinigame();
@@ -149,6 +149,8 @@ public class RaffleQuest : MonoBehaviour
             default:
                     break;
         }
+        notificationScript.Instructions();
+        StartCoroutine(notificationScript.StartMovement());
         timer.SetActive(true);
         timerScript.timerleft = timeMinigame;
         timerScript.timerOn = true;

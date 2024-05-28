@@ -16,6 +16,7 @@ public class CutsceneController : MonoBehaviour
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private ScrpitTablePlayer playerValues;
     [SerializeField] private StaminaSystem staminaScript;
+    [SerializeField] private Notification notificationScript;
     private AudioClip effect;
     private AudioClip ambiance;
     private bool canAlarm;
@@ -49,11 +50,15 @@ public class CutsceneController : MonoBehaviour
             MenuNight.SetActive(true);
             playerValues.EnabledCursor();
         }
-        if(DaySystem.dayTime == "Morning" && canGive == true) {
+        if(canGive == true) {
+            if(DaySystem.dayTime == "Morning") {
+                canGive = false;
+                staminaScript.IncreaseStamina(playerValues.staminaRecuperNight);
+                StartCoroutine(staminaScript.IncreaseStamina(playerValues.staminaRecuperNight));
+                playerValues.staminaRecuperNight = 0;
+            }
+            StartCoroutine(notificationScript.StartMovement());
             canGive = false;
-            Debug.Log("stamanuda");
-            StartCoroutine(staminaScript.IncreaseStamina(playerValues.staminaRecuperNight));
-            playerValues.staminaRecuperNight = 0;
         }
     }
 

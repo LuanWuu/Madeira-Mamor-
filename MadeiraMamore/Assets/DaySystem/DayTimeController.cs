@@ -25,6 +25,7 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private GameObject mosquito;
     [SerializeField] private GameObject Baltasar;
     [SerializeField] private GameObject FoodIcon;
+    [SerializeField] private TextMeshProUGUI normalFoodPrice;
 
     void Awake()
     {
@@ -75,7 +76,8 @@ public class DayTimeController : MonoBehaviour
                 DayText.text = "Periodo do dia: " + "Almoço";
                 notificationScript.PanIcon();
                 FoodIcon.SetActive(true);
-                StartCoroutine(notificationScript.StartMoviment());
+                playerValues.canOpenFoodMenu = true;
+                StartCoroutine(notificationScript.StartMovement());
                 cutscene.GiveAmbianceSound(database.lunchMoment);                     
                 roadMapController.ChefWords();
                 break;
@@ -101,8 +103,10 @@ public class DayTimeController : MonoBehaviour
         }
     }
     public void ChangedDay(){
+        notificationScript.BaseNotifi();
         mensageControllerScript.moment = 0;
         mensageControllerScript.RestNameList();
+        mensageControllerScript.PickWorkerWords();
         switch(DaySystem.day){
             case 1:
                 cutscene.GiveAmbianceSound(database.ambiance);
@@ -137,6 +141,7 @@ public class DayTimeController : MonoBehaviour
                 DayText.text = "Dia " + DaySystem.OrderDay[4].ToString();
                 break;
             case 6:
+                normalFoodPrice.text = "Gratuito";
                 cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.transition);
                 chuva.SetActive(false);
@@ -150,6 +155,7 @@ public class DayTimeController : MonoBehaviour
                 DayText.text = "Dia " + DaySystem.OrderDay[6].ToString();
                 break;
             case 8:
+                normalFoodPrice.text = "$200";
                 cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay27();
@@ -162,8 +168,6 @@ public class DayTimeController : MonoBehaviour
             default:
                 break;
         }
-
-        mensageControllerScript.PickWorkerWords();
         cutscene.SoundEffect(database.Alarm);
         
     }

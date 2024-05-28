@@ -13,7 +13,7 @@ public class IconSup : MonoBehaviour
     void Update()
     {
         float dist = Vector3.Distance(player.position, transform.position);
-        if(dist < 7) {
+        if(dist < 9) {
             if (iconFood.activeInHierarchy){
                 iconFood.SetActive(false);
             }else if(!iconButton.activeInHierarchy){

@@ -16,17 +16,17 @@ public class ScrpitTablePlayer : ScriptableObject
     public bool canMoviCamera = true;
     [Header("stamina")]
     public int staminaRecuperNight;
+    [Header("Food Menu")]
+    public bool canOpenFoodMenu;
 
     public void EnabledCursor(){
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         canMoviCamera = false;
-        Debug.Log("enalbed cursor");
     }
     public void DisabledCursor(){
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         canMoviCamera = true;
-        Debug.Log("Disableds cursor");
     }
 }
