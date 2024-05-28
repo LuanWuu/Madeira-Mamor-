@@ -11,6 +11,7 @@ public class FoodMenu : MonoBehaviour
     [SerializeField] private GameObject foodmenu;
     public void SmallFood(){
         if(playerValues.money >= 100) {
+            playerValues.canOpenFoodMenu = false;
             StartCoroutine(staminaScript.IncreaseStamina(3));
             StartCoroutine(moneyScript.TakeMoney(1));
             Closed();  
@@ -18,6 +19,7 @@ public class FoodMenu : MonoBehaviour
     }
     public void NormalFood () {
         if(playerValues.money >= 200 ||  DaySystem.day == 6 || DaySystem.day == 7) {
+            playerValues.canOpenFoodMenu = false;
             StartCoroutine(staminaScript.IncreaseStamina(5));
             if(DaySystem.day != 6 || DaySystem.day != 7) {
                StartCoroutine(moneyScript.TakeMoney(2)); 
@@ -27,6 +29,7 @@ public class FoodMenu : MonoBehaviour
     }
     public void BigFood(){
         if(playerValues.money >= 300){ 
+            playerValues.canOpenFoodMenu = false;
             StartCoroutine(staminaScript.IncreaseStamina(7));  
             StartCoroutine(moneyScript.TakeMoney(3)); 
             Closed();
@@ -34,7 +37,6 @@ public class FoodMenu : MonoBehaviour
     }
     public void Closed(){
         playerValues.canMovi = true;
-        playerValues.canOpenFoodMenu = false;
         playerValues.DisabledCursor();
         foodmenu.SetActive(false);
     }
