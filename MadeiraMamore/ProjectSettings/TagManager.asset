@@ -29,7 +29,7 @@ TagManager:
   - Treasures
   - UIcutscene
   - Dice
-  - 
+  - Colors
   - 
   - 
   - 
@@ -51,4 +51,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Canvas
+    uniqueID: 2340210597
     locked: 0

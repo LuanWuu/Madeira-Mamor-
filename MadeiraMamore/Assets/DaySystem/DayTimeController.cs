@@ -66,7 +66,7 @@ public class DayTimeController : MonoBehaviour
         switch(DaySystem.dayTime){
             case "Morning":  
                 cutscene.MuteMusic();
-                DayText.text = "Periodo do dia: " + "Primeiro turno";          
+                DayText.text = "Primeiro turno";          
                 train.SetActive(true);
                 roadMapController.ChefWords();
                 mornig.SetActive(true);
@@ -74,7 +74,7 @@ public class DayTimeController : MonoBehaviour
                 Baltasar.SetActive(true);
                 break;
             case "Lunch":    
-                DayText.text = "Periodo do dia: " + "Almoço";
+                DayText.text = "Almoço";
                 notificationScript.PanIcon();
                 FoodIcon.SetActive(true);
                 playerValues.canOpenFoodMenu = true;
@@ -85,12 +85,12 @@ public class DayTimeController : MonoBehaviour
                 break;
             case "Afternoon":
                 cutscene.MuteMusic();
-                DayText.text = "Periodo do dia: " + "Segundo turno"; 
+                DayText.text = "Segundo turno"; 
                 mornig.SetActive(false);
                 afternoon.SetActive(true);
                 break;
             case "Night":
-                DayText.text = "Periodo do dia: " + "Noite"; 
+                DayText.text = "Noite"; 
                 cutscene.DesMuteMusic();
                 cutscene.MusicAmbiente(database.night);   
                 cutscene.SoundEffect(database.Trem);
