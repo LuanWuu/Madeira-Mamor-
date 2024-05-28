@@ -36,7 +36,6 @@ public class CarryUI : MonoBehaviour
     void LayerListToColorList(){
         int[] numberlayers = new int[wagonScripts[numberOfWAGON].LayerAcceptWagon.Count];
         numberlayers = wagonScripts[numberOfWAGON].LayerAcceptWagon.ToArray();
-        Debug.Log(" numberlayers " + numberlayers.Length);
         int amoutNotPainting = 0;
         for(int i = 0; i < numberlayers.Length; i++) {
             for(int l = 0; l < colorLayerScriptable.layerOfPackage.Length; l++) {

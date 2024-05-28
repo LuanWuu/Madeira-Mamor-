@@ -15,8 +15,8 @@ MonoBehaviour:
   amoutWorker: 6
   answer: 0
   cheif:
-  - "Chefe: Mantenha esse desempenho e n\xE3o teremos problemas."
-  - 'Chefe: Bom trabalho. Aproveite a pausa, quando terminar fale comigo.'
+  - "Essa \xE9 tua lista. Tudo h\xE1 de ser terminado hoje."
+  - Nem pense em ficar enrolando.
   chiefScrean:
   - '"Chefe: Venha falar comigo quando acordar"'
   - "Chefe: Mais r\xE1pido! N\xE3o temos o dia todo."
@@ -27,34 +27,36 @@ MonoBehaviour:
   - 'Guarda: Seu trabalho fica pro outro lado.'
   - 'Guarda: Prefere que eu acabe logo com isso?'
   worker0AnswerPositive:
-  - "T1: haha voc\xEA t\xE1 certo, s\xF3 quando morrermos seremos livres."
+  - "haha voc\xEA t\xE1 certo, s\xF3 quando morrermos seremos livres."
   worker0AnswerNegative:
-  - "T1: Isso s\xF3 at\xE9 arranjarmos outro emprego t\xE3o ruim quanto esse."
+  - "Isto s\xF3 at\xE9 arranjarmos outro emprego t\xE3o ruim quanto."
   worker0AnswerPositive2Day22:
-  - "T1: Aqui tamb\xE9m \xE9."
-  - "T1: \xC9 s\xF3 mais um risco, uma \xFAltima aposta."
+  - "Aqui tamb\xE9m \xE9."
+  - "\xC9 s\xF3 mais um risco, uma \xFAltima aposta."
   worker0AnswerNegative2Day22:
-  - "T1: Se sair daqui vivo, espero que possamos nos reencontrar pra uma bebida.
-    Talvez at\xE9 uma \xFAltima rodada de poker."
+  - "Se sair daqui vivo, espero que possamos nos reencontrar pra uma bebida. Talvez
+    at\xE9 uma \xFAltima rodada de poker."
   worker2AnswerPositive:
-  - "T3: Voc\xEA deveria... ficar longe."
+  - "Voc\xEA deveria... afastar-se."
   worker2AnswerNegative:
-  - 'T3: Preciso... do dinheiro.'
-  - "T3: N\xE3o pagam pra... ficar... no hospital."
+  - Preciso...do dinheiro.
+  - "N\xE3o pagam para... ficar de... cama no hospital."
   worker4AnswerPositive:
-  - 'T5: Deve ter sido um desses mosquitos.'
-  - 'T5: Eu vi um homem que vivia reclamando deles morrer.'
+  - "H\xE1 de ter sido um destes mosquitos."
+  - Vi um homem que vivia a reclamar deles morrer.
   worker4AnswerNegative:
-  - "T5: N\xE3o parece..."
+  - "N\xE3o parece..."
   worker5AnswerPositive:
-  - 'T6: Hmm eu ouvi um conhecido falando sobre um lugar interessante aqui perto...'
-  - "T6: Talvez eu tenha um plano, mas talvez esteja meio b\xEAbado.."
-  - 'T6: Discutimos isso outra noite?'
+  - Hmm eu ouvi um conhecido falando sobre um lugar interessante aqui perto...
+  - "Talvez eu possa ter um plano, mas estou meio b\xEAbado..."
+  - Discutimos isto outra noite?
   worker5AnswerNegative:
-  - "T6: N\xE3o seja burro! E n\xE3o seja hip\xF3crita! Diz que fazem sentido mas
-    veio beber..."
-  worker6Special:
-  - "T6: Ah, \xC1lcool, uma das melhores coisas inventadas."
-  - "T6: Como eles podem proibir algo t\xE3o bom? Isso \xE9 o que me faz mais produtivo!
-    Como esperam que eu viva sem?"
-  - "T6: A gente n\xE3o devia continuar aguentando essas regras sem sentido."
+  - "N\xE3o seja burro! E n\xE3o seja hip\xF3crita! Diz que fazem sentido, mas veio
+    beber mesmo assim..."
+  worker5GenericAnswer:
+  - se adora tanto esta Companhia, por que sempre volta aqui?
+  workerSpecial:
+  - "Ah, \xC1lcool, uma das melhores coisas inventadas."
+  - "Como podem proibir-nos algo t\xE3o bom? Isto \xE9 o que me faz mais produtivo!
+    Como esperam que viva sem?"
+  - "N\xF3s n\xE3o dev\xEDamos continuar a aguentar estas regras sem sentido."

@@ -11,10 +11,14 @@ public class Hand : MonoBehaviour
     [SerializeField] private float lerpVelocity;
     [SerializeField] private float durationLerpMovi;
     [SerializeField] private GameObject speechBubble;
+    [SerializeField] private GameObject menuFood;
     [SerializeField] private MensageController mensageControllerScript;
     [SerializeField] private StoragaDayValues DaySystem;
+    [SerializeField] private ScrpitTablePlayer scriptTableValues;
+    [SerializeField] private StaminaSystem staminaController;
 
     [System.NonSerialized] public bool takePackage;
+
     private bool canGet;
     private bool activeOneTime;
     private bool canCarry;
@@ -22,15 +26,22 @@ public class Hand : MonoBehaviour
     private bool canGive;
     private bool canActiveCharaceterLines;
     private bool canGetPackage;
+    private bool pickedUp = false;
+    private bool lookBox;
+
     private float startCarryTime;
+
     private GameObject target;
     private GameObject targetTrain;
     private GameObject targetCharacter;
     private GameObject targetDesposit;
+    private GameObject targetFood;
     private GameObject lastHitObject; 
+    private GameObject iconButton;
     private Renderer targetRenderer;
     private Renderer targetRendererDelivery;
     private Renderer targetRendererDeposity;
+    private Renderer targetRendererFoood;
     private Ray ray;
     private Vector3 screenCenter;
     // Start is called before the first frame update
@@ -47,17 +58,30 @@ public class Hand : MonoBehaviour
 
         InputManager();
         RaycastCheck();
-        if(canCarry == true){
+        if(canCarry == true && target != null){
             Carry();
         }
     }
     void InputManager(){
         if (Input.GetButtonDown("Interactions")){ 
             if(canActiveCharaceterLines == true){ // Ativando Caixa de teste
-                speechBubble.SetActive(true);
-                PlayerCamera.EnabledCursor();
                 mensageControllerScript.GiveTalk(targetCharacter.name);
-                mensageControllerScript.GiveToBottun();
+            }
+            if(targetFood != null && scriptTableValues.canOpenFoodMenu == true){ // Ativando Caixa de teste
+                menuFood.SetActive(true);
+                scriptTableValues.EnabledCursor();
+                scriptTableValues.canMovi = false;
+            }
+            if(target != null && pickedUp == false) {
+                target.tag = "CloneBox";
+                StartCoroutine(staminaController.DecreaseStamina(1));
+                pickedUp = true;
+            }
+            if(target != null && lookBox == true) {
+                target.tag = "CloneBox";
+            }
+            if(iconButton != null) {
+                iconButton.SetActive(false);
             }
             switch(DaySystem.dayTime){
             case "Morning":
@@ -73,21 +97,18 @@ public class Hand : MonoBehaviour
     }
     void ControlerHadAfternoon(){
         if(canGet == true){
-                canCarry = true;
-                startCarryTime = Time.time + durationLerpMovi;
-            }else if(canCarry == true){
-                if(canGive == true){
-                    if(targetTrain != null){
-                        GameObject box = target.transform.GetChild(1).gameObject;
-                        Renderer boxColor = box.GetComponent<Renderer>();
-                        targetTrain.GetComponent<ToFillTrain>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
-                        canMoviLerp = true;
-                        canCarry = false;
-                    }
-                    canGive = false;
-                    target = null;
-                }
-            }
+            canCarry = true;
+            startCarryTime = Time.time + durationLerpMovi;
+        }else if(canCarry == true && canGive == true && targetTrain != null && canCarry == true){
+            GameObject box = target.transform.GetChild(1).gameObject;
+            Renderer boxColor = box.GetComponent<Renderer>();
+            targetTrain.GetComponent<ToFillTrain>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
+            pickedUp = false;
+            canMoviLerp = true;
+            canCarry = false;
+            canGive = false;
+            target = null;
+        }
     }
     void ControlerHadMorning(){
         if(canGetPackage == true){
@@ -97,18 +118,15 @@ public class Hand : MonoBehaviour
         if(canGet == true){
             canCarry = true;
             startCarryTime = Time.time + durationLerpMovi;
-            }else if(canCarry == true){
-                if(canGive == true){
-                    if(targetDesposit  != null){
-                        GameObject box = target.transform.GetChild(1).gameObject;
-                        Renderer boxColor = box.GetComponent<Renderer>();
-                        targetDesposit .GetComponent<PackgeController>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
-                        canMoviLerp = true;
-                        canCarry = false;
-                    }
-                    canGive = false;
-                    target = null;
-                }
+        }else if(canCarry == true && canGive == true && targetDesposit  != null ){
+            GameObject box = target.transform.GetChild(1).gameObject;
+            Renderer boxColor = box.GetComponent<Renderer>();
+            targetDesposit .GetComponent<PackgeController>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
+            pickedUp = false;
+            canMoviLerp = true;
+            canCarry = false;
+            canGive = false;
+            target = null;
         }      
     }
     void RaycastCheck(){
@@ -120,6 +138,7 @@ public class Hand : MonoBehaviour
                     case "Character":
                             canActiveCharaceterLines = true;
                             targetCharacter = hit.collider.gameObject;
+                            IconEnabled(targetCharacter);
                             lastHitObject = hit.collider.gameObject;
                         break;
                     case "Train":
@@ -136,13 +155,23 @@ public class Hand : MonoBehaviour
                         if(canCarry == false){
                             target = hit.collider.gameObject;
                             CarrySystem();
+                            IconEnabled(target);
                             lastHitObject = hit.collider.gameObject;
                         }
                         break;
                     case "Desposit":
                         targetDesposit = hit.collider.gameObject;
                         CheckDeposit();
+                        IconEnabled(targetDesposit);
                         lastHitObject = hit.collider.gameObject;
+                        break;
+                    case "Food":
+                        if(DaySystem.dayTime == "Lunch" && scriptTableValues.canOpenFoodMenu == true){
+                            targetFood = hit.collider.gameObject;
+                            FoodOutilene();
+                            IconEnabled(targetFood);
+                            lastHitObject = hit.collider.gameObject;
+                        }
                         break;
                     default:
                         Reset();
@@ -153,11 +182,28 @@ public class Hand : MonoBehaviour
             Reset();
         }
     }
-
+    void IconEnabled(GameObject luckTarget){
+        Debug.Log(luckTarget.name);
+        for(int i = 0; i < luckTarget.transform.childCount; i++) {
+            GameObject chield = luckTarget.transform.GetChild(i).gameObject;
+            if(chield.tag == "Icon") {
+                 iconButton = chield;
+                 break;
+            }
+        }
+        if(iconButton != null) {
+            iconButton.gameObject.SetActive(true); 
+        }
+    }
+    void FoodOutilene(){
+        if(targetFood != null) {
+            targetRendererFoood = targetFood.GetComponent<Renderer>();
+            targetRendererFoood.material.SetFloat("_ValueMultiplay", outilineSizeBox);
+        }
+    }
     void CheckDelivery(){
-        canGive = true;
         targetRendererDelivery = targetTrain.GetComponent<Renderer>();
-        targetTrain.GetComponent<ToFillTrain>().CompatibleLayer(target.layer);
+        canGive = targetTrain.GetComponent<ToFillTrain>().CompatibleLayer(target.layer);
     }
     void GetPackage(){
         canGetPackage = true;
@@ -166,14 +212,14 @@ public class Hand : MonoBehaviour
     }
     void CheckDeposit(){
         if(target != null){
-            canGive = true;
-            targetRendererDeposity = targetDesposit.GetComponent<Renderer>();
-            targetDesposit.GetComponent<PackgeController>().CompatibleLayer(target.layer);            
+            targetRendererDeposity = targetDesposit.GetComponent<Renderer>();   
+            canGive = targetDesposit.GetComponent<PackgeController>().CompatibleLayer(target.layer);      
         }
     }
     void CarrySystem(){
         if(activeOneTime == true){
             canGet = true;
+            lookBox = true;
             targetRenderer = target.GetComponent<Renderer>();
             targetRenderer.material.SetFloat("_ValueMultiplay", outilineSizeBox);// Ativando o Contorno
             activeOneTime = false;
@@ -202,13 +248,8 @@ public class Hand : MonoBehaviour
     }
 
     void Reset(){
-        lastHitObject = null;
-        canActiveCharaceterLines = false;
         if(speechBubble != null){
             speechBubble.SetActive(false);
-        }
-        if(Time.timeScale != 0){
-            PlayerCamera.DisabledCursor();
         }
         if(targetRendererDelivery != null){
             targetRendererDelivery.material.SetFloat("_ValueMultiplay", 0);
@@ -216,11 +257,21 @@ public class Hand : MonoBehaviour
         if(targetRendererDeposity  != null){
             targetRendererDeposity.material.SetFloat("_ValueMultiplay", 0);
         }
-        canGetPackage = false;
-        canGet = false;
-        activeOneTime = true;
+         if(targetRendererFoood != null) {
+            targetRendererFoood.material.SetFloat("_ValueMultiplay", 0);
+        }
+        if(iconButton != null) {
+            iconButton.SetActive(false);
+        }
         if(targetRenderer != null){
             targetRenderer.material.SetFloat("_ValueMultiplay", 0);
         }
+        targetFood = null;
+        lastHitObject = null;
+        canGetPackage = false;
+        canGet = false;
+        lookBox = false;
+        activeOneTime = true;
+        canActiveCharaceterLines = false;
     }
 }

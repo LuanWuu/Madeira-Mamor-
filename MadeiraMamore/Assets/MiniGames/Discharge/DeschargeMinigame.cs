@@ -73,4 +73,10 @@ public class DeschargeMinigame : MonoBehaviour
             GetComponent<Renderer>().material.SetFloat("_ValueMultiplay", 0);
         }
     }
+    public void Reset(){
+        for (int i = 0; i < load.transform.childCount; i++){
+            GameObject chield = load.transform.GetChild(i).gameObject;
+            chield.gameObject.SetActive(false);
+        }
+    }
 }

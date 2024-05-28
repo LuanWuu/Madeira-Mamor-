@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552d7f639cef04e4baef3aa9ab0056f1, type: 3}
+  m_Name: ClipsAndSouns
+  m_EditorClassIdentifier: 
+  cutscene1: {fileID: 32900000, guid: 2177c263f5db34f4e85d9d1bb7d35c94, type: 3}
+  cutscene2: {fileID: 32900000, guid: abc1499d43c7f174d963af7d7f05de7c, type: 3}
+  end1: {fileID: 32900000, guid: c3e0361b64cd62a469c5905b17f186ba, type: 3}
+  end2: {fileID: 32900000, guid: b7269586723938a4c99e5957871d3c89, type: 3}
+  end3: {fileID: 32900000, guid: 46f53e4f09bd56342888a5200ef603d6, type: 3}
+  transition: {fileID: 32900000, guid: 1e680c1540824da43813d2b06c1adfd4, type: 3}
+  Mosquito: {fileID: 8300000, guid: 52ab6439bacf9ba4ca7a436b906587e8, type: 3}
+  Chuva: {fileID: 8300000, guid: b47ad1f6fbb12544c9ba9f7c625bf27a, type: 3}
+  Trem: {fileID: 8300000, guid: 8299b9b57331f744ab05d0a255bc743f, type: 3}
+  Alarm: {fileID: 8300000, guid: 49414507ddac1df408cbd35189ed0417, type: 3}
+  workSound: {fileID: 8300000, guid: 3952fcc066d68de4dbb1e39e8fab0194, type: 3}
+  lunchMoment: {fileID: 8300000, guid: 6ed607ef0219c11439e458bc48585602, type: 3}
+  ambiance: {fileID: 8300000, guid: d5c5bb15012ec1748a26ed59cd08094d, type: 3}
+  night: {fileID: 8300000, guid: 274c581accc558d4fb7604d54a5cd23a, type: 3}
+  betSound: {fileID: 8300000, guid: 9baab5d351e08f84a824d035a9603d38, type: 3}

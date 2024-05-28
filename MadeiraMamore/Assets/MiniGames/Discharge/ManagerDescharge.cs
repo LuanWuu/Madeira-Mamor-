@@ -25,7 +25,7 @@ public class ManagerDescharge : MonoBehaviour
 
         colorLayerScriptable.packageLayer = uniqueNumbers;
 
-        Debug.Log("teste");
+
         int saveLayerAmout = colorLayerScriptable.packageLayer.ToArray().Length;
         int[] giveDepositAmoutLayer = new int[depositPosition.Length];
         int halfTipLayer = saveLayerAmout/depositPosition.Length; 
@@ -67,6 +67,11 @@ public class ManagerDescharge : MonoBehaviour
                 Destroy(deposit[i], 0.5f);
             }
             startGame = false;
+        }
+    }
+    public void Reset(){
+        for(int i = 0; i < deposit.Length; i++) {
+            Destroy(deposit[i], 0.5f);
         }
     }
 }
