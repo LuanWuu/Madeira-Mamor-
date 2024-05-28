@@ -15,19 +15,19 @@ MonoBehaviour:
   amoutWorker: 6
   answer: 0
   cheif:
-  - "Essa \xE9 tua lista. Tudo h\xE1 de ser terminado hoje."
+  - "Esta \xE9 tua lista. Tudo h\xE1 de ser terminado hoje."
   - Nem pense em ficar enrolando.
   chiefScrean:
-  - '"Chefe: Venha falar comigo quando acordar"'
-  - "Chefe: Mais r\xE1pido! N\xE3o temos o dia todo."
-  - "Chefe: Voc\xEA n\xE3o \xE9 pago pra ficar parado."
-  - 'Chefe: Muito lento...'
+  - Venha falar comigo quando acordar
+  - "Mais r\xE1pido! N\xE3o temos o dia todo."
+  - "Voc\xEA n\xE3o \xE9 pago pra ficar parado."
+  - Muito lento...
   guard:
-  - 'Capataz: Pensa que vai aonde?'
-  - 'Guarda: Seu trabalho fica pro outro lado.'
-  - 'Guarda: Prefere que eu acabe logo com isso?'
+  - Pensa que vai aonde?
+  - Seu trabalho fica pro outro lado.
+  - Prefere que eu acabe logo com isso?
   worker0AnswerPositive:
-  - "haha voc\xEA t\xE1 certo, s\xF3 quando morrermos seremos livres."
+  - "Haha voc\xEA t\xE1 certo, s\xF3 quando morrermos seremos livres."
   worker0AnswerNegative:
   - "Isto s\xF3 at\xE9 arranjarmos outro emprego t\xE3o ruim quanto."
   worker0AnswerPositive2Day22:
@@ -53,8 +53,6 @@ MonoBehaviour:
   worker5AnswerNegative:
   - "N\xE3o seja burro! E n\xE3o seja hip\xF3crita! Diz que fazem sentido, mas veio
     beber mesmo assim..."
-  worker5GenericAnswer:
-  - se adora tanto esta Companhia, por que sempre volta aqui?
   workerSpecial:
   - "Ah, \xC1lcool, uma das melhores coisas inventadas."
   - "Como podem proibir-nos algo t\xE3o bom? Isto \xE9 o que me faz mais produtivo!

@@ -96,7 +96,7 @@ public class roadMap : ScriptableObject {
     public void ChefWords(){
         cheif = new List<string>(){ 
             // Ao falar com o chefe de equipe para iniciar o trabalho:
-            "Essa é tua lista. Tudo há de ser terminado hoje.",
+            "Esta é tua lista. Tudo há de ser terminado hoje.",
             "Nem pense em ficar enrolando."
         };
     }
@@ -134,16 +134,16 @@ public class roadMap : ScriptableObject {
     public void DontStamina(){
         cheif = new List<string>(){ 
             // Não terminou:
-            "Fingindo estar cansado ?",
-            "Se quiser ser pago é melhor trabalhar direito",
-            "Continue assim e não precisará voltar amanhã.",
-            "Volte logo para o próximo turno"
+            "Fingindo estar cansado?",
+            "Acha que temos tempo de esperar que queira trabalhar?",
+            "Se for continuar assim, esqueça teu salário",
+            "Vá antes que eu mude de ideia, e venha logo para o próximo turno"
         };
     }
     public void ChefOrders(){
         cheif = new List<string>(){ 
             // Ao falar com o chefe de equipe para iniciar o trabalho:
-            "Vai dormir na sua barraca que amanhã tem mais",
+            "Vá dormir na tua barraca que amanhã terá mais trabalho",
         };
     }
     public void DontFinshWork(){
@@ -180,7 +180,7 @@ public class roadMap : ScriptableObject {
     public void Rejected(){
         workerSpecial = new List<string>(){
             // resposta errada:
-            "se adora tanto esta Companhia, por que sempre volta aqui?"
+            "Se adoras tanto esta Companhia, por que sempre volta aqui?"
         };
     }
     public void InitializeWorkerTalkDay1(){
@@ -193,7 +193,7 @@ public class roadMap : ScriptableObject {
             "Seria bom sair em férias..."
             };
         workerTalkDay1[2] = new List<string>{// Dia 1
-            "*matando um mosquito* meu sangue deve ser muito bom.",
+            "Meu sangue deve ser muito bom.",
             "Esta maldita floresta está cheia de mosquitos.",
             "E estão usando-me de almoço."
             };
@@ -207,7 +207,7 @@ public class roadMap : ScriptableObject {
         };
         worker0AnswerPositive = new List<string>(){
             //P: Nunca.
-            "haha você tá certo, só quando morrermos seremos livres."
+            "Haha você tá certo, só quando morrermos seremos livres."
 
         };
         worker0AnswerNegative = new List<string>(){
@@ -327,11 +327,11 @@ public class roadMap : ScriptableObject {
     public void InitializeWorkerTalkDay22(){
         workerTalkDay22[0] = new List<string>{// Dia 22: Nesse dia o Trabalhador 1 foge floresta adentro, tentando voltar para sua casa.
             // Esse dia dá a possibilidade do jogador tentar fugir e assim alcançar um final alternativo.
-            "T1: Você já pensou em tentar voltar pra casa?",
-            "T1: Eu não aguento mais ficar aqui, cansei disto tudo. Quero apenas ver minha família novamente.",
-            "T1: *sussurrando* Hoje à noite fugirei, prefiro tentar a sorte nesta mata a ficar mais um dia neste inferno.",
-            "T1: Deseje-me sorte",
-            "T1: Vejo-te do outro lado, amigo."
+            "Você já pensou em tentar voltar pra casa?",
+            "Eu não aguento mais ficar aqui, cansei disto tudo. Quero apenas ver minha família novamente.",
+            "*sussurrando* Hoje à noite fugirei, prefiro tentar a sorte nesta mata a ficar mais um dia neste inferno.",
+            "Deseje-me sorte",
+            "Vejo-te do outro lado, amigo."
             };
         workerTalkDay22[4] = new List<string>{// Dia 20: 
             "Por que proíbem mulheres de aproximarem-se?",
@@ -339,7 +339,7 @@ public class roadMap : ScriptableObject {
         };
          workerTalkDay22[5]= new List<string>(){// Dia 22:
             "Um grupo foi buscar algumas garrafas na vizinhança...",
-            " Espero que retornem logo."
+            "Espero que retornem logo."
         };
         worker0AnswerPositive = new List<string>(){
              // P: Sim.
@@ -353,23 +353,23 @@ public class roadMap : ScriptableObject {
             "Queria eu ser despreocupado assim."
         };
         playerAnswers[0] = new List<string>{
-            "P: Não.",
-            "P: Sim.",
+            "Não.",
+            "Sim.",
         };
         playerAnswers[3] = new List<string>{
-            "P: Boa sorte.",
-            "P: Mas é muito perigoso"
+            "Boa sorte.",
+            "Mas é muito perigoso"
         };
     }
     public void InitializeWorkerTalkDay25(){
         workerTalkDay25[4] = new List<string>{// Dia 25: Ocorre um deslizamento durante a noite anterior,
             // fazendo com que parte dos trilhos seja destruída. Isso faz com que o jogador tenha que realizar o Trabalho B para arrumar os trilhos.
-            "T5: Ao menos não fui eu quem construiu os trilhos destruídos.",
-            "T5: Hei de fazer este trabalho pela primeira vez, e não pela segunda."
+            "Ao menos não fui eu quem cortou as árvores no caminho do trilho.",
+            "Hei de fazer este trabalho pela primeira vez, e não pela segunda."
             };
          workerTalkDay25[5]= new List<string>(){// Dia 25:
-            "Um deslizamento? Demorou para outro acontecer...",
-            "Toda vez que chove forte há um destes."
+            "As árvores cairam? Demorou para acontecer...",
+            "Toda vez que chove forte caem pela floresta."
         };
     }
     public void InitializeWorkerTalkDay26(){
@@ -377,8 +377,8 @@ public class roadMap : ScriptableObject {
             // fazendo com que o jogador trabalhe durante a noite ao invés de escolher o que fazer. 
             // (Durante o dia realizaria o Trabalho B e de noite o Trabalho A, para compensar o tempo que o trem teria ficado parado).
             // Este também é o dia em que o jogador começa a ter sintomas da malária.
-            "T5: Penso que vão fazer-nos trabalhar além do anoitecer...",
-            "T5: Maldito deslizamento."
+            "Penso que vão fazer-nos trabalhar além do anoitecer...",
+            "Maldita chuva."
             };
          workerTalkDay26[5]= new List<string>(){// Dia 26:
             "É melhor não me obrigarem a trabalhar de noite.",
@@ -386,16 +386,16 @@ public class roadMap : ScriptableObject {
     }
     public void InitializeWorkerTalkDay27(){
         workerTalkDay27[4] = new List<string>{ // Dia 27: Os sintomas do jogador pioram, tornando o trabalho ainda mais difícil.
-            "T5: Tá se sentindo bem?",
-            "T5: Ainda aguenta depois de ontem?"
+            "Tá se sentindo bem?",
+            "Ainda aguenta depois de ontem?"
             };
          workerTalkDay27[5] = new List<string>(){// Dia 27:
             "Ei, acho que você deveria descansar.",
             "Parece mal a ponto que uma garrafa inteira não resolveria."
         };
         playerAnswers[0] = new List<string>{
-            "P: : Está tudo bem.",
-            "P: Talvez esteja doente."
+            "Está tudo bem.",
+            "Talvez esteja doente."
         };
     }
 }
