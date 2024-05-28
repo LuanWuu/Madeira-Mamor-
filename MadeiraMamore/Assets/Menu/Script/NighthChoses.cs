@@ -27,6 +27,7 @@ public class NighthChoses : MonoBehaviour
     public void Drink(){
         player.position = localToDrink.position;
         notificationScript.Night();
+        StartCoroutine(notificationScript.StartMovement());
         playerValues.DisabledCursor();
         playerValues.staminaRecuperNight = 20;
         DisableChoses();

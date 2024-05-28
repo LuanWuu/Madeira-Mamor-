@@ -37,6 +37,8 @@ public class RaffleQuest : MonoBehaviour
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
     [Header("Notification")]
     [SerializeField] private Notification notificationScript;
+    [System.NonSerialized] public int salary;
+    [System.NonSerialized] public bool fineshed;
     private Timer timerScript;
     private int numberMinigame;
     private int beforeNumberMinigame;
@@ -56,7 +58,9 @@ public class RaffleQuest : MonoBehaviour
     }
     public void CompleteQuest(){
         notificationScript.Reward();
+        StartCoroutine(notificationScript.StartMovement());
         mensagControlScrpt.RestNameList();
+        fineshed = true;
         switch(DaySystem.dayTime){
             case "Morning":
                 DepositUI.SetActive(false);
@@ -73,15 +77,16 @@ public class RaffleQuest : MonoBehaviour
         if(timerScript.timerleft != 0){
             if(timerScript.timerleft > goodScore){
                 roadMapScriptable.GoodWork();
-                StartCoroutine( MoneySystemScript.GetSalary(3));
+                salary = 3;
             }else if(timerScript.timerleft  > normalScore){
                 roadMapScriptable.MediumWork();
-                StartCoroutine( MoneySystemScript.GetSalary(2));
+                salary = 2;
             }else{
                 roadMapScriptable.BadWork();
-                StartCoroutine( MoneySystemScript.GetSalary(1));
+                salary = 1;
             }
         }
+        notificationScript.canNotify = false;
         timer.SetActive(false);
     }
     public void NoStamina(){
@@ -93,14 +98,17 @@ public class RaffleQuest : MonoBehaviour
         DesableMinigame();
     }
     void  DesableMinigame(){
+        salary = 0;
         mensagControlScrpt.RestNameList();
         mensagControlScrpt.oneTime = true;
+        fineshed = true;
         timerScript.stop = true;
         timer.SetActive(false);
         ManagerDesScript.Reset();
         scriptTableValues.dontFineshed = true;
         scriptTableValues.canMovi = false;
         player.position =  DontFinishPosi.position;
+        notificationScript.canNotify = false;
         switch(DaySystem.dayTime){
             case "Morning":
                 ManagerDesScript.Reset();
@@ -149,7 +157,10 @@ public class RaffleQuest : MonoBehaviour
             default:
                     break;
         }
+        fineshed = false;
+        salary = 0;
         notificationScript.Instructions();
+        notificationScript.canNotify = true;
         StartCoroutine(notificationScript.StartMovement());
         timer.SetActive(true);
         timerScript.timerleft = timeMinigame;

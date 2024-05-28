@@ -65,8 +65,8 @@ public class DayTimeController : MonoBehaviour
         }
         switch(DaySystem.dayTime){
             case "Morning":  
-                DayText.text = "Periodo do dia: " + "Primeiro turno";
-                cutscene.GiveAmbianceSound(database.workSound);            
+                cutscene.MuteMusic();
+                DayText.text = "Periodo do dia: " + "Primeiro turno";          
                 train.SetActive(true);
                 roadMapController.ChefWords();
                 mornig.SetActive(true);
@@ -79,18 +79,20 @@ public class DayTimeController : MonoBehaviour
                 FoodIcon.SetActive(true);
                 playerValues.canOpenFoodMenu = true;
                 StartCoroutine(notificationScript.StartMovement());
-                cutscene.GiveAmbianceSound(database.lunchMoment);                     
+                cutscene.DesMuteMusic();
+                cutscene.MusicAmbiente(database.lunchMoment);                     
                 roadMapController.ChefWords();
                 break;
             case "Afternoon":
+                cutscene.MuteMusic();
                 DayText.text = "Periodo do dia: " + "Segundo turno"; 
-                cutscene.GiveAmbianceSound(database.workSound);
                 mornig.SetActive(false);
                 afternoon.SetActive(true);
                 break;
             case "Night":
                 DayText.text = "Periodo do dia: " + "Noite"; 
-                cutscene.GiveAmbianceSound(database.night);   
+                cutscene.DesMuteMusic();
+                cutscene.MusicAmbiente(database.night);   
                 cutscene.SoundEffect(database.Trem);
                 train.SetActive(false);
                 roadMapController.ChefOrders();
@@ -110,27 +112,24 @@ public class DayTimeController : MonoBehaviour
         mensageControllerScript.PickWorkerWords();
         switch(DaySystem.day){
             case 1://1
-                cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.cutscene1);
                 roadMapController.InitializeWorkerTalkDay1();
                 DayText.text = "Dia " + DaySystem.OrderDay[0].ToString();
                 break;
             case 2://2
-                mosquito.SetActive(true);
                 cutscene.PlayVideo(database.transition);
+                mosquito.SetActive(true);
                 roadMapController.InitializeWorkerTalkDay2();
                 DayText.text = "Dia " + DaySystem.OrderDay[1].ToString();
                 break;
             case 3://12
-                mosquito.SetActive(false);
-                cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.cutscene2);
                 roadMapController.InitializeWorkerTalkDay12();
                 DayText.text = "Dia " + DaySystem.OrderDay[2].ToString();
                 break;
             case 4://20
                 disableCha.DisableDia4();
-                cutscene.GiveAmbianceSound(database.Chuva);
+                cutscene.SecondeSoundEffect(database.Chuva);
                 chuva.SetActive(true);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay20();
@@ -138,7 +137,7 @@ public class DayTimeController : MonoBehaviour
                 break;
             case 5://22
                 disableCha.DisableDia5();
-                cutscene.GiveAmbianceSound(database.Chuva);
+                cutscene.SecondeSoundEffect(database.Chuva);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay22();
                 DayText.text = "Dia " + DaySystem.OrderDay[4].ToString();
@@ -146,21 +145,18 @@ public class DayTimeController : MonoBehaviour
             case 6://25
                 disableCha.DisableDia6();
                 normalFoodPrice.text = "Gratuito";
-                cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.transition);
                 chuva.SetActive(false);
                 roadMapController.InitializeWorkerTalkDay25();
                 DayText.text = "Dia " + DaySystem.OrderDay[5].ToString();
                 break;
             case 7://26
-                cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay26();
                 DayText.text = "Dia " + DaySystem.OrderDay[6].ToString();
                 break;
             case 8://27
                 normalFoodPrice.text = "$200";
-                cutscene.GiveAmbianceSound(database.ambiance);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay27();
                 DayText.text = "Dia " + DaySystem.OrderDay[7].ToString();

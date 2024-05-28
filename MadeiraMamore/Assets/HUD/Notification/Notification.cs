@@ -15,11 +15,11 @@ public class Notification : MonoBehaviour
     [SerializeField] private GameObject iconChef;
     [SerializeField] private GameObject iconFood;
     [SerializeField] private float time;
+    [System.NonSerialized] public bool canNotify;
     private List<string> localList;
     private float localGodScore;
     private float localNormalScore;
     private float localBadScore;
-    private bool canNotify = true;
     private int localScore;
     // Start is called before the first frame update
     void Start()
@@ -35,12 +35,10 @@ public class Notification : MonoBehaviour
         ChefIcon();
     }
     public IEnumerator StartMovement(){
-        canNotify = false;
         transform.position = iniPosition.position;
         yield return MoveToPosition(targetPosi.position);
         yield return new WaitForSeconds(time);
         yield return MoveToPosition(iniPosition.position);
-        canNotify = true;
     }
 
     private IEnumerator MoveToPosition(Vector3 targetPosition)
@@ -70,7 +68,6 @@ public class Notification : MonoBehaviour
     public void Night(){
         ChefIcon();
         textNotifi.text = "Vá para a cama, amanhã se terá um longo dia";
-        StartCoroutine(StartMovement());
     }
     public void Reward(){
         ChefIcon();

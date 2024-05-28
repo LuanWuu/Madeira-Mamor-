@@ -20,4 +20,5 @@ public class DatabaseCutscene : ScriptableObject
     public AudioClip ambiance;
     public AudioClip night;
     public AudioClip betSound;
+    public AudioClip mosquito;
 }

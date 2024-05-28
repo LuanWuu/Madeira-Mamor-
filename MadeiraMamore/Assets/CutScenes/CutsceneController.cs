@@ -7,18 +7,21 @@ public class CutsceneController : MonoBehaviour
 {
     [SerializeField] private GameObject HUD;
     [SerializeField] private GameObject MenuNight;
+    [SerializeField] private GameObject SoundAmbiente;
     [SerializeField] private Camera cameraMain;
     [SerializeField] private Camera myCamera;
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private AudioSource sound;
-    [SerializeField] private AudioSource ambianceSound;
+    [SerializeField] private AudioSource secondSound;
+    [SerializeField] private AudioSource musicAmbiente;
     [SerializeField] private DayTimeController dayController;
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private ScrpitTablePlayer playerValues;
     [SerializeField] private StaminaSystem staminaScript;
     [SerializeField] private Notification notificationScript;
     private AudioClip effect;
-    private AudioClip ambiance;
+    private AudioClip secondEffect;
+    private AudioClip music;
     private bool canAlarm;
     private bool isPlaying;
     private bool canGive;
@@ -35,10 +38,11 @@ public class CutsceneController : MonoBehaviour
         cameraMain.enabled = true;
         isPlaying = false;
         videoPlayer.gameObject.SetActive(false);
+        SoundAmbiente.SetActive(true);
         HUD.SetActive(true);
-        ambianceSound.mute = false;
         StartCoroutine(dayController.DayAnimator());
-        Ambiance();
+        SecondSound();
+        Music();
         if(canAlarm == true){
             PlaySoundEffect();
         }
@@ -73,7 +77,7 @@ public class CutsceneController : MonoBehaviour
         canGive = true;
         videoPlayer.gameObject.SetActive(true);
         HUD.SetActive(false);
-        ambianceSound.mute = true;
+        SoundAmbiente.SetActive(false);
         videoPlayer.clip = cutscene;
         videoPlayer.loopPointReached += OnVideoEnd;
         videoPlayer.prepareCompleted += OnVideoPrepared;
@@ -90,13 +94,26 @@ public class CutsceneController : MonoBehaviour
         sound.Play();
         canAlarm = false;
     }
-    public void GiveAmbianceSound(AudioClip audio){
-        ambiance = audio;
+    public void SecondeSoundEffect(AudioClip audio){
+        secondEffect = audio;
     }
-    void Ambiance(){
-        ambianceSound.mute = false;
-        ambianceSound.clip = ambiance;
-        ambianceSound.Play();
+    void SecondSound(){
+        secondSound.clip = secondEffect;
+        secondSound.Play();
+    }
+    public void MusicAmbiente(AudioClip audio){
+        music = audio;
+    }
+    void Music(){
+        musicAmbiente.clip = music;
+        musicAmbiente.Play();
+    }
+    public void MuteMusic(){
+        musicAmbiente.clip = null;
+        musicAmbiente.mute = true;
+    }
+    public void DesMuteMusic(){
+        musicAmbiente.mute = false;
     }
     
 }

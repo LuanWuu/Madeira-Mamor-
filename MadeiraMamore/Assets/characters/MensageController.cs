@@ -18,6 +18,7 @@ public class MensageController : MonoBehaviour
     [SerializeField] private GameObject escapeButton;
     [SerializeField] private RaffleQuest rafflequestScript;
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
+    [SerializeField] private MoneySystem MoneySystemScript;
 
     int numeberOfWorker;
     int placeNumber;
@@ -129,6 +130,10 @@ public class MensageController : MonoBehaviour
                 if(DaySystem.dayTime != "Night" && DaySystem.dayTime != "Lunch"){
                     rafflequestScript.DecideQuest();
                     oneTime = false;
+                }
+                if(rafflequestScript.fineshed == true) {
+                   StartCoroutine( MoneySystemScript.GetSalary(rafflequestScript.salary));
+                   rafflequestScript.fineshed= false; 
                 }
             }
             if(numeberOfWorker == 5 && firstTime == 3){

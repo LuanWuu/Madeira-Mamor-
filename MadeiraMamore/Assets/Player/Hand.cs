@@ -73,7 +73,6 @@ public class Hand : MonoBehaviour
                 scriptTableValues.canMovi = false;
             }
             if(target != null && pickedUp == false) {
-                target.tag = "CloneBox";
                 StartCoroutine(staminaController.DecreaseStamina(1));
                 pickedUp = true;
             }
@@ -162,7 +161,6 @@ public class Hand : MonoBehaviour
                     case "Desposit":
                         targetDesposit = hit.collider.gameObject;
                         CheckDeposit();
-                        IconEnabled(targetDesposit);
                         lastHitObject = hit.collider.gameObject;
                         break;
                     case "Food":
@@ -183,16 +181,17 @@ public class Hand : MonoBehaviour
         }
     }
     void IconEnabled(GameObject luckTarget){
-        Debug.Log(luckTarget.name);
-        for(int i = 0; i < luckTarget.transform.childCount; i++) {
-            GameObject chield = luckTarget.transform.GetChild(i).gameObject;
-            if(chield.tag == "Icon") {
-                 iconButton = chield;
-                 break;
+        if(luckTarget != null) {
+            for(int i = 0; i < luckTarget.transform.childCount; i++) {
+                GameObject chield = luckTarget.transform.GetChild(i).gameObject;
+                if(chield.tag == "Icon") {
+                    iconButton = chield;
+                    break;
+                }
             }
-        }
-        if(iconButton != null) {
-            iconButton.gameObject.SetActive(true); 
+            if(iconButton != null) {
+                iconButton.gameObject.SetActive(true); 
+            }
         }
     }
     void FoodOutilene(){
@@ -213,7 +212,10 @@ public class Hand : MonoBehaviour
     void CheckDeposit(){
         if(target != null){
             targetRendererDeposity = targetDesposit.GetComponent<Renderer>();   
-            canGive = targetDesposit.GetComponent<PackgeController>().CompatibleLayer(target.layer);      
+            canGive = targetDesposit.GetComponent<PackgeController>().CompatibleLayer(target.layer);
+            if(canGive == true){
+                IconEnabled(targetDesposit);
+            }      
         }
     }
     void CarrySystem(){
@@ -266,6 +268,7 @@ public class Hand : MonoBehaviour
         if(targetRenderer != null){
             targetRenderer.material.SetFloat("_ValueMultiplay", 0);
         }
+        IconEnabled(null);
         targetFood = null;
         lastHitObject = null;
         canGetPackage = false;
