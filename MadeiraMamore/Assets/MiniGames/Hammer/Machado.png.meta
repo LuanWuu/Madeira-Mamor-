@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aaed479c0d7ee5f4fb34eb16c4a9bc8a
+guid: 55a1b686e4b97c64fae95b733195d884
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,22 +105,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fugir_0
+      name: Machado_1
       rect:
         serializedVersion: 2
-        x: 1125
-        y: 698
-        width: 1060
-        height: 1111
+        x: 1770
+        y: 975
+        width: 463
+        height: 545
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1aa9abf4c62c1bc49b954a64adffb118
-      internalID: -1188568898
+      spriteID: 6c30594ad65650b4da0c9dd5affff09d
+      internalID: -1162927400
       vertices: []
       indices: 
       edges: []
@@ -128,7 +128,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 0f68e443cfe6d39468fab593dd030319
     internalID: 0
     vertices: []
     indices: 
@@ -136,7 +136,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Fugir_0: -1188568898
+      Machado_0: 2071158672
+      Machado_1: -1162927400
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

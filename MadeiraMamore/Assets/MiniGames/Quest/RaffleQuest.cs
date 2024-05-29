@@ -9,40 +9,72 @@ public class RaffleQuest : MonoBehaviour
     [SerializeField] private GameObject carryUI;
     [SerializeField] private ManagerDescharge ManagerDesScript;
     [SerializeField] private GameObject DepositUI;
+    [SerializeField] private HammerMinigame hammerScript;
     [SerializeField] private DeschargeMinigame[] descharger;
+
     [Header("Timer")]
     [SerializeField] private GameObject timer;
+
     [Header("Timer of Carry Minigame")]
+
     [SerializeField] private float carryTime;
+
     [Header("Timer of Descharge wagons")]
     [SerializeField] private float deschargeTime;
+
+    [Header("Timer of Broken Tree")]
+    [SerializeField] private float axeTime;
+
+    [Header("Nivelamento Carry")]
+    [SerializeField] private float carryGoodTime;
+    [SerializeField] private float carryNormalTime;
+    [SerializeField] private float carryBadTime;
+
+    [Header("Nivelamento Axe")]
+    [SerializeField] private float axeGoodTime;
+    [SerializeField] private float axeNormalTime;
+    [SerializeField] private float axeBadTime;
+
+    [Header("Nivelamento Descharge")]
+    [SerializeField] private float deschargerGoodTime;
+    [SerializeField] private float deschargerNormalTime;
+    [SerializeField] private float deschargerBadTime;
+
     [Header("Total Points of time")]
     [SerializeField] private float pointTimeQuest;
-    [Header("Nivelamento")]
-    public float goodScore;
-    public float normalScore;
-    public float badScore;
+
     [Header("Money")]
     [SerializeField] private MoneySystem MoneySystemScript;
+
     [Header("Roteiro")]
     [SerializeField] private roadMap roadMapScriptable;
     [SerializeField] private MensageController mensagControlScrpt;
+
     [Header("Day time")]
+
     [SerializeField] private StoragaDayValues DaySystem;
     [Header("Day time")]
+
     [SerializeField] private Hand handScript;
     [Header("Positions Dont Finished Game")]
+
     [SerializeField] private Transform DontFinishPosi;
     [SerializeField] private Transform player;
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
     [Header("Notification")]
+
     [SerializeField] private Notification notificationScript;
     [System.NonSerialized] public int salary;
     [System.NonSerialized] public bool fineshed;
+
+
     private Timer timerScript;
     private int numberMinigame;
     private int beforeNumberMinigame;
     private float timeMinigame = 0;
+    private float goodScore;
+    private float normalScore;
+    private float badScore;
     // Start is called before the first frame update
     void Start()
     {
@@ -142,31 +174,48 @@ public class RaffleQuest : MonoBehaviour
         //SceneManager.LoadScene("SecondArea");
     }
     public void DecideQuest(){
-         switch(DaySystem.dayTime){
-            case "Morning":
+        if(DaySystem.day == 6 || DaySystem.day == 7){
+            if(DaySystem.dayTime == "Night") {
                 ManagerDesScript.StartMinigame();
-                timeMinigame = deschargeTime;
                 handScript.takePackage = true;
-                break;
-
-            case "Afternoon":
-                carryScript.DecideAmoutBox();
-                timeMinigame = carryTime;
-                handScript.takePackage = false;
-                break;
-            default:
+                DecideEvaluation(deschargerGoodTime,deschargerNormalTime,deschargerBadTime, deschargeTime);
+            }else{
+                hammerScript.StartMinigame();
+                DecideEvaluation(axeGoodTime, axeBadTime, axeBadTime,axeTime);
+            }
+        }else{
+            switch(DaySystem.dayTime){
+                case "Morning":
+                    ManagerDesScript.StartMinigame();
+                    handScript.takePackage = true;
+                    DecideEvaluation(deschargerGoodTime,deschargerNormalTime,deschargerBadTime,deschargeTime);
                     break;
+
+                case "Afternoon":
+                    carryScript.DecideAmoutBox();
+                    handScript.takePackage = false;
+                    DecideEvaluation(carryGoodTime, carryNormalTime, carryBadTime,carryTime);
+                    break;
+                default:
+                        break;
+            }
         }
         fineshed = false;
         salary = 0;
         notificationScript.Instructions();
         notificationScript.canNotify = true;
         StartCoroutine(notificationScript.StartMovement());
+    }
+    void DecideEvaluation(float good, float normal, float bad, float time){
+        goodScore = good;
+        normalScore = normal;
+        badScore = bad;
+        timeMinigame = time;
         timer.SetActive(true);
         timerScript.timerleft = timeMinigame;
         timerScript.timerOn = true;
         timerScript.stop = false;
         timerScript.end = false;
+        notificationScript.GetValues(good, normal, bad);
     }
-    
 }

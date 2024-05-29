@@ -10,10 +10,9 @@ public class Notification : MonoBehaviour
     [SerializeField] private RaffleQuest rafflequestScript;
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private Timer timerScript;
-    [SerializeField] private Transform targetPosi;
-    [SerializeField] private Transform iniPosition;
     [SerializeField] private GameObject iconChef;
     [SerializeField] private GameObject iconFood;
+    [SerializeField] private GameObject iconBed;
     [SerializeField] private Animator animatorController;
     [SerializeField] private float time;
     [System.NonSerialized] public bool canNotify;
@@ -25,10 +24,12 @@ public class Notification : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        localGodScore = rafflequestScript.goodScore;
-        localNormalScore = rafflequestScript.normalScore;
-        localBadScore = rafflequestScript.badScore;
         BaseNotifi();
+    }
+    public void GetValues(float good, float normal, float bad){
+        localGodScore = good;
+        localNormalScore = normal;
+        localBadScore = bad;
     }
     public void BaseNotifi(){
         localList = roadMapScriptable.chiefScrean;
@@ -57,7 +58,8 @@ public class Notification : MonoBehaviour
         }
     }
     public void Night(){
-        ChefIcon();
+        iconChef.SetActive(false);
+        iconBed.SetActive(true);
         textNotifi.text = "Vá para a cama, amanhã se terá um longo dia";
     }
     public void Reward(){
@@ -80,6 +82,7 @@ public class Notification : MonoBehaviour
     void ChefIcon(){
         iconChef.SetActive(true);
         iconFood.SetActive(false);
+        iconBed.SetActive(false);
     }
     void Good(){
         ChefIcon();

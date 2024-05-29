@@ -122,19 +122,7 @@ public class MensageController : MonoBehaviour
             speechBubble.SetActive(false);
             scriptTableValues.DisabledCursor();
             if(numeberOfWorker == 6){
-                DayTCScript.TimeOfDay(moment);
-                moment++; 
-                if(DaySystem.dayTime == "Lunch"){
-                    RestNameList();
-                } 
-                if(DaySystem.dayTime != "Night" && DaySystem.dayTime != "Lunch"){
-                    rafflequestScript.DecideQuest();
-                    oneTime = false;
-                }
-                if(rafflequestScript.fineshed == true) {
-                   StartCoroutine( MoneySystemScript.GetSalary(rafflequestScript.salary));
-                   rafflequestScript.fineshed= false; 
-                }
+               Chief();
             }
             if(numeberOfWorker == 5 && firstTime == 3){
                 Invoke("EndGameSeringueiro", 1f);    
@@ -144,6 +132,23 @@ public class MensageController : MonoBehaviour
                 scriptTableValues.canMoviCamera = true;
                 scriptTableValues.canMovi = true;
             }
+        }
+    }
+    void Chief(){
+        DayTCScript.TimeOfDay(moment);
+        moment++; 
+        if(DaySystem.dayTime == "Lunch"){
+            RestNameList();
+        }
+        if ((DaySystem.day != 7 && (DaySystem.dayTime == "Afternoon" || DaySystem.dayTime == "Morning")) ||
+        (DaySystem.day == 7 && (DaySystem.dayTime == "Afternoon" || DaySystem.dayTime == "Morning" || DaySystem.dayTime == "Night"))){
+            
+            rafflequestScript.DecideQuest();
+            oneTime = false;
+        }
+        if(rafflequestScript.fineshed == true) {
+            StartCoroutine( MoneySystemScript.GetSalary(rafflequestScript.salary));
+            rafflequestScript.fineshed= false; 
         }
     }
     void EndGameSeringueiro(){

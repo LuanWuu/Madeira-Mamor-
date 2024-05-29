@@ -26,7 +26,6 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private GameObject mosquito;
     [SerializeField] private GameObject Baltasar;
     [SerializeField] private GameObject FoodIcon;
-    [SerializeField] private TextMeshProUGUI normalFoodPrice;
 
     void Awake()
     {
@@ -94,7 +93,9 @@ public class DayTimeController : MonoBehaviour
                 cutscene.MuteMusic(true);
                 cutscene.MusicAmbiente(database.night);   
                 cutscene.SoundEffect(database.Trem);
-                train.SetActive(false);
+                if(DaySystem.day != 7) {
+                   train.SetActive(false); 
+                }
                 roadMapController.ChefOrders();
                 afternoon.SetActive(false);
                 night.SetActive(true);
@@ -144,7 +145,6 @@ public class DayTimeController : MonoBehaviour
                 break;
             case 6://25
                 disableCha.DisableDia6();
-                normalFoodPrice.text = "Gratuito";
                 cutscene.PlayVideo(database.transition);
                 chuva.SetActive(false);
                 roadMapController.InitializeWorkerTalkDay25();
@@ -156,7 +156,6 @@ public class DayTimeController : MonoBehaviour
                 DayText.text = "Dia " + DaySystem.OrderDay[6].ToString();
                 break;
             case 8://27
-                normalFoodPrice.text = "$200";
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay27();
                 DayText.text = "Dia " + DaySystem.OrderDay[7].ToString();

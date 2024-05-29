@@ -48,11 +48,7 @@ public class CutsceneController : MonoBehaviour
         if(canAlarm == true){
             PlaySoundEffect();
         }
-        if(DaySystem.dayTime == "Night"){
-            MenuNight.SetActive(true);
-            playerValues.EnabledCursor();
-        }
-        if(DaySystem.dayTime == "Night"){
+        if(DaySystem.dayTime == "Night" && DaySystem.day != 7){
             MenuNight.SetActive(true);
             playerValues.EnabledCursor();
         }
