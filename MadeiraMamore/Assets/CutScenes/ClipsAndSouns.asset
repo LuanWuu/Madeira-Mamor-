@@ -30,3 +30,4 @@ MonoBehaviour:
   mosquito: {fileID: 0}
   hitWood: {fileID: 8300000, guid: 1526c38107023fa429060a1edb0d2871, type: 3}
   brokenWood: {fileID: 8300000, guid: c71ae793b47728242a4dd47d080e4384, type: 3}
+  moneyEffect: {fileID: 8300000, guid: 6c2d3dd708ce5a9499ea061382df7a9c, type: 3}

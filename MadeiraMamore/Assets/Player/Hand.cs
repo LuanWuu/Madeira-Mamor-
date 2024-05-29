@@ -16,6 +16,8 @@ public class Hand : MonoBehaviour
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
     [SerializeField] private StaminaSystem staminaController;
     [SerializeField] private HammerMinigame hammerScript;
+    [SerializeField] private AudioSource effect;
+    [SerializeField] private AudioClip sound;
 
     [System.NonSerialized] public bool takePackage;
 
@@ -104,6 +106,8 @@ public class Hand : MonoBehaviour
             canCarry = true;
             startCarryTime = Time.time + durationLerpMovi;
         }else if(canCarry && canGive && targetTrain != null){
+            effect.clip = sound;
+            effect.Play();
             GameObject box = target.transform.GetChild(1).gameObject;
             Renderer boxColor = box.GetComponent<Renderer>();
             targetTrain.GetComponent<ToFillTrain>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
@@ -123,6 +127,8 @@ public class Hand : MonoBehaviour
             canCarry = true;
             startCarryTime = Time.time + durationLerpMovi;
         }else if(canCarry && canGive && targetDesposit  != null ){
+            effect.clip = sound;
+            effect.Play();
             GameObject box = target.transform.GetChild(1).gameObject;
             Renderer boxColor = box.GetComponent<Renderer>();
             targetDesposit .GetComponent<PackgeController>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);

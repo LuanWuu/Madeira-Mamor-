@@ -8,6 +8,8 @@ public class MoneySystem : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private ScrpitTablePlayer playerValues;
+    [SerializeField] private AudioSource effect;
+    [SerializeField] private AudioClip effectMoney;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,8 @@ public class MoneySystem : MonoBehaviour
         }
     }
     public IEnumerator GetSalary(int salary){
+        effect.clip = effectMoney;
+        effect.Play();
         int totalIncrease = salary * 100;
         int valueMoney = playerValues.money;
         playerValues.money += totalIncrease;

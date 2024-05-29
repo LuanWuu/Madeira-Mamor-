@@ -10,9 +10,13 @@ public class ButtonPlayerTalk : MonoBehaviour, IPointerDownHandler
     [SerializeField] private roadMap characterWords;
     [SerializeField] private TMP_Text buttonText;
     public bool localSignal;
-
+    void Update(){
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
+            ActionButton();
+    }
+    void ActionButton(){
         if(characterWords.answer == false){
             mensageControllerScript.ChangePhrase();
         }else if(characterWords.answer == true){

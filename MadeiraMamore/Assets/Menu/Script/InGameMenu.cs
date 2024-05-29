@@ -13,6 +13,8 @@ public class InGameMenu : MonoBehaviour
     [SerializeField] private GameObject firstMenu;
     [SerializeField] private GameObject options;
     [SerializeField] private GameObject credits;
+    [SerializeField] private GameObject menuFirstButton;
+    [SerializeField] private GameObject optionsFirstButton;
     private bool isOpen = false;
     // Start is called before the first frame update
     void Start()
@@ -30,8 +32,8 @@ public class InGameMenu : MonoBehaviour
                     scriptTableValues.EnabledCursor();
                     isOpen = true;
                     Time.timeScale = 0;
-                    //EventSystem.current.SetSelectedGameObject(null);
-                    //EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(menuFirstButton);
                 }else{
                     BackToGame();
                 }
@@ -51,8 +53,8 @@ public class InGameMenu : MonoBehaviour
     {
         firstMenu.SetActive(false);
         options.SetActive(true);
-        //EventSystem.current.SetSelectedGameObject(null);
-        //EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
     }
     public void closeOptions()
     {
@@ -63,8 +65,6 @@ public class InGameMenu : MonoBehaviour
     {
         firstMenu.SetActive(false);
         credits.SetActive(true);
-        //EventSystem.current.SetSelectedGameObject(null);
-        //EventSystem.current.SetSelectedGameObject(closeCreditsFirstButton);
     }
     public void closeCredits()
     {
@@ -74,6 +74,5 @@ public class InGameMenu : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
-        Debug.Log("Quito");
     }
 }

@@ -10,4 +10,7 @@ public class OptionsValue : ScriptableObject
     public float controlSensitX;
     public float controlSensitY;
     public float cursorSize;
+    public float masterSound;
+    public float music;
+    public float effect;
 }

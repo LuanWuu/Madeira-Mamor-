@@ -17,3 +17,6 @@ MonoBehaviour:
   controlSensitX: 1
   controlSensitY: 1
   cursorSize: 5
+  masterSound: 0.1
+  music: 0.1
+  effect: 0.1

@@ -14,7 +14,6 @@ public class MangerMenu : MonoBehaviour
     [SerializeField] private GameObject options;
     [SerializeField] private GameObject credits;
     [SerializeField] private GameObject closeMenuInGame;
-    [SerializeField] private GameObject canvas;
 
     [Header("Primeiros botoes selecionados pelo controle")]
     [SerializeField] private GameObject playFirtButton;
@@ -23,48 +22,49 @@ public class MangerMenu : MonoBehaviour
 
     [Header("Nome da primeira fase")]
     [SerializeField] private string nameGame;  
+    [Header("SALVANDO VALORES")]
+    [SerializeField] private OptionsValue optionsScriptable;
 
-    [Header("Script do Menu")]
-    [SerializeField] private ManegerOptions scriptManegerOptions;  
-
-    void Awake(){
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("menu");
-        if (objs.Length > 1)
-        {
-            Destroy(menu);
+    void Awake()
+    { 
+        optionsScriptable.sensitX = 0.1f;
+        optionsScriptable.sensitY = 0.1f;
+        optionsScriptable.controlSensitX = 0.1f;
+        optionsScriptable.controlSensitY = 0.1f;
+        optionsScriptable.cursorSize = 0.1f;
+        optionsScriptable.masterSound = 0.1f;
+        optionsScriptable.music = 0.1f;
+        optionsScriptable.effect = 0.1f;
+        if (Input.GetJoystickNames().Length > 0){ 
+            FirtButton();
         }
     }
-    void Start()
-    { 
-        FirtButton();
-
-    }
     void FirtButton(){
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(playFirtButton);
+        if (Input.GetJoystickNames().Length > 0){ 
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(playFirtButton);
+        }
     }
     void SecondButton(){
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(optionsButton);
+        if (Input.GetJoystickNames().Length > 0){ 
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(optionsButton);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void StartGame()
     { 
         SceneManager.LoadScene(nameGame);
-        closeMenuInGame.SetActive(true);
     }
 
     public void openOptions()
     {
         firstMenu.SetActive(false);
         options.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+        if (Input.GetJoystickNames().Length > 0){ 
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+        }
     }
     public void closeOptions()
     {
@@ -76,8 +76,10 @@ public class MangerMenu : MonoBehaviour
     {
         firstMenu.SetActive(false);
         credits.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(closeCreditsFirstButton);
+        if (Input.GetJoystickNames().Length > 0){ 
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(closeCreditsFirstButton);
+        }
     }
     public void closeCredits()
     {

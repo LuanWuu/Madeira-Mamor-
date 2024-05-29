@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class Bet : MonoBehaviour
 {
@@ -16,8 +17,19 @@ public class Bet : MonoBehaviour
     [System.NonSerialized] public bool canBet = true;
     [SerializeField] private Image dice;
     [SerializeField] private Sprite[] diceFaces;
+    [SerializeField] private GameObject FirtButton;
     private int number;
     private bool canGetMOney = true;
+    private bool canActive = true;
+    void Update(){
+        if(gameObject.activeSelf && canActive) {
+            if (Input.GetJoystickNames().Length > 0){ 
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(FirtButton);
+                canActive = false;
+            }
+        }
+    }
     public void NumberMore(){
         if (!canBet) return;
         if(number < 6) {
@@ -103,6 +115,7 @@ public class Bet : MonoBehaviour
         }else{
             StartCoroutine(Lose());
         }
+        canActive = true;
     }
     IEnumerator Win(){
         int diceRotation = 0;

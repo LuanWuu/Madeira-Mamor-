@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class NighthChoses : MonoBehaviour
 {
@@ -14,7 +15,19 @@ public class NighthChoses : MonoBehaviour
     [SerializeField] private Transform tent;
     [SerializeField] private GameObject BetMenu;
     [SerializeField] private GameObject ChosesMenu;
+    [SerializeField] private GameObject FirstChose;
 
+    private bool canActive = true;
+
+    void Update(){
+        if(ChosesMenu.activeSelf && canActive) {
+            if (Input.GetJoystickNames().Length > 0){ 
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(FirstChose);
+                canActive = false;
+            }
+        }
+    }
     public void Sleep(){
         DaySystem.day++;
         DayTCScript.TimeOfDay(0);
@@ -51,6 +64,7 @@ public class NighthChoses : MonoBehaviour
         playerValues.DisabledCursor();
     }
     void DisableChoses(){
+        canActive = true;
         ChosesMenu.SetActive(false);
     }
 }
