@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aaed479c0d7ee5f4fb34eb16c4a9bc8a
+guid: a2d39f406575e4f4a8e9c45fdcb739a0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fugir_0
+      name: troncos_0
       rect:
         serializedVersion: 2
-        x: 1125
-        y: 698
-        width: 1060
-        height: 1111
+        x: 772
+        y: 1520
+        width: 125
+        height: 211
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,8 +119,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1aa9abf4c62c1bc49b954a64adffb118
-      internalID: -1188568898
+      spriteID: 71fe49b420f2ca74fb277ab94a0fce37
+      internalID: 95644678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: troncos_1
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 961
+        width: 476
+        height: 337
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e43fba09cd5971245a67a971e036e371
+      internalID: 963858773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: troncos_2
+      rect:
+        serializedVersion: 2
+        x: 1067
+        y: 960
+        width: 331
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 854d0b934bcd7c445b5570fb4d5277b3
+      internalID: -1981166719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: troncos_3
+      rect:
+        serializedVersion: 2
+        x: 1471
+        y: 960
+        width: 331
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 844e876712e5ef14d9ff0f84b099a45b
+      internalID: 1449339075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: troncos_4
+      rect:
+        serializedVersion: 2
+        x: 1890
+        y: 960
+        width: 331
+        height: 329
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4eef0cff085222e479cee5d2ecb65d57
+      internalID: -1555644615
       vertices: []
       indices: 
       edges: []
@@ -128,7 +212,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 7615570dec17a834d8340dc0223708ca
     internalID: 0
     vertices: []
     indices: 
@@ -136,7 +220,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Fugir_0: -1188568898
+      troncos_1: 963858773
+      troncos_3: 1449339075
+      troncos_4: -1555644615
+      troncos_5: 1719701142
+      troncos_0: 95644678
+      troncos_2: -1981166719
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

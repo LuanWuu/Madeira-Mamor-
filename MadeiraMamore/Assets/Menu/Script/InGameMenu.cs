@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class InGameMenu : MonoBehaviour
 {
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
+    [SerializeField] private GameObject speechBubble;
     [SerializeField] private GameObject canvas;
     [SerializeField] private string nameSceneMenu;
     [SerializeField] private GameObject firstMenu;
@@ -21,21 +22,19 @@ public class InGameMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown("escape")){
-            if(isOpen == false){
-                canvas.SetActive(true);
-                //Debug.Log("Abriu");
-                scriptTableValues.EnabledCursor();
-                isOpen = true;
-                Time.timeScale = 0;
-                //EventSystem.current.SetSelectedGameObject(null);
-                //EventSystem.current.SetSelectedGameObject(optionsFirstButton);
-            }else{
-                canvas.SetActive(false);
-                scriptTableValues.DisabledCursor();
-                //Debug.Log("Fechou");
-                isOpen = false;
-                Time.timeScale = 1;
+        if(!speechBubble.activeSelf) {
+            if(Input.GetKeyDown("escape")){
+                if(isOpen == false){
+                    canvas.SetActive(true);
+                    //Debug.Log("Abriu");
+                    scriptTableValues.EnabledCursor();
+                    isOpen = true;
+                    Time.timeScale = 0;
+                    //EventSystem.current.SetSelectedGameObject(null);
+                    //EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+                }else{
+                    BackToGame();
+                }
             }
         }
     }

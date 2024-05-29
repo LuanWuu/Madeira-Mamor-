@@ -70,8 +70,10 @@ public class ManagerDescharge : MonoBehaviour
         }
     }
     public void Reset(){
-        for(int i = 0; i < deposit.Length; i++) {
-            Destroy(deposit[i], 0.5f);
+        if(deposit != null) {
+            for(int i = 0; i < deposit.Length; i++) {
+                Destroy(deposit[i], 0.5f);
+            }
         }
     }
 }

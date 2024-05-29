@@ -18,6 +18,8 @@ public class ScrpitTablePlayer : ScriptableObject
     public int staminaRecuperNight;
     [Header("Food Menu")]
     public bool canOpenFoodMenu;
+    [Header("Salary")]
+    public int salary;
 
     public void EnabledCursor(){
         Cursor.visible = true;

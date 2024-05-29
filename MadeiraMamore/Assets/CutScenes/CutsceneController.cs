@@ -19,12 +19,14 @@ public class CutsceneController : MonoBehaviour
     [SerializeField] private ScrpitTablePlayer playerValues;
     [SerializeField] private StaminaSystem staminaScript;
     [SerializeField] private Notification notificationScript;
+    [SerializeField] private MoneySystem moneySystemScript;
     private AudioClip effect;
     private AudioClip secondEffect;
     private AudioClip music;
     private bool canAlarm;
     private bool isPlaying;
     private bool canGive;
+    private bool? ear;
     private void Start() {
          videoPlayer.Prepare();
     }
@@ -43,14 +45,11 @@ public class CutsceneController : MonoBehaviour
         StartCoroutine(dayController.DayAnimator());
         SecondSound();
         Music();
+        DecideMute();
         if(canAlarm == true){
             PlaySoundEffect();
         }
-        if(DaySystem.dayTime == "Night"){
-            MenuNight.SetActive(true);
-            playerValues.EnabledCursor();
-        }
-        if(DaySystem.dayTime == "Night"){
+        if(DaySystem.dayTime == "Night" && DaySystem.day != 7){
             MenuNight.SetActive(true);
             playerValues.EnabledCursor();
         }
@@ -63,6 +62,10 @@ public class CutsceneController : MonoBehaviour
             }
             StartCoroutine(notificationScript.StartMovement());
             canGive = false;
+        }
+        if(playerValues.salary !=0) {
+            StartCoroutine(moneySystemScript.GetSalary(playerValues.salary));
+            playerValues.salary = 0;
         }
     }
 
@@ -108,12 +111,17 @@ public class CutsceneController : MonoBehaviour
         musicAmbiente.clip = music;
         musicAmbiente.Play();
     }
-    public void MuteMusic(){
-        musicAmbiente.clip = null;
+    public void MuteMusic(bool mute){
         musicAmbiente.mute = true;
+        if(mute == true) {
+            musicAmbiente.clip = null;
+            musicAmbiente.mute = true;
+        }else{
+            ear = mute;
+        }
     }
-    public void DesMuteMusic(){
+    void DecideMute(){
         musicAmbiente.mute = false;
+        ear = null;
     }
-    
 }

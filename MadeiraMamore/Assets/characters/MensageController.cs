@@ -19,6 +19,7 @@ public class MensageController : MonoBehaviour
     [SerializeField] private RaffleQuest rafflequestScript;
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
     [SerializeField] private MoneySystem MoneySystemScript;
+    [SerializeField] private NighthChoses nightChoseScript;
 
     int numeberOfWorker;
     int placeNumber;
@@ -110,6 +111,15 @@ public class MensageController : MonoBehaviour
         }
         speechBubbleText.text = myCharacterlist[0];  
     }
+    public void LimitBarrier(){
+        placeNumber = 0;  
+        scriptTableValues.canMovi = false;
+        speechBubble.SetActive(true);
+        scriptTableValues.EnabledCursor();
+        numeberOfWorker = 7;
+        myCharacterlist = characterWords.guard;
+        speechBubbleText.text = myCharacterlist[0];  
+    }
     public void ChangePhrase(){
         placeNumber++;
         if(placeNumber < myCharacterlist.Count){
@@ -122,18 +132,10 @@ public class MensageController : MonoBehaviour
             speechBubble.SetActive(false);
             scriptTableValues.DisabledCursor();
             if(numeberOfWorker == 6){
-                DayTCScript.TimeOfDay(moment);
-                moment++; 
-                if(DaySystem.dayTime == "Lunch"){
-                    RestNameList();
-                } 
-                if(DaySystem.dayTime != "Night" && DaySystem.dayTime != "Lunch"){
-                    rafflequestScript.DecideQuest();
-                    oneTime = false;
-                }
-                if(rafflequestScript.fineshed == true) {
-                   StartCoroutine( MoneySystemScript.GetSalary(rafflequestScript.salary));
-                   rafflequestScript.fineshed= false; 
+                if(moment <4){
+                    Chief();
+                }else if(DaySystem.dayTime == "Night" && DaySystem.day == 7){
+                    nightChoseScript.Sleep();
                 }
             }
             if(numeberOfWorker == 5 && firstTime == 3){
@@ -145,6 +147,19 @@ public class MensageController : MonoBehaviour
                 scriptTableValues.canMovi = true;
             }
         }
+    }
+    void Chief(){
+        DayTCScript.TimeOfDay(moment);
+        if(DaySystem.dayTime == "Lunch"){
+            RestNameList();
+        }
+        if ((DaySystem.day != 7 && (DaySystem.dayTime == "Afternoon" || DaySystem.dayTime == "Morning")) ||
+        (DaySystem.day == 7 && (DaySystem.dayTime == "Afternoon" || DaySystem.dayTime == "Morning" || DaySystem.dayTime == "Night"))){
+            
+            rafflequestScript.DecideQuest();
+            oneTime = false;
+        }
+        moment++; 
     }
     void EndGameSeringueiro(){
         DayTCScript.EndGameSeringueiro();

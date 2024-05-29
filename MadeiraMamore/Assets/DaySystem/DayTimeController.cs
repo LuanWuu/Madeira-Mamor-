@@ -15,6 +15,7 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private ScrpitTablePlayer playerValues;
     [SerializeField] private Notification notificationScript;
     [SerializeField] private DisableCharacters disableCha;
+    [SerializeField] private HammerMinigame hammerScript;
     [SerializeField] private string[] dayTime;
     [SerializeField] private GameObject train;
     [SerializeField] private GameObject DayIcon;
@@ -26,7 +27,9 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private GameObject mosquito;
     [SerializeField] private GameObject Baltasar;
     [SerializeField] private GameObject FoodIcon;
-    [SerializeField] private TextMeshProUGUI normalFoodPrice;
+    [SerializeField] private GameObject terNormal;
+    [SerializeField] private GameObject terLandslide;
+    [SerializeField] private GameObject terAfterLandslide;
 
     void Awake()
     {
@@ -65,7 +68,7 @@ public class DayTimeController : MonoBehaviour
         }
         switch(DaySystem.dayTime){
             case "Morning":  
-                cutscene.MuteMusic();
+                cutscene.MuteMusic(true);
                 DayText.text = "Primeiro turno";          
                 train.SetActive(true);
                 roadMapController.ChefWords();
@@ -79,27 +82,30 @@ public class DayTimeController : MonoBehaviour
                 FoodIcon.SetActive(true);
                 playerValues.canOpenFoodMenu = true;
                 StartCoroutine(notificationScript.StartMovement());
-                cutscene.DesMuteMusic();
+                cutscene.MuteMusic(false);
                 cutscene.MusicAmbiente(database.lunchMoment);                     
                 roadMapController.ChefWords();
                 break;
             case "Afternoon":
-                cutscene.MuteMusic();
+                cutscene.MuteMusic(true);
                 DayText.text = "Segundo turno"; 
                 mornig.SetActive(false);
                 afternoon.SetActive(true);
                 break;
             case "Night":
                 DayText.text = "Noite"; 
-                cutscene.DesMuteMusic();
+                cutscene.MuteMusic(true);
                 cutscene.MusicAmbiente(database.night);   
                 cutscene.SoundEffect(database.Trem);
-                train.SetActive(false);
+                if(DaySystem.day != 7) {
+                   train.SetActive(false); 
+                   Baltasar.SetActive(false);
+                }else{
+                    hammerScript.DestroyTree();
+                }
                 roadMapController.ChefOrders();
                 afternoon.SetActive(false);
                 night.SetActive(true);
-                playerValues.EnabledCursor();
-                Baltasar.SetActive(false);
                 break;
             default:
                     break;
@@ -144,26 +150,28 @@ public class DayTimeController : MonoBehaviour
                 break;
             case 6://25
                 disableCha.DisableDia6();
-                normalFoodPrice.text = "Gratuito";
                 cutscene.PlayVideo(database.transition);
                 chuva.SetActive(false);
+                terLandslide.SetActive(true);
+                terNormal.SetActive(true);
                 roadMapController.InitializeWorkerTalkDay25();
                 DayText.text = "Dia " + DaySystem.OrderDay[5].ToString();
                 break;
             case 7://26
+                hammerScript.EnabledTree();
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay26();
                 DayText.text = "Dia " + DaySystem.OrderDay[6].ToString();
                 break;
             case 8://27
-                normalFoodPrice.text = "$200";
+                terLandslide.SetActive(false);
+                terAfterLandslide.SetActive(true);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay27();
                 DayText.text = "Dia " + DaySystem.OrderDay[7].ToString();
                 break;
             case 9://30 
                 DayText.text = "Dia " + DaySystem.OrderDay[8].ToString();
-                Invoke("EndGame", 5);
                 break;
             default:
                 break;
@@ -171,7 +179,7 @@ public class DayTimeController : MonoBehaviour
         cutscene.SoundEffect(database.Alarm);
         
     }
-    void EndGame(){
+    public void EndGame(){
         database.chosenEnding = database.end1;
         SceneManager.LoadScene("EndGame");
     }
