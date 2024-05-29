@@ -25,12 +25,10 @@ public class ScrpitTablePlayer : ScriptableObject
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         canMoviCamera = false;
-        Debug.Log("Ativou o cursor");
     }
     public void DisabledCursor(){
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         canMoviCamera = true;
-        Debug.Log("Desativou o cursor");
     }
 }

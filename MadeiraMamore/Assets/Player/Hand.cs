@@ -10,7 +10,6 @@ public class Hand : MonoBehaviour
     [SerializeField] private float outilineSizeBox;
     [SerializeField] private float lerpVelocity;
     [SerializeField] private float durationLerpMovi;
-    [SerializeField] private GameObject speechBubble;
     [SerializeField] private GameObject menuFood;
     [SerializeField] private MensageController mensageControllerScript;
     [SerializeField] private StoragaDayValues DaySystem;
@@ -179,7 +178,8 @@ public class Hand : MonoBehaviour
                         break;
                     case "Tree":
                             targetTree = hit.collider.gameObject;
-                            IconEnabled(targetFood);
+                            IconEnabled(targetTree);
+                            TreeOutilene();
                             lastHitObject = hit.collider.gameObject;
                         break;
                     default:
@@ -209,6 +209,12 @@ public class Hand : MonoBehaviour
         if(targetFood != null) {
             targetRendererFoood = targetFood.GetComponent<Renderer>();
             targetRendererFoood.material.SetFloat("_ValueMultiplay", outilineSizeBox);
+        }
+    }
+    void TreeOutilene(){
+        if(targetTree != null) {
+            targetRendererTree = targetTree.GetComponent<Renderer>();
+            targetRendererTree.material.SetFloat("_ValueMultiplay", outilineSizeBox);
         }
     }
     void CheckDelivery(){
@@ -261,7 +267,6 @@ public class Hand : MonoBehaviour
     }
 
     void Reset(){
-        speechBubble?.SetActive(false);
         iconButton?.SetActive(false);
         IconEnabled(null);
         ResetMaterialValue(targetRendererDelivery);

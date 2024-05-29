@@ -53,7 +53,7 @@ public class RaffleQuest : MonoBehaviour
     [Header("Day time")]
 
     [SerializeField] private StoragaDayValues DaySystem;
-    [Header("Day time")]
+    [SerializeField] private DayTimeController DayTCScript;
 
     [SerializeField] private Hand handScript;
     [Header("Positions Dont Finished Game")]
@@ -156,6 +156,11 @@ public class RaffleQuest : MonoBehaviour
                 carryScript.ResetFillWagons();
                 carryScript.DestroyPackages();
                 break;
+            case "Night":
+                carryUI.SetActive(false);
+                carryScript.ResetFillWagons();
+                carryScript.DestroyPackages();
+                break;
             default:
                     break;
         }
@@ -206,6 +211,9 @@ public class RaffleQuest : MonoBehaviour
         notificationScript.Instructions();
         notificationScript.canNotify = true;
         StartCoroutine(notificationScript.StartMovement());
+        if(DaySystem.day == 9) {
+            Invoke("EndGame", 40);
+        }
     }
     void DecideEvaluation(float good, float normal, float bad, float time){
         goodScore = good;
@@ -218,5 +226,8 @@ public class RaffleQuest : MonoBehaviour
         timerScript.stop = false;
         timerScript.end = false;
         notificationScript.GetValues(good, normal, bad);
+    }
+    void EndGame(){
+        DayTCScript.EndGame();
     }
 }

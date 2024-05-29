@@ -56,7 +56,9 @@ public class CarryMinimage : MonoBehaviour
 
     }
     public void DestroyPackages(){
-        Destroy(packages,0.05f);
+        if(packages != null) {
+            Destroy(packages,0.05f);
+        }
     }
     public void ResetFillWagons(){
         for(int i = 0; i < wagons.Length; i++){

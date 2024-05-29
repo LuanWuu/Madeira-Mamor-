@@ -15,6 +15,7 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private ScrpitTablePlayer playerValues;
     [SerializeField] private Notification notificationScript;
     [SerializeField] private DisableCharacters disableCha;
+    [SerializeField] private HammerMinigame hammerScript;
     [SerializeField] private string[] dayTime;
     [SerializeField] private GameObject train;
     [SerializeField] private GameObject DayIcon;
@@ -26,6 +27,9 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private GameObject mosquito;
     [SerializeField] private GameObject Baltasar;
     [SerializeField] private GameObject FoodIcon;
+    [SerializeField] private GameObject terNormal;
+    [SerializeField] private GameObject terLandslide;
+    [SerializeField] private GameObject terAfterLandslide;
 
     void Awake()
     {
@@ -96,6 +100,8 @@ public class DayTimeController : MonoBehaviour
                 if(DaySystem.day != 7) {
                    train.SetActive(false); 
                    Baltasar.SetActive(false);
+                }else{
+                    hammerScript.DestroyTree();
                 }
                 roadMapController.ChefOrders();
                 afternoon.SetActive(false);
@@ -146,22 +152,26 @@ public class DayTimeController : MonoBehaviour
                 disableCha.DisableDia6();
                 cutscene.PlayVideo(database.transition);
                 chuva.SetActive(false);
+                terLandslide.SetActive(true);
+                terNormal.SetActive(true);
                 roadMapController.InitializeWorkerTalkDay25();
                 DayText.text = "Dia " + DaySystem.OrderDay[5].ToString();
                 break;
             case 7://26
+                hammerScript.EnabledTree();
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay26();
                 DayText.text = "Dia " + DaySystem.OrderDay[6].ToString();
                 break;
             case 8://27
+                terLandslide.SetActive(false);
+                terAfterLandslide.SetActive(true);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay27();
                 DayText.text = "Dia " + DaySystem.OrderDay[7].ToString();
                 break;
             case 9://30 
                 DayText.text = "Dia " + DaySystem.OrderDay[8].ToString();
-                Invoke("EndGame", 5);
                 break;
             default:
                 break;
@@ -169,7 +179,7 @@ public class DayTimeController : MonoBehaviour
         cutscene.SoundEffect(database.Alarm);
         
     }
-    void EndGame(){
+    public void EndGame(){
         database.chosenEnding = database.end1;
         SceneManager.LoadScene("EndGame");
     }

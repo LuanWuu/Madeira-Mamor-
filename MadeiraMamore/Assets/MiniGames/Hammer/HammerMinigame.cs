@@ -8,9 +8,11 @@ public class HammerMinigame : MonoBehaviour
     [SerializeField] private ScrpitTablePlayer playerValues;
     [SerializeField] private DatabaseCutscene database;
     [SerializeField] private RaffleQuest raffeQuestScript;
+    [SerializeField] private StaminaSystem staminaScript;
     [SerializeField] private AudioSource sound;
     [SerializeField] private Point pointScript;
     [SerializeField] private Image woodImage;
+    [SerializeField]  private Sprite saveSrpite;
     [SerializeField] private Sprite[] woodSprites;
     [SerializeField] private GameObject AxeUI;
     [SerializeField] private Animator AxeAnimator;
@@ -21,18 +23,24 @@ public class HammerMinigame : MonoBehaviour
     private bool hitTarget;
     private bool canHit = false;
     private GameObject tree;
-    private Sprite saveSrpite;
 
+    public void EnabledTree(){
+        if(transform.childCount != 0) {
+            for(int i = 0; i < transform.childCount; i++) {
+                GameObject florest = transform.GetChild(i).gameObject;
+                florest.SetActive(true);
+                florest.tag = "Untagged";
+            }
+        }
+    }
     public void StartMinigame(){
         if(transform.childCount != 0) {
             for(int i = 0; i < transform.childCount; i++) {
                 GameObject EnabledTree = transform.GetChild(i).gameObject;
-                EnabledTree.SetActive(true);
                 EnabledTree.tag = "Tree";
             }
         }
         hit = 0;
-        woodImage.sprite = saveSrpite;
         canHit = true;
     }
     public void EnableAxeUI(GameObject target){
@@ -40,6 +48,7 @@ public class HammerMinigame : MonoBehaviour
         tree = target;
         playerValues.canMovi = false;
         AxeUI.SetActive(true);
+        woodImage.sprite = saveSrpite;
         pointScript.RandomDirection();
     }
     private void Update() {
@@ -58,6 +67,7 @@ public class HammerMinigame : MonoBehaviour
     }
     public void ChangeScript(){
         if(hitTarget == true){
+            StartCoroutine(staminaScript.IncreaseStamina(10));
             woodImage.sprite = woodSprites[hit];
             sound.clip = database.hitWood;
             sound.Play();
@@ -85,5 +95,13 @@ public class HammerMinigame : MonoBehaviour
             }
         }
         raffeQuestScript.CompleteQuest();
+    }
+    public void DestroyTree(){
+        if(transform.childCount != 0) {
+            for(int i = 0; i < transform.childCount; i++) {
+                GameObject destroyFlorest = transform.GetChild(i).gameObject;
+                Destroy(destroyFlorest);
+            }
+        }
     }
 }

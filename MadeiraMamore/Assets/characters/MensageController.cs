@@ -111,6 +111,15 @@ public class MensageController : MonoBehaviour
         }
         speechBubbleText.text = myCharacterlist[0];  
     }
+    public void LimitBarrier(){
+        placeNumber = 0;  
+        scriptTableValues.canMovi = false;
+        speechBubble.SetActive(true);
+        scriptTableValues.EnabledCursor();
+        numeberOfWorker = 7;
+        myCharacterlist = characterWords.guard;
+        speechBubbleText.text = myCharacterlist[0];  
+    }
     public void ChangePhrase(){
         placeNumber++;
         if(placeNumber < myCharacterlist.Count){
@@ -125,8 +134,7 @@ public class MensageController : MonoBehaviour
             if(numeberOfWorker == 6){
                 if(moment <4){
                     Chief();
-                }
-                if(DaySystem.dayTime == "Night" && DaySystem.day == 7){
+                }else if(DaySystem.dayTime == "Night" && DaySystem.day == 7){
                     nightChoseScript.Sleep();
                 }
             }
