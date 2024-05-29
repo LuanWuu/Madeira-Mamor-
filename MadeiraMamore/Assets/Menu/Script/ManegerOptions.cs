@@ -37,14 +37,14 @@ public class ManegerOptions : MonoBehaviour
     [SerializeField] private TextMeshProUGUI effectText;
 
     void Start(){
-        masterText.text = optionsScriptable.masterSound.ToString();
-        musicText.text = optionsScriptable.music.ToString();
-        effectText.text = optionsScriptable.effect.ToString();
-        cursorSizeText.text  = optionsScriptable.cursorSize.ToString();
-        controlXText.text = optionsScriptable.controlSensitX.ToString();
-        controlYText.text = optionsScriptable.controlSensitY.ToString();
-        mouseXText.text = optionsScriptable.sensitX.ToString();
-        mouseYText.text = optionsScriptable.sensitY.ToString();
+        masterText.text = optionsScriptable.masterSound.ToString("0.0");
+        musicText.text = optionsScriptable.music.ToString("0.0");
+        effectText.text = optionsScriptable.effect.ToString("0.0");
+        cursorSizeText.text  = optionsScriptable.cursorSize.ToString("0.0");
+        controlXText.text = optionsScriptable.controlSensitX.ToString("0.0");
+        controlYText.text = optionsScriptable.controlSensitY.ToString("0.0");
+        mouseXText.text = optionsScriptable.sensitX.ToString("0.0");
+        mouseYText.text = optionsScriptable.sensitY.ToString("0.0");
         mixer.SetFloat("Master", 20f * optionsScriptable.masterSound);
         mixer.SetFloat("Music", 20f * optionsScriptable.music);
         mixer.SetFloat("Effects", 20f * optionsScriptable.effect);
@@ -78,41 +78,40 @@ public class ManegerOptions : MonoBehaviour
     //ponteiro
     public void SetPonterSize(float intensity){
         optionsScriptable.cursorSize = intensity;
-        cursorSizeText.text = intensity.ToString();
+        cursorSizeText.text = intensity.ToString("0.0");
     }
     // Control
     public void SetControlX(float intensity){
         optionsScriptable.controlSensitX = intensity;
-        controlXText.text = intensity.ToString();
+        controlXText.text = intensity.ToString("0.0");
     }
     public void SetControlY(float intensity){
         optionsScriptable.controlSensitY = intensity;
-        controlYText.text = intensity.ToString();
+        controlYText.text = intensity.ToString("0.0");
     }
     //Mouse
     public void SetMouseX(float intensity){
         optionsScriptable.sensitX = intensity;
-        mouseXText.text = intensity.ToString();
+        mouseXText.text = intensity.ToString("0.0");
     }
     public void SetMouseY(float intensity){
         optionsScriptable.sensitY = intensity;
-        mouseYText.text = intensity.ToString();
+        mouseYText.text = intensity.ToString("0.0");
     }
     // Sound
     public void SetMasterVolume(float intensity){
         optionsScriptable.masterSound = intensity;
-        masterText.text = intensity.ToString();
+        masterText.text = intensity.ToString("0.0");
     }
     public void SetMusicVolume(float intensity){
         optionsScriptable.music = intensity;
-        musicText.text = intensity.ToString();
+        musicText.text = intensity.ToString("0.0");
     }
     public void SetEffectsVolume(float intensity){
         optionsScriptable.effect = intensity;
-        effectText.text = intensity.ToString();
+        effectText.text = intensity.ToString("0.0");
     }
     public void ApplyConfig(){
-        Debug.Log("teste");
         mixer.SetFloat("Master", 20f * Mathf.Log10(optionsScriptable.masterSound));
         mixer.SetFloat("Music", 20f * Mathf.Log10(optionsScriptable.music));
         mixer.SetFloat("Effects", 20f * Mathf.Log10(optionsScriptable.effect));

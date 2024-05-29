@@ -15,6 +15,7 @@ public class InGameMenu : MonoBehaviour
     [SerializeField] private GameObject credits;
     [SerializeField] private GameObject menuFirstButton;
     [SerializeField] private GameObject optionsFirstButton;
+    [SerializeField] private GameObject CreditsFirstButton;
     private bool isOpen = false;
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class InGameMenu : MonoBehaviour
     void Update()
     {
         if(!speechBubble.activeSelf) {
-            if(Input.GetKeyDown("escape")){
+            if(Input.GetButtonDown("Cancel")){
                 if(isOpen == false){
                     canvas.SetActive(true);
                     //Debug.Log("Abriu");
@@ -65,6 +66,10 @@ public class InGameMenu : MonoBehaviour
     {
         firstMenu.SetActive(false);
         credits.SetActive(true);
+        if (Input.GetJoystickNames().Length > 0){ 
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(CreditsFirstButton);
+        }
     }
     public void closeCredits()
     {

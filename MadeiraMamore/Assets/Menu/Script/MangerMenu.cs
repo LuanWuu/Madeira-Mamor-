@@ -18,7 +18,7 @@ public class MangerMenu : MonoBehaviour
     [Header("Primeiros botoes selecionados pelo controle")]
     [SerializeField] private GameObject playFirtButton;
     [SerializeField] private GameObject optionsFirstButton;
-    [SerializeField] private GameObject closeCreditsFirstButton;
+    [SerializeField] private GameObject CreditsFirstButton;
 
     [Header("Nome da primeira fase")]
     [SerializeField] private string nameGame;  
@@ -27,14 +27,14 @@ public class MangerMenu : MonoBehaviour
 
     void Awake()
     { 
-        optionsScriptable.sensitX = 0.1f;
-        optionsScriptable.sensitY = 0.1f;
-        optionsScriptable.controlSensitX = 0.1f;
-        optionsScriptable.controlSensitY = 0.1f;
-        optionsScriptable.cursorSize = 0.1f;
-        optionsScriptable.masterSound = 0.1f;
-        optionsScriptable.music = 0.1f;
-        optionsScriptable.effect = 0.1f;
+        optionsScriptable.sensitX = 3f;
+        optionsScriptable.sensitY = 3f;
+        optionsScriptable.controlSensitX = 3f;
+        optionsScriptable.controlSensitY = 3f;
+        optionsScriptable.cursorSize = 10f;
+        optionsScriptable.masterSound = 0.3f;
+        optionsScriptable.music = 0.3f;
+        optionsScriptable.effect = 0.3f;
         if (Input.GetJoystickNames().Length > 0){ 
             FirtButton();
         }
@@ -78,7 +78,7 @@ public class MangerMenu : MonoBehaviour
         credits.SetActive(true);
         if (Input.GetJoystickNames().Length > 0){ 
             EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(closeCreditsFirstButton);
+            EventSystem.current.SetSelectedGameObject(CreditsFirstButton);
         }
     }
     public void closeCredits()
