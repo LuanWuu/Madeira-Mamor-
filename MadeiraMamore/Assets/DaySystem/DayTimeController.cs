@@ -16,6 +16,7 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private Notification notificationScript;
     [SerializeField] private DisableCharacters disableCha;
     [SerializeField] private HammerMinigame hammerScript;
+    [SerializeField] private Malaria malariaScript;
     [SerializeField] private string[] dayTime;
     [SerializeField] private GameObject train;
     [SerializeField] private GameObject DayIcon;
@@ -135,42 +136,47 @@ public class DayTimeController : MonoBehaviour
                 break;
             case 4://20
                 disableCha.DisableDia4();
-                cutscene.SecondeSoundEffect(database.Chuva);
-                chuva.SetActive(true);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay20();
                 DayText.text = "Dia " + DaySystem.OrderDay[3].ToString();
                 break;
             case 5://22
                 disableCha.DisableDia5();
-                cutscene.SecondeSoundEffect(database.Chuva);
                 cutscene.PlayVideo(database.transition);
                 roadMapController.InitializeWorkerTalkDay22();
                 DayText.text = "Dia " + DaySystem.OrderDay[4].ToString();
                 break;
             case 6://25
+                hammerScript.EnabledTree();
                 disableCha.DisableDia6();
                 cutscene.PlayVideo(database.transition);
-                chuva.SetActive(false);
+                chuva.SetActive(true);
+                cutscene.SecondeSoundEffect(database.Chuva);
                 terLandslide.SetActive(true);
                 terNormal.SetActive(true);
                 roadMapController.InitializeWorkerTalkDay25();
                 DayText.text = "Dia " + DaySystem.OrderDay[5].ToString();
                 break;
             case 7://26
-                hammerScript.EnabledTree();
+
                 cutscene.PlayVideo(database.transition);
+                cutscene.SecondeSoundEffect(database.Chuva);
                 roadMapController.InitializeWorkerTalkDay26();
+                StartCoroutine(malariaScript.lowMalaria());
                 DayText.text = "Dia " + DaySystem.OrderDay[6].ToString();
                 break;
             case 8://27
                 terLandslide.SetActive(false);
                 terAfterLandslide.SetActive(true);
+                cutscene.SecondeSoundEffect(database.Chuva);
                 cutscene.PlayVideo(database.transition);
+                StartCoroutine(malariaScript.HighMalaria());
                 roadMapController.InitializeWorkerTalkDay27();
                 DayText.text = "Dia " + DaySystem.OrderDay[7].ToString();
                 break;
             case 9://30 
+                cutscene.SecondeSoundEffect(database.Chuva);
+                malariaScript.DeadMalaria();
                 DayText.text = "Dia " + DaySystem.OrderDay[8].ToString();
                 break;
             default:

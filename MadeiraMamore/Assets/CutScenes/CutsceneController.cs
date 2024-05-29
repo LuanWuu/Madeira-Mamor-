@@ -26,7 +26,7 @@ public class CutsceneController : MonoBehaviour
     private bool canAlarm;
     private bool isPlaying;
     private bool canGive;
-    private bool? ear;
+    private bool canMusic;
     private void Start() {
          videoPlayer.Prepare();
     }
@@ -45,7 +45,9 @@ public class CutsceneController : MonoBehaviour
         StartCoroutine(dayController.DayAnimator());
         SecondSound();
         Music();
-        DecideMute();
+        if(canMusic != true) {
+            DecideMute();
+        }
         if(canAlarm == true){
             PlaySoundEffect();
         }
@@ -113,15 +115,9 @@ public class CutsceneController : MonoBehaviour
     }
     public void MuteMusic(bool mute){
         musicAmbiente.mute = true;
-        if(mute == true) {
-            musicAmbiente.clip = null;
-            musicAmbiente.mute = true;
-        }else{
-            ear = mute;
-        }
+        canMusic = mute;
     }
     void DecideMute(){
         musicAmbiente.mute = false;
-        ear = null;
     }
 }

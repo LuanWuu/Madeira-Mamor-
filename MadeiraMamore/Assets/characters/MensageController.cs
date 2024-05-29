@@ -7,6 +7,7 @@ using System.Linq;
 public class MensageController : MonoBehaviour
 {
     public List<string> characterNames;
+    [SerializeField] private List<string> characterFullName;
     [SerializeField] private roadMap characterWords;
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private TextMeshProUGUI speechBubbleText;
@@ -20,6 +21,7 @@ public class MensageController : MonoBehaviour
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
     [SerializeField] private MoneySystem MoneySystemScript;
     [SerializeField] private NighthChoses nightChoseScript;
+    [SerializeField] private TextMeshProUGUI nameCharacter;
 
     int numeberOfWorker;
     int placeNumber;
@@ -82,6 +84,7 @@ public class MensageController : MonoBehaviour
         if(!saveNameList.Contains(name)){
             for(int i = 0; i < characterNames.Count; i++) {
                 if(name == characterNames[i]){
+                    nameCharacter.text = characterFullName[i];
                     saveNameList.Add(name);
                     numeberOfWorker = i;
                     Senteces();

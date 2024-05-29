@@ -8,6 +8,7 @@ public class NighthChoses : MonoBehaviour
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private DayTimeController DayTCScript;
     [SerializeField] private ScrpitTablePlayer playerValues;
+    [SerializeField] private MoneySystem MoneySystemScript;
     [SerializeField] private Notification notificationScript;
     [SerializeField] private Bet BetScript;
     [SerializeField] private Transform localToDrink;
@@ -41,6 +42,7 @@ public class NighthChoses : MonoBehaviour
         player.position = localToDrink.position;
         notificationScript.Night();
         StartCoroutine(notificationScript.StartMovement());
+        MoneySystemScript.TakeMoney(1);
         playerValues.DisabledCursor();
         playerValues.staminaRecuperNight = 20;
         DisableChoses();

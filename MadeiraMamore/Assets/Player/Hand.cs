@@ -77,7 +77,7 @@ public class Hand : MonoBehaviour
                 scriptTableValues.canMovi = false;
             }
             if(target != null && !pickedUp) {
-                StartCoroutine(staminaController.DecreaseStamina(1));
+                StartCoroutine(staminaController.DecreaseStamina(5));
                 pickedUp = true;
             }
             if(target != null && lookBox) {

@@ -14,7 +14,7 @@ public class QuestUI : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown("Quest")){
+        if(Input.GetButtonDown("Quest")){
             if(isClosed == false){
                 isOpen = false;
                 isClosed = true;
