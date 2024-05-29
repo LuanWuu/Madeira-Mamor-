@@ -19,6 +19,7 @@ public class MensageController : MonoBehaviour
     [SerializeField] private RaffleQuest rafflequestScript;
     [SerializeField] private ScrpitTablePlayer scriptTableValues;
     [SerializeField] private MoneySystem MoneySystemScript;
+    [SerializeField] private NighthChoses nightChoseScript;
 
     int numeberOfWorker;
     int placeNumber;
@@ -122,7 +123,12 @@ public class MensageController : MonoBehaviour
             speechBubble.SetActive(false);
             scriptTableValues.DisabledCursor();
             if(numeberOfWorker == 6){
-               Chief();
+                if(moment <4){
+                    Chief();
+                }
+                if(DaySystem.dayTime == "Night" && DaySystem.day == 7){
+                    nightChoseScript.Sleep();
+                }
             }
             if(numeberOfWorker == 5 && firstTime == 3){
                 Invoke("EndGameSeringueiro", 1f);    
@@ -136,7 +142,6 @@ public class MensageController : MonoBehaviour
     }
     void Chief(){
         DayTCScript.TimeOfDay(moment);
-        moment++; 
         if(DaySystem.dayTime == "Lunch"){
             RestNameList();
         }
@@ -146,10 +151,7 @@ public class MensageController : MonoBehaviour
             rafflequestScript.DecideQuest();
             oneTime = false;
         }
-        if(rafflequestScript.fineshed == true) {
-            StartCoroutine( MoneySystemScript.GetSalary(rafflequestScript.salary));
-            rafflequestScript.fineshed= false; 
-        }
+        moment++; 
     }
     void EndGameSeringueiro(){
         DayTCScript.EndGameSeringueiro();

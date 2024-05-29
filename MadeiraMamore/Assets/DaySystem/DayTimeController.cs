@@ -95,12 +95,11 @@ public class DayTimeController : MonoBehaviour
                 cutscene.SoundEffect(database.Trem);
                 if(DaySystem.day != 7) {
                    train.SetActive(false); 
+                   Baltasar.SetActive(false);
                 }
                 roadMapController.ChefOrders();
                 afternoon.SetActive(false);
                 night.SetActive(true);
-                playerValues.EnabledCursor();
-                Baltasar.SetActive(false);
                 break;
             default:
                     break;

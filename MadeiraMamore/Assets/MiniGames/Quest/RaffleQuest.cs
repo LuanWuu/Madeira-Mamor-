@@ -118,6 +118,7 @@ public class RaffleQuest : MonoBehaviour
                 salary = 1;
             }
         }
+        scriptTableValues.salary = salary;
         notificationScript.canNotify = false;
         timer.SetActive(false);
     }

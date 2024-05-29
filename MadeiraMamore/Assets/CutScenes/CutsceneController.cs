@@ -19,6 +19,7 @@ public class CutsceneController : MonoBehaviour
     [SerializeField] private ScrpitTablePlayer playerValues;
     [SerializeField] private StaminaSystem staminaScript;
     [SerializeField] private Notification notificationScript;
+    [SerializeField] private MoneySystem moneySystemScript;
     private AudioClip effect;
     private AudioClip secondEffect;
     private AudioClip music;
@@ -61,6 +62,10 @@ public class CutsceneController : MonoBehaviour
             }
             StartCoroutine(notificationScript.StartMovement());
             canGive = false;
+        }
+        if(playerValues.salary !=0) {
+            StartCoroutine(moneySystemScript.GetSalary(playerValues.salary));
+            playerValues.salary = 0;
         }
     }
 
