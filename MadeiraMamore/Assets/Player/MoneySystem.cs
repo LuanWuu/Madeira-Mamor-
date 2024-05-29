@@ -13,8 +13,8 @@ public class MoneySystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerValues.money = 0;
-        StartCoroutine(GetSalary(2));
+        playerValues.money = 200;
+        moneyText.text = "$200"; 
     }
 
     // Update is called once per frame

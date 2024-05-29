@@ -273,7 +273,9 @@ public class Hand : MonoBehaviour
     }
 
     void Reset(){
-        iconButton?.SetActive(false);
+        if(iconButton != null) {
+            iconButton.SetActive(false);
+        }
         IconEnabled(null);
         ResetMaterialValue(targetRendererDelivery);
         ResetMaterialValue(targetRendererDeposity);

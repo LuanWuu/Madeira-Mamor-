@@ -48,6 +48,7 @@ public class ManegerOptions : MonoBehaviour
         mixer.SetFloat("Master", 20f * optionsScriptable.masterSound);
         mixer.SetFloat("Music", 20f * optionsScriptable.music);
         mixer.SetFloat("Effects", 20f * optionsScriptable.effect);
+        ApplyConfig();
     }
     
     public void KeyBoard(){
