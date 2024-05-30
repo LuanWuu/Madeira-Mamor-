@@ -16,7 +16,7 @@ MonoBehaviour:
   - {r: 0.10416517, g: 0.6137702, b: 0.7169812, a: 1}
   - {r: 0.405018, g: 0.8584906, b: 0.40008897, a: 1}
   - {r: 0.8207547, g: 0.25861514, b: 0.7880927, a: 1}
-  - {r: 0.8980392, g: 0.8016536, b: 0.0745098, a: 1}
+  - {r: 0.81960785, g: 0.2588235, b: 0.30951107, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
   layerOfPackage:
   - Wood
@@ -24,5 +24,5 @@ MonoBehaviour:
   - Stone
   - Dirt
   - Treasures
-  amoutPackage: 3
+  amoutPackage: 5
   packageLayer: 
