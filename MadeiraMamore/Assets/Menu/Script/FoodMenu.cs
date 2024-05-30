@@ -24,7 +24,7 @@ public class FoodMenu : MonoBehaviour
         if(playerValues.money >= 100) {
             playerValues.canOpenFoodMenu = false;
             StartCoroutine(staminaScript.IncreaseStamina(3));
-            StartCoroutine(moneyScript.TakeMoney(20));
+            StartCoroutine(moneyScript.TakeMoney(1));
             Closed();  
         }
     }

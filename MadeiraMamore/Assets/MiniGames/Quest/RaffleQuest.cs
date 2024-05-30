@@ -101,6 +101,10 @@ public class RaffleQuest : MonoBehaviour
                 carryUI.SetActive(false);
                 carryScript.ResetFillWagons();
                 break;
+             case "Night":
+                carryUI.SetActive(false);
+                carryScript.ResetFillWagons();
+                break;
             default:
                     break;
         }
@@ -211,8 +215,9 @@ public class RaffleQuest : MonoBehaviour
         notificationScript.Instructions();
         notificationScript.canNotify = true;
         StartCoroutine(notificationScript.StartMovement());
+        Debug.Log(DaySystem.day);
         if(DaySystem.day == 9) {
-            Invoke("EndGame", 40);
+            Invoke("EndGame", 30f);
         }
     }
     void DecideEvaluation(float good, float normal, float bad, float time){

@@ -80,9 +80,6 @@ public class Hand : MonoBehaviour
                 StartCoroutine(staminaController.DecreaseStamina(5));
                 pickedUp = true;
             }
-            if(target != null && lookBox) {
-                target.tag = "CloneBox";
-            }
             if(iconButton != null) {
                 iconButton.SetActive(false);
             }
@@ -110,6 +107,9 @@ public class Hand : MonoBehaviour
     }
     void ControlerHadAfternoon(){
         if(canGet){
+            if(target != null) {
+                target.tag = "CloneBox";
+            }
             canCarry = true;
             startCarryTime = Time.time + durationLerpMovi;
         }else if(canCarry && canGive && targetTrain != null){
@@ -126,10 +126,13 @@ public class Hand : MonoBehaviour
         }
     }
     void ControlerHadMorning(){
-        if(canGetPackage){
+        if(canGetPackage && canCarry == false){
             target = targetTrain.GetComponent<DeschargeMinigame>().GiveClone(hand); 
-            canCarry = true;
-            canGetPackage = false;
+            if(target != null) {
+                canCarry = true;
+                canGetPackage = false;
+                target.tag = "CloneBox";
+            }
         }
         if(canGet){
             canCarry = true;

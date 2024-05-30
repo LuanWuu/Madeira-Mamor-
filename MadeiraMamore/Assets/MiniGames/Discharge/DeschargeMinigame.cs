@@ -65,7 +65,7 @@ public class DeschargeMinigame : MonoBehaviour
             package[number].SetActive(false);
             number++;
             return boxClone;
-        }else {
+        }else{
             return null;
         }
     }
