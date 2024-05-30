@@ -24,14 +24,14 @@ public class FoodMenu : MonoBehaviour
         if(playerValues.money >= 100) {
             playerValues.canOpenFoodMenu = false;
             StartCoroutine(staminaScript.IncreaseStamina(3));
-            StartCoroutine(moneyScript.TakeMoney(1));
+            StartCoroutine(moneyScript.TakeMoney(20));
             Closed();  
         }
     }
     public void NormalFood () {
         if(playerValues.money >= 200 ||  DaySystem.day == 6 || DaySystem.day == 7) {
             playerValues.canOpenFoodMenu = false;
-            StartCoroutine(staminaScript.IncreaseStamina(5));
+            StartCoroutine(staminaScript.IncreaseStamina(40));
             if(DaySystem.day != 6 || DaySystem.day != 7) {
                StartCoroutine(moneyScript.TakeMoney(2)); 
             }
@@ -41,7 +41,7 @@ public class FoodMenu : MonoBehaviour
     public void BigFood(){
         if(playerValues.money >= 300){ 
             playerValues.canOpenFoodMenu = false;
-            StartCoroutine(staminaScript.IncreaseStamina(7));  
+            StartCoroutine(staminaScript.IncreaseStamina(60));  
             StartCoroutine(moneyScript.TakeMoney(3)); 
             Closed();
         }

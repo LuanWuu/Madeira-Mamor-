@@ -153,12 +153,11 @@ public class DayTimeController : MonoBehaviour
                 chuva.SetActive(true);
                 cutscene.SecondeSoundEffect(database.Chuva);
                 terLandslide.SetActive(true);
-                terNormal.SetActive(true);
+                terNormal.SetActive(false);
                 roadMapController.InitializeWorkerTalkDay25();
                 DayText.text = "Dia " + DaySystem.OrderDay[5].ToString();
                 break;
             case 7://26
-
                 cutscene.PlayVideo(database.transition);
                 cutscene.SecondeSoundEffect(database.Chuva);
                 roadMapController.InitializeWorkerTalkDay26();

@@ -83,7 +83,9 @@ public class Hand : MonoBehaviour
             if(target != null && lookBox) {
                 target.tag = "CloneBox";
             }
-            iconButton?.SetActive(false);
+            if(iconButton != null) {
+                iconButton.SetActive(false);
+            }
             if (targetTree != null){
                 hammerScript.EnableAxeUI(targetTree);
                 targetTree = null;
@@ -224,8 +226,10 @@ public class Hand : MonoBehaviour
         }
     }
     void CheckDelivery(){
-        targetRendererDelivery = targetTrain.GetComponent<Renderer>();
-        canGive = targetTrain.GetComponent<ToFillTrain>().CompatibleLayer(target.layer);
+        if(target != null && targetTrain != null) {
+            targetRendererDelivery = targetTrain.GetComponent<Renderer>();
+            canGive = targetTrain.GetComponent<ToFillTrain>().CompatibleLayer(target.layer);
+        }
     }
     void GetPackage(){
         canGetPackage = true;
