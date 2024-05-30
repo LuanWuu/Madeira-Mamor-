@@ -98,6 +98,11 @@ public class Hand : MonoBehaviour
             case "Afternoon":
                 ControlerHadAfternoon();
                 break;
+            case "Night":
+                if(DaySystem.day == 7){
+                    ControlerHadAfternoon();
+                }
+                break;
             default:
                     break;
             }
@@ -154,12 +159,13 @@ public class Hand : MonoBehaviour
                             lastHitObject = hit.collider.gameObject;
                         break;
                     case "Train":
-                            if(canCarry == true) {
-                                targetTrain = hit.collider.gameObject;
-                                CheckDelivery();
-                            }else if(takePackage == true){
+                            if(takePackage== true) {
                                 targetTrain = hit.collider.gameObject;
                                 GetPackage();
+
+                            }else{
+                                targetTrain = hit.collider.gameObject;
+                                CheckDelivery();
                             }
                             lastHitObject = hit.collider.gameObject;
                         break;
