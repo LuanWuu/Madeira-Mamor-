@@ -20,6 +20,7 @@ public class Malaria : MonoBehaviour
         Debug.Log("low");
     }
     public IEnumerator HighMalaria(){
+        StopCoroutine("lowMalaria");
         malariaLow.SetActive(false);
         malaraHigh.SetActive(false);
         yield return new WaitForSeconds(coolDownMalariaHigh);
