@@ -51,19 +51,23 @@ public class PlayerCamera : MonoBehaviour
     }
     void Update(){
         if(scriptTableValues.canMoviCamera == true){
-            if (Input.GetJoystickNames().Length > 0){
+            bool joystickActive = Input.GetJoystickNames().Length > 0;
+            if (joystickActive){
                 float horizontalDeltaJoystick = Input.GetAxis("HorizontalCameraJoystick") * controlSensitivityX;// Valor de Eixo X
                 float verticalDeltaJoystick = Input.GetAxis("VerticalCameraJoystick") * controlSensitivityY; // Valor de Eixo Y
                 if(horizontalDeltaJoystick != 0 || verticalDeltaJoystick != 0){
                     MoveCamera(horizontalDeltaJoystick, verticalDeltaJoystick);
                 }
-            }else{
-                float horizontalDeltaMouse = Input.GetAxisRaw("Mouse X") * sensitivityX;// Valor de Eixo X
-                float verticalDeltaMouse = Input.GetAxisRaw("Mouse Y") * sensitivityY; // Valor de Eixo Y
-                if(horizontalDeltaMouse != 0 || verticalDeltaMouse != 0){
-                    MoveCamera(horizontalDeltaMouse, verticalDeltaMouse);
-                }
             }
+            if (!joystickActive || (Input.GetAxisRaw("Mouse X") != 0 || Input.GetAxisRaw("Mouse Y") != 0)){
+                float horizontalDeltaMouse = Input.GetAxisRaw("Mouse X") * sensitivityX;
+                float verticalDeltaMouse = Input.GetAxisRaw("Mouse Y") * sensitivityY;
+
+                if (horizontalDeltaMouse != 0 || verticalDeltaMouse != 0){
+                    MoveCamera(horizontalDeltaMouse, verticalDeltaMouse);
+                } 
+            }
+        }
         if(scriptTableValues.dontFineshed == true) {
             transform.LookAt(EyesBaltasar);
             playerBody.LookAt(Baltasar);  
@@ -75,7 +79,6 @@ public class PlayerCamera : MonoBehaviour
         controlSensitivityY = optionsScriptable.controlSensitY;
         cursorSize = optionsScriptable.cursorSize;
         CursorCustomize();
-        }
     }
     void CursorCustomize(){
         cursor.transform.localScale = new Vector3(cursorSize, cursorSize, cursorSize);
