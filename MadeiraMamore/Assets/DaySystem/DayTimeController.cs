@@ -158,6 +158,7 @@ public class DayTimeController : MonoBehaviour
                 DayText.text = "Dia " + DaySystem.OrderDay[5].ToString();
                 break;
             case 7://26
+                playerValues.moveSpeed = 400;
                 cutscene.PlayVideo(database.transition);
                 cutscene.SecondeSoundEffect(database.Chuva);
                 roadMapController.InitializeWorkerTalkDay26();
@@ -165,6 +166,7 @@ public class DayTimeController : MonoBehaviour
                 DayText.text = "Dia " + DaySystem.OrderDay[6].ToString();
                 break;
             case 8://27
+                playerValues.moveSpeed = 200;
                 terLandslide.SetActive(false);
                 terAfterLandslide.SetActive(true);
                 cutscene.SecondeSoundEffect(database.Chuva);

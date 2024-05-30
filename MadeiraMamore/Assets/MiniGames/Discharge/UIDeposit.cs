@@ -12,19 +12,13 @@ public class UIDeposit : MonoBehaviour
     private Image[] boxImage;
     private int numberOfDeposit;
     void Start(){
+    }
 
-    }
-    void Reset(){
-        for(int i = 0; i < boxList.Length; i++) {
-            for(int c = 0; c < boxList[i].transform.childCount; c++) {
-                boxList[i].transform.GetChild(c).gameObject.SetActive(true);
-            }
-        }
-    }
     public void Deposit(int numerberDeposit){
         numberOfDeposit = numerberDeposit;
         boxList[numerberDeposit].SetActive(true);
         CheckWagonAccpet();
+
     }
     void CheckWagonAccpet(){
         boxImage = new Image[boxList[numberOfDeposit].transform.childCount];
@@ -42,6 +36,7 @@ public class UIDeposit : MonoBehaviour
             for(int l = 0; l < colorLayerScriptable.layerOfPackage.Length; l++) {
                 if(numberlayers[i] == LayerMask.NameToLayer(colorLayerScriptable.layerOfPackage[l])){
                     boxImage[i].color = colorLayerScriptable.packageColor[l];
+                    boxImage[i].gameObject.SetActive(true);
                     amoutNotPainting++;
                 }
             }

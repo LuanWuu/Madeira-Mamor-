@@ -5,7 +5,7 @@ using UnityEngine;
 public class Point : MonoBehaviour
 {
     [SerializeField] private RectTransform limit; 
-    [SerializeField] private float velocidade = 50f; 
+    [SerializeField] private float velocidade = 100f; 
 
     private bool moviDirection; 
     public void RandomDirection(){

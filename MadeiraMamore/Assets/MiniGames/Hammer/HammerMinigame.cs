@@ -12,7 +12,7 @@ public class HammerMinigame : MonoBehaviour
     [SerializeField] private AudioSource sound;
     [SerializeField] private Point pointScript;
     [SerializeField] private Image woodImage;
-    [SerializeField]  private Sprite saveSrpite;
+    [SerializeField] private Sprite saveSrpite;
     [SerializeField] private Sprite[] woodSprites;
     [SerializeField] private GameObject AxeUI;
     [SerializeField] private Animator AxeAnimator;

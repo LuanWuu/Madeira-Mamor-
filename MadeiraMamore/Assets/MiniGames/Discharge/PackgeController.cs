@@ -49,7 +49,6 @@ public class PackgeController : MonoBehaviour
             GameObject boxColorChild = boxFulfilling[turn].transform.GetChild(1).gameObject;
             boxColorChild.GetComponent<Renderer>().materials[1].color = boxColor;
             colorLayerScriptable.amoutPackage--;
-            Debug.Log("amout " + colorLayerScriptable.amoutPackage);
         }
         turn++;
     }

@@ -53,6 +53,7 @@ public class ManagerDescharge : MonoBehaviour
                 colorLayerScriptable.packageLayer.RemoveAt(0);
             }
             UIDepositScript.Deposit(i);
+
         }
         startGame = true;
     }

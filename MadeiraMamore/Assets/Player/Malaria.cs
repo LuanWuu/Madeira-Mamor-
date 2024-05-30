@@ -12,6 +12,7 @@ public class Malaria : MonoBehaviour
     [SerializeField] private float durationMalariaHigh;
 
     public IEnumerator lowMalaria(){
+        malariaLow.SetActive(false);
         yield return new WaitForSeconds(coolDownMalariaLow);
         malariaLow.SetActive(true);
         yield return new WaitForSeconds(durationMalariaLow);
@@ -19,6 +20,8 @@ public class Malaria : MonoBehaviour
         Debug.Log("low");
     }
     public IEnumerator HighMalaria(){
+        malariaLow.SetActive(false);
+        malaraHigh.SetActive(false);
         yield return new WaitForSeconds(coolDownMalariaHigh);
         malaraHigh.SetActive(true);
         yield return new WaitForSeconds(durationMalariaHigh);
@@ -27,6 +30,7 @@ public class Malaria : MonoBehaviour
     }
     public void DeadMalaria() {
          StopAllCoroutines();
+         malariaLow.SetActive(false);
          malaraHigh.SetActive(true);
     }
     

@@ -115,6 +115,7 @@ public class MensageController : MonoBehaviour
         speechBubbleText.text = myCharacterlist[0];  
     }
     public void LimitBarrier(){
+        nameCharacter.text = characterFullName[7];
         placeNumber = 0;  
         scriptTableValues.canMovi = false;
         speechBubble.SetActive(true);
