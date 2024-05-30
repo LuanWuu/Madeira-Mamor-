@@ -10,6 +10,7 @@ public class RaffleQuest : MonoBehaviour
     [SerializeField] private ManagerDescharge ManagerDesScript;
     [SerializeField] private GameObject DepositUI;
     [SerializeField] private HammerMinigame hammerScript;
+    [SerializeField] private GameObject AxeUI;
     [SerializeField] private DeschargeMinigame[] descharger;
 
     [Header("Timer")]
@@ -124,6 +125,7 @@ public class RaffleQuest : MonoBehaviour
         }
         scriptTableValues.salary = salary;
         notificationScript.canNotify = false;
+        AxeUI.SetActive(false);
         timer.SetActive(false);
     }
     public void NoStamina(){
@@ -168,6 +170,7 @@ public class RaffleQuest : MonoBehaviour
             default:
                     break;
         }
+        AxeUI.SetActive(false);
         Invoke("NeedDestroy", 1.5f);
     }
     void NeedDestroy(){
@@ -191,6 +194,7 @@ public class RaffleQuest : MonoBehaviour
                 DecideEvaluation(deschargerGoodTime,deschargerNormalTime,deschargerBadTime, deschargeTime);
             }else{
                 hammerScript.StartMinigame();
+                AxeUI.SetActive(true);
                 DecideEvaluation(axeGoodTime, axeBadTime, axeBadTime,axeTime);
             }
         }else{
