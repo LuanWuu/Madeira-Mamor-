@@ -22,7 +22,7 @@ public class IconButton : MonoBehaviour
     void Update()
     {
         transform.LookAt(player.transform);
-        if (Input.GetJoystickNames().Length > 1000){
+        if (Input.GetJoystickNames().Length > 0){
             text.text = "A";
         }else{
             text.text = "E";
