@@ -67,7 +67,7 @@ public class HammerMinigame : MonoBehaviour
     }
     public void ChangeScript(){
         if(hitTarget == true){
-            StartCoroutine(staminaScript.IncreaseStamina(10));
+            StartCoroutine(staminaScript.DecreaseStamina(10));
             woodImage.sprite = woodSprites[hit];
             sound.clip = database.hitWood;
             sound.Play();
