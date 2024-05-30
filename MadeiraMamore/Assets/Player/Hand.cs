@@ -127,7 +127,8 @@ public class Hand : MonoBehaviour
     }
     void ControlerHadMorning(){
         if(canGetPackage){
-            targetTrain.GetComponent<DeschargeMinigame>().GiveClone(hand); 
+            target = targetTrain.GetComponent<DeschargeMinigame>().GiveClone(hand); 
+            canCarry = true;
             canGetPackage = false;
         }
         if(canGet){

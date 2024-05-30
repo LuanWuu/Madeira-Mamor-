@@ -182,8 +182,8 @@ public class RaffleQuest : MonoBehaviour
     public void DecideQuest(){
         if(DaySystem.day == 6 || DaySystem.day == 7){
             if(DaySystem.dayTime == "Night") {
-                ManagerDesScript.StartMinigame();
-                handScript.takePackage = true;
+                carryScript.DecideAmoutBox();
+                handScript.takePackage = false;
                 DecideEvaluation(deschargerGoodTime,deschargerNormalTime,deschargerBadTime, deschargeTime);
             }else{
                 hammerScript.StartMinigame();

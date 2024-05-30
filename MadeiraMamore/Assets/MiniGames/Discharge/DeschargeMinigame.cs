@@ -56,7 +56,7 @@ public class DeschargeMinigame : MonoBehaviour
         colorLayerScriptable.packageLayer.AddRange(saveLayersDescharger);
     }
 
-    public void GiveClone(Transform positionHand){
+    public GameObject GiveClone(Transform positionHand){
         if(package[number] !=  null){
             GameObject boxClone = Instantiate(box,positionHand.position, Quaternion.identity);
             boxClone.layer = package[number].layer;
@@ -64,6 +64,9 @@ public class DeschargeMinigame : MonoBehaviour
             boxCloneColor.GetComponent<Renderer>().materials[1].color = packageColor[number].GetComponent<Renderer>().materials[1].color;
             package[number].SetActive(false);
             number++;
+            return boxClone;
+        }else {
+            return null;
         }
     }
     public void ActiveOutiline(){
