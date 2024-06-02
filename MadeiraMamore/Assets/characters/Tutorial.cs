@@ -11,6 +11,11 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private CutsceneController cutscene;
     [SerializeField] private DatabaseCutscene database;
     [SerializeField] private ScrpitTablePlayer playerValues;
+    void Update(){
+        if(gameObject.activeSelf && Cursor.visible == false) {
+           playerValues.EnabledCursor();
+        }
+    }
     public void Active(){
         playerValues.EnabledCursor();
         Time.timeScale = 0;

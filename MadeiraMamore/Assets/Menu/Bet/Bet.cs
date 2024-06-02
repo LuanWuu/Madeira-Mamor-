@@ -29,6 +29,9 @@ public class Bet : MonoBehaviour
                 canActive = false;
             }
         }
+        if(gameObject.activeSelf && Cursor.visible ==false) {
+           playerValues.EnabledCursor();
+        }
     }
     public void NumberMore(){
         if (!canBet) return;

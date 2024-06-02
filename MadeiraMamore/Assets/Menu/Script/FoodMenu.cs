@@ -19,6 +19,9 @@ public class FoodMenu : MonoBehaviour
                 canActive = false;
             }
         }
+        if(foodmenu.activeSelf && Cursor.visible ==false) {
+           playerValues.EnabledCursor();
+        }
     }
     public void SmallFood(){
         if(playerValues.money >= 200) {
