@@ -159,7 +159,6 @@ public class MensageController : MonoBehaviour
         }
         if ((DaySystem.day != 7 && (DaySystem.dayTime == "Afternoon" || DaySystem.dayTime == "Morning")) ||
         (DaySystem.day == 7 && (DaySystem.dayTime == "Afternoon" || DaySystem.dayTime == "Morning" || DaySystem.dayTime == "Night"))){
-            
             rafflequestScript.DecideQuest();
             oneTime = false;
         }

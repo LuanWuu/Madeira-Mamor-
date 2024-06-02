@@ -69,11 +69,13 @@ public class DeschargeMinigame : MonoBehaviour
             return null;
         }
     }
-    public void ActiveOutiline(){
+    public bool ActiveOutiline(){
         if(package[number] !=  null){
             GetComponent<Renderer>().material.SetFloat("_ValueMultiplay", 1.02f);
+            return true;
         }else{
             GetComponent<Renderer>().material.SetFloat("_ValueMultiplay", 0);
+            return false;
         }
     }
     public void Reset(){

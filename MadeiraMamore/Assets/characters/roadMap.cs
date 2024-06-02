@@ -393,7 +393,7 @@ public class roadMap : ScriptableObject {
             "Ei, acho que você deveria descansar.",
             "Parece mal a ponto que uma garrafa inteira não resolveria."
         };
-        playerAnswers[0] = new List<string>{
+        playerAnswers[4] = new List<string>{
             "Está tudo bem.",
             "Talvez esteja doente."
         };

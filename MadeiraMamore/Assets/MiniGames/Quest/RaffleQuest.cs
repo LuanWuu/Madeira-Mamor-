@@ -55,7 +55,7 @@ public class RaffleQuest : MonoBehaviour
 
     [SerializeField] private StoragaDayValues DaySystem;
     [SerializeField] private DayTimeController DayTCScript;
-
+    [Header("Player Scripts")]
     [SerializeField] private Hand handScript;
     [Header("Positions Dont Finished Game")]
 
@@ -148,6 +148,7 @@ public class RaffleQuest : MonoBehaviour
         scriptTableValues.canMovi = false;
         player.position =  DontFinishPosi.position;
         notificationScript.canNotify = false;
+        handScript.canCarry = false;
         switch(DaySystem.dayTime){
             case "Morning":
                 ManagerDesScript.Reset();

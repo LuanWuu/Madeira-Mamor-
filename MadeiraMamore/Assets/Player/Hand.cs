@@ -20,15 +20,14 @@ public class Hand : MonoBehaviour
     [SerializeField] private AudioClip sound;
 
     [System.NonSerialized] public bool takePackage;
+    [System.NonSerialized] public bool canCarry;
 
     private bool canGet;
     private bool activeOneTime;
-    private bool canCarry;
     private bool canMoviLerp;
     private bool canGive;
     private bool canActiveCharaceterLines;
     private bool canGetPackage;
-    private bool pickedUp = false;
 
     private float startCarryTime;
 
@@ -75,10 +74,6 @@ public class Hand : MonoBehaviour
                 scriptTableValues.EnabledCursor();
                 scriptTableValues.canMovi = false;
             }
-            if(target != null && !pickedUp) {
-                StartCoroutine(staminaController.DecreaseStamina(5));
-                pickedUp = true;
-            }
             if(iconButton != null) {
                 iconButton.SetActive(false);
             }
@@ -117,7 +112,7 @@ public class Hand : MonoBehaviour
             GameObject box = target.transform.GetChild(1).gameObject;
             Renderer boxColor = box.GetComponent<Renderer>();
             targetTrain.GetComponent<ToFillTrain>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
-            pickedUp = false;
+            StartCoroutine(staminaController.DecreaseStamina(5));
             canMoviLerp = true;
             canCarry = false;
             canGive = false;
@@ -142,7 +137,7 @@ public class Hand : MonoBehaviour
             GameObject box = target.transform.GetChild(1).gameObject;
             Renderer boxColor = box.GetComponent<Renderer>();
             targetDesposit .GetComponent<PackgeController>().CheckLayerPackage(boxColor.materials[1].color, target.layer,target);
-            pickedUp = false;
+            StartCoroutine(staminaController.DecreaseStamina(5));
             canMoviLerp = true;
             canCarry = false;
             canGive = false;
@@ -241,9 +236,10 @@ public class Hand : MonoBehaviour
         }
     }
     void GetPackage(){
-        canGetPackage = true;
-        targetTrain.GetComponent<DeschargeMinigame>().ActiveOutiline();
-        targetRendererDelivery = targetTrain.GetComponent<Renderer>();
+        if(targetTrain != null) {
+            canGetPackage = targetTrain.GetComponent<DeschargeMinigame>().ActiveOutiline();
+            targetRendererDelivery = targetTrain.GetComponent<Renderer>();
+        }
     }
     void CheckDeposit(){
         if(target != null){
@@ -301,6 +297,7 @@ public class Hand : MonoBehaviour
         canGet = false;
         activeOneTime = true;
         canActiveCharaceterLines = false;
+        canGive = false;
     }
     void ResetMaterialValue(Renderer renderer){
         if (renderer != null)

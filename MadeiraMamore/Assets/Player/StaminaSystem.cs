@@ -28,10 +28,10 @@ public class StaminaSystem : MonoBehaviour
     }
     void Update(){
         if(Input.GetKeyDown(KeyCode.M)) {
-            StartCoroutine(IncreaseStamina(1));
+            StartCoroutine(IncreaseStamina(100));
         }
         if(Input.GetKeyDown(KeyCode.N)) {
-            StartCoroutine(DecreaseStamina(60));
+            StartCoroutine(DecreaseStamina(95));
        }
     }
     public IEnumerator DecreaseStamina(int amout){
