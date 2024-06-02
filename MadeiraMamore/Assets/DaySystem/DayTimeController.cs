@@ -16,6 +16,7 @@ public class DayTimeController : MonoBehaviour
     [SerializeField] private Notification notificationScript;
     [SerializeField] private DisableCharacters disableCha;
     [SerializeField] private HammerMinigame hammerScript;
+    [SerializeField] private Tutorial TutorialScript;
     [SerializeField] private Malaria malariaScript;
     [SerializeField] private string[] dayTime;
     [SerializeField] private GameObject train;
@@ -60,7 +61,6 @@ public class DayTimeController : MonoBehaviour
         }
     }
     public void TimeOfDay(int moment){
-        cutscene.PlayVideo(database.transition);
         for(int i = 0; i < dayTime.Length; i++) {
             if(i == moment) {
                 DaySystem.dayTime = dayTime[i];
@@ -76,6 +76,11 @@ public class DayTimeController : MonoBehaviour
                 mornig.SetActive(true);
                 night.SetActive(false);
                 Baltasar.SetActive(true);
+                if(DaySystem.day == 1 || DaySystem.day == 6) {
+                    TutorialScript.Active();
+                }else{
+                    cutscene.PlayVideo(database.transition);
+                }
                 break;
             case "Lunch":    
                 DayText.text = "Almoço";
@@ -84,7 +89,8 @@ public class DayTimeController : MonoBehaviour
                 playerValues.canOpenFoodMenu = true;
                 StartCoroutine(notificationScript.StartMovement());
                 cutscene.MuteMusic(false);
-                cutscene.MusicAmbiente(database.lunchMoment);                     
+                cutscene.MusicAmbiente(database.lunchMoment);
+                cutscene.PlayVideo(database.transition);                     
                 roadMapController.ChefWords();
                 break;
             case "Afternoon":
@@ -92,6 +98,11 @@ public class DayTimeController : MonoBehaviour
                 DayText.text = "Segundo turno"; 
                 mornig.SetActive(false);
                 afternoon.SetActive(true);
+                if(DaySystem.day == 1) {
+                    TutorialScript.Active();
+                }else{
+                    cutscene.PlayVideo(database.transition);
+                }
                 break;
             case "Night":
                 DayText.text = "Noite"; 
@@ -107,6 +118,7 @@ public class DayTimeController : MonoBehaviour
                 roadMapController.ChefOrders();
                 afternoon.SetActive(false);
                 night.SetActive(true);
+                cutscene.PlayVideo(database.transition);
                 break;
             default:
                     break;

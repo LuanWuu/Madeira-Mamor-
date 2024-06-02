@@ -15,6 +15,7 @@ public class Notification : MonoBehaviour
     [SerializeField] private GameObject iconBed;
     [SerializeField] private Animator animatorController;
     [SerializeField] private float time;
+    [SerializeField] private AudioSource source;
     [System.NonSerialized] public bool canNotify;
     private List<string> localList;
     private float localGodScore;
@@ -40,6 +41,9 @@ public class Notification : MonoBehaviour
         animatorController.SetBool("canMovi", true);
         yield return new WaitForSeconds(time);
         animatorController.SetBool("canMovi", false);
+    }
+    void SoundEffect(){
+        source.Play();
     }
 
     private void Update(){

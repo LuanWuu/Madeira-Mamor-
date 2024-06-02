@@ -29,7 +29,6 @@ public class Hand : MonoBehaviour
     private bool canActiveCharaceterLines;
     private bool canGetPackage;
     private bool pickedUp = false;
-    private bool lookBox;
 
     private float startCarryTime;
 
@@ -258,7 +257,6 @@ public class Hand : MonoBehaviour
     void CarrySystem(){
         if(activeOneTime == true){
             canGet = true;
-            lookBox = true;
             targetRenderer = target.GetComponent<Renderer>();
             targetRenderer.material.SetFloat("_ValueMultiplay", outilineSizeBox);// Ativando o Contorno
             activeOneTime = false;
@@ -301,7 +299,6 @@ public class Hand : MonoBehaviour
         lastHitObject = null;
         canGetPackage = false;
         canGet = false;
-        lookBox = false;
         activeOneTime = true;
         canActiveCharaceterLines = false;
     }

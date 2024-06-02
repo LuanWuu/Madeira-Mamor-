@@ -24,7 +24,7 @@ public class FoodMenu : MonoBehaviour
         if(playerValues.money >= 100) {
             playerValues.canOpenFoodMenu = false;
             StartCoroutine(staminaScript.IncreaseStamina(20));
-            StartCoroutine(moneyScript.TakeMoney(1));
+            StartCoroutine(moneyScript.TakeMoney(2));
             Closed();  
         }
     }
@@ -33,7 +33,7 @@ public class FoodMenu : MonoBehaviour
             playerValues.canOpenFoodMenu = false;
             StartCoroutine(staminaScript.IncreaseStamina(40));
             if(DaySystem.day != 6 || DaySystem.day != 7) {
-               StartCoroutine(moneyScript.TakeMoney(2)); 
+               StartCoroutine(moneyScript.TakeMoney(4)); 
             }
             Closed();
         }
@@ -42,7 +42,7 @@ public class FoodMenu : MonoBehaviour
         if(playerValues.money >= 300){ 
             playerValues.canOpenFoodMenu = false;
             StartCoroutine(staminaScript.IncreaseStamina(60));  
-            StartCoroutine(moneyScript.TakeMoney(3)); 
+            StartCoroutine(moneyScript.TakeMoney(6)); 
             Closed();
         }
     }

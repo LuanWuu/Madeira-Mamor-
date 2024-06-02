@@ -5,6 +5,7 @@ using UnityEngine;
 public class QuestUI : MonoBehaviour
 {
    [SerializeField] private  Animator animatorController;
+   [SerializeField] private AudioSource source;
     private bool isOpen;
     private bool isClosed;
     // Update is called once per frame
@@ -18,6 +19,7 @@ public class QuestUI : MonoBehaviour
             if(isClosed == false){
                 isOpen = false;
                 isClosed = true;
+                source.Play();
             }else if(isOpen == false){
                 isClosed = false;
                 isOpen = true;
